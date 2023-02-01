@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <script type="application/ld+json">
+
+{  
+  "@context":"http://schema.org",
+  "@type":"Website",
+  "@id":"http:\/\/OKHand-Zy.github.io\/",
+  "author": {
+    "@type": "Person",
+    "name": "OKH@nd",
+    
+    "image": "https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943"
+    
+  },
+  "name":"OKH@nd\u0027s Blog",
+  "description":"",
+  "url":"http:\/\/OKHand-Zy.github.io\/post\/line-bot1\/",
+  "keywords":"[tech]"
+}
+
+</script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.107.0 with theme Tranquilpeak 0.5.3-BETA">
+<meta name="author" content="OKH@nd">
+<meta name="keywords" content="tech">
+<meta name="description" content="">
+
+
+<meta property="og:description" content="">
+<meta property="og:type" content="article">
+<meta property="og:title" content="讓我們用 Python 開發一個 Line Bot">
+<meta name="twitter:title" content="讓我們用 Python 開發一個 Line Bot">
+<meta property="og:url" content="http://OKHand-Zy.github.io/post/line-bot1/">
+<meta property="twitter:url" content="http://OKHand-Zy.github.io/post/line-bot1/">
+<meta property="og:site_name" content="OKH@nd&#39;s Blog">
+<meta property="og:description" content="">
+<meta name="twitter:description" content="">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2023-02-01T16:24:45">
+  
+  
+    <meta property="article:modified_time" content="2023-02-01T16:24:45">
+  
+  
+  
+    
+      <meta property="article:section" content="category">
+    
+      <meta property="article:section" content="subcategory">
+    
+  
+  
+    
+      <meta property="article:tag" content="Line Bot">
+    
+      <meta property="article:tag" content="Heroku">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=640">
+
+
+
+
+
+  <meta property="og:image" content="https://imgur.com/TpT3zn2.png">
+  <meta property="twitter:image" content="https://imgur.com/TpT3zn2.png">
+
+
+    <title>讓我們用 Python 開發一個 Line Bot</title>
+
+    <link rel="icon" href="http://OKHand-Zy.github.io/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="http://OKHand-Zy.github.io/post/line-bot1/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    
+    <link rel="stylesheet" href="http://OKHand-Zy.github.io/css/style-h6ccsoet3mzkbb0wngshlfbaweimexgqcxj0h5hu4h82olsdzz6wmqdkajm.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="http://OKHand-Zy.github.io/" aria-label="Go to homepage">OKH@nd&#39;s Blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="http://OKHand-Zy.github.io/#about" aria-label="Open the link: /#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="http://OKHand-Zy.github.io/#about" aria-label="Read more about the author">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">OKH@nd</h4>
+        
+          <h5 class="sidebar-profile-bio">會 <strong>Coding</strong> 是一件很酷的事，我覺得你也該試試</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://OKHand-Zy.github.io/" title="Home">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-home" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://OKHand-Zy.github.io/categories" title="Categories">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-bookmark" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://OKHand-Zy.github.io/tags" title="Tags">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-tags" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://OKHand-Zy.github.io/archives" title="Archives">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-archive" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://OKHand-Zy.github.io/#about" title="About">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-question" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/OKHand-Zy" target="_blank" rel="noopener" title="GitHub">
+    
+      <i class="sidebar-button-icon fab fa-lg fa-github" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://home.gamer.com.tw/homeindex.php?owner=Az7899603" target="_blank" rel="noopener" title="Gamer Forum">
+    
+      <i class="sidebar-button-icon fa fa-gamepad" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Gamer Forum</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://OKHand-Zy.github.io/index.xml" title="RSS">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-rss" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" id="top">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title">
+      讓我們用 Python 開發一個 Line Bot
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time datetime="2023-02-01T16:24:45&#43;08:00">
+        
+  February 1, 2023
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="http://OKHand-Zy.github.io/categories/category">category</a>, 
+    
+      <a class="category-link" href="http://OKHand-Zy.github.io/categories/subcategory">subcategory</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown">
+            <div class="main-content-wrap">
+              <h1 id="正題">正題：</h1>
+<p>我們要做 Line Bot 前要先理解一些他們的傳送資料的方法和架構！
+<a href="https://medium.com/@justinlee_78563/line-bot-%E7%B3%BB%E5%88%97%E6%96%87-%E4%BB%80%E9%BA%BC%E6%98%AF-webhook-d0ab0bb192be"><img src="https://miro.medium.com/max/1400/1*xRW05xCHmq7r8OOmFzlosw.png" alt="Line Bot架構"></a>
+簡單來說就是我們 User 傳送的資料 or 文字都會透過 LineBot-API 先傳到 Line，之後會轉傳到我們掛在 Heroku 上用 Python+Flask 建立的網頁，然後網頁收到請求後去執行對應的程式碼，再回傳回去 Line 並執行對應的動作(Ex：傳資料給 User )。</p>
+<h1 id="實作">實作：</h1>
+<p>註冊：<br>
+我們先去 <a href="https://developers.line.biz/en/" title="Line Developers">Line Developers</a> 創建我們的 Line Bot <br>
+先到我們的 Account 裡選擇 Products 然後選擇 Messaging API 然後點 Start Now <br>
+<img src="https://imgur.com/6fAMZ7x.png" alt="LineBot_Create">
+之後就開始填一些基本資料，有些資料可以不用填，這樣我們就有了基本的 LineBot 了。 <br>
+之後就去註冊 <a href="https://www.heroku.com" title="Heroku.com">Heroku</a>，然後就可以建立一個 App，之後也是填一下資料就建立好了～</p>
+<h1 id="程式方面">程式方面：</h1>
+<p>我們是用 Python+Flask 建構一個網頁掛在 Heroku 上持續執行 <br>
+上傳資料到 Heroku 需要安裝 <a href="https://git-scm.com/" title="Git">Git</a> 跟 <a href="https://devcenter.heroku.com/articles/heroku-cli" title="HerokuCLI">HerokuCLI</a> <br>
+我是用 Python 3.8.6 去開發此專案，如果需在本地測試環境需安裝一些要使用的套件，如果不需要本地測試就不用安裝摟～</p>
+<ul>
+<li>pip install line-bot-sdk</li>
+<li>pip install Flask</li>
+</ul>
+<p>之後就開始看我們的 Line Bot 程式碼了！</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># main.py</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 初始化LINT BOT</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> linebot <span style="color:#f92672">import</span> LineBotApi, WebhookHandler
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>app <span style="color:#f92672">=</span> Flask(__name__)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>line_bot_api <span style="color:#f92672">=</span> LineBotApi(os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#39;CHANNEL_ACCESS_TOKEN&#39;</span>])
+</span></span><span style="display:flex;"><span>handler <span style="color:#f92672">=</span> WebhookHandler(os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#39;CHANNEL_SECRET&#39;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 利用 handler 處理 LINE 觸發事件</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> linebot.models <span style="color:#f92672">import</span> MessageEvent, TextMessage, TextSendMessage
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@handler.add</span>(MessageEvent, message<span style="color:#f92672">=</span>TextMessage)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_message</span>(event):
+</span></span><span style="display:flex;"><span>    line_bot_api<span style="color:#f92672">.</span>reply_message(
+</span></span><span style="display:flex;"><span>        event<span style="color:#f92672">.</span>reply_token, TextSendMessage(text<span style="color:#f92672">=</span><span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Hello </span><span style="color:#e6db74">{</span>line_bot_api<span style="color:#f92672">.</span>get_profile(event<span style="color:#f92672">.</span>source<span style="color:#f92672">.</span>user_id)<span style="color:#f92672">.</span>display_name<span style="color:#e6db74">}</span><span style="color:#e6db74">!&#34;</span>)
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 利用 route 處理路由</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> request, abort
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> linebot.exceptions <span style="color:#f92672">import</span> InvalidSignatureError
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#34;/callback&#34;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;POST&#39;</span>])
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">callback</span>():
+</span></span><span style="display:flex;"><span>    signature <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>headers[<span style="color:#e6db74">&#39;X-Line-Signature&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    body <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>get_data(as_text<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>    app<span style="color:#f92672">.</span>logger<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#34;Request body: &#34;</span> <span style="color:#f92672">+</span> body)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        handler<span style="color:#f92672">.</span>handle(body, signature)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> InvalidSignatureError:
+</span></span><span style="display:flex;"><span>        abort(<span style="color:#ae81ff">400</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;OK&#39;</span>
+</span></span></code></pre></div><p>我們可以看到程式碼裡面有 CHANNEL_ACCESS_TOKEN 跟 CHANNEL_SECRET <br>
+都是在我們剛剛創 Line Bot 的地方可以看到 <br>
+Channel secret 在 Basic Setting 下
+<img src="https://imgur.com/j633Bbx.png" alt="Channel secret">
+Channel access token 在 Messaging API 下
+<img src="https://imgur.com/XAJWN2K.png" alt="Channel access token">
+之後就要回到 Heroku 的部分因為我們要上傳到 Heroku，我們先把程式碼的部分搞定在上傳 <br>
+我們要把程式上傳到 Heroku 需要幾個東西讓 Heroku 去安裝他要的東西跟指定要跑的程式等等&hellip; <br>
+要上傳Heroku有幾個必要的東西 <strong>Procfile，requirements.txt，runtime.txt</strong> 這三個設定檔跟你的主程式。</p>
+<p>Procfile：主要是寫說你這個程式是什麼東西並主要執行的程式
+我們要在裡面填上 web: gunicorn main:app –preload
+說明這是用 main 這個程式運行一個 app 並且是用 Gunicorn 搭建一個 Web 服務
+等等上傳就可以在你的 Heroku 上看到
+<img src="https://imgur.com/s5YDi4R.png" alt="Heroku app"></p>
+<p>requirements.txt：這很重要！這是要把我們需要用到的 Library 去跟 Heroku 說他會在上傳程式碼時一起裝起來的套件
+這是我有裝的東西基本上就是 套件名字==版本</p>
+<ul>
+<li>Flask==2.0.2</li>
+<li>gunicorn==19.9.0</li>
+<li>line-bot-sdk==2.0.1</li>
+<li>requests==2.27.1</li>
+<li>psycopg2==2.9.3</li>
+<li>numpy==1.19.4</li>
+<li>Pillow==8.0.1</li>
+<li>pygsheets==2.0.5</li>
+</ul>
+<p>runtime.txt：這裡面是寫說你要用什麼語言跟版本去執行程式
+我填上的是 python-3.8.6
+之後我們就照著 Heroku 裡 Deploy 下的步驟一步一步操作就能上傳程式碼到 Heroku 上了 <br>
+過程跟上傳 Github 的方法87％像，之後我們剛剛可以看到程式碼裡有這兩句</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>line_bot_api <span style="color:#f92672">=</span> LineBotApi(os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#39;CHANNEL_ACCESS_TOKEN&#39;</span>])
+</span></span><span style="display:flex;"><span>handler <span style="color:#f92672">=</span> WebhookHandler(os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#39;CHANNEL_SECRET&#39;</span>])
+</span></span></code></pre></div><p>這邊的用的 os.environ[&lsquo;CHANNEL_ACCESS_TOKEN&rsquo;]，是利用我們 Heroku 上設定環境變數並當你跟 Heroku 要的時候會吐出指定的東西給他那要整麼設定呢？
+在你的 Heroku App 裡的 Setting 可以看到 Config Vars 把旁邊的點開就能看到兩行可以輸入的東西，我們就在這邊輸入我們 LineBot 的資訊就不用吧他寫在程式裡摟！！
+<img src="https://imgur.com/qa4gYpA.png" alt="Heroku Environment Setting">
+我們有了剛剛講的這三個跟主程式就上傳到你的 Heroku <br>
+就回去剛剛的 LineBot 裡的 Webhook URL <br>
+填上 https://你heroku的APP名字.herokuapp.com/callback <br>
+按 Verify 正常過的話就是代表能用摟！！</p>
+<h1 id="trouble-shooting">Trouble shooting</h1>
+<p>先檢查 Webhook URL 是否有對到你的 HerokuAPP <br>
+再 CHANNEL_ACCESS_TOKEN 跟 CHANNEL_SECRET 是否填對 <br>
+如果你不覺的是 Heroku 的問題也能改成直接寫在程式裡</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>line_bot_api <span style="color:#f92672">=</span> LineBotApi(<span style="color:#e6db74">&#39;CHANNEL_ACCESS_TOKEN&#39;</span>)
+</span></span><span style="display:flex;"><span>Ex: line_bot_api <span style="color:#f92672">=</span> LineBotApi(<span style="color:#e6db74">&#39;sdgfdfhfgjfgjerwer3534534&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>handler <span style="color:#f92672">=</span> WebhookHandler(<span style="color:#e6db74">&#39;CHANNEL_SECRET&#39;</span>)
+</span></span><span style="display:flex;"><span>Ex: handler <span style="color:#f92672">=</span> WebhookHandler(<span style="color:#e6db74">&#39;dsfdsf453465sdgsg&#39;</span>)
+</span></span></code></pre></div><p>過來就是檢查上傳 Heroku 的資料是否都有，再檢查是否有上傳成功</p>
+<p>我知道我講的有點簡略，但可以搭配之有一些前輩的文章一起參考喔！ <br>
+如果都不行或是還有疑問就留言吧！如果我會，我就盡量回答！！</p>
+<p>Reference： <br>
+<a href="https://medium.com/@justinlee_78563/line-bot-%E7%B3%BB%E5%88%97%E6%96%87-%E4%BB%80%E9%BA%BC%E6%98%AF-webhook-d0ab0bb192be">LINE Bot 系列文 — 什麼是 Webhook?</a> <br>
+<a href="https://ithelp.ithome.com.tw/articles/10254814">賴田捕手 iT幫幫忙</a> <br>
+<a href="https://ithelp.ithome.com.tw/users/20107309/ironman/1253">卡米狗 iT幫幫忙</a> <br>
+<a href="https://dotblogs.com.tw/Funny_DotBlog/2018/11/14/chatbot_python_1">[ChatBot] 創造自己的 Line bot，第一次就上手！(1) — Line bot 架構及工具簡介</a></p>
+              
+
+
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="http://OKHand-Zy.github.io/tags/line-bot/">Line Bot</a>
+
+  <a class="tag tag--primary tag--small" href="http://OKHand-Zy.github.io/tags/heroku/">Heroku</a>
+
+                  </div>
+                
+              
+            
+            
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://OKHand-Zy.github.io/post/line-bot1/" title="Share on Facebook" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://OKHand-Zy.github.io/post/line-bot1/" title="Share on Twitter" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=http://OKHand-Zy.github.io/post/line-bot1/" title="Share on Linkedin" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+    <li class="post-action">
+      <a class="post-action-btn btn btn--default" href="#disqus_thread" aria-label="Leave a comment">
+        <i class="far fa-comment"></i>
+      </a>
+    </li>
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="Back to top">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+            
+  
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+    <script type="text/javascript">
+      var disqus_config = function() {
+        this.page.url = 'http:\/\/OKHand-Zy.github.io\/post\/line-bot1\/';
+        
+          this.page.identifier = '\/post\/line-bot1\/'
+        
+      };
+      (function() {
+        
+        
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+          document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+          return;
+        }
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        var disqus_shortname = 'hugo-tranquilpeak-theme';
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+  
+
+
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2023 OKH@nd. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://OKHand-Zy.github.io/post/line-bot1/" title="Share on Facebook" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://OKHand-Zy.github.io/post/line-bot1/" title="Share on Twitter" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=http://OKHand-Zy.github.io/post/line-bot1/" title="Share on Linkedin" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+    <li class="post-action">
+      <a class="post-action-btn btn btn--default" href="#disqus_thread" aria-label="Leave a comment">
+        <i class="far fa-comment"></i>
+      </a>
+    </li>
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="Back to top">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+      </div>
+      
+<div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-times"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2FOKHand-Zy.github.io%2Fpost%2Fline-bot1%2F" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http%3A%2F%2FOKHand-Zy.github.io%2Fpost%2Fline-bot1%2F" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=http%3A%2F%2FOKHand-Zy.github.io%2Fpost%2Fline-bot1%2F" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i><span>Share on Linkedin</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
+
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-times"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">OKH@nd</h4>
+    
+      <div id="about-card-bio">會 <strong>Coding</strong> 是一件很酷的事，我覺得你也該試試</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        SIT Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker-alt"></i>
+        <br/>
+        Taiwan
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('http://OKHand-Zy.github.io/images/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script src="http://OKHand-Zy.github.io/js/script-yqzy9wdlzix4lbbwdnzvwx3egsne77earqmn73v9uno8aupuph8wfguccut.min.js"></script>
+
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-gE8KAQyFIzV1C9+GZ8TKJHZS2s+n7EjNtC+IMRn1l5+WYJTHOODUM6JSjZhFhqXmc7bG8Av6XXpckA4tYhflnw==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/apache.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-EWROca+bote+7Oaaar1F6y74iZj1r1F9rm/ly7o+/FwJopbBaWtsFDmaKoZDd3QiGU2pGacBirHJNivmGLYrow==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/go.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-GDVzAn0wpx1yVtQsRWmFc6PhJiLBPdUic+h4GWgljBh904O3JU10fk9EKNpVyIoPqkFn54rgL2QBG4BmUTMpiQ==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/http.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-UgZlma8NzkrDb/NWgmLIcTrH7i/CSnLLDRFqCSNF5NGPpjKmzyM25qcoXGOup8+cDakKyaiTDd7N4dyH4YT+IA==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/less.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-lot9koe73sfXIrUvIPM/UEhuMciN56RPyBdOyZgfO53P2lkWyyXN7J+njcxIIBRV+nVDQeiWtiXg+bLAJZDTfg==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/nginx.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-Zd3e7XxHP00TD0Imr0PIfeM0fl0v95kMWuhyAS3Wn1UTSXTkz0OhtRgBAr4JlmADRgiXr4x7lpeUdqaGN8xIog==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/puppet.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-qtqDO052iXMSP+5d/aE/jMtL9vIIGvONgTJziC2K/ZIB1yEGa55WVxGE9/08rSQ62EoDifS9SWVGZ7ihSLhzMA==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/scss.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-1NmkjnEDnwwwcu28KoQF8vs3oaPFokQHbmbtwGhFfeDsQZtVFI8zW2aE9O8yMYdpdyKV/5blE4pSWw4Z/Sv97w==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/stylus.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-B2wSfruPjr8EJL6IIzQr1eAuDwrsfIfccNf/LCEdxELCgC/S/ZMt/Uvk80aD79m7IqOqW+Sw8nbkvha20yZpzg==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/swift.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-28oDiQZGKUVN6wQ7PSLPNipOcmkCALXKwOi7bnkyFf8QiMZQxG9EQoy/iiNx6Zxj2cG2SbVa4dXKigQhu7GiFw==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/yaml.min.js"></script>
+  
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+
+
+    
+  </body>
+</html>
+
