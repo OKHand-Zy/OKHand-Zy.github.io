@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Line Bot on OKH@nd&#39;s Blog</title>
-    <link>http://OKHand-zy.github.io/tags/line-bot/</link>
+    <link>https://okhand-zy.github.io/#about/tags/line-bot/</link>
     <description>Recent content in Line Bot on OKH@nd&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 01 Feb 2023 16:24:45 +0800</lastBuildDate><atom:link href="http://OKHand-zy.github.io/tags/line-bot/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 01 Feb 2023 16:24:45 +0800</lastBuildDate><atom:link href="https://okhand-zy.github.io/#about/tags/line-bot/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>讓我們用 Python 開發一個 Line Bot</title>
-      <link>http://OKHand-zy.github.io/post/line-bot1/</link>
+      <link>https://okhand-zy.github.io/#about/post/line-bot1/</link>
       <pubDate>Wed, 01 Feb 2023 16:24:45 +0800</pubDate>
       
-      <guid>http://OKHand-zy.github.io/post/line-bot1/</guid>
+      <guid>https://okhand-zy.github.io/#about/post/line-bot1/</guid>
       <description></description>
     </item>
     
