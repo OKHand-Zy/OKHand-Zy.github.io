@@ -16,8 +16,8 @@
     
   },
   "name":"OKH@nd\u0027s Blog",
-  "description":"\u003cp\u003e本文主要是實作如何從無到有一個簡單的 Line Bot 並把程式上傳到 Heroku 當一個 Service 可以去跟我們做簡單的互動。\u003c\/p\u003e",
-  "url":"https:\/\/okhand-zy.github.io\/post\/line-bot1\/",
+  "description":"\u003cp\u003e本文是實作如何 Heroku 持續不間段服務 與 連結 Google Sheet 當作我們的資料庫。\u003c\/p\u003e",
+  "url":"https:\/\/okhand-zy.github.io\/post\/line-bot3\/",
   "keywords":"[tech]"
 }
 
@@ -28,25 +28,25 @@
 <meta name="generator" content="Hugo 0.107.0 with theme Tranquilpeak 0.5.3-BETA">
 <meta name="author" content="OKH@nd">
 <meta name="keywords" content="tech">
-<meta name="description" content="本文主要是實作如何從無到有一個簡單的 Line Bot 並把程式上傳到 Heroku 當一個 Service 可以去跟我們做簡單的互動。">
+<meta name="description" content="本文是實作如何 Heroku 持續不間段服務 與 連結 Google Sheet 當作我們的資料庫。">
 
 
-<meta property="og:description" content="本文主要是實作如何從無到有一個簡單的 Line Bot 並把程式上傳到 Heroku 當一個 Service 可以去跟我們做簡單的互動。">
+<meta property="og:description" content="本文是實作如何 Heroku 持續不間段服務 與 連結 Google Sheet 當作我們的資料庫。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="讓我們用 Python 開發一個 Line Bot">
-<meta name="twitter:title" content="讓我們用 Python 開發一個 Line Bot">
-<meta property="og:url" content="https://okhand-zy.github.io/post/line-bot1/">
-<meta property="twitter:url" content="https://okhand-zy.github.io/post/line-bot1/">
+<meta property="og:title" content=" Line Notify 建立資料庫並提供不休息的服務">
+<meta name="twitter:title" content=" Line Notify 建立資料庫並提供不休息的服務">
+<meta property="og:url" content="https://okhand-zy.github.io/post/line-bot3/">
+<meta property="twitter:url" content="https://okhand-zy.github.io/post/line-bot3/">
 <meta property="og:site_name" content="OKH@nd&#39;s Blog">
-<meta property="og:description" content="本文主要是實作如何從無到有一個簡單的 Line Bot 並把程式上傳到 Heroku 當一個 Service 可以去跟我們做簡單的互動。">
-<meta name="twitter:description" content="本文主要是實作如何從無到有一個簡單的 Line Bot 並把程式上傳到 Heroku 當一個 Service 可以去跟我們做簡單的互動。">
+<meta property="og:description" content="本文是實作如何 Heroku 持續不間段服務 與 連結 Google Sheet 當作我們的資料庫。">
+<meta name="twitter:description" content="本文是實作如何 Heroku 持續不間段服務 與 連結 Google Sheet 當作我們的資料庫。">
 <meta property="og:locale" content="en-us">
 
   
-    <meta property="article:published_time" content="2023-02-01T16:24:45">
+    <meta property="article:published_time" content="2023-02-02T16:32:43">
   
   
-    <meta property="article:modified_time" content="2023-02-01T16:24:45">
+    <meta property="article:modified_time" content="2023-02-02T16:32:43">
   
   
   
@@ -59,6 +59,8 @@
   
     
       <meta property="article:tag" content="Line Bot">
+    
+      <meta property="article:tag" content="Line Notify">
     
       <meta property="article:tag" content="Heroku">
     
@@ -80,18 +82,18 @@
 
 
 
-  <meta property="og:image" content="https://imgur.com/TpT3zn2.png">
-  <meta property="twitter:image" content="https://imgur.com/TpT3zn2.png">
+  <meta property="og:image" content="https://imgur.com/kOoKkoG.png">
+  <meta property="twitter:image" content="https://imgur.com/kOoKkoG.png">
 
 
-    <title>讓我們用 Python 開發一個 Line Bot</title>
+    <title> Line Notify 建立資料庫並提供不休息的服務</title>
 
     <link rel="icon" href="https://okhand-zy.github.io/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://okhand-zy.github.io/post/line-bot1/">
+    <link rel="canonical" href="https://okhand-zy.github.io/post/line-bot3/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -251,15 +253,15 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title">
-      讓我們用 Python 開發一個 Line Bot
+       Line Notify 建立資料庫並提供不休息的服務
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time datetime="2023-02-01T16:24:45&#43;08:00">
+      <time datetime="2023-02-02T16:32:43&#43;08:00">
         
-  February 1, 2023
+  February 2, 2023
 
       </time>
     
@@ -280,122 +282,92 @@
           
           <div class="post-content markdown">
             <div class="main-content-wrap">
-              <p>本文主要是實作如何從無到有一個簡單的 Line Bot 並把程式上傳到 Heroku 當一個 Service 可以去跟我們做簡單的互動。</p>
-<h1 id="簡單的介紹">簡單的介紹：</h1>
-<p>我們要做 Line Bot 前要先理解一些他們的傳送資料的方法和架構！
-<a href="https://medium.com/@justinlee_78563/line-bot-%E7%B3%BB%E5%88%97%E6%96%87-%E4%BB%80%E9%BA%BC%E6%98%AF-webhook-d0ab0bb192be"><img src="https://miro.medium.com/max/1400/1*xRW05xCHmq7r8OOmFzlosw.png" alt="Line Bot架構"></a>
-簡單來說就是我們 User 傳送的資料 or 文字都會透過 LineBot-API 先傳到 Line，之後會轉傳到我們掛在 Heroku 上用 Python+Flask 建立的網頁，然後網頁收到請求後去執行對應的程式碼，再回傳回去 Line 並執行對應的動作(Ex：傳資料給 User )。</p>
-<h1 id="註冊">註冊：</h1>
-<p>Line Bot 註冊：<br>
-我們先去 <a href="https://developers.line.biz/en/" title="Line Developers">Line Developers</a> 創建我們的 Line Bot <br>
-先到我們的 Account 裡選擇 Products 然後選擇 Messaging API 然後點 Start Now <br>
-<img src="https://imgur.com/6fAMZ7x.png" alt="LineBot_Create">
-之後就開始填一些基本資料，有些資料可以不用填，這樣我們就有了基本的 LineBot 了。 <br>
-之後就去註冊 <a href="https://www.heroku.com" title="Heroku.com">Heroku</a>，然後就可以建立一個 App，之後也是填一下資料就建立好了～
-<img src="https://imgur.com/woiIEhX.png" alt="HerokuApp_Create"></p>
-<h1 id="程式與上傳">程式與上傳：</h1>
-<p>我們是用 Python+Flask 建構一個網頁掛在 Heroku 上並持續執行 <br>
-上傳資料到 Heroku 需要安裝 <a href="https://git-scm.com/" title="Git">Git</a> 跟 <a href="https://devcenter.heroku.com/articles/heroku-cli" title="HerokuCLI">HerokuCLI</a> <br>
-我是用 Python 3.8.6 去開發此專案，如果需在本地進行測試環境需安裝一些要使用的套件，如果不需要本地測試就不用安裝摟～</p>
-<ul>
-<li>pip install line-bot-sdk</li>
-<li>pip install Flask</li>
-</ul>
-<p>之後就開始看我們的 Line Bot 程式碼了！</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># main.py</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 初始化LINT BOT</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> linebot <span style="color:#f92672">import</span> LineBotApi, WebhookHandler
+              <p>本文是實作如何 Heroku 持續不間段服務 與 連結 Google Sheet 當作我們的資料庫。</p>
+<h1 id="前情提要">前情提要：</h1>
+<p>繼之前 <a href="https://okhand-zy.github.io/post/line-bot1/">讓我們用 Python 開發一個 LineBot</a> 跟 <a href="https://okhand-zy.github.io/post/line-bot2/">Line Bot 之利用 Line Notify 突破限制吧！</a>，我們已經有了 Line Bot 跟 Line Notify 並串接好了，那我們之後就是要去紀錄這些 Access Token 是誰的，當需要傳送資料的時候就知道要傳給誰了！！</p>
+<h1 id="不睡覺的服務">不睡覺的服務：</h1>
+<p>身為一個慣老闆下的社畜我也想當一下慣老闆的滋味，於是我們的服務是一直運作也是理所當然的吧！！ <br>
+這部分比較簡單原理大概就是因為 Heroku 每 25 分鐘如果沒人使用的話那個 APP 就會進入暫時性的休息，於是我們只要在 24 分的時候去戳一下自己的 Web 讓他以為有人叫他就可以讓他一直工作了。 <br>
+我們先安裝一個套件 APScheduler =&gt; pip install apscheduler <br>
+之後我們就可以製作我們的 clock.py，當然你要定時的去傳送訊息或是做一些事也能打在裡面。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#75715e"># clock.py</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> apscheduler.schedulers.blocking <span style="color:#f92672">import</span> BlockingScheduler
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> urllib.request
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>app <span style="color:#f92672">=</span> Flask(__name__)
+</span></span><span style="display:flex;"><span>sched <span style="color:#f92672">=</span> BlockingScheduler()
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>line_bot_api <span style="color:#f92672">=</span> LineBotApi(os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#39;CHANNEL_ACCESS_TOKEN&#39;</span>])
-</span></span><span style="display:flex;"><span>handler <span style="color:#f92672">=</span> WebhookHandler(os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#39;CHANNEL_SECRET&#39;</span>])
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#定時去搓url讓服務不中斷</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@sched.scheduled_job</span>(<span style="color:#e6db74">&#39;cron&#39;</span>, day_of_week<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;mon-sun&#39;</span>, minute<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;*/25&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">scheduled_job</span>():
+</span></span><span style="display:flex;"><span>    url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://你的Heroku APP名字.herokuapp.com/&#34;</span>
+</span></span><span style="display:flex;"><span>    conn <span style="color:#f92672">=</span> urllib<span style="color:#f92672">.</span>request<span style="color:#f92672">.</span>urlopen(url)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> key, value <span style="color:#f92672">in</span> conn<span style="color:#f92672">.</span>getheaders():
+</span></span><span style="display:flex;"><span>        print(key, value)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;戳一下&#34;</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 利用 handler 處理 LINE 觸發事件</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> linebot.models <span style="color:#f92672">import</span> MessageEvent, TextMessage, TextSendMessage
+</span></span><span style="display:flex;"><span>sched<span style="color:#f92672">.</span>start()
+</span></span></code></pre></div><p>我們有了 clock.py 之後我們也要修改一下 <strong>requirements.txt</strong> and <strong>Procfile</strong> <br>
+requirements.txt =&gt; 多加 APScheduler == 3.8.1 <br>
+Procfile          =&gt; 多加 clock: python clock.py <br>
+加好之後上傳 Heroku 之後記得去開啟 Clock 才會啟用喔！！
+<img src="https://imgur.com/lZguAHu.png" alt="Configure_Dynos">
+<img src="https://imgur.com/WhM6JMF.png" alt="Active_clock">
+之後就能去看 Log 或是 app 狀態 觀察它是否一直有在運作。</p>
+<h1 id="建立我們的資料庫">建立我們的資料庫</h1>
+<p>我遠本是想用 Heroku 內的資料庫可是我學了一下覺的很難用於是我就把目光轉到 Google Sheet 上了，對於我們只要儲存一些 Access Token 跟使用者名字是夠用的！！(如果想要用Heroku內的資料庫可以去看麥田捕手的文章連結在下面) <br>
+我們這邊就講要整麼利用 GoogleSheet 當我們的資料庫 <br>
+先到 <a href="https://console.developers.google.com">Google Cloud Platform</a> 建立一份 Google Sheet 和一個 Google Sheet  的 API 身份
+<img src="https://imgur.com/v4FyKrn.png" alt="Google_sheet_api">
+然後再去申請一下金鑰讓我們可以跟 Google Sheet 去做互動 <br>
+申請憑證在：側邊欄裡的 API 和服務 =&gt; 憑證 =&gt; 服務帳戶旁邊的管理帳戶 =&gt; 建立服務帳戶 <br>
+<img src="https://www.maxlist.xyz/wp-content/uploads/2018/09/%E5%BB%BA%E7%AB%8B%E6%86%91%E8%AD%89-GCP.png" alt="Apply_authority">
+憑證申請完之後會給你下載一個 jason 檔就是之後要引用的金鑰(請保存好沒了就要重申請！) <br>
+之後你會在服務帳戶那邊看到電子郵件之後我們去建立一個 GoogleSheet 並且分享編輯權限給這個 Email
+<img src="https://imgur.com/RDHz5n5.png" alt="Share_authority">
+安裝環境測試需要的套件 pygsheets 套件 =&gt; pip3 install pygsheets <br>
+記得！第一篇有說的 Heroku 的設定檔(requirements.txt)也要加才入套件才能在 Heroku 上使用喔 <br>
+之後我們就可以開始使用 Google Sheet 當我們的資料庫去做使用了 \</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#75715e"># 自己練習跟 Google Sheet 互動的程式碼</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pygsheets
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#給憑證</span>
+</span></span><span style="display:flex;"><span>gc <span style="color:#f92672">=</span> pygsheets<span style="color:#f92672">.</span>authorize(service_file<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;你的憑證位置&#39;</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@handler.add</span>(MessageEvent, message<span style="color:#f92672">=</span>TextMessage)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_message</span>(event):
-</span></span><span style="display:flex;"><span>    line_bot_api<span style="color:#f92672">.</span>reply_message(
-</span></span><span style="display:flex;"><span>        event<span style="color:#f92672">.</span>reply_token, TextSendMessage(text<span style="color:#f92672">=</span><span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Hello </span><span style="color:#e6db74">{</span>line_bot_api<span style="color:#f92672">.</span>get_profile(event<span style="color:#f92672">.</span>source<span style="color:#f92672">.</span>user_id)<span style="color:#f92672">.</span>display_name<span style="color:#e6db74">}</span><span style="color:#e6db74">!&#34;</span>)
-</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 開啟googlesheet</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># google sheet連結範例 = https://docs.google.com/spreadsheets/d/&lt;docID&gt;/edit#gid=&lt;sheetID&gt;</span>
+</span></span><span style="display:flex;"><span>sheet <span style="color:#f92672">=</span> gc<span style="color:#f92672">.</span>open_by_url(
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;https://docs.google.com/spreadsheets/d/&lt;docID&gt;/&#39;</span>
+</span></span><span style="display:flex;"><span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 利用 route 處理路由</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> request, abort
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> linebot.exceptions <span style="color:#f92672">import</span> InvalidSignatureError
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#找到下方&#34;工作表1&#34;分頁並在裡面操作</span>
+</span></span><span style="display:flex;"><span>wks <span style="color:#f92672">=</span> sheet<span style="color:#f92672">.</span>worksheet_by_title(<span style="color:#e6db74">&#34;工作表1&#34;</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#34;/callback&#34;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;POST&#39;</span>])
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">callback</span>():
-</span></span><span style="display:flex;"><span>    signature <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>headers[<span style="color:#e6db74">&#39;X-Line-Signature&#39;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#暴力破解直列搜尋 (用來尋找這個人的userid並拿取相對應的accesstoken我們就能傳送訊息給指定的人)</span>
+</span></span><span style="display:flex;"><span>Count <span style="color:#f92672">=</span> int( wks<span style="color:#f92672">.</span>cell( <span style="color:#e6db74">&#39;C1&#39;</span> )<span style="color:#f92672">.</span>value ) <span style="color:#75715e">#人數 #在C1設定目前綁定人數並拿來當計數器</span>
+</span></span><span style="display:flex;"><span>Userid <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#75715e">#先clear</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,Count ) :
+</span></span><span style="display:flex;"><span>    Userid <span style="color:#f92672">=</span> str(wks<span style="color:#f92672">.</span>cell( <span style="color:#e6db74">&#39;A&#39;</span><span style="color:#f92672">+</span>str(i) )<span style="color:#f92672">.</span>value)
+</span></span><span style="display:flex;"><span>    print(Userid)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> Userid<span style="color:#f92672">.</span>value <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;101112&#34;</span> : <span style="color:#75715e">#找到1011112就做下面</span>
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;第&#34;</span><span style="color:#f92672">+</span>str(i)<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;個&#34;</span>)    <span style="color:#75715e">#顯示第幾個</span>
+</span></span><span style="display:flex;"><span>        print( wks<span style="color:#f92672">.</span>cell( <span style="color:#e6db74">&#39;B&#39;</span><span style="color:#f92672">+</span>str(i) )<span style="color:#f92672">.</span>value ) <span style="color:#75715e">#顯示裡面得值</span>
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;ok&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span> <span style="color:#75715e">#拿到並跳出</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    body <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>get_data(as_text<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-</span></span><span style="display:flex;"><span>    app<span style="color:#f92672">.</span>logger<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#34;Request body: &#34;</span> <span style="color:#f92672">+</span> body)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>        handler<span style="color:#f92672">.</span>handle(body, signature)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> InvalidSignatureError:
-</span></span><span style="display:flex;"><span>        abort(<span style="color:#ae81ff">400</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;OK&#39;</span>
-</span></span></code></pre></div><p>我們可以看到程式碼裡面有 CHANNEL_ACCESS_TOKEN 跟 CHANNEL_SECRET <br>
-都是在我們剛剛創 Line Bot 的地方可以看到，這個很重要先記著！ <br>
-Channel secret 在 Basic Setting 下
-<img src="https://imgur.com/j633Bbx.png" alt="Channel secret">
-Channel access token 在 Messaging API 下
-<img src="https://imgur.com/XAJWN2K.png" alt="Channel access token">
-之後就要回到 Heroku 的部分因為我們要上傳到 Heroku，我們先把環境設定與程式碼的部分搞定在上傳 <br>
-我們要把程式上傳到 Heroku 需要幾個東西讓 Heroku 知道要我們要使用的套件與指定要跑的程式等等&hellip; <br>
-要上傳Heroku有幾個必要的東西 <strong>Procfile，requirements.txt，runtime.txt</strong> 這三個設定檔跟你的主程式(main.py)。</p>
-<p><strong>Procfile</strong>：主要是寫說你這個程式是什麼東西並主要執行的程式
-我們要在裡面填上 <br>
-web: gunicorn main:app –preload <br>
-說明要用 main 這個程式運行一個 app 並且是用 Gunicorn 搭建一個 Web 服務
-等等上傳就可以在你的 Heroku 上看到
-<img src="https://imgur.com/s5YDi4R.png" alt="Heroku app"></p>
-<p><strong>requirements.txt</strong>：這很重要！這是要把我們需要用到的 Library 去跟 Heroku 說，他會在上傳程式碼時一起把套件裝起來 <br>
-這邊就列出我們需要用的 <strong>套件名字==版本</strong></p>
-<ul>
-<li>Flask==2.0.2</li>
-<li>gunicorn==19.9.0</li>
-<li>line-bot-sdk==2.0.1</li>
-<li>requests==2.27.1</li>
-<li>psycopg2==2.9.3</li>
-<li>numpy==1.19.4</li>
-<li>Pillow==8.0.1</li>
-<li>pygsheets==2.0.5</li>
-</ul>
-<p><strong>runtime.txt</strong>：這裡面是說明你要用什麼語言跟版本去執行程式，我使用的是 python-3.8.6
-之後我們就照著 Heroku 裡 Deploy 下的步驟一步一步操作就能上傳程式碼到 Heroku 上了
-<img src="https://imgur.com/7GLoq2B.png" alt="Heroku_Deploy">
-過程跟上傳 Github 的方法87％像，之後我們剛剛可以看到程式碼裡有這兩句</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>line_bot_api <span style="color:#f92672">=</span> LineBotApi(os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#39;CHANNEL_ACCESS_TOKEN&#39;</span>])
-</span></span><span style="display:flex;"><span>handler <span style="color:#f92672">=</span> WebhookHandler(os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#39;CHANNEL_SECRET&#39;</span>])
-</span></span></code></pre></div><p>這邊用的 os.environ[&lsquo;CHANNEL_ACCESS_TOKEN&rsquo;]，是利用我們 Heroku 上設定環境變數並當你跟 Heroku 要的時候會吐出指定的東西給他那要整麼設定呢？ <br>
-在你的 Heroku App 裡的 Setting 可以看到 Config Vars 把旁邊的點開就能看到兩行可以輸入的東西，我們就在這邊輸入我們 LineBot 的資訊就不用把機密寫在程式裡摟！！ 安全吧！
-<img src="https://imgur.com/qa4gYpA.png" alt="Heroku Environment Setting">
-我們有了剛剛講的這三個檔案跟主程式(main.py)就可以上傳到你的 Heroku，並且去到 Heroku 設定一下環境設定 <br>
-就回去剛剛的 LineBot 裡的 Webhook URL <br>
-填上 https://你heroku的APP名字.herokuapp.com/callback <br>
-按 Verify 正常過的話就是代表能用摟！！</p>
-<h1 id="trouble-shooting">Trouble shooting</h1>
-<p>先檢查 Webhook URL 是否有對到你的 HerokuAPP <br>
-再檢查 CHANNEL_ACCESS_TOKEN 跟 CHANNEL_SECRET 是否填對 <br>
-如果你不覺的是 Heroku 的問題，也能改成直接寫在程式裡在本地執行程式去進行測試</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>line_bot_api <span style="color:#f92672">=</span> LineBotApi(<span style="color:#e6db74">&#39;CHANNEL_ACCESS_TOKEN&#39;</span>)
-</span></span><span style="display:flex;"><span>Ex: line_bot_api <span style="color:#f92672">=</span> LineBotApi(<span style="color:#e6db74">&#39;sdgfdfhfgjfgjerwer3534534&#39;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>handler <span style="color:#f92672">=</span> WebhookHandler(<span style="color:#e6db74">&#39;CHANNEL_SECRET&#39;</span>)
-</span></span><span style="display:flex;"><span>Ex: handler <span style="color:#f92672">=</span> WebhookHandler(<span style="color:#e6db74">&#39;dsfdsf453465sdgsg&#39;</span>)
-</span></span></code></pre></div><p>過來就是檢查上傳 Heroku 的資料是否都有，再檢查是否有上傳成功</p>
-<p>我知道我講的有點簡略，但可以搭配下面前輩的文章一起參考喔！ <br>
-如果都不行或是還有疑問就留言吧！如果我會，我就盡量回答！！</p>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#新增資料方式 (新增綁定人資料並統計人數,並讓下次可以跑進迴圈)</span>
+</span></span><span style="display:flex;"><span>wks<span style="color:#f92672">.</span>update_value(<span style="color:#e6db74">&#39;A6&#39;</span>, <span style="color:#e6db74">&#39;asderrgte231231564gh&#39;</span>) <span style="color:#75715e">#新增資料</span>
+</span></span><span style="display:flex;"><span>wks<span style="color:#f92672">.</span>update_value(<span style="color:#e6db74">&#39;C1&#39;</span>, Count<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)  <span style="color:#75715e">#人數+1</span>
+</span></span><span style="display:flex;"><span>A <span style="color:#f92672">=</span> wks<span style="color:#f92672">.</span>cell( <span style="color:#e6db74">&#39;A6&#39;</span> )
+</span></span><span style="display:flex;"><span>print(A<span style="color:#f92672">.</span>value)       <span style="color:#75715e">#檢查新資料</span>
+</span></span></code></pre></div><p>Google sheet 該如何與 Python 運作跟上面的註冊詳細我一樣會把參考資料都放在下面(還不懂的可以看裡面教的比較詳細) <br>
+我知道我講的有點簡略如果都不行或是還有疑問就留言吧！如果我會，我就盡量回答！！ \</p>
 <h2 id="reference">Reference</h2>
-<p><a href="https://medium.com/@justinlee_78563/line-bot-%E7%B3%BB%E5%88%97%E6%96%87-%E4%BB%80%E9%BA%BC%E6%98%AF-webhook-d0ab0bb192be">LINE Bot 系列文 — 什麼是 Webhook?</a> <br>
+<p>Line：<br>
 <a href="https://ithelp.ithome.com.tw/articles/10254814">賴田捕手 iT幫幫忙</a> <br>
 <a href="https://ithelp.ithome.com.tw/users/20107309/ironman/1253">卡米狗 iT幫幫忙</a> <br>
-<a href="https://dotblogs.com.tw/Funny_DotBlog/2018/11/14/chatbot_python_1">[ChatBot] 創造自己的 Line bot，第一次就上手！(1) — Line bot 架構及工具簡介</a></p>
+Google Sheet： <br>
+<a href="https://www.maxlist.xyz/2018/09/25/python_googlesheet_crud/#_%E5%85%AD_Python_%E4%B8%B2%E6%8E%A5_GoogleSheet_%E7%9A%84%E5%85%B6%E4%BB%96%E6%87%89%E7%94%A8">[資料庫筆記] Python 串接 GoogleSheet 新增、讀取、更新和刪除</a> <br>
+<a href="https://hackmd.io/@Yun-Cheng/GoogleSheets">Python 讀寫 Google Sheets 教學</a> <br>
+<a href="https://www.learncodewithmike.com/2020/08/python-write-to-google-sheet.html">[Python爬蟲教學]解析如何串接Google Sheet試算表寫入爬取的資料</a></p>
               
 
 
@@ -411,6 +383,8 @@ web: gunicorn main:app –preload <br>
                     
   <a class="tag tag--primary tag--small" href="https://okhand-zy.github.io/tags/line-bot/">Line Bot</a>
 
+  <a class="tag tag--primary tag--small" href="https://okhand-zy.github.io/tags/line-notify/">Line Notify</a>
+
   <a class="tag tag--primary tag--small" href="https://okhand-zy.github.io/tags/heroku/">Heroku</a>
 
                   </div>
@@ -424,7 +398,7 @@ web: gunicorn main:app –preload <br>
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://okhand-zy.github.io/post/line-bot2/" data-tooltip="Line Bot 之利用 Line Notify 突破限制吧！" aria-label="NEXT: Line Bot 之利用 Line Notify 突破限制吧！">
+            <a class="post-action-btn btn btn--disabled">
           
               <i class="fa fa-angle-left"></i>
               <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -432,7 +406,7 @@ web: gunicorn main:app –preload <br>
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--disabled">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://okhand-zy.github.io/post/line-bot2/" data-tooltip="Line Bot 之利用 Line Notify 突破限制吧！" aria-label="PREVIOUS: Line Bot 之利用 Line Notify 突破限制吧！">
           
               <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
               <i class="fa fa-angle-right"></i>
@@ -450,19 +424,19 @@ web: gunicorn main:app –preload <br>
     </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://okhand-zy.github.io/post/line-bot1/" title="Share on Facebook" aria-label="Share on Facebook">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://okhand-zy.github.io/post/line-bot3/" title="Share on Facebook" aria-label="Share on Facebook">
           <i class="fab fa-facebook-square" aria-hidden="true"></i>
         </a>
       </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://okhand-zy.github.io/post/line-bot1/" title="Share on Twitter" aria-label="Share on Twitter">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://okhand-zy.github.io/post/line-bot3/" title="Share on Twitter" aria-label="Share on Twitter">
           <i class="fab fa-twitter" aria-hidden="true"></i>
         </a>
       </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://okhand-zy.github.io/post/line-bot1/" title="Share on Linkedin" aria-label="Share on Linkedin">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://okhand-zy.github.io/post/line-bot3/" title="Share on Linkedin" aria-label="Share on Linkedin">
           <i class="fab fa-linkedin" aria-hidden="true"></i>
         </a>
       </li>
@@ -493,9 +467,9 @@ web: gunicorn main:app –preload <br>
     </div>
     <script type="text/javascript">
       var disqus_config = function() {
-        this.page.url = 'https:\/\/okhand-zy.github.io\/post\/line-bot1\/';
+        this.page.url = 'https:\/\/okhand-zy.github.io\/post\/line-bot3\/';
         
-          this.page.identifier = '\/post\/line-bot1\/'
+          this.page.identifier = '\/post\/line-bot3\/'
         
       };
       (function() {
@@ -531,7 +505,7 @@ web: gunicorn main:app –preload <br>
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://okhand-zy.github.io/post/line-bot2/" data-tooltip="Line Bot 之利用 Line Notify 突破限制吧！" aria-label="NEXT: Line Bot 之利用 Line Notify 突破限制吧！">
+            <a class="post-action-btn btn btn--disabled">
           
               <i class="fa fa-angle-left"></i>
               <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -539,7 +513,7 @@ web: gunicorn main:app –preload <br>
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--disabled">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://okhand-zy.github.io/post/line-bot2/" data-tooltip="Line Bot 之利用 Line Notify 突破限制吧！" aria-label="PREVIOUS: Line Bot 之利用 Line Notify 突破限制吧！">
           
               <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
               <i class="fa fa-angle-right"></i>
@@ -557,19 +531,19 @@ web: gunicorn main:app –preload <br>
     </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://okhand-zy.github.io/post/line-bot1/" title="Share on Facebook" aria-label="Share on Facebook">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://okhand-zy.github.io/post/line-bot3/" title="Share on Facebook" aria-label="Share on Facebook">
           <i class="fab fa-facebook-square" aria-hidden="true"></i>
         </a>
       </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://okhand-zy.github.io/post/line-bot1/" title="Share on Twitter" aria-label="Share on Twitter">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://okhand-zy.github.io/post/line-bot3/" title="Share on Twitter" aria-label="Share on Twitter">
           <i class="fab fa-twitter" aria-hidden="true"></i>
         </a>
       </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://okhand-zy.github.io/post/line-bot1/" title="Share on Linkedin" aria-label="Share on Linkedin">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://okhand-zy.github.io/post/line-bot3/" title="Share on Linkedin" aria-label="Share on Linkedin">
           <i class="fab fa-linkedin" aria-hidden="true"></i>
         </a>
       </li>
@@ -600,19 +574,19 @@ web: gunicorn main:app –preload <br>
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fokhand-zy.github.io%2Fpost%2Fline-bot1%2F" aria-label="Share on Facebook">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fokhand-zy.github.io%2Fpost%2Fline-bot3%2F" aria-label="Share on Facebook">
           <i class="fab fa-facebook-square" aria-hidden="true"></i><span>Share on Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fokhand-zy.github.io%2Fpost%2Fline-bot1%2F" aria-label="Share on Twitter">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Fokhand-zy.github.io%2Fpost%2Fline-bot3%2F" aria-label="Share on Twitter">
           <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fokhand-zy.github.io%2Fpost%2Fline-bot1%2F" aria-label="Share on Linkedin">
+        <a class="share-option-btn" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fokhand-zy.github.io%2Fpost%2Fline-bot3%2F" aria-label="Share on Linkedin">
           <i class="fab fa-linkedin" aria-hidden="true"></i><span>Share on Linkedin</span>
         </a>
       </li>

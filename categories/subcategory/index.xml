@@ -6,14 +6,23 @@
     <description>Recent content in subcategory on OKH@nd&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 02 Feb 2023 14:52:30 +0800</lastBuildDate><atom:link href="https://okhand-zy.github.io/categories/subcategory/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 02 Feb 2023 16:32:43 +0800</lastBuildDate><atom:link href="https://okhand-zy.github.io/categories/subcategory/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title> Line Notify 建立資料庫並提供不休息的服務</title>
+      <link>https://okhand-zy.github.io/post/line-bot3/</link>
+      <pubDate>Thu, 02 Feb 2023 16:32:43 +0800</pubDate>
+      
+      <guid>https://okhand-zy.github.io/post/line-bot3/</guid>
+      <description>&lt;p&gt;本文是實作如何 Heroku 持續不間段服務 與 連結 Google Sheet 當作我們的資料庫。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Line Bot 之利用 Line Notify 突破限制吧！</title>
       <link>https://okhand-zy.github.io/post/line-bot2/</link>
       <pubDate>Thu, 02 Feb 2023 14:52:30 +0800</pubDate>
       
       <guid>https://okhand-zy.github.io/post/line-bot2/</guid>
-      <description></description>
+      <description>&lt;p&gt;本文主要是實作如何從基本的 Line Bot 串接 Line Notify，回傳出 URL 讓使用者去綁定達到可以去互動的效果！&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -22,7 +31,7 @@
       <pubDate>Wed, 01 Feb 2023 16:24:45 +0800</pubDate>
       
       <guid>https://okhand-zy.github.io/post/line-bot1/</guid>
-      <description>&lt;p&gt;本文主要是講述如何從無到有一個簡單的 Line Bot 並把程式上傳到 Heroku 當一個 Service 可以去跟我們做簡單的互動。&lt;/p&gt;</description>
+      <description>&lt;p&gt;本文主要是實作如何從無到有一個簡單的 Line Bot 並把程式上傳到 Heroku 當一個 Service 可以去跟我們做簡單的互動。&lt;/p&gt;</description>
     </item>
     
   </channel>
