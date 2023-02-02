@@ -6,14 +6,23 @@
     <description>Recent content in subcategory on OKH@nd&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 01 Feb 2023 16:24:45 +0800</lastBuildDate><atom:link href="https://okhand-zy.github.io/categories/subcategory/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 02 Feb 2023 14:52:30 +0800</lastBuildDate><atom:link href="https://okhand-zy.github.io/categories/subcategory/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Line Bot 之利用 Line Notify 突破限制吧！</title>
+      <link>https://okhand-zy.github.io/post/line-bot2/</link>
+      <pubDate>Thu, 02 Feb 2023 14:52:30 +0800</pubDate>
+      
+      <guid>https://okhand-zy.github.io/post/line-bot2/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>讓我們用 Python 開發一個 Line Bot</title>
       <link>https://okhand-zy.github.io/post/line-bot1/</link>
       <pubDate>Wed, 01 Feb 2023 16:24:45 +0800</pubDate>
       
       <guid>https://okhand-zy.github.io/post/line-bot1/</guid>
-      <description></description>
+      <description>&lt;p&gt;本文主要是講述如何從無到有一個簡單的 Line Bot 並把程式上傳到 Heroku 當一個 Service 可以去跟我們做簡單的互動。&lt;/p&gt;</description>
     </item>
     
   </channel>
