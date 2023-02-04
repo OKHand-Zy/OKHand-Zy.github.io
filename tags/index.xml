@@ -2,35 +2,35 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on OKH@nd&#39;s Blog</title>
-    <link>https://okhand-zy.github.io/tags/</link>
+    <link>https://OKHand.org/tags/</link>
     <description>Recent content in Tags on OKH@nd&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 02 Feb 2023 16:32:43 +0800</lastBuildDate><atom:link href="https://okhand-zy.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 02 Feb 2023 16:32:43 +0800</lastBuildDate><atom:link href="https://OKHand.org/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Heroku</title>
-      <link>https://okhand-zy.github.io/tags/heroku/</link>
+      <link>https://OKHand.org/tags/heroku/</link>
       <pubDate>Thu, 02 Feb 2023 16:32:43 +0800</pubDate>
       
-      <guid>https://okhand-zy.github.io/tags/heroku/</guid>
+      <guid>https://OKHand.org/tags/heroku/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Line Bot</title>
-      <link>https://okhand-zy.github.io/tags/line-bot/</link>
+      <link>https://OKHand.org/tags/line-bot/</link>
       <pubDate>Thu, 02 Feb 2023 16:32:43 +0800</pubDate>
       
-      <guid>https://okhand-zy.github.io/tags/line-bot/</guid>
+      <guid>https://OKHand.org/tags/line-bot/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Line Notify</title>
-      <link>https://okhand-zy.github.io/tags/line-notify/</link>
+      <link>https://OKHand.org/tags/line-notify/</link>
       <pubDate>Thu, 02 Feb 2023 16:32:43 +0800</pubDate>
       
-      <guid>https://okhand-zy.github.io/tags/line-notify/</guid>
+      <guid>https://OKHand.org/tags/line-notify/</guid>
       <description></description>
     </item>
     
