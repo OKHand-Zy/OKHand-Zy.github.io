@@ -6,9 +6,27 @@
     <description>Recent content in category on OKH@nd&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 02 Feb 2023 16:32:43 +0800</lastBuildDate><atom:link href="https://OKHand.org/categories/category/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 04 Feb 2023 15:00:40 +0800</lastBuildDate><atom:link href="https://OKHand.org/categories/category/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title> Line Notify 建立資料庫並提供不休息的服務</title>
+      <title>Line Notify 搬家計畫</title>
+      <link>https://OKHand.org/post/line-bot-ex/</link>
+      <pubDate>Sat, 04 Feb 2023 15:00:40 +0800</pubDate>
+      
+      <guid>https://OKHand.org/post/line-bot-ex/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Line Bot 懶人包 - 總結</title>
+      <link>https://OKHand.org/post/line-bot-end/</link>
+      <pubDate>Sat, 04 Feb 2023 13:43:16 +0800</pubDate>
+      
+      <guid>https://OKHand.org/post/line-bot-end/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Line Notify 建立資料庫並提供不休息的服務</title>
       <link>https://OKHand.org/post/line-bot3/</link>
       <pubDate>Thu, 02 Feb 2023 16:32:43 +0800</pubDate>
       

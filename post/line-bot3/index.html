@@ -33,8 +33,8 @@
 
 <meta property="og:description" content="本文是實作如何 Heroku 持續不間段服務 與 連結 Google Sheet 當作我們的資料庫。">
 <meta property="og:type" content="article">
-<meta property="og:title" content=" Line Notify 建立資料庫並提供不休息的服務">
-<meta name="twitter:title" content=" Line Notify 建立資料庫並提供不休息的服務">
+<meta property="og:title" content="Line Notify 建立資料庫並提供不休息的服務">
+<meta name="twitter:title" content="Line Notify 建立資料庫並提供不休息的服務">
 <meta property="og:url" content="https://OKHand.org/post/line-bot3/">
 <meta property="twitter:url" content="https://OKHand.org/post/line-bot3/">
 <meta property="og:site_name" content="OKH@nd&#39;s Blog">
@@ -51,9 +51,7 @@
   
   
     
-      <meta property="article:section" content="category">
-    
-      <meta property="article:section" content="subcategory">
+      <meta property="article:section" content="Line_Bot">
     
   
   
@@ -86,7 +84,7 @@
   <meta property="twitter:image" content="https://imgur.com/kOoKkoG.png">
 
 
-    <title> Line Notify 建立資料庫並提供不休息的服務</title>
+    <title>Line Notify 建立資料庫並提供不休息的服務</title>
 
     <link rel="icon" href="https://OKHand.org/okhand.png">
     
@@ -190,7 +188,7 @@
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://OKHand.org/#about" title="About">
+      <a class="sidebar-button-link " href="https://OKHand.org/about_me/" title="About">
     
       <i class="sidebar-button-icon fas fa-lg fa-question" aria-hidden="true"></i>
       
@@ -228,6 +226,16 @@
       
   <li class="sidebar-button">
     
+      <a class="sidebar-button-link " href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=okhand.ziyu@okhand.org" target="_blank" rel="noopener" title="Gmail">
+    
+      <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Gmail</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
       <a class="sidebar-button-link " href="https://OKHand.org/index.xml" title="RSS">
     
       <i class="sidebar-button-icon fas fa-lg fa-rss" aria-hidden="true"></i>
@@ -253,7 +261,7 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title">
-       Line Notify 建立資料庫並提供不休息的服務
+      Line Notify 建立資料庫並提供不休息的服務
     </h1>
   
   
@@ -270,9 +278,7 @@
   
     <span>in</span>
     
-      <a class="category-link" href="https://OKHand.org/categories/category">category</a>, 
-    
-      <a class="category-link" href="https://OKHand.org/categories/subcategory">subcategory</a>
+      <a class="category-link" href="https://OKHand.org/categories/line_bot">Line_Bot</a>
     
   
 
@@ -284,7 +290,7 @@
             <div class="main-content-wrap">
               <p>本文是實作如何 Heroku 持續不間段服務 與 連結 Google Sheet 當作我們的資料庫。</p>
 <h1 id="前情提要">前情提要：</h1>
-<p>繼之前 <a href="https://okhand-zy.github.io/post/line-bot1/">讓我們用 Python 開發一個 LineBot</a> 跟 <a href="https://okhand-zy.github.io/post/line-bot2/">Line Bot 之利用 Line Notify 突破限制吧！</a>，我們已經有了 Line Bot 跟 Line Notify 並串接好了，那我們之後就是要去紀錄這些 Access Token 是誰的，當需要傳送資料的時候就知道要傳給誰了！！</p>
+<p>繼之前 <a href="https://okhand.org/post/line-bot1/">讓我們用 Python 開發一個 LineBot</a> 跟 <a href="https://okhand.org/post/line-bot2/">Line Bot 之利用 Line Notify 突破限制吧！</a>，我們已經有了 Line Bot 跟 Line Notify 並串接好了，那我們之後就是要去紀錄這些 Access Token 是誰的，當需要傳送資料的時候就知道要傳給誰了！！</p>
 <h1 id="不睡覺的服務">不睡覺的服務：</h1>
 <p>身為一個慣老闆下的社畜我也想當一下慣老闆的滋味，於是我們的服務是一直運作也是理所當然的吧！！ <br>
 這部分比較簡單原理大概就是因為 Heroku 每 25 分鐘如果沒人使用的話那個 APP 就會進入暫時性的休息，於是我們只要在 24 分的時候去戳一下自己的 Web 讓他以為有人叫他就可以讓他一直工作了。 <br>
@@ -398,7 +404,7 @@ Google Sheet： <br>
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--disabled">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/line-bot-end/" data-tooltip="Line Bot 懶人包 - 總結" aria-label="NEXT: Line Bot 懶人包 - 總結">
           
               <i class="fa fa-angle-left"></i>
               <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -505,7 +511,7 @@ Google Sheet： <br>
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--disabled">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/line-bot-end/" data-tooltip="Line Bot 懶人包 - 總結" aria-label="NEXT: Line Bot 懶人包 - 總結">
           
               <i class="fa fa-angle-left"></i>
               <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
