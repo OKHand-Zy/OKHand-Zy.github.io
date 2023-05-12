@@ -16,9 +16,9 @@
     
   },
   "name":"OKH@nd\u0027s Blog",
-  "description":"\u003cp\u003e本文講述如何使用 Docker 簡單搭建 Jenkins 服務，並紀錄過程！\u003c\/p\u003e",
-  "url":"https:\/\/OKHand.org\/post\/jenkins-build\/",
-  "keywords":"[Jenkins]"
+  "description":"\u003cp\u003e本篇文章是自己記錄下來如何自己修改 hugo-tranquilpeak-theme 添加自己需要的 Giscus 留言板！\u003c\/p\u003e",
+  "url":"https:\/\/OKHand.org\/post\/hugo-giscus\/",
+  "keywords":"[Hugo, Giscus]"
 }
 
 </script>
@@ -27,36 +27,38 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Hugo 0.107.0 with theme Tranquilpeak 0.5.3-BETA">
 <meta name="author" content="OKH@nd">
-<meta name="keywords" content="Jenkins">
-<meta name="description" content="本文講述如何使用 Docker 簡單搭建 Jenkins 服務，並紀錄過程！">
+<meta name="keywords" content="Hugo, Giscus">
+<meta name="description" content="本篇文章是自己記錄下來如何自己修改 hugo-tranquilpeak-theme 添加自己需要的 Giscus 留言板！">
 
 
-<meta property="og:description" content="本文講述如何使用 Docker 簡單搭建 Jenkins 服務，並紀錄過程！">
+<meta property="og:description" content="本篇文章是自己記錄下來如何自己修改 hugo-tranquilpeak-theme 添加自己需要的 Giscus 留言板！">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Jenkins 環境搭建">
-<meta name="twitter:title" content="Jenkins 環境搭建">
-<meta property="og:url" content="https://OKHand.org/post/jenkins-build/">
-<meta property="twitter:url" content="https://OKHand.org/post/jenkins-build/">
+<meta property="og:title" content="Hugo 加裝 Giscus 留言板">
+<meta name="twitter:title" content="Hugo 加裝 Giscus 留言板">
+<meta property="og:url" content="https://OKHand.org/post/hugo-giscus/">
+<meta property="twitter:url" content="https://OKHand.org/post/hugo-giscus/">
 <meta property="og:site_name" content="OKH@nd&#39;s Blog">
-<meta property="og:description" content="本文講述如何使用 Docker 簡單搭建 Jenkins 服務，並紀錄過程！">
-<meta name="twitter:description" content="本文講述如何使用 Docker 簡單搭建 Jenkins 服務，並紀錄過程！">
+<meta property="og:description" content="本篇文章是自己記錄下來如何自己修改 hugo-tranquilpeak-theme 添加自己需要的 Giscus 留言板！">
+<meta name="twitter:description" content="本篇文章是自己記錄下來如何自己修改 hugo-tranquilpeak-theme 添加自己需要的 Giscus 留言板！">
 <meta property="og:locale" content="en-us">
 
   
-    <meta property="article:published_time" content="2023-05-12T11:21:49">
+    <meta property="article:published_time" content="2023-05-12T15:05:04">
   
   
-    <meta property="article:modified_time" content="2023-05-12T11:21:49">
+    <meta property="article:modified_time" content="2023-05-12T15:05:04">
   
-  
-  
-    
-      <meta property="article:section" content="DevOps">
-    
   
   
     
-      <meta property="article:tag" content="Jenkins">
+      <meta property="article:section" content="Hugo">
+    
+  
+  
+    
+      <meta property="article:tag" content="Hugo">
+    
+      <meta property="article:tag" content="Giscus">
     
   
 
@@ -76,18 +78,18 @@
 
 
 
-  <meta property="og:image" content="https://static.coderbridge.com/img/jerryeml/ad11f75c7f6a4cc6ae4478db0ffd05a6.png">
-  <meta property="twitter:image" content="https://static.coderbridge.com/img/jerryeml/ad11f75c7f6a4cc6ae4478db0ffd05a6.png">
+  <meta property="og:image" content="https://raw.githubusercontent.com/github/explore/8753900cdf248290844b22340000825a102dd5a2/topics/giscus/giscus.png">
+  <meta property="twitter:image" content="https://raw.githubusercontent.com/github/explore/8753900cdf248290844b22340000825a102dd5a2/topics/giscus/giscus.png">
 
 
-    <title>Jenkins 環境搭建</title>
+    <title>Hugo 加裝 Giscus 留言板</title>
 
     <link rel="icon" href="https://OKHand.org/okhand.png">
     
 
     
 
-    <link rel="canonical" href="https://OKHand.org/post/jenkins-build/">
+    <link rel="canonical" href="https://OKHand.org/post/hugo-giscus/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -257,13 +259,13 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title">
-      Jenkins 環境搭建
+      Hugo 加裝 Giscus 留言板
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time datetime="2023-05-12T11:21:49&#43;08:00">
+      <time datetime="2023-05-12T15:05:04&#43;08:00">
         
   May 12, 2023
 
@@ -274,7 +276,7 @@
   
     <span>in</span>
     
-      <a class="category-link" href="https://OKHand.org/categories/devops">DevOps</a>
+      <a class="category-link" href="https://OKHand.org/categories/hugo">Hugo</a>
     
   
 
@@ -284,46 +286,39 @@
           
           <div class="post-content markdown">
             <div class="main-content-wrap">
-              <p>本文講述如何使用 Docker 簡單搭建 Jenkins 服務，並紀錄過程！</p>
-<p>我們的環境是使用 Docker 來搭建，使用下面命令來下載 image 並跑起來服務！</p>
-<p>Docker :</p>
-<pre tabindex="0"><code>docker run --name jenkins -d -p 8080:8080 -p 50000:50000  -v ${HOME}/docker/jenkins:/var/jenkins_home jenkins/jenkins
-參數說明：
---name =&gt; container 名子
--p =&gt; host端的port : container端的port
--v =&gt; host端資料夾位置 : container端內的資料夾位置
-jenkins/jenkins  =&gt; container image 版本
-</code></pre><p>服務啟動好之後我們需要了解一下 Docker 相關操作不然等等會卡關</p>
-<pre tabindex="0"><code>docker 操作 command :
-查看目前有在啟動的 container. =&gt; docker ps
-查看全部 container. =&gt; docker ps -a
-進container bash =&gt; docker exec -it &lt;container_id or name&gt; /bin/bash
-進container root身分進 bash =&gt; docker exec -u 0 -it &lt;container_id or name&gt; /bin/bash
-</code></pre><p>服務啟動好之後我們開啟網頁輸入 http://localhost:8080 就能看到 Jenkins 了！
-先初始化我們的密碼
-<img src="https://i.imgur.com/rCy1Nib.png" alt="Jenkins_getting_started"></p>
-<p>利用上面剛剛說的 command 就能進到container 底下之後輸入下面的 command 就可以看到初始化密碼了</p>
-<pre tabindex="0"><code>cat /var/jenkins_home/secrets/initialAdminPassword
-</code></pre><p>之後我們就能安裝想安裝的 pluging , 並設置我們的帳號密碼</p>
-<hr>
-<h3 id="如果後來忘記密碼qq">如果後來忘記密碼QQ</h3>
-<p>在使用 jenkins 的時候不小心把 admin 密碼忘記了，下面來修改找回 admin 密碼
-Jenkins 專用的 user 資料存放在 JENKINS_HOME/users 目錄。每個user資料分別放在 users/xxx(各種用戶名) ，可以用 find 命令查找對應用戶的路徑：</p>
-<pre tabindex="0"><code># find / -name config.xml
-/var/jenkins_home/jobs/peter_Test/config.xml
-/var/jenkins_home/config.xml
-/var/jenkins_home/users/admin_17608091780692632075/config.xml
-/var/jenkins_home/users/ziyu_13869244322503421338/config.xml
-/var/jenkins_home/users/frank_5101403968758794797/config.xml
-/var/jenkins_home/users/alan_10846704603041450940/config.xml
-/var/jenkins_home/users/peter_17697102942534321614/config.xml
-</code></pre><p>打開忘記密碼的用戶文件夾，裏面有一個文件config.xml，在裏面找到 <passwordHash> 位置
-把 <passwordHash> 位置的內容換成 #jbcrypt:$2a$10$DdaWzN64JgUtLdvxWIflcuQu2fgrrMSAMabF5TSrGK5nXitqK9ZMS
-儲存，重新啓動 Jenkins container，然後輸入用戶名，密碼：111111 然後就OK了^^</p>
+              <p>本篇文章是自己記錄下來如何自己修改 hugo-tranquilpeak-theme 添加自己需要的 Giscus 留言板！</p>
+<p>當初網站建好留言板得部分我考慮了很久要用哪個，很多人說 Disqus 會脫慢網站速度，後來就看到 Gitalk 和 Utterances，不過查了老半天突然看到一個另我心動的留言板可以用 emoji 反應在留言板上，覺得超酷超有趣而且還是接在 Github 上就直接選用這個了XD</p>
+<h2 id="建立個人網站留言的儲存庫-並-啟用giscus">建立個人網站留言的儲存庫 並 啟用giscus</h2>
+<ol>
+<li>先在 Github 上新建一個 <a href="https://github.com/new">repository</a>，名字取你想要的，並將儲存庫設定為 <strong>Public</strong> 否則訪客將無法查看 discussion。</li>
+<li>安裝 <a href="https://github.com/apps/giscus">giscus</a> 應用程式，否則訪客將無法留言或回應。 <br>
+接下來會看到選擇你是要給 giscus 權限是 <strong>全部的專案</strong> 還是 <strong>選擇的專案</strong>，我自己是選擇自己剛剛建的那個新的 repository。<br>
+如果選錯可以到 頭像 -&gt; Integrations -&gt; Applications -&gt; giscus -&gt; configure 去調整
+<img src="https://imgur.com/hr9KGel.png" alt="giscus_access_option"></li>
+<li>到剛剛新建的 repository 下的 Setting -&gt; Features 勾選 Discussions 啟用它。<br>
+<img src="https://imgur.com/VnNA3oD.png" alt="enable_Discussions"></li>
+<li>之後到 <a href="https://giscus.app/zh-TW">giscus.app</a> 輸入並勾選一些資訊，勾選完輸入完之後就可以在下面<strong>啟用 giscus</strong>部分看到可以嵌入留言板的code
+下面的可以不用照著我的勾選，可以依照你的需求與喜好去做選擇
+<img src="https://imgur.com/HBmG4UW.png" alt="giscus.app_1">
+<img src="https://imgur.com/saS0Pae.png" alt="giscus.app_2"></li>
+</ol>
+<h2 id="修改-hugo-theme">修改 Hugo theme</h2>
+<p>這邊要先說一下每個 Hugo theme 裡面的config.tomal跟一些擺放資料的位置或方法會有些許不一樣，我用的是 <a href="https://github.com/kakawait/hugo-tranquilpeak-theme/tree/master">hugo-tranquilpeak-theme</a></p>
+<ol start="5">
+<li>之後到 hugo web 的資料夾下找到 <strong>config.tomal</strong> 添加下面的 Code
+<pre tabindex="0"><code>[params.comment.giscus]
+  enable = true
+</code></pre><img src="https://imgur.com/exXQTCO.png" alt="add-code_config.tomal"></li>
+<li>之後到 layouts/partials/post 找到 <strong>comment.html</strong>，到最下面{{END}}上面添加以下的Code
+<pre tabindex="0"><code>{{ else if .Site.Params.comment.giscus.enable }}
+    剛剛在 giscus.app 啟用 giscus 的 code 貼過來
+</code></pre><img src="https://imgur.com/cNQpBXZ.png" alt="add-code_comment.html"></li>
+</ol>
+<p>就完成拉！現在拉到你的個人網頁下因該就會有這個樣子的留言板了
+<img src="https://imgur.com/0JdCHs4.png" alt="giscus_message-board"></p>
 <h2 id="reference">Reference</h2>
-<p><a href="https://cloud.tencent.com/developer/article/2204594">软件测试|Docker 上搭建持续集成平台 Jenkins - 腾讯云开发者社区-腾讯云 (tencent.com)</a> <br>
-<a href="https://www.jianshu.com/p/670a7a52af14">Jenkins忘记密码解决方法 windows/Linux - 簡書 (jianshu.com)</a> <br>
-<a href="https://www.twblogs.net/a/5d487efbbd9eee5327fb9f3f">jenkins初始密碼忘記了+修改密碼 - 台部落 (twblogs.net)</a></p>
+<p><a href="https://ivonblog.com/posts/hugo-giscus-comment/">安裝Giscus作為Hugo網站的留言板，支援轉換Gitalk/Utterances的留言</a> <br>
+<a href="https://giscus.app/zh-TW">Giscus官方協助安裝網頁</a></p>
               
 
 
@@ -337,7 +332,9 @@ Jenkins 專用的 user 資料存放在 JENKINS_HOME/users 目錄。每個user資
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/jenkins/">Jenkins</a>
+  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/hugo/">Hugo</a>
+
+  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/giscus/">Giscus</a>
 
                   </div>
                 
@@ -350,7 +347,7 @@ Jenkins 專用的 user 資料存放在 JENKINS_HOME/users 目錄。每個user資
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/hugo-giscus/" data-tooltip="Hugo 加裝 Giscus 留言板" aria-label="NEXT: Hugo 加裝 Giscus 留言板">
+            <a class="post-action-btn btn btn--disabled">
           
               <i class="fa fa-angle-left"></i>
               <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -358,7 +355,7 @@ Jenkins 專用的 user 資料存放在 JENKINS_HOME/users 目錄。每個user資
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/line-bot-ex/" data-tooltip="Line Notify 搬家計畫" aria-label="PREVIOUS: Line Notify 搬家計畫">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/jenkins-build/" data-tooltip="Jenkins 環境搭建" aria-label="PREVIOUS: Jenkins 環境搭建">
           
               <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
               <i class="fa fa-angle-right"></i>
@@ -376,19 +373,19 @@ Jenkins 專用的 user 資料存放在 JENKINS_HOME/users 目錄。每個user資
     </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/jenkins-build/" title="Share on Facebook" aria-label="Share on Facebook">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/hugo-giscus/" title="Share on Facebook" aria-label="Share on Facebook">
           <i class="fab fa-facebook-square" aria-hidden="true"></i>
         </a>
       </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/jenkins-build/" title="Share on Twitter" aria-label="Share on Twitter">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/hugo-giscus/" title="Share on Twitter" aria-label="Share on Twitter">
           <i class="fab fa-twitter" aria-hidden="true"></i>
         </a>
       </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/jenkins-build/" title="Share on Linkedin" aria-label="Share on Linkedin">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/hugo-giscus/" title="Share on Linkedin" aria-label="Share on Linkedin">
           <i class="fab fa-linkedin" aria-hidden="true"></i>
         </a>
       </li>
@@ -443,7 +440,7 @@ Jenkins 專用的 user 資料存放在 JENKINS_HOME/users 目錄。每個user資
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/hugo-giscus/" data-tooltip="Hugo 加裝 Giscus 留言板" aria-label="NEXT: Hugo 加裝 Giscus 留言板">
+            <a class="post-action-btn btn btn--disabled">
           
               <i class="fa fa-angle-left"></i>
               <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -451,7 +448,7 @@ Jenkins 專用的 user 資料存放在 JENKINS_HOME/users 目錄。每個user資
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/line-bot-ex/" data-tooltip="Line Notify 搬家計畫" aria-label="PREVIOUS: Line Notify 搬家計畫">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/jenkins-build/" data-tooltip="Jenkins 環境搭建" aria-label="PREVIOUS: Jenkins 環境搭建">
           
               <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
               <i class="fa fa-angle-right"></i>
@@ -469,19 +466,19 @@ Jenkins 專用的 user 資料存放在 JENKINS_HOME/users 目錄。每個user資
     </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/jenkins-build/" title="Share on Facebook" aria-label="Share on Facebook">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/hugo-giscus/" title="Share on Facebook" aria-label="Share on Facebook">
           <i class="fab fa-facebook-square" aria-hidden="true"></i>
         </a>
       </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/jenkins-build/" title="Share on Twitter" aria-label="Share on Twitter">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/hugo-giscus/" title="Share on Twitter" aria-label="Share on Twitter">
           <i class="fab fa-twitter" aria-hidden="true"></i>
         </a>
       </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/jenkins-build/" title="Share on Linkedin" aria-label="Share on Linkedin">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/hugo-giscus/" title="Share on Linkedin" aria-label="Share on Linkedin">
           <i class="fab fa-linkedin" aria-hidden="true"></i>
         </a>
       </li>
@@ -506,19 +503,19 @@ Jenkins 專用的 user 資料存放在 JENKINS_HOME/users 目錄。每個user資
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2FOKHand.org%2Fpost%2Fjenkins-build%2F" aria-label="Share on Facebook">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2FOKHand.org%2Fpost%2Fhugo-giscus%2F" aria-label="Share on Facebook">
           <i class="fab fa-facebook-square" aria-hidden="true"></i><span>Share on Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2FOKHand.org%2Fpost%2Fjenkins-build%2F" aria-label="Share on Twitter">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2FOKHand.org%2Fpost%2Fhugo-giscus%2F" aria-label="Share on Twitter">
           <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2FOKHand.org%2Fpost%2Fjenkins-build%2F" aria-label="Share on Linkedin">
+        <a class="share-option-btn" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2FOKHand.org%2Fpost%2Fhugo-giscus%2F" aria-label="Share on Linkedin">
           <i class="fab fa-linkedin" aria-hidden="true"></i><span>Share on Linkedin</span>
         </a>
       </li>
