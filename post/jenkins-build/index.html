@@ -320,10 +320,19 @@ Jenkins 專用的 user 資料存放在 JENKINS_HOME/users 目錄。每個user資
 </code></pre><p>打開忘記密碼的用戶文件夾，裏面有一個文件config.xml，在裏面找到 <passwordHash> 位置
 把 <passwordHash> 位置的內容換成 #jbcrypt:$2a$10$DdaWzN64JgUtLdvxWIflcuQu2fgrrMSAMabF5TSrGK5nXitqK9ZMS
 儲存，重新啓動 Jenkins container，然後輸入用戶名，密碼：111111 然後就OK了^^</p>
+<p>Troubleshooting：
+如果有遇到在 Jenkins 想查用網頁查看文件但沒辦法看的朋友可以用下面方法解決但只是暫時的每次 Jenkins 重啟都要重做一遍。如果想永久解決可以看下面文章內有解決辦法
+Jenkins首頁 =&gt; Manage Jenkins =&gt; ScriptConsole 輸入</p>
+<pre tabindex="0"><code>System.setProperty(&#34;hudson.model.DirectoryBrowserSupport.CSP&#34;,&#34;sandbox allow-scripts; default-src &#39;none&#39;; img-src &#39;self&#39; data: ; style-src &#39;self&#39; &#39;unsafe-inline&#39; data: ; script-src &#39;self&#39; &#39;unsafe-inline&#39; &#39;unsafe-eval&#39; ;&#34;)
+</code></pre><p>要按 2~3次 Run 才會有反應</p>
 <h2 id="reference">Reference</h2>
 <p><a href="https://cloud.tencent.com/developer/article/2204594">软件测试|Docker 上搭建持续集成平台 Jenkins - 腾讯云开发者社区-腾讯云 (tencent.com)</a> <br>
 <a href="https://www.jianshu.com/p/670a7a52af14">Jenkins忘记密码解决方法 windows/Linux - 簡書 (jianshu.com)</a> <br>
 <a href="https://www.twblogs.net/a/5d487efbbd9eee5327fb9f3f">jenkins初始密碼忘記了+修改密碼 - 台部落 (twblogs.net)</a></p>
+<p>Troubleshooting：
+<a href="https://www.jenkins.io/doc/book/security/configuring-content-security-policy/">Configuring Content Security Policy - Jenkins</a><br>
+<a href="https://stackoverflow.com/questions/34315723/jenkins-error-blocked-script-execution-in-url-because-the-documents-frame">Jenkins error - Blocked script execution in <URL>. because the document&rsquo;s frame is sandboxed and the &lsquo;allow-scripts&rsquo; permission is not set</a> <br>
+<a href="https://stackoverflow.com/questions/37829647/where-is-jenkins-xml-in-jenkins-docker-container">Where is jenkins.xml in jenkins docker container</a></p>
               
 
 
