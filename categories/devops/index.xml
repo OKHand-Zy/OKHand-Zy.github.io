@@ -6,7 +6,25 @@
     <description>Recent content in DevOps on OKH@nd&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 May 2023 11:21:49 +0800</lastBuildDate><atom:link href="https://OKHand.org/categories/devops/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Nov 2023 16:00:41 +0800</lastBuildDate><atom:link href="https://OKHand.org/categories/devops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>基礎 Docker 介紹與用法</title>
+      <link>https://OKHand.org/post/basic-docker/</link>
+      <pubDate>Sun, 19 Nov 2023 16:00:41 +0800</pubDate>
+      
+      <guid>https://OKHand.org/post/basic-docker/</guid>
+      <description>&lt;p&gt;本文講述 Docker 的 基本知識 與 用法＆指令&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Gitlab Runner</title>
+      <link>https://OKHand.org/post/gitlab-runner/</link>
+      <pubDate>Sat, 17 Jun 2023 15:33:12 +0800</pubDate>
+      
+      <guid>https://OKHand.org/post/gitlab-runner/</guid>
+      <description>&lt;p&gt;本文講述 Gitlab Runner 的各種類別與建立使用方法!!&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Jenkins 環境搭建</title>
       <link>https://OKHand.org/post/jenkins-build/</link>
