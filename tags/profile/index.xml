@@ -13,7 +13,7 @@
       <pubDate>Sat, 04 Feb 2023 15:15:39 +0800</pubDate>
       
       <guid>https://OKHand.org/about_me/</guid>
-      <description>Hi 👋, I&#39;m OKH@nd Automation Developer from Taiwan Work Experience: Automation Developer, SIT, Foxconn, Mar.2023 ~ Present 1. Design, develop, and maintain test automation codebase such as Python/Bash/Powershell scripts 2. Experience in manual/automation testing of server centric/rack-level validation 3. Extensive communication and collaboration with stakeholders from firmware/BIOS/BMC/Silicon-Vendor teams for planning and developing solutions. System Integration Testing Engineer, SIT, Foxconn, Nov.2021 ~ Mar.2023 1. Responsible for x86-64 and arm server operation test 2.</description>
+      <description>Hi 👋, I&#39;m OKH@nd Automation Developer from Taiwan Work Experience: System Integration Testing Engineer, SIT, Foxconn, Nov.2021 ~ Mar.2023 1. Responsible for x86-64 and arm server operation test 2. Test and verify system function (functional test) 3. compatibility (options compatibility test), performance (performance) 4. stress loading (stress loading) 5. reliability (RAS feature test) and integration test BIOS, BMC, and all accessories for server hardware. Automation Developer, SIT, Foxconn, Mar.2023 ~ Present 1.</description>
     </item>
     
   </channel>

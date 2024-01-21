@@ -6,14 +6,32 @@
     <description>Recent content in Posts on OKH@nd&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 Nov 2023 16:00:41 +0800</lastBuildDate><atom:link href="https://OKHand.org/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Dec 2023 01:39:20 +0800</lastBuildDate><atom:link href="https://OKHand.org/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>基礎 Docker 介紹與用法</title>
-      <link>https://OKHand.org/post/basic-docker/</link>
+      <title>How to Do Great Work 自我反思與心得</title>
+      <link>https://OKHand.org/post/how2dogreatwork/</link>
+      <pubDate>Sat, 30 Dec 2023 01:39:20 +0800</pubDate>
+      
+      <guid>https://OKHand.org/post/how2dogreatwork/</guid>
+      <description>&lt;p&gt;本文是我在閱讀 Paul Graham 在2023年7月時在他自己 Blog 所寫下的 How to Do Great Work 這篇文章的個人想法！！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Docker Swarm 入門教學</title>
+      <link>https://OKHand.org/post/docker-swarm/</link>
+      <pubDate>Sun, 26 Nov 2023 22:39:37 +0800</pubDate>
+      
+      <guid>https://OKHand.org/post/docker-swarm/</guid>
+      <description>&lt;p&gt;本文介紹基礎的 Docker Swarm 該如何使用&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Docker與VM的不同 與 Docker指令</title>
+      <link>https://OKHand.org/post/docker-vm-df/</link>
       <pubDate>Sun, 19 Nov 2023 16:00:41 +0800</pubDate>
       
-      <guid>https://OKHand.org/post/basic-docker/</guid>
-      <description>&lt;p&gt;本文講述 Docker 的 基本知識 與 用法＆指令&lt;/p&gt;</description>
+      <guid>https://OKHand.org/post/docker-vm-df/</guid>
+      <description>&lt;p&gt;本文講述 Docker與VM的不同 與 Docker指令&lt;/p&gt;</description>
     </item>
     
     <item>

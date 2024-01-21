@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <script type="application/ld+json">
+
+{  
+  "@context":"http://schema.org",
+  "@type":"Website",
+  "@id":"https:\/\/OKHand.org\/",
+  "author": {
+    "@type": "Person",
+    "name": "OKH@nd",
+    
+    "image": "https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943"
+    
+  },
+  "name":"OKH@nd\u0027s Blog",
+  "description":"\u003cp\u003e本文講述 Docker與VM的不同 與 Docker指令\u003c\/p\u003e",
+  "url":"https:\/\/OKHand.org\/post\/docker-vm-df\/",
+  "keywords":"[Docker, DevOps]"
+}
+
+</script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.107.0 with theme Tranquilpeak 0.5.3-BETA">
+<meta name="author" content="OKH@nd">
+<meta name="keywords" content="Docker, DevOps">
+<meta name="description" content="本文講述 Docker與VM的不同 與 Docker指令">
+
+
+<meta property="og:description" content="本文講述 Docker與VM的不同 與 Docker指令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker與VM的不同 與 Docker指令">
+<meta name="twitter:title" content="Docker與VM的不同 與 Docker指令">
+<meta property="og:url" content="https://OKHand.org/post/docker-vm-df/">
+<meta property="twitter:url" content="https://OKHand.org/post/docker-vm-df/">
+<meta property="og:site_name" content="OKH@nd&#39;s Blog">
+<meta property="og:description" content="本文講述 Docker與VM的不同 與 Docker指令">
+<meta name="twitter:description" content="本文講述 Docker與VM的不同 與 Docker指令">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2023-11-19T16:00:41">
+  
+  
+    <meta property="article:modified_time" content="2023-11-19T16:00:41">
+  
+  
+  
+    
+      <meta property="article:section" content="DevOps">
+    
+      <meta property="article:section" content="Docker">
+    
+  
+  
+    
+      <meta property="article:tag" content="DevOps">
+    
+      <meta property="article:tag" content="Docker">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=640">
+
+
+
+
+
+  <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/919/919853.png">
+  <meta property="twitter:image" content="https://cdn-icons-png.flaticon.com/512/919/919853.png">
+
+
+    <title>Docker與VM的不同 與 Docker指令</title>
+
+    <link rel="icon" href="https://OKHand.org/okhand.png">
+    
+
+    
+
+    <link rel="canonical" href="https://OKHand.org/post/docker-vm-df/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    
+    <link rel="stylesheet" href="https://OKHand.org/css/style-h6ccsoet3mzkbb0wngshlfbaweimexgqcxj0h5hu4h82olsdzz6wmqdkajm.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://OKHand.org/" aria-label="Go to homepage">OKH@nd&#39;s Blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://OKHand.org/#about" aria-label="Open the link: /#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://OKHand.org/#about" aria-label="Read more about the author">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">OKH@nd</h4>
+        
+          <h5 class="sidebar-profile-bio">致力於用我的知識，嘗試去改變現今的教育及社會，讓世界變得更美好</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/" title="Home">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-home" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/categories" title="Categories">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-bookmark" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/tags" title="Tags">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-tags" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/archives" title="Archives">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-archive" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/about_me/" title="About">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-question" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/OKHand-Zy" target="_blank" rel="noopener" title="GitHub">
+    
+      <i class="sidebar-button-icon fab fa-lg fa-github" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://home.gamer.com.tw/homeindex.php?owner=Az7899603" target="_blank" rel="noopener" title="Gamer Forum">
+    
+      <i class="sidebar-button-icon fa fa-gamepad" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Gamer Forum</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=okhand.ziyu@okhand.org" target="_blank" rel="noopener" title="Gmail">
+    
+      <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Gmail</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/index.xml" title="RSS">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-rss" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" id="top">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title">
+      Docker與VM的不同 與 Docker指令
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time datetime="2023-11-19T16:00:41&#43;08:00">
+        
+  November 19, 2023
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://OKHand.org/categories/devops">DevOps</a>, 
+    
+      <a class="category-link" href="https://OKHand.org/categories/docker">Docker</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown">
+            <div class="main-content-wrap">
+              <p>本文講述 Docker與VM的不同 與 Docker指令</p>
+<h3 id="重要觀念-docker--container">重要觀念 Docker != Container</h3>
+<h2 id="docker-架構">Docker 架構：</h2>
+<p><img src="https://dockertips.readthedocs.io/en/latest/_images/container_vs_vm.png" alt="vm_vs_container">
+<img src="https://i.imgur.com/gnlQGVa.png" alt="vm_vs_container_arch"></p>
+<h2 id="vm">VM：</h2>
+<p>用來建立虛擬化運算環境的技術(OS層級虛擬化)</p>
+<p>優點:</p>
+<ul>
+<li>安全性較高，因為硬體層以上都虛擬化</li>
+<li>可以選擇各種不同的 OS</li>
+</ul>
+<p>缺點:</p>
+<ul>
+<li>Image大小通常為GB</li>
+<li>啟動速度通常要花個幾分鐘</li>
+<li>資源使用較多，因為要將一部分資源分給 VM 的作業系統</li>
+</ul>
+<h2 id="container">Container：</h2>
+<p>Docker 是個管理容器的服務，提供應用層級虛擬化技術。容器不像虛擬機要在 Host OS 上再安裝 Guest OS，而可以直接共用底層 Host OS 的資源，同時具備其應用程式沙盒的隔離性。</p>
+<p>優點:</p>
+<ul>
+<li>Image大小通常為<strong>MB</strong></li>
+<li>啟動速度較<strong>快</strong></li>
+<li>能將更多資源運用在跑服務上</li>
+<li>更新較為容易</li>
+</ul>
+<p>缺點:</p>
+<ul>
+<li>安全性較<strong>差</strong></li>
+<li>同一台機器中，每個 Container 的 OS 都是相同</li>
+</ul>
+<h2 id="docker-參數">Docker 參數：</h2>
+<p>docker -p <code>&lt;host端port:container端port&gt;</code>
+docker -v <code>&lt;host_path:container_path&gt;</code></p>
+<h2 id="docker-command">Docker Command：</h2>
+<p>把 docker image 下載下來： <br>
+<code>docker pull &lt;image_name:version_Tag&gt;</code></p>
+<p>建立當前資料夾下的 <code>docker-compose.yml</code> 檔建立相對應的 container：  <br>
+<code>docker compose up -d</code></p>
+<p>查看目前有在跑的 container 和 詳細資料： <br>
+<code>docker compose ps -a</code></p>
+<p>查看 container 目前有什麼在跑：  <br>
+<code>docker container ls</code></p>
+<p>查看 container ID and 執行佔用 CPU or Memory …：  <br>
+<code>docker stats</code></p>
+<p>執行 container：  <br>
+<code>docker run &lt;container_ID or Container_name&gt;</code></p>
+<p>停止 container：  <br>
+<code>docker stop &lt;container_ID or Container_name&gt;</code></p>
+<p>移除 container：  <br>
+<code>docker rm &lt;container_ID or Container_name&gt;</code></p>
+<p>停止 container：  <br>
+<code>docker compose stop &lt;container_ID or compose_name&gt;</code></p>
+<p>開始 container：  <br>
+<code>docker compose run &lt;container_ID or compose_name&gt;</code></p>
+<p>重啟 container：  <br>
+<code>docker compose restart &lt;container_ID or compose_name&gt;</code></p>
+<p>查看所有 docker 上 network 種類：  <br>
+<code>docker network ls</code></p>
+<p>查詢接上此 network 的資訊：  <br>
+<code>docker network inspect &lt;network_name&gt;</code></p>
+<p>docker 跟 container 溝通：  <br>
+<code>docker exec -it &lt;container_id or container_name&gt; &lt;Command&gt;</code></p>
+<p>以 root權限 跟 container 溝通：  <br>
+<code>docker exec -it —user=root &lt;container_id or container_name&gt; &lt;Command&gt;</code>
+or
+<code>docker exec -it —u 0 &lt;container_id or container_name&gt; &lt;Command&gt;</code></p>
+<p>把docker file 文件打包成一個imag：<code>docker compose build</code></p>
+<p>看container ip：</p>
+<pre tabindex="0"><code>docker inspect -f &#39;{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}&#39; &lt;container_id or container_name&gt;
+</code></pre><p>找資料位置：</p>
+<pre tabindex="0"><code>docker volume ls  # =&gt; get Container_ID
+docker inspect -f &#39;{{.Mounts}}&#39; &lt;Container_ID&gt;
+</code></pre><p>刪除 docker 產物 ：<code>docker &lt;*&gt; prune</code> <br>
+image：</p>
+<ul>
+<li><code>docker image prune</code></li>
+<li><code>docker image prune -a</code></li>
+</ul>
+<p>container：</p>
+<ul>
+<li><code>docker container prune</code></li>
+</ul>
+<p>volumes：</p>
+<ul>
+<li><code>docker volume prune</code></li>
+</ul>
+<p>network：</p>
+<ul>
+<li><code>docker network prune</code></li>
+</ul>
+<p>everything：</p>
+<ul>
+<li><code>docker system prune</code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>WARNING! This will remove:
+</span></span><span style="display:flex;"><span>        - all stopped containers
+</span></span><span style="display:flex;"><span>        - all networks not used by at least one container
+</span></span><span style="display:flex;"><span>        - all dangling images
+</span></span><span style="display:flex;"><span>        - all build cache
+</span></span></code></pre></div></li>
+<li><code>docker system prune --volumes</code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>  WARNING! This will remove:
+</span></span><span style="display:flex;"><span>          - all stopped containers
+</span></span><span style="display:flex;"><span>          - all networks not used by at least one container
+</span></span><span style="display:flex;"><span>          - all volumes not used by at least one container
+</span></span><span style="display:flex;"><span>          - all dangling images
+</span></span><span style="display:flex;"><span>          - all build cache
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="reference">Reference：</h3>
+<p><a href="https://philipzheng.gitbook.io/docker_practice/">《Docker —— 從入門到實踐­》正體中文版 (Git book)</a></p>
+<p><a href="https://dockertips.readthedocs.io/en/latest/index.html">Docker Tips (Git book)</a></p>
+<p><a href="https://hackmd.io/@wei06097/Byag8i2-s">專題筆記: VM 與 Docker (Hackmd) by.@wei06097</a></p>
+<p><a href="https://docs.docker.com/config/pruning/">Prune unused Docker objects | Docker Docs</a></p>
+              
+
+
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/devops/">DevOps</a>
+
+  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/docker/">Docker</a>
+
+                  </div>
+                
+              
+            
+            
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/docker-swarm/" data-tooltip="Docker Swarm 入門教學" aria-label="NEXT: Docker Swarm 入門教學">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/gitlab-runner/" data-tooltip="Gitlab Runner" aria-label="PREVIOUS: Gitlab Runner">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/docker-vm-df/" title="Share on Facebook" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/docker-vm-df/" title="Share on Twitter" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/docker-vm-df/" title="Share on Linkedin" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="Back to top">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+            
+  
+    <script src="https://giscus.app/client.js"
+      data-repo="OKHand-zy/web-giscus"
+      data-repo-id="R_kgDOJiGm_w"
+      data-category="Announcements"
+      data-category-id="DIC_kwDOJiGm_84CWb2E"
+      data-mapping="title"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="light_high_contrast"
+      data-lang="zh-TW"
+      crossorigin="anonymous"
+      async>
+    </script>
+  
+
+
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2024 OKH@nd. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/docker-swarm/" data-tooltip="Docker Swarm 入門教學" aria-label="NEXT: Docker Swarm 入門教學">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/gitlab-runner/" data-tooltip="Gitlab Runner" aria-label="PREVIOUS: Gitlab Runner">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/docker-vm-df/" title="Share on Facebook" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/docker-vm-df/" title="Share on Twitter" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/docker-vm-df/" title="Share on Linkedin" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="Back to top">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+      </div>
+      
+<div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-times"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2FOKHand.org%2Fpost%2Fdocker-vm-df%2F" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2FOKHand.org%2Fpost%2Fdocker-vm-df%2F" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2FOKHand.org%2Fpost%2Fdocker-vm-df%2F" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i><span>Share on Linkedin</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
+
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-times"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">OKH@nd</h4>
+    
+      <div id="about-card-bio">致力於用我的知識，嘗試去改變現今的教育及社會，讓世界變得更美好</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Automation Developer Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker-alt"></i>
+        <br/>
+        Taiwan
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://OKHand.org/images/nasa.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script src="https://OKHand.org/js/script-yqzy9wdlzix4lbbwdnzvwx3egsne77earqmn73v9uno8aupuph8wfguccut.min.js"></script>
+
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-gE8KAQyFIzV1C9+GZ8TKJHZS2s+n7EjNtC+IMRn1l5+WYJTHOODUM6JSjZhFhqXmc7bG8Av6XXpckA4tYhflnw==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/apache.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-EWROca+bote+7Oaaar1F6y74iZj1r1F9rm/ly7o+/FwJopbBaWtsFDmaKoZDd3QiGU2pGacBirHJNivmGLYrow==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/go.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-GDVzAn0wpx1yVtQsRWmFc6PhJiLBPdUic+h4GWgljBh904O3JU10fk9EKNpVyIoPqkFn54rgL2QBG4BmUTMpiQ==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/http.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-UgZlma8NzkrDb/NWgmLIcTrH7i/CSnLLDRFqCSNF5NGPpjKmzyM25qcoXGOup8+cDakKyaiTDd7N4dyH4YT+IA==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/less.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-lot9koe73sfXIrUvIPM/UEhuMciN56RPyBdOyZgfO53P2lkWyyXN7J+njcxIIBRV+nVDQeiWtiXg+bLAJZDTfg==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/nginx.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-Zd3e7XxHP00TD0Imr0PIfeM0fl0v95kMWuhyAS3Wn1UTSXTkz0OhtRgBAr4JlmADRgiXr4x7lpeUdqaGN8xIog==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/puppet.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-qtqDO052iXMSP+5d/aE/jMtL9vIIGvONgTJziC2K/ZIB1yEGa55WVxGE9/08rSQ62EoDifS9SWVGZ7ihSLhzMA==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/scss.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-1NmkjnEDnwwwcu28KoQF8vs3oaPFokQHbmbtwGhFfeDsQZtVFI8zW2aE9O8yMYdpdyKV/5blE4pSWw4Z/Sv97w==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/stylus.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-B2wSfruPjr8EJL6IIzQr1eAuDwrsfIfccNf/LCEdxELCgC/S/ZMt/Uvk80aD79m7IqOqW+Sw8nbkvha20yZpzg==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/swift.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-28oDiQZGKUVN6wQ7PSLPNipOcmkCALXKwOi7bnkyFf8QiMZQxG9EQoy/iiNx6Zxj2cG2SbVa4dXKigQhu7GiFw==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/yaml.min.js"></script>
+  
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+
+
+    
+  </body>
+</html>
+
