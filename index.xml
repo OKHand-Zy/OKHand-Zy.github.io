@@ -6,7 +6,16 @@
     <description>Recent content on OKH@nd&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 30 Dec 2023 01:39:20 +0800</lastBuildDate><atom:link href="https://OKHand.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 08 Feb 2024 13:29:55 +0800</lastBuildDate><atom:link href="https://OKHand.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Windows Server S2D </title>
+      <link>https://OKHand.org/post/builds2d/</link>
+      <pubDate>Thu, 08 Feb 2024 13:29:55 +0800</pubDate>
+      
+      <guid>https://OKHand.org/post/builds2d/</guid>
+      <description>&lt;p&gt;本文紀錄 Windows Server 2019 上建立 S2D 的過程！！&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>How to Do Great Work 自我反思與心得</title>
       <link>https://OKHand.org/post/how2dogreatwork/</link>

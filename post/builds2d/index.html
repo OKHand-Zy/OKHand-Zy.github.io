@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <script type="application/ld+json">
+
+{  
+  "@context":"http://schema.org",
+  "@type":"Website",
+  "@id":"https:\/\/OKHand.org\/",
+  "author": {
+    "@type": "Person",
+    "name": "OKH@nd",
+    
+    "image": "https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943"
+    
+  },
+  "name":"OKH@nd\u0027s Blog",
+  "description":"\u003cp\u003e本文紀錄 Windows Server 2019 上建立 S2D 的過程！！\u003c\/p\u003e",
+  "url":"https:\/\/OKHand.org\/post\/builds2d\/",
+  "keywords":"[S2D]"
+}
+
+</script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.107.0 with theme Tranquilpeak 0.5.3-BETA">
+<meta name="author" content="OKH@nd">
+<meta name="keywords" content="S2D">
+<meta name="description" content="本文紀錄 Windows Server 2019 上建立 S2D 的過程！！">
+
+
+<meta property="og:description" content="本文紀錄 Windows Server 2019 上建立 S2D 的過程！！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows Server S2D ">
+<meta name="twitter:title" content="Windows Server S2D ">
+<meta property="og:url" content="https://OKHand.org/post/builds2d/">
+<meta property="twitter:url" content="https://OKHand.org/post/builds2d/">
+<meta property="og:site_name" content="OKH@nd&#39;s Blog">
+<meta property="og:description" content="本文紀錄 Windows Server 2019 上建立 S2D 的過程！！">
+<meta name="twitter:description" content="本文紀錄 Windows Server 2019 上建立 S2D 的過程！！">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2024-02-08T13:29:55">
+  
+  
+    <meta property="article:modified_time" content="2024-02-08T13:29:55">
+  
+  
+  
+    
+      <meta property="article:section" content="Windows">
+    
+      <meta property="article:section" content="S2D">
+    
+  
+  
+    
+      <meta property="article:tag" content="Windows">
+    
+      <meta property="article:tag" content="S2D">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=640">
+
+
+
+
+
+  <meta property="og:image" content="https://imgur.com/z7aJjzo.png">
+  <meta property="twitter:image" content="https://imgur.com/z7aJjzo.png">
+
+
+    <title>Windows Server S2D </title>
+
+    <link rel="icon" href="https://OKHand.org/okhand.png">
+    
+
+    
+
+    <link rel="canonical" href="https://OKHand.org/post/builds2d/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    
+    <link rel="stylesheet" href="https://OKHand.org/css/style-h6ccsoet3mzkbb0wngshlfbaweimexgqcxj0h5hu4h82olsdzz6wmqdkajm.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://OKHand.org/" aria-label="Go to homepage">OKH@nd&#39;s Blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://OKHand.org/#about" aria-label="Open the link: /#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://OKHand.org/#about" aria-label="Read more about the author">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">OKH@nd</h4>
+        
+          <h5 class="sidebar-profile-bio">致力於用我的知識，嘗試去改變現今的教育及社會，讓世界變得更美好</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/" title="Home">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-home" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/categories" title="Categories">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-bookmark" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/tags" title="Tags">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-tags" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/archives" title="Archives">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-archive" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/about_me/" title="About">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-question" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/OKHand-Zy" target="_blank" rel="noopener" title="GitHub">
+    
+      <i class="sidebar-button-icon fab fa-lg fa-github" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://home.gamer.com.tw/homeindex.php?owner=Az7899603" target="_blank" rel="noopener" title="Gamer Forum">
+    
+      <i class="sidebar-button-icon fa fa-gamepad" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Gamer Forum</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=okhand.ziyu@okhand.org" target="_blank" rel="noopener" title="Gmail">
+    
+      <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Gmail</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/index.xml" title="RSS">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-rss" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" id="top">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title">
+      Windows Server S2D 
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time datetime="2024-02-08T13:29:55&#43;08:00">
+        
+  February 8, 2024
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://OKHand.org/categories/windows">Windows</a>, 
+    
+      <a class="category-link" href="https://OKHand.org/categories/s2d">S2D</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown">
+            <div class="main-content-wrap">
+              <p>本文紀錄 Windows Server 2019 上建立 S2D 的過程！！</p>
+<p>先介紹安裝環境，此次是不含 ADDS 並使用外接 USB 當作仲裁驗證方式部屬 S2D。</p>
+<p>我們總共有 2 台機台分別是 Node1 跟 Node2，我們這邊把 Node1 當主要部署及後續操作機台。</p>
+<p>那由於我們沒有 ADDS 跟 DHCP 所以我們就先把 Node1 跟 Node2 設定為靜態 IP。</p>
+<pre tabindex="0"><code>Node1 IP : 192.8.1.42
+Node2 IP : 192.8.1.43
+# 這邊先擬定一個給 Cluster 建立用的 IP
+Cluster IP : 192.8.1.57
+Quorum 仲裁機制 : &lt;Host IP&gt;/Q:\\
+</code></pre><h1 id="建立-s2d-步驟">建立 S2D 步驟</h1>
+<ol>
+<li>
+<p>設定 hosts (每個 Node 都需要設定)
+由於我們是沒有 DHCP、ADDS 情況下部屬我們要讓機台互相可以能溝通到所以要設定本機上的 hosts
+編輯 <strong>C:\Windows\System32\drivers\etc\hosts</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span>Ex: IP hostname
+</span></span><span style="display:flex;"><span>192.8.1.43       Node2
+</span></span><span style="display:flex;"><span>192.8.1.42       Node1
+</span></span><span style="display:flex;"><span>192.8.1.57       S2D-Cluster
+</span></span></code></pre></div><p><img src="https://imgur.com/xrm4oLq.png" alt="hosts"></p>
+</li>
+<li>
+<p>設定 TrustedHosts (每個 Node 都需要設定)</p>
+<ul>
+<li>新增 TrustedHosts</li>
+</ul>
+<pre tabindex="0"><code>Set-Item WSMan:\localhost\Client\TrustedHosts -Concatenate -Value &#34;S2D-Controller , Node1 , Node2“
+</code></pre><ul>
+<li>確認 TrustedHosts</li>
+</ul>
+<pre tabindex="0"><code>Get-Item WSMAN:\Localhost\Client\TrustedHosts
+</code></pre><p><img src="https://imgur.com/WfVMuSv.png" alt="TrustedHosts"></p>
+</li>
+<li>
+<p>安裝需要用到的服務 (每個 Node 都需要設定)</p>
+<ul>
+<li>安裝套件 Windows 腳色和功能</li>
+</ul>
+<pre tabindex="0"><code>Install-WindowsFeature -Name &#34;Hyper-V&#34;, &#34;Failover-Clustering&#34;, &#34;Data-Center-Bridging&#34;, &#34;RSAT-Clustering-PowerShell&#34;, &#34;Hyper-V-PowerShell&#34;, &#34;FS-FileServer&#34; -IncludeManagementTools
+</code></pre><p><img src="https://imgur.com/q2PofhE.png" alt="Install-WindowsFeature"></p>
+</li>
+<li>
+<p>清空 S2D 磁碟 (每個 Node 都需要設定)</p>
+<p>初始化 S2D 硬碟 (確保硬碟都是沒有被 Claimed 的狀態 )</p>
+<p>如果硬碟沒設定過就不需要該步驟(須避開作業系統硬碟)</p>
+<p>請先以 Diskpart 指令確認硬碟編號，然後就可以使用 Clear-Disk 的 PowerShell 來清掃硬碟中所有的內容。</p>
+<p>(請注意!! 硬碟必須為 Online 狀態下，那麼 Clear-Disk 指令才能順利清掃硬碟內容。)</p>
+<pre tabindex="0"><code>處理單顆硬碟：
+Clear-Disk  –Number 1  -RemoveData  -RemoveOEM
+一次處理多顆硬碟：
+Clear-Disk  –Number 1,2,3,4  -RemoveData  -RemoveOEM
+</code></pre><p>執行完 Clear-Disk 動作後，硬碟的狀態應恢復到「Unknown、Not Initialized、Unallocated」才是正確狀態</p>
+<p>請注意 !! 若硬碟未呈現正確狀態的話，稍後啟動「Software Storage Bus」機制時，將無法順利把節點主機的本機硬碟加入至儲存資源池中。</p>
+<p><img src="https://imgur.com/CgntOO5.png" alt="ClearDisk"></p>
+</li>
+<li>
+<p>測試建立 Cluster 環境 (Node1)</p>
+<p>測試 Node1 Node2 是否符合建立 Cluster 的環境</p>
+<pre tabindex="0"><code>Test-Cluster Node1 , Node2
+</code></pre><p>測試完會顯示目前問題與報告產生的地方，有問題建議去看報告會有詳細的問題說明
+<img src="https://imgur.com/JoMrKxQ.png" alt="Test-Cluster"></p>
+</li>
+<li>
+<p>建立 Cluster (Node1)</p>
+<ul>
+<li>建立 Cluster</li>
+</ul>
+<pre tabindex="0"><code>New-Cluster –Name S2DCluster -Node Node1,Node2 -AdministrativeAccessPoint DNS -StaticAddress 192.8.1.57
+</code></pre><p><img src="https://imgur.com/3CbuGxu.png" alt="CreateCluster"></p>
+</li>
+<li>
+<p>Quorum USB 設定 (Node2)</p>
+<ul>
+<li>先到 USB Properties，之後開啟 Share…</li>
+<li>Advanced Shareing… &gt; Permissions &gt; Everyone 點選 Full Control
+<img src="https://imgur.com/GQab2uo.png" alt="USB-Enable"></li>
+</ul>
+</li>
+<li>
+<p>設定 Cluster 的仲裁機制 (Node1)</p>
+<ul>
+<li>設定 仲裁機制為外接 USB</li>
+</ul>
+<pre tabindex="0"><code>Set-ClusterQuorum -FileShareWitness \\192.8.1.43\q -Credential $(Get-Credential)
+</code></pre><p>之後會出現登入畫面請輸入相對應機台的帳號與密碼
+<img src="https://imgur.com/FvRfqST.png" alt="ClusterQuorum"></p>
+</li>
+<li>
+<p>開啟 Storage Spaces Direct 服務 (Node1)</p>
+<pre tabindex="0"><code>Enable-ClusterStorageSpacesDirect
+</code></pre><p>跑完一小段之後它會問你是不是要使用你剛剛創的 Cluster 輸入 Y 開始建立
+<img src="https://imgur.com/mwtKLYt.png" alt="Enable-ClusterStorageSpacesDirect"></p>
+</li>
+<li>
+<p>查看 Failover Cluster Manager (Node1 or Node2)</p>
+<ul>
+<li>Server Manager &gt; Tool &gt; Failover Cluster Manager</li>
+<li>點擊 Failover Cluster Manager 右鍵 &gt; Connect to Cluster &gt; 點擊 OK</li>
+<li>它會自己找到目前機台有連接的 Cluster</li>
+<li>你可以在 Disks, Pools 下找到剛剛建立好的 Disks, Pools
+<img src="https://imgur.com/2B6Flna.png" alt="Disk">
+<img src="https://imgur.com/3gFfKXM.png" alt="Pool"></li>
+</ul>
+</li>
+</ol>
+<h1 id="建立-share-disk-步驟">建立 Share Disk 步驟</h1>
+<ul>
+<li>建立好 Cluster 後想要切出一個空間給某個功能用可以依照以下方法執行</li>
+<li>先在 Pool 中點擊右鍵，點選 New Virtual Disk 之後切出你要的空間</li>
+<li>切完之後到另一台 Node 下 Disk Management 可以看到此硬碟</li>
+<li>初始化它(可以用 ReFS 或是 NTFS 格式化)並設定 槽區</li>
+<li>回到原本 Node 下到 Failover Cluster Manager &gt; Disks 下把硬碟加入到 Cluster Share Volumes</li>
+</ul>
+<ol>
+<li>
+<p>從 Pool 中建立新的虛擬磁碟 (Node1)</p>
+<ul>
+<li>從 Pool 中切出一個要使用的空間</li>
+<li>盡量不要選 Max 因為我們架構沒有空間給它快取有可能在建構的時候會造成 Fail</li>
+<li>切好之後的彈出視窗是可以幫你建立槽區但現在的架構不是單純的一個機台或有AD的情境下所以不適用</li>
+<li>之後我們自己手動切槽區
+<img src="https://imgur.com/0HGLem8.png" alt="CreateVD"></li>
+<li>切完之後我們可以看到下面會長出一個新的 Virtual Disk
+<img src="https://imgur.com/9WX64pJ.png" alt="NewVD"></li>
+</ul>
+</li>
+<li>
+<p>確認有切出虛擬磁碟 (Node2)</p>
+<ul>
+<li>跳到 Node2 的 Disk Management 我們可以看到會有一個新的未啟用的 Disk
+<img src="https://imgur.com/UkMf7HG.png" alt="CheckN2VD"></li>
+</ul>
+</li>
+<li>
+<p>手動切割磁區 (Node2)</p>
+<ul>
+<li>我們手動先手動建立跟格式化(ReFS or NTFS 都可以)</li>
+<li>之後按右鍵 Change Drive Letter and Paths … 幫它上槽區
+<img src="https://imgur.com/EEWnm9Q.png" alt="N2CreateDisk"></li>
+</ul>
+</li>
+<li>
+<p>確認 Cluster 的 Pool 上是否有建立出一個磁碟 (Node1)</p>
+<ul>
+<li>回到 Node1 的 Failover Cluster Manager &gt; Pool 下可以看到有了槽區並且是 ReFS 格式跟我們剛剛做的符合
+<img src="https://imgur.com/KuhTpdA.png" alt="CheckPoolDisk"></li>
+</ul>
+</li>
+<li>
+<p>確認 Cluster 的 Disk 上的資訊 (Node1)</p>
+<ul>
+<li>我們到 Disks 確認可以看到類似的內容，並且可以注意到它目前狀態是 <strong>Avalable Storage</strong>
+<img src="https://imgur.com/jWRr6W7.png" alt="CheckDiskDiskInfo"></li>
+</ul>
+</li>
+<li>
+<p>新增到 Cluster Share Volumes (Node1)</p>
+<ul>
+<li>我們右鍵剛剛創建的 Virtual Disk 按下 Add to Cluster Share Volumes 把我們的硬碟加到 Cluster Share Volumes 讓兩個 node 都能用到
+<img src="https://imgur.com/7L9B2c6.png" alt="Add to Cluster Share Volumes"></li>
+</ul>
+</li>
+<li>
+<p>確認 Cluster Share Volume 狀態 (Node1)</p>
+<ul>
+<li>加完之後我們就可以看見上面的狀態變成 Cluster Share Volume</li>
+<li>下面變成 CSVFS 的格式了</li>
+<li>會掛載到每個 Node 的 C:\ClusterStorage 下
+<img src="https://imgur.com/qEJDmD8.png" alt="Check Cluster Share Volume"></li>
+</ul>
+</li>
+<li>
+<p>確認是否都有掛載到每個 Node 上 (Node1 and Node2)</p>
+<ul>
+<li>到每個 Node 下去驗證 <strong>C:\ClusterStorage</strong> 下是否有空間
+<img src="https://imgur.com/CZ1btK0.png" alt="CheckClusterStorage"></li>
+</ul>
+</li>
+</ol>
+<h1 id="補充">補充：</h1>
+<h3 id="更換仲裁機制">更換仲裁機制：</h3>
+<ul>
+<li>Failover Cluster Manager &gt; 右鍵 Cluster &gt; MoreAction &gt; Configure ClusterQuorum Settings…</li>
+<li>或是依照前面 Setting USB enable share folder 方式使用 Command Line 來設定新的 Quorum</li>
+</ul>
+<h3 id="確認-s2d-損壞硬碟">確認 S2D 損壞硬碟：</h3>
+<ul>
+<li>確認硬碟狀態：
+<pre tabindex="0"><code>Get-StoragePool *S2D* | Get-PhysicalDisk
+</code></pre><ul>
+<li>有問題的硬碟狀態為
+<pre tabindex="0"><code>OperationalStatus：Lost Communication， HealthStatus：Warning
+</code></pre></li>
+</ul>
+</li>
+<li>查看受影響的 VirtualDisk：
+<pre tabindex="0"><code>Get-VirtualDisk
+</code></pre><ul>
+<li>有問題的 VirtualDisk 狀態為：
+<pre tabindex="0"><code>HealthStatus：Warning
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<h3 id="排除-s2d-故障硬碟">排除 S2D 故障硬碟：</h3>
+<ul>
+<li>從硬碟區將故障硬碟過濾出來並存成 $FailDisk 變數
+<pre tabindex="0"><code>$FailDisk  = Get-PhysicalDisk |? OperationalStatus -Notlike OK
+</code></pre></li>
+<li>設定故障硬碟的使用狀態為 Retired
+<pre tabindex="0"><code>Set-PhysicalDisk -InputObject $FailDisk -Usage Retired
+</code></pre></li>
+<li>將故障硬碟從 S2D Pool 中移除
+<pre tabindex="0"><code>Get-StoragePool *S2D* | Remove-PhysicalDisk -PhysicalDisks $FailDisk
+</code></pre></li>
+<li>確認 S2D Pool 以無故障硬碟
+<pre tabindex="0"><code>Get-StoragePool *S2D* | Get-PhysicalDisk
+</code></pre></li>
+</ul>
+<h3 id="新硬碟加入-storage-pool">新硬碟加入 Storage Pool：</h3>
+<ul>
+<li>尋找可以加入 Storage Pool 的新硬碟並存成 $NewDisk 變數
+<pre tabindex="0"><code>$NewDisk = Get-PhysicalDisk |? CanPool -eq True
+</code></pre></li>
+<li>將新硬碟加入 Storage Pool 中 (請確保新硬碟尚未初始化、格式化，否則屆時 S2D 將無法順利宣告及使用此顆新硬碟!!)
+<pre tabindex="0"><code>Get-StoragePool *S2D* | Add-PhysicalDisk -PhysicalDisks $NewDisk –Verbose
+</code></pre></li>
+<li>確認新硬碟是否已加入 Storage Pool
+<pre tabindex="0"><code>Get-StoragePool *S2D* | Get-PhysicalDisk
+</code></pre></li>
+</ul>
+<h3 id="手動重新平均寫入-slab-資料">手動重新平均寫入 Slab 資料</h3>
+<ul>
+<li>正常情況下 S2D 會自己自動執行 S2D Storage Pool Rebalance 的動作把資料平均儲存在每個硬碟上
+手動執行 S2D Storage Pool Rebalance
+<pre tabindex="0"><code>Get-StoragePool *S2D* | Optimize-StoragePool
+</code></pre></li>
+<li>透過 Show-PrettyPool.ps1 這隻腳本可以看到硬碟上已經寫回 Slab 資料</li>
+<li>查看平衡進度
+<pre tabindex="0"><code>Get-StorageJob
+</code></pre></li>
+</ul>
+<h3 id="reference">Reference：</h3>
+<p><a href="https://www.weithenn.org/2015/10/netadmin-117.html">117 期 - 微軟最新 S2D 儲存技術，跨伺服器硬碟組成資源池 (weithenn blog)</a></p>
+<p><a href="https://learn.microsoft.com/zh-tw/windows-server/storage/storage-spaces/deploy-storage-spaces-direct">在 Windows Server 上部署儲存空間直接存取 (microsoft.com)</a></p>
+<p><a href="https://www.weithenn.org/2017/01/s2d-storage-pool.html">深入剖析 S2D Storage Pool (weithenn blog)</a></p>
+<p><a href="https://learn.microsoft.com/zh-tw/azure-stack/hci/concepts/nested-resiliency">儲存空間直接存取的巢狀復原 - Azure Stack HCI (microsoft.com)</a></p>
+<p><a href="https://www.weithenn.org/2018/04/s2d-replace-failed-disk.html">S2D (Storage Spaces Direct) 更換故障硬碟 (weithenn blog)</a></p>
+              
+
+
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/windows/">Windows</a>
+
+  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/s2d/">S2D</a>
+
+                  </div>
+                
+              
+            
+            
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/how2dogreatwork/" data-tooltip="How to Do Great Work 自我反思與心得" aria-label="PREVIOUS: How to Do Great Work 自我反思與心得">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/builds2d/" title="Share on Facebook" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/builds2d/" title="Share on Twitter" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/builds2d/" title="Share on Linkedin" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="Back to top">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+            
+  
+    <script src="https://giscus.app/client.js"
+      data-repo="OKHand-zy/web-giscus"
+      data-repo-id="R_kgDOJiGm_w"
+      data-category="Announcements"
+      data-category-id="DIC_kwDOJiGm_84CWb2E"
+      data-mapping="title"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="light_high_contrast"
+      data-lang="zh-TW"
+      crossorigin="anonymous"
+      async>
+    </script>
+  
+
+
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2024 OKH@nd. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/how2dogreatwork/" data-tooltip="How to Do Great Work 自我反思與心得" aria-label="PREVIOUS: How to Do Great Work 自我反思與心得">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/builds2d/" title="Share on Facebook" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/builds2d/" title="Share on Twitter" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/builds2d/" title="Share on Linkedin" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="Back to top">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+      </div>
+      
+<div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-times"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2FOKHand.org%2Fpost%2Fbuilds2d%2F" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2FOKHand.org%2Fpost%2Fbuilds2d%2F" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2FOKHand.org%2Fpost%2Fbuilds2d%2F" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i><span>Share on Linkedin</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
+
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-times"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">OKH@nd</h4>
+    
+      <div id="about-card-bio">致力於用我的知識，嘗試去改變現今的教育及社會，讓世界變得更美好</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Automation Developer Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker-alt"></i>
+        <br/>
+        Taiwan
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://OKHand.org/images/nasa.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script src="https://OKHand.org/js/script-yqzy9wdlzix4lbbwdnzvwx3egsne77earqmn73v9uno8aupuph8wfguccut.min.js"></script>
+
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-gE8KAQyFIzV1C9+GZ8TKJHZS2s+n7EjNtC+IMRn1l5+WYJTHOODUM6JSjZhFhqXmc7bG8Av6XXpckA4tYhflnw==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/apache.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-EWROca+bote+7Oaaar1F6y74iZj1r1F9rm/ly7o+/FwJopbBaWtsFDmaKoZDd3QiGU2pGacBirHJNivmGLYrow==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/go.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-GDVzAn0wpx1yVtQsRWmFc6PhJiLBPdUic+h4GWgljBh904O3JU10fk9EKNpVyIoPqkFn54rgL2QBG4BmUTMpiQ==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/http.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-UgZlma8NzkrDb/NWgmLIcTrH7i/CSnLLDRFqCSNF5NGPpjKmzyM25qcoXGOup8+cDakKyaiTDd7N4dyH4YT+IA==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/less.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-lot9koe73sfXIrUvIPM/UEhuMciN56RPyBdOyZgfO53P2lkWyyXN7J+njcxIIBRV+nVDQeiWtiXg+bLAJZDTfg==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/nginx.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-Zd3e7XxHP00TD0Imr0PIfeM0fl0v95kMWuhyAS3Wn1UTSXTkz0OhtRgBAr4JlmADRgiXr4x7lpeUdqaGN8xIog==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/puppet.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-qtqDO052iXMSP+5d/aE/jMtL9vIIGvONgTJziC2K/ZIB1yEGa55WVxGE9/08rSQ62EoDifS9SWVGZ7ihSLhzMA==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/scss.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-1NmkjnEDnwwwcu28KoQF8vs3oaPFokQHbmbtwGhFfeDsQZtVFI8zW2aE9O8yMYdpdyKV/5blE4pSWw4Z/Sv97w==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/stylus.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-B2wSfruPjr8EJL6IIzQr1eAuDwrsfIfccNf/LCEdxELCgC/S/ZMt/Uvk80aD79m7IqOqW+Sw8nbkvha20yZpzg==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/swift.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-28oDiQZGKUVN6wQ7PSLPNipOcmkCALXKwOi7bnkyFf8QiMZQxG9EQoy/iiNx6Zxj2cG2SbVa4dXKigQhu7GiFw==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/yaml.min.js"></script>
+  
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+
+
+    
+  </body>
+</html>
+
