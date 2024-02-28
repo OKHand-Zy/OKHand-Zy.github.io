@@ -17,12 +17,21 @@
     </item>
     
     <item>
-      <title>Docker與VM的不同 與 Docker指令</title>
+      <title>Docker 與 VM 的不同 與 Docker 指令</title>
       <link>https://OKHand.org/post/docker-vm-df/</link>
       <pubDate>Sun, 19 Nov 2023 16:00:41 +0800</pubDate>
       
       <guid>https://OKHand.org/post/docker-vm-df/</guid>
-      <description>&lt;p&gt;本文講述 Docker與VM的不同 與 Docker指令&lt;/p&gt;</description>
+      <description>&lt;p&gt;本文講述 Docker 與 VM 的不同 與 Docker 指令&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Gitlab Runner</title>
+      <link>https://OKHand.org/post/gitlab-runner/</link>
+      <pubDate>Sat, 17 Jun 2023 15:33:12 +0800</pubDate>
+      
+      <guid>https://OKHand.org/post/gitlab-runner/</guid>
+      <description>&lt;p&gt;本文講述 Gitlab Runner 的各種類別與建立使用方法!!&lt;/p&gt;</description>
     </item>
     
   </channel>

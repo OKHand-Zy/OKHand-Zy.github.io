@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <script type="application/ld+json">
+
+{  
+  "@context":"http://schema.org",
+  "@type":"Website",
+  "@id":"https:\/\/OKHand.org\/",
+  "author": {
+    "@type": "Person",
+    "name": "OKH@nd",
+    
+    "image": "https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943"
+    
+  },
+  "name":"OKH@nd\u0027s Blog",
+  "description":"\u003cp\u003e本文介紹在 Ubuntu Server 22.04 上安裝 Docker 與 Kubernetes 並在 Container 上使用 GPU 的紀錄\u003c\/p\u003e",
+  "url":"https:\/\/OKHand.org\/post\/k8sgpu\/",
+  "keywords":"[DevOps, K8s, Docker, GPU]"
+}
+
+</script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.107.0 with theme Tranquilpeak 0.5.3-BETA">
+<meta name="author" content="OKH@nd">
+<meta name="keywords" content="DevOps, K8s, Docker, GPU">
+<meta name="description" content="本文介紹在 Ubuntu Server 22.04 上安裝 Docker 與 Kubernetes 並在 Container 上使用 GPU 的紀錄">
+
+
+<meta property="og:description" content="本文介紹在 Ubuntu Server 22.04 上安裝 Docker 與 Kubernetes 並在 Container 上使用 GPU 的紀錄">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何正確在 Docker 與 K8s 使用 GPU">
+<meta name="twitter:title" content="如何正確在 Docker 與 K8s 使用 GPU">
+<meta property="og:url" content="https://OKHand.org/post/k8sgpu/">
+<meta property="twitter:url" content="https://OKHand.org/post/k8sgpu/">
+<meta property="og:site_name" content="OKH@nd&#39;s Blog">
+<meta property="og:description" content="本文介紹在 Ubuntu Server 22.04 上安裝 Docker 與 Kubernetes 並在 Container 上使用 GPU 的紀錄">
+<meta name="twitter:description" content="本文介紹在 Ubuntu Server 22.04 上安裝 Docker 與 Kubernetes 並在 Container 上使用 GPU 的紀錄">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2024-02-28T13:01:40">
+  
+  
+    <meta property="article:modified_time" content="2024-02-28T13:01:40">
+  
+  
+  
+    
+      <meta property="article:section" content="DevOps">
+    
+  
+  
+    
+      <meta property="article:tag" content="K8s">
+    
+      <meta property="article:tag" content="Docker">
+    
+      <meta property="article:tag" content="GPU">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=640">
+
+
+
+
+
+  <meta property="og:image" content="https://imgur.com/M7eKqvc.png">
+  <meta property="twitter:image" content="https://imgur.com/M7eKqvc.png">
+
+
+    <title>如何正確在 Docker 與 K8s 使用 GPU</title>
+
+    <link rel="icon" href="https://OKHand.org/okhand.png">
+    
+
+    
+
+    <link rel="canonical" href="https://OKHand.org/post/k8sgpu/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    
+    <link rel="stylesheet" href="https://OKHand.org/css/style-h6ccsoet3mzkbb0wngshlfbaweimexgqcxj0h5hu4h82olsdzz6wmqdkajm.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://OKHand.org/" aria-label="Go to homepage">OKH@nd&#39;s Blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://OKHand.org/#about" aria-label="Open the link: /#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://OKHand.org/#about" aria-label="Read more about the author">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">OKH@nd</h4>
+        
+          <h5 class="sidebar-profile-bio">致力於用我的知識，嘗試去改變現今的教育及社會，讓世界變得更美好</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/" title="Home">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-home" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/categories" title="Categories">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-bookmark" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/tags" title="Tags">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-tags" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/archives" title="Archives">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-archive" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/about_me/" title="About">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-question" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/OKHand-Zy" target="_blank" rel="noopener" title="GitHub">
+    
+      <i class="sidebar-button-icon fab fa-lg fa-github" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://home.gamer.com.tw/homeindex.php?owner=Az7899603" target="_blank" rel="noopener" title="Gamer Forum">
+    
+      <i class="sidebar-button-icon fa fa-gamepad" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Gamer Forum</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=okhand.ziyu@okhand.org" target="_blank" rel="noopener" title="Gmail">
+    
+      <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Gmail</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/index.xml" title="RSS">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-rss" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" id="top">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title">
+      如何正確在 Docker 與 K8s 使用 GPU
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time datetime="2024-02-28T13:01:40&#43;08:00">
+        
+  February 28, 2024
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://OKHand.org/categories/devops">DevOps</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown">
+            <div class="main-content-wrap">
+              <p>本文介紹在 Ubuntu Server 22.04 上安裝 Docker 與 Kubernetes 並在 Container 上使用 GPU 的紀錄</p>
+<h1 id="環境介紹">環境介紹</h1>
+<ul>
+<li>
+<p><strong>K8s-Controller（V100 GPU）</strong></p>
+<ul>
+<li>OS：Ubuntu Server 22.04</li>
+<li>IP：192.168.137.154</li>
+<li>Hostname：k8s-controller.com</li>
+</ul>
+</li>
+<li>
+<p><strong>K8s-Node1（T4 GPU）</strong></p>
+<ul>
+<li>OS：Ubuntu Server 22.04</li>
+<li>IP：192.168.137.168</li>
+<li>Hostname：k8s-node1.com</li>
+</ul>
+</li>
+<li>
+<p><strong>K8s-Node2（T4 GPU）</strong></p>
+<ul>
+<li>OS：Ubuntu Server 22.04</li>
+<li>IP：192.168.137.249</li>
+<li>Hostname：k8s-node2.com</li>
+</ul>
+</li>
+</ul>
+<p>如果不太懂 K8s 上該使用 GPU 整體架構可以先看這篇文章，可以大致上先了解等等會用到的套件
+K8s GPU 整體架構介紹：<a href="https://zhuanlan.zhihu.com/p/670798727">https://zhuanlan.zhihu.com/p/670798727</a></p>
+<h1 id="gpu-設定-及-安裝-每台都需要設定">GPU 設定 及 安裝 (每台都需要設定)</h1>
+<h2 id="環境設定">環境設定</h2>
+<ol>
+<li>Disable nouveau 開源版本的 GPU 驅動 <br>
+當系統安裝完成之後，會安裝系統開源的 NVIDIA 驅動版本，名稱為 nouveau
+<ul>
+<li>創建 /etc/modprobe.d/blacklist-nouveau.conf 文件</li>
+<li><code>sudo vim /etc/modprobe.d/blacklist-nouveau.conf</code>
+將下面内容添加進去：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>blacklist nouveau
+</span></span><span style="display:flex;"><span>blacklist lbm-nouveau
+</span></span><span style="display:flex;"><span>options nouveau modeset<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>alias nouveau off
+</span></span><span style="display:flex;"><span>alias lbm-nouveau off
+</span></span></code></pre></div></li>
+<li>創建 /etc/modprobe.d/nouveau-kms.conf 文件，並將 options nouveau mdeset=0 添加進去：
+<pre tabindex="0"><code>echo options nouveau modeset=0 | sudo tee -a /etc/modprobe.d/nouveau-kms.conf
+</code></pre></li>
+<li>更新一下 initramfs：
+<pre tabindex="0"><code>sudo update-initramfs -u
+</code></pre></li>
+<li>重啟伺服器：
+<pre tabindex="0"><code>sudo reboot
+</code></pre></li>
+<li>查看 nouveau 是否加載，沒顯示的話就表示已經禁用：
+<pre tabindex="0"><code>sudo lsmod | grep nouveau
+</code></pre></li>
+</ul>
+</li>
+</ol>
+<h2 id="套件安裝">套件安裝</h2>
+<pre><code>有分&quot;一次全部安裝好(CUDA Toolkit)&quot;跟&quot;各個小套件分別安裝&quot;的方法,這邊推薦直接裝一次全部裝好的版本
+</code></pre>
+<h3 id="安裝-nvidia-cuda-toolkit-套件-一次全裝版本">安裝 Nvidia CUDA Toolkit 套件 (一次全裝版本)</h3>
+<p>這邊是使用 Local deb 安裝, 安裝 Ubuntu 22.04 local deb 版本</p>
+<ol>
+<li>移除舊 NVIDIA 驅動
+<pre tabindex="0"><code>sudo apt-get --purge remove nvidia*
+sudo apt-get --purge remove libnvidia*
+</code></pre></li>
+<li>安装 CUDA Toolkit (裡面包含 Driver Cuda NVCC 等等&hellip;)
+<ul>
+<li>Base Installer:
+<pre tabindex="0"><code>wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
+
+sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
+
+wget https://developer.download.nvidia.com/compute/cuda/12.3.2/local_installers/cuda-repo-ubuntu2204-12-3-local_12.3.2-545.23.08-1_amd64.deb
+
+sudo dpkg -i cuda-repo-ubuntu2204-12-3-local_12.3.2-545.23.08-1_amd64.deb
+
+sudo cp /var/cuda-repo-ubuntu2204-12-3-local/cuda-*-keyring.gpg /usr/share/keyrings/
+
+sudo apt-get update
+
+sudo apt-get -y install cuda-toolkit-12-3
+</code></pre></li>
+<li>Driver Installer：二擇一即可我是裝上面就行了
+<ul>
+<li>To install the legacy kernel module flavor:
+<pre tabindex="0"><code>sudo apt-get install -y cuda-drivers
+</code></pre></li>
+<li>To install the open kernel module flavor:
+<pre tabindex="0"><code>sudo apt-get install -y nvidia-kernel-open-545
+
+sudo apt-get install -y cuda-drivers-545
+</code></pre></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<pre tabindex="0"><code>補充說明：
+可以去官網選擇你的 OS 與版本去安裝合適套件與步驟：
+Nvidia CUDA Toolkit：https://developer.nvidia.com/cuda-downloads
+</code></pre><hr>
+<h3 id="單純安裝-nvidia-gpu-drive-之後還要裝-cuda">單純安裝 Nvidia GPU Drive (之後還要裝 Cuda):</h3>
+<pre><code>實作中發現有 error 要控制 OS core 版本所以沒特別去解!!
+所以要嘗試單個套件安裝的請自行 Debug，或哪天我找到正確方法我在補上！
+</code></pre>
+<ol>
+<li>
+<p>wget NVIDIA GPU Driver</p>
+<ul>
+<li>找自己型號的 Driver 並複製下載連結： <br>
+<a href="https://www.nvidia.com/Download/index.aspx?lang=en-us">https://www.nvidia.com/Download/index.aspx?lang=en-us</a></li>
+<li>下載 Driver 到機台上
+<pre tabindex="0"><code>wget &#34;Driver-Url&#34;
+</code></pre></li>
+</ul>
+</li>
+<li>
+<p>install GPU Driver</p>
+<pre tabindex="0"><code>chmod 777 &#34;GPU-Driver&#34;
+./&#34;GPU-Driver&#34;
+</code></pre><p>安裝後就顯示這個錯誤</p>
+<pre tabindex="0"><code>ERROR: An error occurred while performing the step: &#34;Building kernel modules&#34;. See /var/log/nvidia-installer.log for details.
+ERROR: An error occurred while performing the step: &#34;Checking to see whether the nvidia kernel module was successfully built&#34;. See
+     /var/log/nvidia-installer.log for details.
+</code></pre><p>調整到跟 uname -r 一樣的版本或是調低 uname 到一樣的版本
+install linux-kernel-headers kernel-package:</p>
+<ul>
+<li>sudo apt-get install linux-kernel-headers kernel-package</li>
+</ul>
+<pre tabindex="0"><code>解決方法：
+ref：https://www.linuxprobe.com/ubuntu-nvidia-v100-gpu.html
+</code></pre></li>
+</ol>
+<hr>
+<h2 id="補充">補充：</h2>
+<h3 id="裝完之後要使用-nvcc">裝完之後要使用 nvcc：</h3>
+<ol>
+<li>
+<p>sudo nano ~/.bashrc</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 加在最下面</span>
+</span></span><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/usr/local/&lt;cuda-version-folder&gt;/bin:</span>$PATH<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>export LD_LIBRARY_PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/usr/local/&lt;cuda-version-folder&gt;/lib64:</span>$LD_LIBRARY_PATH<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 或者用這個也可</span>
+</span></span><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/usr/local/cuda/bin:</span>$PATH<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>export LD_LIBRARY_PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/usr/local/cuda/lib64:</span>$LD_LIBRARY_PATH<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 或者用這個也可 (我是用這個)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ref : https://blog.csdn.net/qq_41094058/article/details/116207333</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $LD_LIBRARY_PATH <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    export LD_LIBRARY_PATH<span style="color:#f92672">=</span>$LD_LIBRARY_PATH:<span style="color:#e6db74">&#39;/usr/local/cuda/lib64&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    export LD_LIBRARY_PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/usr/local/cuda/lib64&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $PATH <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    export PATH<span style="color:#f92672">=</span>$PATH:<span style="color:#e6db74">&#39;/usr/local/cuda/bin&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/usr/local/cuda/bin&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $CUDA_HOME <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    export CUDA_HOME<span style="color:#f92672">=</span>$CUDA_HOME:<span style="color:#e6db74">&#39;/usr/local/cuda&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    export CUDA_HOME<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/usr/local/cuda&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span></code></pre></div></li>
+<li>
+<p><code>source ~/.bashrc</code></p>
+</li>
+<li>
+<p><code>nvcc --version</code>
+對於多版本 cuda 的切換，也可以通過建立連結的方法：</p>
+<ul>
+<li><code>sudo rm -rf cuda</code></li>
+<li><code>sudo ln -s /usr/local/cuda-11.1/  /usr/local/cuda</code></li>
+</ul>
+</li>
+<li>
+<p>Check Driver, CUDA, NVCC</p>
+<ul>
+<li><code>nvidia-smi</code></li>
+<li><code>nvcc -V</code></li>
+</ul>
+</li>
+</ol>
+<pre tabindex="0"><code>參考資料：
+ref：https://zhuanlan.zhihu.com/p/338507526
+</code></pre><hr>
+<h3 id="gpu-相關資源">GPU 相關資源：</h3>
+<ul>
+<li>Nvidia Download Website: <a href="https://developer.nvidia.com/downloads">https://developer.nvidia.com/downloads</a></li>
+<li>Nvidia CUDA Toolkit : <a href="https://developer.nvidia.com/cuda-downloads">https://developer.nvidia.com/cuda-downloads</a></li>
+<li>Nvidia Driver : <a href="https://www.nvidia.com.tw/Download/index.aspx?lang=tw">https://www.nvidia.com.tw/Download/index.aspx?lang=tw</a></li>
+</ul>
+<h3 id="gpu-check-command">GPU Check Command:</h3>
+<ul>
+<li><code>nvidia-smi</code></li>
+<li><code>nvcc -V</code></li>
+</ul>
+<h3 id="gpu-補充">GPU 補充:</h3>
+<ul>
+<li>搭配性 : GPU 驅動 去跟 CUDA 匹配， CUDA 可以裝低一點版本的只要 GPU 驅動有兼容到即可</li>
+<li>nvidia-smi 顯示的是當前驅動支持的最高版本的 cuda。 不是已經安裝的 cuda 版本。</li>
+<li>Cuda Toolkit 版本內裝的各套件版本 <a href="https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html">https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html</a></li>
+<li>CUDA : 為 GPU 通用計算建構的運算平台</li>
+<li>cudnn : 為深度學習計算設計的套件</li>
+<li>CUDA Toolkit (nvidia) : CUDA 完整的工具安裝包，其中提供 Nvidia 驅動、開發 CUDA 程式相關開發工具等可供安裝的選項。包括 CUDA 編譯器、IDE、調適器等，CUDA 程式所對應的問件以及他們的頭文件</li>
+<li>CUDA Toolkit (Pytorch): CUDA 不完整的工具安裝包，其主要包含在使用 CUDA 相關功能時所依賴的動態連接庫。不會安裝驅動程式!!</li>
+<li>NVCC 是 CUDA 的編譯器，只是 CUDA Toolkit 的一部分</li>
+</ul>
+<h1 id="k8s安裝-會寫說在哪個-node-上安裝沒特別寫就是每台都要裝">K8s安裝 (會寫說在哪個 Node 上安裝，沒特別寫就是每台都要裝)</h1>
+<ol>
+<li>
+<p>set hostname (All nodes) <br>
+依照你要設定的 Hostname 去設定</p>
+<ul>
+<li><code>sudo hostnamectl set-hostname &lt;k8smaster.example.net&gt; </code></li>
+<li><code>exec bash</code></li>
+</ul>
+</li>
+<li>
+<p>set /etc/hosts (All nodes)</p>
+<pre tabindex="0"><code>//    IP          Hostname  ServerName
+192.168.137.154   k8sc.net  k8sc
+192.168.137.168   k8sn1.net k8sn1
+192.168.137.249   k8sn2.net k8sn2
+</code></pre></li>
+<li>
+<p>disable swap , selinux, firewall</p>
+<ul>
+<li>
+<p>swap:</p>
+<pre tabindex="0"><code>swapon --show
+sudo sed -i &#39;/ swap / s/^\(.*\)$/#\1/g&#39; /etc/fstab
+sudo swapoff -a
+</code></pre></li>
+<li>
+<p>selinux:</p>
+<pre tabindex="0"><code>sudo selinux-config-enforcing
+  or
+sudo vim /etc/selinux/config
+
+Modify =&gt; SELINUX=disabled
+
+Reboot system
+</code></pre></li>
+<li>
+<p>firewall:</p>
+<pre tabindex="0"><code>sudo ufw status
+sudo ufw disabl
+</code></pre></li>
+</ul>
+<pre tabindex="0"><code>參考資料：
+ref：https://www.zhihu.com/question/374752553/answer/1052244227
+</code></pre></li>
+<li>
+<p>modify core</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span>sudo tee /etc/modules-load.d/containerd.conf <span style="color:#e6db74">&lt;&lt;EOF
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">overlay
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">br_netfilter
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span></code></pre></div></li>
+<li>
+<p>reload mod</p>
+<pre tabindex="0"><code>sudo modprobe overlay
+sudo modprobe br_netfilter
+</code></pre></li>
+<li>
+<p>modify core</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span>sudo tee /etc/sysctl.d/kubernetes.conf <span style="color:#e6db74">&lt;&lt;EOF
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">net.bridge.bridge-nf-call-ip6tables = 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">net.bridge.bridge-nf-call-iptables = 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">net.ipv4.ip_forward = 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span></code></pre></div></li>
+<li>
+<p>reload system</p>
+<pre tabindex="0"><code>sudo sysctl --system
+</code></pre></li>
+<li>
+<p>install CRI suite</p>
+<pre tabindex="0"><code>sudo apt install -y curl gnupg2 software-properties-common
+apt-transport-https ca-certificates
+</code></pre></li>
+<li>
+<p>add docker apt repository</p>
+<ul>
+<li>
+<p>Add Docker&rsquo;s official GPG key:</p>
+<pre tabindex="0"><code>sudo apt-get update
+
+sudo apt-get install ca-certificates curl gnupg
+
+sudo install -m 0755 -d /etc/apt/keyrings
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+</code></pre></li>
+<li>
+<p>Add the repository to Apt sources:</p>
+<pre tabindex="0"><code>echo \
+  &#34;deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release &amp;&amp; echo &#34;$VERSION_CODENAME&#34;) stable&#34; | \
+  sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+</code></pre></li>
+</ul>
+</li>
+<li>
+<p>install Docker</p>
+<pre tabindex="0"><code>sudo apt-get update
+
+# 安裝 docker 相關套件
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# 新增 docker 群組
+sudo groupadd docker
+
+# 把現在的 $USER 加到 docker 中
+sudo usermod -aG docker $USER
+
+# 切換到 docker 群組
+newgrp docker
+</code></pre></li>
+<li>
+<p>設置 docker 使用 cgroupdriver=systemd <br>
+因為要配合 k8s 使用 systemd 所以要設定 docker daemon</p>
+<ul>
+<li><code>mkdir -p /etc/docker</code></li>
+<li><code>vim /etc/docker/daemon.json</code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;exec-opts&#34;</span>: <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;native.cgroupdriver=systemd&#34;</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div></li>
+<li><code>systemctl enable docker &amp;&amp; systemctl</code></li>
+<li><code>systemctl status docker</code></li>
+</ul>
+</li>
+<li>
+<p>install <a href="https://github.com/Mirantis/cri-dockerd">cri-docker</a></p>
+<ul>
+<li>V0.3.9：
+<pre tabindex="0"><code>wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.9/cri-dockerd_0.3.9.3-0.ubuntu-jammy_amd64.deb
+
+sudo dpkg -i cri-dockerd_0.3.9.3-0.ubuntu-jammy_amd64.deb
+
+systemctl daemon-reload
+
+systemctl enable cri-docker &amp;&amp; systemctl start cri-docker &amp;&amp; systemctl status cri-docker
+</code></pre></li>
+<li>V0.3.10：
+<pre tabindex="0"><code>wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.10/cri-dockerd_0.3.10.3-0.ubuntu-jammy_amd64.deb
+
+sudo dpkg -i cri-dockerd_0.3.10.3-0.ubuntu-jammy_amd64.deb
+
+systemctl daemon-reload
+
+systemctl enable cri-docker &amp;&amp; systemctl start cri-docker &amp;&amp; systemctl status cri-docker
+</code></pre></li>
+<li>Docker 試跑:
+<pre tabindex="0"><code>Run container =&gt; docker run --name hello-world hello-world
+看資源 =&gt; docker ps -a
+刪除 container =&gt; docker rm hello-world
+</code></pre></li>
+</ul>
+</li>
+<li>
+<p>Add Kubernetes apt repository：</p>
+<pre tabindex="0"><code>(推薦)官方使用原生包管理工具安装
+sudo apt-get update
+
+# apt-transport-https 可以是一个虚拟包；如果是这样，你可以跳过这个包
+sudo apt-get install -y apt-transport-https ca-certificates curl
+
+# 如果 `/etc/apt/keyrings` 目录不存在，则应在 curl 命令之前创建它，请阅读下面的注释。
+sudo mkdir -p -m 755 /etc/apt/keyrings
+
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+echo &#39;deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /&#39; | sudo tee /etc/apt/sources.list.d/kubernetes.list
+</code></pre><pre tabindex="0"><code>!!註解:
+想要別的版本請改 V?.??
+要升级 kubectl 到别的次要版本，你需要先升级 /etc/apt/sources.list.d/kubernetes.list 中的版本， 再运行 apt-get update 和 apt-get upgrade。
+ref: https://kubernetes.io/zh-cn/docs/tasks/tools/install-kubectl-linux/
+</code></pre></li>
+<li>
+<p>install Kubernetes suite for Kubectl, kubeadm, kubelet</p>
+<pre tabindex="0"><code>sudo apt update
+sudo apt install -y kubelet kubeadm kubectl
+(option) sudo apt-mark hold kubelet kubeadm kubectl
+</code></pre></li>
+<li>
+<p>Kubeadm init (Controller Node)</p>
+<pre tabindex="0"><code>特別注意！！
+參數基本上都是依照你的環境狀態去新增或修改！！
+--pod-network-cidr &lt;cidr_ip&gt; 請依照你後來要使用的 cidr_ip 需求去修改
+</code></pre><ul>
+<li>Normal command:
+<pre tabindex="0"><code>sudo kubeadm init --control-plane-endpoint=k8sc.net --pod-network-cidr=172.168.0.0/16
+</code></pre></li>
+<li>Docekr cri-dockerd command:
+<pre tabindex="0"><code>sudo kubeadm init --control-plane-endpoint=k8sc.net --pod-network-cidr=172.168.0.0/16 --cri-socket unix:///run/cri-dockerd.sock
+</code></pre></li>
+<li>初始化好會顯示
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Bash" data-lang="Bash"><span style="display:flex;"><span>Your Kubernetes control-plane has initialized successfully!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>To start using your cluster, you need to run the following as a regular user:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  mkdir -p $HOME/.kube
+</span></span><span style="display:flex;"><span>  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+</span></span><span style="display:flex;"><span>  sudo chown <span style="color:#66d9ef">$(</span>id -u<span style="color:#66d9ef">)</span>:<span style="color:#66d9ef">$(</span>id -g<span style="color:#66d9ef">)</span> $HOME/.kube/config
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Alternatively, <span style="color:#66d9ef">if</span> you are the root user, you can run:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  export KUBECONFIG<span style="color:#f92672">=</span>/etc/kubernetes/admin.conf
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>You should now deploy a pod network to the cluster.
+</span></span><span style="display:flex;"><span>Run <span style="color:#e6db74">&#34;kubectl apply -f [podnetwork].yaml&#34;</span> with one of the options listed at:
+</span></span><span style="display:flex;"><span>  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>You can now join any number of control-plane nodes by copying certificate authorities
+</span></span><span style="display:flex;"><span>and service account keys on each node and <span style="color:#66d9ef">then</span> running the following as root:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  kubeadm join k8sc.net:6443 --token m4mgvk.ds9gbxubeelkyg1d <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --discovery-token-ca-cert-hash sha256:967a99a31596e6d6ad9b40dabf69813b8c605f9fe1c8590ddbe68fa23d58e095 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --control-plane
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Then you can join any number of worker nodes by running the following on each as root:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>kubeadm join k8sc.net:6443 --token m4mgvk.ds9gbxubeelkyg1d <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  --discovery-token-ca-cert-hash sha256:967a99a31596e6d6ad9b40dabf69813b8c605f9fe1c8590ddbe68fa23d58e095
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>Work Node Join cluster (WorkNode)</p>
+<pre tabindex="0"><code>請依照你剛剛建立好的 k8s 去修改要輸入的 kubeadm join code
+</code></pre><pre><code>- Normal command:
+  ```
+  kubeadm join k8sc.net:6443 --token m4mgvk.ds9gbxubeelkyg1d \
+  --discovery-token-ca-cert-hash sha256:967a99a31596e6d6ad9b40dabf69813b8c605f9fe1c8590ddbe68fa23d58e095
+  ```
+- Docekr cri-dockerd command:
+  ```
+  kubeadm join k8sc.net:6443 --token m4mgvk.ds9gbxubeelkyg1d \
+  --discovery-token-ca-cert-hash sha256:967a99a31596e6d6ad9b40dabf69813b8c605f9fe1c8590ddbe68fa23d58e095 --cri-socket unix:///run/cri-dockerd.sock
+  ```
+</code></pre>
+</li>
+<li>
+<p>Check all node join (MasterNode)
+- <code>kubectl get nodes</code></p>
+</li>
+<li>
+<p>install Calico Pod network suite (MasterNode)</p>
+<pre tabindex="0"><code>此版本為 V3.27.0 因為這次使用的是 --pod-network-cidr=172.168.0.0/16 所以需要改文件
+</code></pre><pre><code>```
+# 建立它所需要的套件
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
+
+# 下載設定檔
+wget https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml
+```
+修改設定檔：
+```
+# 因為預設是 192.168.0.0 跟我們 IP 撞到,修改成 172.168.0.0
+nano custom-resources.yaml
+
+# This section includes base Calico installation configuration.
+# For more information, see: https://docs.tigera.io/calico/latest/reference/installation/api#operator.tigera.io/v1.Installation
+apiVersion: operator.tigera.io/v1
+kind: Installation
+metadata:
+name: default
+spec:
+# Configures Calico networking.
+calicoNetwork:
+    # Note: The ipPools section cannot be modified post-install.
+    ipPools:
+    - blockSize: 26
+    cidr: 172.168.0.0/16 &lt;= 修改這
+    encapsulation: VXLANCrossSubnet
+    natOutgoing: Enabled
+    nodeSelector: all()
+---
+```
+
+```
+# 部屬 CNI
+kubectl create -f custom-resources.yaml
+```
+
+- waite all pods Running
+    ```
+    watch kubectl get pods -n calico-system
+    or
+    watch kubectl get pods --all-namespaces
+
+    # 移除在 control-plane 上的 汙點(taint)
+    kubectl taint nodes --all node-role.kubernetes.io/control-plane-
+
+    # 移除在 master 上的 汙點(taint)
+    kubectl taint nodes --all node-role.kubernetes.io/master-
+    ```
+```
+參考資料：
+ref:
+https://docs.tigera.io/calico/latest/getting-started/kubernetes/quickstart
+https://www.cnblogs.com/khtt/p/16563088.html
+```
+</code></pre>
+</li>
+<li>
+<p>Check All Cluster Node STATUS</p>
+<pre tabindex="0"><code>kubectl get nodes -o wide
+</code></pre><p>會都相下面一樣顯示 Ready 代表 k8s 以可以正常使用！！</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>NAME            STATUS   ROLES           AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
+</span></span><span style="display:flex;"><span>k8smaster.net   Ready    control-plane   52m   v1.29.1   192.8.1.66    &lt;none&gt;        Ubuntu 22.04.3 LTS   5.15.0-78-generic   containerd://1.6.27
+</span></span><span style="display:flex;"><span>k8snode1.net    Ready    &lt;none&gt;          23m   v1.29.1   192.8.1.65    &lt;none&gt;        Ubuntu 22.04.3 LTS   5.15.0-78-generic   containerd://1.6.27
+</span></span><span style="display:flex;"><span>k8snode2.net    Ready    &lt;none&gt;          23m   v1.29.1   192.8.1.69    &lt;none&gt;        Ubuntu 22.04.3 LTS   5.15.0-78-generic   containerd://1.6.27
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="trouble-shooting">Trouble Shooting:</h3>
+<ul>
+<li>&ldquo;初始錯誤&quot;要重建 k8s：
+<pre tabindex="0"><code># 如果 kubeadm reset
+(使用 containerd.io)
+kubeadm reset
+  or
+(使用 cri-dockerd)
+kubeadm reset --cri-socket unix:///run/cri-dockerd.sock
+# 清除 k8s 文件
+rm -rf $HOME/.kube
+# 重啟 k8s 服務
+systemctl daemon-reload &amp;&amp; systemctl restart kubelet
+之後請回到 step.15
+</code></pre></li>
+<li>&ldquo;建立 CNI 之後&quot;重建 k8s：
+<pre tabindex="0"><code># 如果 kubeadm reset
+(使用 containerd.io)
+kubeadm reset
+  or
+(使用 cri-dockerd)
+kubeadm reset --cri-socket unix:///run/cri-dockerd.sock
+# 刪除 CNI 文件
+rm -rf /etc/cni/net.d
+# 刪除之前 CNI 所建立的 iptable
+sudo iptables -F &amp;&amp; sudo iptables -t nat -F &amp;&amp; sudo iptables -t mangle -F &amp;&amp; sudo iptables -X
+# 刪除 k8s 文件
+sudo rm -f $HOME/.kube/config
+</code></pre></li>
+<li>kubectl get nodes 如果出現
+<pre tabindex="0"><code>root@k8sc:~/K8s# kubectl get node
+E0201 16:03:23.299872   18786 memcache.go:265] couldn&#39;t get current server API group list: Get &#34;http://localhost:8080/api?timeout=32s&#34;: dial tcp 127.0.0.1:8080: connect: connection refused
+E0201 16:03:23.300534   18786 memcache.go:265] couldn&#39;t get current server API group list: Get &#34;http://localhost:8080/api?timeout=32s&#34;: dial tcp 127.0.0.1:8080: connect: connection refused
+E0201 16:03:23.302286   18786 memcache.go:265] couldn&#39;t get current server API group list: Get &#34;http://localhost:8080/api?timeout=32s&#34;: dial tcp 127.0.0.1:8080: connect: connection refused
+E0201 16:03:23.302901   18786 memcache.go:265] couldn&#39;t get current server API group list: Get &#34;http://localhost:8080/api?timeout=32s&#34;: dial tcp 127.0.0.1:8080: connect: connection refused
+E0201 16:03:23.304646   18786 memcache.go:265] couldn&#39;t get current server API group list: Get &#34;http://localhost:8080/api?timeout=32s&#34;: dial tcp 127.0.0.1:8080: connect: connection refused
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+</code></pre><pre tabindex="0"><code>解決方法:
+=&gt; mkdir ~/.kube
+=&gt; cp /etc/kubernetes/admin.conf ~/.kube/config
+參考資料：
+rfe: https://www.gbase8.cn/12320
+</code></pre></li>
+</ul>
+<h2 id="docker-use-gpu">Docker use GPU</h2>
+<p>有 GPU 的 host 都需要裝</p>
+<ol>
+<li>
+<p>install nvidia-container-toolkit</p>
+<pre tabindex="0"><code>distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+
+curl -s -L https://nvidia.github.io/libnvidia-container/gpgkey | sudo apt-key add -
+
+curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | sudo tee /etc/apt/sources.list.d/libnvidia-container.list
+
+sudo apt-get update &amp;&amp; sudo apt-get install -y nvidia-container-toolkit
+</code></pre></li>
+<li>
+<p>Setting /etc/docker/daemon.json</p>
+<ul>
+<li>nano /etc/docker/daemon.json
+<pre tabindex="0"><code>{
+&#34;exec-opts&#34;: [&#34;native.cgroupdriver=systemd&#34;],
+&#34;default-runtime&#34;: &#34;nvidia&#34;,
+&#34;runtimes&#34;: {
+    &#34;nvidia&#34;: {
+            &#34;path&#34;: &#34;/usr/bin/nvidia-container-runtime&#34;,
+            &#34;runtimeArgs&#34;: []
+        }
+    }
+}
+</code></pre></li>
+<li>sudo systemctl restart docker</li>
+</ul>
+</li>
+<li>
+<p>check container can use GPU</p>
+<pre tabindex="0"><code>docker run --rm -it nvcr.io/nvidia/cuda:10.2-base nvidia-smi
+</code></pre><p>如果可以看到下面這樣 Nvidia-smi 畫面就代表你的 docker container 裡可以使用 GPU 了!!</p>
+<pre tabindex="0"><code>Thu Feb  1 09:55:47 2024
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 545.23.08              Driver Version: 545.23.08    CUDA Version: 12.3     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  Tesla T4                       On  | 00000000:18:00.0 Off |                    0 |
+| N/A   28C    P8               9W /  70W |      7MiB / 15360MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+</code></pre></li>
+</ol>
+<pre tabindex="0"><code>參考資料：
+ref：https://github.com/NVIDIA/k8s-device-plugin?tab=readme-ov-file#enabling-gpu-support-in-kubernetes
+</code></pre><h2 id="install-ngc">Install NGC</h2>
+<p>為了可以讓 k8s 可以找到 GPU 資源需要 Nvidia NGC 中的 images</p>
+<ol>
+<li>
+<p>Install NGC Command Line</p>
+<pre tabindex="0"><code>wget --content-disposition https://api.ngc.nvidia.com/v2/resources/nvidia/ngc-apps/ngc_cli/versions/3.37.0/files/ngccli_linux.zip -O ngccli_linux.zip &amp;&amp; unzip ngccli_linux.zip
+
+find ngc-cli/ -type f -exec md5sum {} + | LC_ALL=C sort | md5sum -c ngc-cli.md5
+
+chmod u+x ngc-cli/ngc
+
+echo &#34;export PATH=\&#34;\$PATH:$(pwd)/ngc-cli\&#34;&#34; &gt;&gt; ~/.bash_profile &amp;&amp; source ~/.bash_profile
+
+rfe :https://ngc.nvidia.com/setup/installers/cli
+</code></pre></li>
+<li>
+<p>set NGC config set</p>
+<ol>
+<li><a href="https://ngc.nvidia.com/">ngc.nvidia.com</a></li>
+<li>辦一個會員</li>
+<li>右上角頭像 SetUp -&gt; API Key</li>
+<li>Generate API Key</li>
+<li>ngc config set</li>
+<li>輸入 api key 跟一些資料</li>
+<li>docker login nvcr.io
+<pre tabindex="0"><code>Username:
+輸入 =&gt; $oauthtoken
+
+Password:
+輸入你的 token
+</code></pre>完成就會像這樣
+<pre tabindex="0"><code>root@k8sc:~/NVD# docker login nvcr.io
+Username: $oauthtoken
+Password:
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+</code></pre>確認是否可連上並下載回來 images
+<pre tabindex="0"><code>docker pull nvcr.io/nvidia/k8s-device-plugin:v0.14.4
+</code></pre></li>
+</ol>
+</li>
+<li>
+<p>Check Pods Ruing</p>
+<pre tabindex="0"><code>root@k8sc:~/NVD/test# kubectl get pods -A
+NAMESPACE          NAME                                       READY   STATUS    RESTARTS       AGE
+........           ........                                   ......
+kube-system        nvidia-device-plugin-daemonset-g7pn5       1/1     Running   0              11m
+kube-system        nvidia-device-plugin-daemonset-j5t79       1/1     Running   0              11m
+kube-system        nvidia-device-plugin-daemonset-pjjr9       1/1     Running   0              11m
+........           ........                                   ......
+</code></pre></li>
+<li>
+<p>Check kubectl describe nodes <br>
+確認有 nvidia.com/gpu 就代表成功了</p>
+<pre tabindex="0"><code>Addresses:
+  InternalIP:  192.168.137.249
+  Hostname:    k8sn2.net
+Capacity:
+  cpu:                96
+  ephemeral-storage:  3843514416Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             395820888Ki
+  nvidia.com/gpu:     5
+  pods:               110
+Allocatable:
+  cpu:                96
+  ephemeral-storage:  3542182879921
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             395718488Ki
+  nvidia.com/gpu:     5
+  pods:               110
+System Info:
+  Machine ID:                 99a1ca0433d9443aafba35201ede1a9b
+  System UUID:                d8c50c1b-e0ef-2445-bc45-140d4f639386
+  Boot ID:                    5a8a1c1f-f155-44af-9e70-105e821bd24c
+  Kernel Version:             6.5.0-15-generic
+  OS Image:                   Ubuntu 22.04.3 LTS
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  docker://25.0.2
+  Kubelet Version:            v1.29.1
+  Kube-Proxy Version:         v1.29.1
+PodCIDR:                      172.168.2.0/24
+PodCIDRs:                     172.168.2.0/24
+Non-terminated Pods:          (5 in total)
+  Namespace                   Name                                    CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                                    ------------  ----------  ---------------  -------------  ---
+  calico-system               calico-node-rvhj8                       0 (0%)        0 (0%)      0 (0%)           0 (0%)         17h
+  calico-system               calico-typha-5f87879b7d-tjwld           0 (0%)        0 (0%)      0 (0%)           0 (0%)         17h
+  calico-system               csi-node-driver-b58b7                   0 (0%)        0 (0%)      0 (0%)           0 (0%)         17h
+  kube-system                 kube-proxy-xcf67                        0 (0%)        0 (0%)      0 (0%)           0 (0%)         17h
+  kube-system                 nvidia-device-plugin-daemonset-pjjr9    0 (0%)        0 (0%)      0 (0%)           0 (0%)         14m
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests  Limits
+  --------           --------  ------
+  cpu                0 (0%)    0 (0%)
+  memory             0 (0%)    0 (0%)
+  ephemeral-storage  0 (0%)    0 (0%)
+  hugepages-1Gi      0 (0%)    0 (0%)
+  hugepages-2Mi      0 (0%)    0 (0%)
+  nvidia.com/gpu     0         0
+Events:              &lt;none&gt;
+</code></pre></li>
+</ol>
+<pre tabindex="0"><code>參考資料：
+ref：
+https://github.com/NVIDIA/k8s-device-plugin
+https://bluesmilery.github.io/blogs/afcb1072/
+</code></pre><h3 id="trouble-shooting-1">Trouble Shooting:</h3>
+<ul>
+<li>reboot 之後 nvidia-smi 會報錯:
+<pre tabindex="0"><code>sudo ubuntu-drivers devices
+# 安裝帶有 recommended 版本的 Driver
+sudo apt-get install nvidia-driver-&lt;*&gt;
+
+ref:
+https://zhuanlan.zhihu.com/p/337013545
+https://www.zhihu.com/question/474222642
+</code></pre></li>
+<li>create -f k8s device plugin 之後發現 control-plane 沒有被派發任務，
+step.19 沒做到此動作，輸入完即可
+<pre tabindex="0"><code># 移除在 control-plane 上的 汙點(taint)
+kubectl taint nodes --all node-role.kubernetes.io/control-plane-
+
+# 移除在 master 上的 汙點(taint)
+kubectl taint nodes --all node-role.kubernetes.io/master-
+</code></pre></li>
+</ul>
+<h1 id="gpu-burn">GPU Burn</h1>
+<p>使用 <a href="https://github.com/wilicc/gpu-burn">wilicc/gpu-burn</a> 作為 GPU Burn 程式並且打包成 images 使用</p>
+<ol>
+<li>wilicc/gpu-burn to image</li>
+</ol>
+<pre tabindex="0"><code>git clone https://github.com/wilicc/gpu-burn
+cd gpu-burn
+nano Dockerfile
+</code></pre><pre tabindex="0"><code># 把它修改版本及執行方式成我們要的樣子方便後面 k8s 使用
+ARG CUDA_VERSION=12.3.1
+ARG IMAGE_DISTRO=ubuntu22.04
+
+FROM nvidia/cuda:${CUDA_VERSION}-devel-${IMAGE_DISTRO} AS builder
+
+WORKDIR /build
+
+COPY . /build/
+
+RUN make
+
+FROM nvidia/cuda:${CUDA_VERSION}-runtime-${IMAGE_DISTRO}
+
+COPY --from=builder /build/gpu_burn /app/
+COPY --from=builder /build/compare.ptx /app/
+
+WORKDIR /app
+
+# Create a /app/result directory and link it to the local ./result directory
+RUN mkdir /app/result &amp;&amp; ln -s /app/result /result
+</code></pre><pre tabindex="0"><code># 打包成 Images
+docker build -t gpu_burn .
+
+# 確認是否有打包好的 images
+docker images
+</code></pre><h2 id="private-docker-registry-server">Private Docker Registry Server</h2>
+<p>因為需要下在自己打包的 image 給其他 node 使用又不想上傳到 dockerhub 所以自己建一個 Private Docker Registry</p>
+<pre tabindex="0"><code># 用 docker 架起 Registry
+docker run -d --restart always -p 5000:5000 -v /root/K8s/registry:/var/lib/registry --name registry registry:2
+
+# 把我們剛剛打包好的 image 打上 tag
+docker tag &lt;images_name&gt; &lt;registries_ip&gt;:5000/&lt;images_name&gt;
+
+# 在所有要下載的 server 修改 docker 設定檔新增以下 code
+nano /etc/docker/daemon.json (all node)
+</code></pre><pre tabindex="0"><code>&#34;live-restore&#34;: true,
+  &#34;group&#34;: &#34;dockerroot&#34;,
+  &#34;insecure-registries&#34;: [&#34;&lt;registries_ip&gt;:5000&#34;]
+</code></pre><pre tabindex="0"><code># 重啟 docker 讓他讀取新設定檔 (all node)
+systemctl restart docker
+
+# 上傳剛剛打上 tag 的 images
+docker push &lt;registries_IP&gt;:5000/&lt;images_name&gt;
+</code></pre><h2 id="k8s-exec-gpu-burn">K8s exec GPU-Burn</h2>
+<p>gpu-burn-CN5c.yaml:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">batch/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Job</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">gpu-burn-job-controller</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">gpu-burn</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ttlSecondsAfterFinished</span>: <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">template</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">gpu-burn</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">restartPolicy</span>: <span style="color:#ae81ff">Never</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">nodeSelector</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">kubernetes.io/hostname</span>: <span style="color:#ae81ff">k8sc.net</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">gpu-burn</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">192.168.137.154</span>:<span style="color:#ae81ff">5000</span><span style="color:#ae81ff">/gpu_burn</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">Never</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">command</span>: [ <span style="color:#e6db74">&#34;sh&#34;</span>, <span style="color:#e6db74">&#34;-c&#34;</span>, <span style="color:#e6db74">&#34;./gpu_burn 60 &gt; /app/result/output.txt &amp;&amp; exit&#34;</span> ]
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">limits</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">nvidia.com/gpu</span>: <span style="color:#ae81ff">5</span>  <span style="color:#75715e"># 設置每個 Pod 使用的 GPU 數量</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">volumeMounts</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">result-volume</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/app/result</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">result-volume</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">hostPath</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/root/gpu-result</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">type</span>: <span style="color:#ae81ff">Directory</span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">batch/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Job</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">gpu-burn-job-node1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">gpu-burn</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ttlSecondsAfterFinished</span>: <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">template</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">gpu-burn</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">restartPolicy</span>: <span style="color:#ae81ff">Never</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">nodeSelector</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">kubernetes.io/hostname</span>: <span style="color:#ae81ff">k8sn1.net</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">gpu-burn</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">192.168.137.154</span>:<span style="color:#ae81ff">5000</span><span style="color:#ae81ff">/gpu_burn</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">Never</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">command</span>: [ <span style="color:#e6db74">&#34;sh&#34;</span>, <span style="color:#e6db74">&#34;-c&#34;</span>, <span style="color:#e6db74">&#34;./gpu_burn 60 &gt; /app/result/output.txt &amp;&amp; exit&#34;</span> ]
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">limits</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">nvidia.com/gpu</span>: <span style="color:#ae81ff">5</span>  <span style="color:#75715e"># 設置每個 Pod 使用的 GPU 數量</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">volumeMounts</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">result-volume</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/app/result</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">result-volume</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">hostPath</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/root/gpu-result</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">type</span>: <span style="color:#ae81ff">Directory</span>
+</span></span><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">batch/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Job</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">gpu-burn-job-node2</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">gpu-burn</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ttlSecondsAfterFinished</span>: <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">template</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">gpu-burn</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">restartPolicy</span>: <span style="color:#ae81ff">Never</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">nodeSelector</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">kubernetes.io/hostname</span>: <span style="color:#ae81ff">k8sn2.net</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">gpu-burn</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">192.168.137.154</span>:<span style="color:#ae81ff">5000</span><span style="color:#ae81ff">/gpu_burn</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">Never</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">command</span>: [ <span style="color:#e6db74">&#34;sh&#34;</span>, <span style="color:#e6db74">&#34;-c&#34;</span>, <span style="color:#e6db74">&#34;./gpu_burn 60 &gt; /app/result/output.txt &amp;&amp; exit&#34;</span> ]
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">limits</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">nvidia.com/gpu</span>: <span style="color:#ae81ff">5</span>  <span style="color:#75715e"># 設置每個 Pod 使用的 GPU 數量</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">volumeMounts</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">result-volume</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/app/result</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">result-volume</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">hostPath</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/root/gpu-result</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">type</span>: <span style="color:#ae81ff">Directory</span>
+</span></span></code></pre></div><p>gpu-burn-R4c-3pod.yaml:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">batch/v1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Job</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">gpu-burn-job-random</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">app</span>: <span style="color:#ae81ff">gpu-burn</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ttlSecondsAfterFinished</span>: <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">completions</span>: <span style="color:#ae81ff">3</span> <span style="color:#75715e"># 完成幾個</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">parallelism</span>: <span style="color:#ae81ff">3</span> <span style="color:#75715e"># 同時執行幾個</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">template</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">metadata</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">labels</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">gpu-burn</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">spec</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">restartPolicy</span>: <span style="color:#ae81ff">Never</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">containers</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">gpu-burn</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">image</span>: <span style="color:#ae81ff">192.168.137.154</span>:<span style="color:#ae81ff">5000</span><span style="color:#ae81ff">/gpu_burn</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">imagePullPolicy</span>: <span style="color:#ae81ff">Never</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">command</span>: [ <span style="color:#e6db74">&#34;sh&#34;</span>, <span style="color:#e6db74">&#34;-c&#34;</span>, <span style="color:#e6db74">&#34;./gpu_burn 60 &gt; /app/result/output.txt &amp;&amp; exit&#34;</span> ]
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">limits</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">nvidia.com/gpu</span>: <span style="color:#ae81ff">4</span>  <span style="color:#75715e"># 設置每個 Pod 使用的 GPU 數量</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">volumeMounts</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">result-volume</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">mountPath</span>: <span style="color:#ae81ff">/app/result</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">volumes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">result-volume</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">hostPath</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/root/gpu-result</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">type</span>: <span style="color:#ae81ff">Directory</span>
+</span></span></code></pre></div><pre tabindex="0"><code>建立任務:
+=&gt; kubectl create -f &lt;yaml&gt;
+
+刪除任務:
+=&gt; kubectl delete -f &lt;yaml&gt;
+
+查看 job :
+=&gt; kubectl get pods
+
+查看 job 詳細資訊 :
+=&gt; kubectl describe pods
+or
+=&gt; kubectl describe pod &lt;pod_name&gt;
+
+查看執行 Logs :
+=&gt; kubectl Logs &lt;pod_name&gt;
+</code></pre>
+              
+
+
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/k8s/">K8s</a>
+
+  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/docker/">Docker</a>
+
+  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/gpu/">GPU</a>
+
+                  </div>
+                
+              
+            
+            
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/builds2d/" data-tooltip="Windows Server S2D " aria-label="PREVIOUS: Windows Server S2D ">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/k8sgpu/" title="Share on Facebook" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/k8sgpu/" title="Share on Twitter" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/k8sgpu/" title="Share on Linkedin" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="Back to top">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+            
+  
+    <script src="https://giscus.app/client.js"
+      data-repo="OKHand-zy/web-giscus"
+      data-repo-id="R_kgDOJiGm_w"
+      data-category="Announcements"
+      data-category-id="DIC_kwDOJiGm_84CWb2E"
+      data-mapping="title"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="light_high_contrast"
+      data-lang="zh-TW"
+      crossorigin="anonymous"
+      async>
+    </script>
+  
+
+
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2024 OKH@nd. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/builds2d/" data-tooltip="Windows Server S2D " aria-label="PREVIOUS: Windows Server S2D ">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/k8sgpu/" title="Share on Facebook" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/k8sgpu/" title="Share on Twitter" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/k8sgpu/" title="Share on Linkedin" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="Back to top">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+      </div>
+      
+<div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-times"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2FOKHand.org%2Fpost%2Fk8sgpu%2F" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2FOKHand.org%2Fpost%2Fk8sgpu%2F" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2FOKHand.org%2Fpost%2Fk8sgpu%2F" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i><span>Share on Linkedin</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
+
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-times"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">OKH@nd</h4>
+    
+      <div id="about-card-bio">致力於用我的知識，嘗試去改變現今的教育及社會，讓世界變得更美好</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Automation Developer Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker-alt"></i>
+        <br/>
+        Taiwan
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://OKHand.org/images/nasa.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script src="https://OKHand.org/js/script-yqzy9wdlzix4lbbwdnzvwx3egsne77earqmn73v9uno8aupuph8wfguccut.min.js"></script>
+
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-gE8KAQyFIzV1C9+GZ8TKJHZS2s+n7EjNtC+IMRn1l5+WYJTHOODUM6JSjZhFhqXmc7bG8Av6XXpckA4tYhflnw==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/apache.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-EWROca+bote+7Oaaar1F6y74iZj1r1F9rm/ly7o+/FwJopbBaWtsFDmaKoZDd3QiGU2pGacBirHJNivmGLYrow==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/go.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-GDVzAn0wpx1yVtQsRWmFc6PhJiLBPdUic+h4GWgljBh904O3JU10fk9EKNpVyIoPqkFn54rgL2QBG4BmUTMpiQ==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/http.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-UgZlma8NzkrDb/NWgmLIcTrH7i/CSnLLDRFqCSNF5NGPpjKmzyM25qcoXGOup8+cDakKyaiTDd7N4dyH4YT+IA==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/less.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-lot9koe73sfXIrUvIPM/UEhuMciN56RPyBdOyZgfO53P2lkWyyXN7J+njcxIIBRV+nVDQeiWtiXg+bLAJZDTfg==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/nginx.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-Zd3e7XxHP00TD0Imr0PIfeM0fl0v95kMWuhyAS3Wn1UTSXTkz0OhtRgBAr4JlmADRgiXr4x7lpeUdqaGN8xIog==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/puppet.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-qtqDO052iXMSP+5d/aE/jMtL9vIIGvONgTJziC2K/ZIB1yEGa55WVxGE9/08rSQ62EoDifS9SWVGZ7ihSLhzMA==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/scss.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-1NmkjnEDnwwwcu28KoQF8vs3oaPFokQHbmbtwGhFfeDsQZtVFI8zW2aE9O8yMYdpdyKV/5blE4pSWw4Z/Sv97w==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/stylus.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-B2wSfruPjr8EJL6IIzQr1eAuDwrsfIfccNf/LCEdxELCgC/S/ZMt/Uvk80aD79m7IqOqW+Sw8nbkvha20yZpzg==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/swift.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-28oDiQZGKUVN6wQ7PSLPNipOcmkCALXKwOi7bnkyFf8QiMZQxG9EQoy/iiNx6Zxj2cG2SbVa4dXKigQhu7GiFw==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/yaml.min.js"></script>
+  
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+
+
+    
+  </body>
+</html>
+
