@@ -18,7 +18,7 @@
   "name":"OKH@nd\u0027s Blog",
   "description":"\u003cp\u003e此文章介紹如何從安裝 Nvidia 驅動到從 HuggingFace 下載的 LLM Model 使用 Ollama 啟動 LLM 並使用 OpenWeb ui 進行溝通的部署過程紀錄。\u003c\/p\u003e",
   "url":"https:\/\/OKHand.org\/post\/ollama-deploy\/",
-  "keywords":"[AI, LLM, Ollama]"
+  "keywords":"[AI, LLM, Ollama, LLama]"
 }
 
 </script>
@@ -27,14 +27,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Hugo 0.107.0 with theme Tranquilpeak 0.5.3-BETA">
 <meta name="author" content="OKH@nd">
-<meta name="keywords" content="AI, LLM, Ollama">
+<meta name="keywords" content="AI, LLM, Ollama, LLama">
 <meta name="description" content="此文章介紹如何從安裝 Nvidia 驅動到從 HuggingFace 下載的 LLM Model 使用 Ollama 啟動 LLM 並使用 OpenWeb ui 進行溝通的部署過程紀錄。">
 
 
 <meta property="og:description" content="此文章介紹如何從安裝 Nvidia 驅動到從 HuggingFace 下載的 LLM Model 使用 Ollama 啟動 LLM 並使用 OpenWeb ui 進行溝通的部署過程紀錄。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ollama Deploy">
-<meta name="twitter:title" content="Ollama Deploy">
+<meta property="og:title" content="Ollama Deploy LLM">
+<meta name="twitter:title" content="Ollama Deploy LLM">
 <meta property="og:url" content="https://OKHand.org/post/ollama-deploy/">
 <meta property="twitter:url" content="https://OKHand.org/post/ollama-deploy/">
 <meta property="og:site_name" content="OKH@nd&#39;s Blog">
@@ -80,7 +80,7 @@
   <meta property="twitter:image" content="https://imgur.com/AtkbdYl.png">
 
 
-    <title>Ollama Deploy</title>
+    <title>Ollama Deploy LLM</title>
 
     <link rel="icon" href="https://OKHand.org/okhand.png">
     
@@ -222,7 +222,7 @@
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=okhand.ziyu@okhand.org" target="_blank" rel="noopener" title="Gmail">
+      <a class="sidebar-button-link " href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=okhand.ziyu@gmail.com" target="_blank" rel="noopener" title="Gmail">
     
       <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
       
@@ -257,7 +257,7 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title">
-      Ollama Deploy
+      Ollama Deploy LLM
     </h1>
   
   
@@ -307,7 +307,7 @@ lsmod | grep nouveau
 
 # 也可以使用以下指令檢查一下 configuration 是否還有 nouveau 文字
 sudo lshw -numeric -C display
-</code></pre><p>Ref: <a href="https://askubuntu.com/a/951892">https://askubuntu.com/a/951892</a></p>
+</code></pre><p>Ref: <a href="https://askubuntu.com/a/951892">How to disable Nouveau kernel driver - askubuntu</a></p>
 </li>
 <li>
 <p>apt-install tool</p>
@@ -333,7 +333,7 @@ sudo apt-get -y install cuda-toolkit-12-4
 
 Driver Installer：
 sudo apt-get install -y cuda-drivers
-</code></pre><p>Follower：https://developer.nvidia.com/cuda-downloads?target_os=Linux&amp;target_arch=x86_64&amp;Distribution=Ubuntu&amp;target_version=22.04&amp;target_type=deb_local</p>
+</code></pre><p>Follower：<a href="https://developer.nvidia.com/cuda-downloads?target_os=Linux&amp;target_arch=x86_64&amp;Distribution=Ubuntu&amp;target_version=22.04&amp;target_type=deb_local">Nvidia cuda 官方安裝網頁</a></p>
 <p>補充：</p>
 <pre tabindex="0"><code>Check Nvidia Version:
 modinfo nvidia|grep version
@@ -367,7 +367,7 @@ Selecting previously unselected package libcudnn9-cuda-12.
 (Reading database ... 216732 files and directories currently installed.)
 Preparing to unpack .../0-libcudnn9-cuda-12_9.1.0.70-1_amd64.deb ...
 Unpacking libcudnn9-cuda-12 (9.1.0.70-1) ...
-</code></pre><p>Follower: <a href="https://developer.nvidia.com/cudnn-downloads?target_os=Linux&amp;target_arch=x86_64&amp;Distribution=Ubuntu&amp;target_version=22.04&amp;target_type=deb_local">https://developer.nvidia.com/cudnn-downloads?target_os=Linux&amp;target_arch=x86_64&amp;Distribution=Ubuntu&amp;target_version=22.04&amp;target_type=deb_local</a></p>
+</code></pre><p>Follower: <a href="https://developer.nvidia.com/cudnn-downloads?target_os=Linux&amp;target_arch=x86_64&amp;Distribution=Ubuntu&amp;target_version=22.04&amp;target_type=deb_local">Nvidia cuDNN 官方安裝網頁</a></p>
 <p>Check cuDNN:</p>
 <ul>
 <li>see version:
@@ -399,12 +399,12 @@ bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
 rm -rf ~/miniconda3/miniconda.sh
 ~/miniconda3/bin/conda init bash
 conda create --name llama_py python=3.10
-</code></pre><p>Follower: <a href="https://docs.anaconda.com/free/miniconda/index.html">https://docs.anaconda.com/free/miniconda/index.html</a></p>
+</code></pre><p>Follower: <a href="https://docs.anaconda.com/free/miniconda/index.html">miniconda 官方網頁</a></p>
 </li>
 <li>
 <p>install pytorch</p>
 <pre tabindex="0"><code>pip3 install torch torchvision torchaudio
-</code></pre><p>Ref: <a href="https://pytorch.org/get-started/locally/">https://pytorch.org/get-started/locally/</a></p>
+</code></pre><p>Ref: <a href="https://pytorch.org/get-started/locally/">pytorch 官方網頁</a></p>
 </li>
 <li>
 <p>Try run LLama2</p>
@@ -412,7 +412,7 @@ conda create --name llama_py python=3.10
 pip install -e .
 download the model (Ex:llama-2-7b-chat)
 torchrun --nproc_per_node 1 example_chat_completion.py     --ckpt_dir llama-2-7b-chat/     --tokenizer_path tokenizer.model     --max_seq_len 512 --max_batch_size 6
-</code></pre><p>Ref：https://github.com/Meta-Llama/llama?tab=readme-ov-file</p>
+</code></pre><p>Ref：<a href="https://github.com/Meta-Llama/llama?tab=readme-ov-file">LLama GitHub Page</a></p>
 </li>
 <li>
 <p>Docker run Ollama &amp; openWeb ui</p>
@@ -454,7 +454,7 @@ open-webui:
 <li>
 <p>Create Ollama Modelfile to Ollama use Model</p>
 <pre tabindex="0"><code>create ./Makefile
-</code></pre><p>Makefile：</p>
+</code></pre><p>Makefile： (還有其他 LLM 詳細設定可以到 Ollama 的 github 上看)</p>
 <pre tabindex="0"><code>FROM ./&lt;model_name&gt;.gguf
 </code></pre><pre tabindex="0"><code>docker compose up -d
 docker exec -it ollama /bin/bash
@@ -468,7 +468,7 @@ writing layer sha256:6e8dc213cf73dab521788f5a7e506d202db50b73d104d7d1bbc343089df
 writing manifest
 success
 root@454866b8147a:/code# ls
-</code></pre><p>Ref: <a href="https://github.com/ollama/ollama/blob/main/docs/import.md">https://github.com/ollama/ollama/blob/main/docs/import.md</a></p>
+</code></pre><p>Ref: <a href="https://github.com/ollama/ollama/blob/main/docs/import.md">Ollama GitHub Page - import</a></p>
 </li>
 <li>
 <p>Go to Web use</p>
@@ -515,12 +515,13 @@ sudo apt-get update
 <li>
 <p>Verify Docker</p>
 <pre tabindex="0"><code>=&gt; sudo docker run hello-world
-</code></pre><p>Ref：https://docs.docker.com/engine/install/ubuntu/</p>
+</code></pre><p>Ref：<a href="https://docs.docker.com/engine/install/ubuntu/">docker 官方網頁</a></p>
 </li>
 </ul>
 <p>Nvidia container toolkit：</p>
 <ul>
-<li>install Nvidia container toolkit
+<li>
+<p>install Nvidia container toolkit</p>
 <pre tabindex="0"><code>=&gt; curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
 &amp;&amp; curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
     sed &#39;s#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g&#39; | \
@@ -534,9 +535,10 @@ sudo apt-get update
 
 # Test GPU integration
 =&gt; docker run --gpus all nvidia/cuda:11.5.2-base-ubuntu20.04 nvidia-smi
-</code></pre>Ref：
-<a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html</a>
-<a href="https://blog.darkthread.net/blog/ollam-open-webui/">https://blog.darkthread.net/blog/ollam-open-webui/</a></li>
+</code></pre><p>Ref：</p>
+<p><a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">Nvidia container-toolkit</a></p>
+<p><a href="https://blog.darkthread.net/blog/ollam-open-webui/">傻瓜 LLM 架設 - Ollama + Open WebUI 之 Docker Compose 懶人包</a></p>
+</li>
 </ul>
               
 
@@ -564,7 +566,7 @@ sudo apt-get update
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--disabled">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/ollama-modefile/" data-tooltip="Ollama Modefile 可調參數紀錄" aria-label="NEXT: Ollama Modefile 可調參數紀錄">
           
               <i class="fa fa-angle-left"></i>
               <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -657,7 +659,7 @@ sudo apt-get update
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--disabled">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/ollama-modefile/" data-tooltip="Ollama Modefile 可調參數紀錄" aria-label="NEXT: Ollama Modefile 可調參數紀錄">
           
               <i class="fa fa-angle-left"></i>
               <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>

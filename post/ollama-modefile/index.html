@@ -16,9 +16,9 @@
     
   },
   "name":"OKH@nd\u0027s Blog",
-  "description":"\u003cp\u003e本文講述 Gitlab Runner 的各種類別與建立使用方法!!\u003c\/p\u003e",
-  "url":"https:\/\/OKHand.org\/post\/gitlab-runner\/",
-  "keywords":"[Gitlab, Runner]"
+  "description":"\u003cp\u003e這邊紀錄從 Ollama github 上的 Modefile 紀錄有哪些可以修改的參數。\u003c\/p\u003e",
+  "url":"https:\/\/OKHand.org\/post\/ollama-modefile\/",
+  "keywords":"[AI, LLM, Ollama]"
 }
 
 </script>
@@ -27,38 +27,36 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Hugo 0.107.0 with theme Tranquilpeak 0.5.3-BETA">
 <meta name="author" content="OKH@nd">
-<meta name="keywords" content="Gitlab, Runner">
-<meta name="description" content="本文講述 Gitlab Runner 的各種類別與建立使用方法!!">
+<meta name="keywords" content="AI, LLM, Ollama">
+<meta name="description" content="這邊紀錄從 Ollama github 上的 Modefile 紀錄有哪些可以修改的參數。">
 
 
-<meta property="og:description" content="本文講述 Gitlab Runner 的各種類別與建立使用方法!!">
+<meta property="og:description" content="這邊紀錄從 Ollama github 上的 Modefile 紀錄有哪些可以修改的參數。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Gitlab Runner">
-<meta name="twitter:title" content="Gitlab Runner">
-<meta property="og:url" content="https://OKHand.org/post/gitlab-runner/">
-<meta property="twitter:url" content="https://OKHand.org/post/gitlab-runner/">
+<meta property="og:title" content="Ollama Modefile 可調參數紀錄">
+<meta name="twitter:title" content="Ollama Modefile 可調參數紀錄">
+<meta property="og:url" content="https://OKHand.org/post/ollama-modefile/">
+<meta property="twitter:url" content="https://OKHand.org/post/ollama-modefile/">
 <meta property="og:site_name" content="OKH@nd&#39;s Blog">
-<meta property="og:description" content="本文講述 Gitlab Runner 的各種類別與建立使用方法!!">
-<meta name="twitter:description" content="本文講述 Gitlab Runner 的各種類別與建立使用方法!!">
+<meta property="og:description" content="這邊紀錄從 Ollama github 上的 Modefile 紀錄有哪些可以修改的參數。">
+<meta name="twitter:description" content="這邊紀錄從 Ollama github 上的 Modefile 紀錄有哪些可以修改的參數。">
 <meta property="og:locale" content="en-us">
 
   
-    <meta property="article:published_time" content="2023-06-17T15:33:12">
+    <meta property="article:published_time" content="2024-06-08T19:56:17">
   
   
-    <meta property="article:modified_time" content="2023-06-17T15:33:12">
+    <meta property="article:modified_time" content="2024-06-08T19:56:17">
   
-  
-  
-    
-      <meta property="article:section" content="DevOps">
-    
   
   
     
-      <meta property="article:tag" content="DevOps">
+      <meta property="article:section" content="AI">
     
-      <meta property="article:tag" content="Gitlab">
+  
+  
+    
+      <meta property="article:tag" content="AI">
     
   
 
@@ -78,18 +76,18 @@
 
 
 
-  <meta property="og:image" content="https://imgur.com/eFgK5Kj.png">
-  <meta property="twitter:image" content="https://imgur.com/eFgK5Kj.png">
+  <meta property="og:image" content="https://imgur.com/aQg5Yg4.png">
+  <meta property="twitter:image" content="https://imgur.com/aQg5Yg4.png">
 
 
-    <title>Gitlab Runner</title>
+    <title>Ollama Modefile 可調參數紀錄</title>
 
     <link rel="icon" href="https://OKHand.org/okhand.png">
     
 
     
 
-    <link rel="canonical" href="https://OKHand.org/post/gitlab-runner/">
+    <link rel="canonical" href="https://OKHand.org/post/ollama-modefile/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -259,15 +257,15 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title">
-      Gitlab Runner
+      Ollama Modefile 可調參數紀錄
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time datetime="2023-06-17T15:33:12&#43;08:00">
+      <time datetime="2024-06-08T19:56:17&#43;08:00">
         
-  June 17, 2023
+  June 8, 2024
 
       </time>
     
@@ -276,7 +274,7 @@
   
     <span>in</span>
     
-      <a class="category-link" href="https://OKHand.org/categories/devops">DevOps</a>
+      <a class="category-link" href="https://OKHand.org/categories/ai">AI</a>
     
   
 
@@ -286,91 +284,194 @@
           
           <div class="post-content markdown">
             <div class="main-content-wrap">
-              <p>本文講述 Gitlab Runner 的各種類別與建立使用方法!!</p>
-<p>GitLab CI/CD 的 Runner 是藉由另一台電腦去執行 CI/CD 動作完後再回傳給 GitLab 資訊
-<img src="https://imgur.com/qhtaCY2.png" alt="gitlab-runner">
-自架 Gitlab 要使用到 Gitlab CI/CD 功能需安裝 Git-runner 到一台 Server or Container 下去做使用
-<a href="https://docs.gitlab.com/runner/install/">Install GitLab Runner | GitLab</a> <br>
-Gitlab Runner 有三種不同的權限 :</p>
+              <p>這邊紀錄從 Ollama github 上的 Modefile 紀錄有哪些可以修改的參數。</p>
+<h1 id="ollama-modelfile">Ollama Modelfile：</h1>
+<p>Modelfile 內指令參數：</p>
+<pre tabindex="0"><code>FROM 		: (必填) 定义要使用的基本模型。
+PARAMETER	: 设置 Ollama 如何运行模型的参数。
+TEMPLATE	: 要发送到模型的完整提示模板。
+SYSTEM		: 指定将在模板中设置的系统消息。
+ADAPTER		: 定义要应用于模型的 （Q）LoRA 适配器。
+LICENSE		: 指定合法许可证。
+MESSAGE		: 指定消息历史记录。
+</code></pre><h2 id="base-model-specification">Base model specification</h2>
+<p>FROM： <br>
+Defines the base model to use for creating your customized model. <br>
+定義一個 model , 去所建立客製化 model</p>
+<h2 id="model-parameters">Model parameters</h2>
 <ul>
-<li><a href="https://docs.gitlab.com/ee/ci/runners/runners_scope.html#shared-runners">Shared runners</a>：可用於 GitLab 實例中的所有組和項目。</li>
-<li><a href="https://docs.gitlab.com/ee/ci/runners/runners_scope.html#group-runners">Group runners</a>：可用於小組中的所有項目和子小組。</li>
-<li><a href="https://docs.gitlab.com/ee/ci/runners/runners_scope.html#specific-runners">Specific runners</a>：與特定的項目相關聯。通常，特定的運行器一次用於一個項目。 <strong>當你沒有管理 runner 的權限時，可以用這個來建立屬於自己的 gitlab runner</strong></li>
+<li>
+<p>PARAMETER mirostat [0/1/2]： <br>
+Enable Mirostat sampling for perplexity control. <br>
+0=disabled, 1=Mirostat, 2=Mirostat 2.0. <br>
+Mirostat值：可以有效避免出現過度重複或不連貫的内容 <br>
+預設:0 , 0 是不使用 , 1是Mirostat , 2是Mirostat2.0</p>
+</li>
+<li>
+<p>PARAMETER mirostat_eta [float]： <br>
+Learning rate for Mirostat. Default=0.1. Adjusts algorithm responsiveness. <br>
+mirostat_eta值：影響算法對生成文本反應的響應速度，從而影響生成文本的質量和特徵。 <br>
+較低的值調整速度較慢，較高的值使算法更具影響性，對於需要快速迭代或調整模型輸出的場景非常有用。 ; 預設:0.1</p>
+</li>
+<li>
+<p>PARAMETER mirostat_tau [float]： <br>
+Balance between coherence and diversity. Default=5.0. <br>
+Lower values = more focused text. <br>
+mirostat_tau：可以控制生成文本的連貫性和多樣性之間的平衡,從而影響文本的重複性和連貫性等重要属性。 <br>
+較低的值可以更加集中和連貫，較高的值則會增加輸出的多樣性。預設:5.0</p>
+</li>
+<li>
+<p>PARAMETER num_ctx [int]： <br>
+Context window size. Default=2048. <br>
+Controls tokens used for generating the next token. <br>
+num_ctx：這個參數用於設置上下文 token 的數量。它决定了模型在生成響應時可以考慮的上下文長度。預設:2048</p>
+</li>
+<li>
+<p>PARAMETER num_gqa [int]： <br>
+Number of GQA groups in the transformer layer. Required for some models, e.g., 8 for llama2:70b. <br>
+num_gqa：可以控制模型同時處理的任務數量，從而最佳化模型的性能和效率，設定 Transformer 層中 GQA 组的數量。某些模型需要，例如 llama2:70b 為 8</p>
+</li>
+<li>
+<p>PARAMETER num_gpu [int]： <br>
+Number of layers to send to the GPU(s). macOS default：1 for metal support. <br>
+num_gpu：設置模型在推理時使用的 GPU layers 數量。預設：1，禁用：0</p>
+</li>
+<li>
+<p>PARAMETER num_thread [int]： <br>
+Number of threads for computation. Recommended: number of physical CPU cores. <br>
+num_thread：設置模型在推理時使用的 CPU 線程數量。
+Ollama 將檢測到這一點以獲得最佳性能。建議將此值設置為系統具有的物理 CPU 核心數（而不是邏輯核心數）。</p>
+</li>
+<li>
+<p>PARAMETER repeat_last_n [int]： <br>
+Lookback distance to prevent repetition. <br>
+Default=64, 0=disabled, -1=num_ctx. <br>
+repeat_last_n：模型在生成文本時檢測和懲罰重複 n-gram 的&quot;數量&quot;。告訴模型在嘗試不重複最后一部分對話時應該考慮的 token 數量。 <br>
+簡單來說就是 控制模型在生成文本時避免重複前 n-gram 的 token 出現,從而提高文本的多樣性和質量。 預設：64，禁用：0，-1=num_ctx</p>
+</li>
+<li>
+<p>PARAMETER repeat_penalty [float]： <br>
+Penalty for repetitions. Higher values penalize more. Default: 1.1. <br>
+repeat_penalty：設置模型在生成文本時對重複 n-gram 的懲罰&quot;程度&quot;。
+可以控制模型對重複 n-gram 的懲罰力度,從而影響生成文本的流暢性和連貫性。 <br>
+較高的值（例如，1.5）將更強烈的懲罰重複，而較低的值（例如，0.9）將更寬鬆。預設:1.1</p>
+</li>
+<li>
+<p>PARAMETER temperature [float]： <br>
+Model creativity vs coherence. Higher values = more creative. Default=0.8. <br>
+temperature：參數可以影響生成文本的多樣性,值越&quot;高&quot;生成的文本越具有創造性和變化性,值越&quot;低&quot;生成的文本越趨向於保守和穩定。預設:0.8</p>
+</li>
+<li>
+<p>PARAMETER seed [int]： <br>
+Random seed for generation consistency. Default=0. <br>
+seed：通過設定固定的種子值，可以確保每次運行相同的模型和相同的輸入時，得到的輸出是一致的。 預設：0</p>
+</li>
+<li>
+<p>PARAMETER stop &ldquo;[string]&quot;： <br>
+Stop sequences for generation end. Multiple stops possible with separate parameters. <br>
+stop：設置要使用的停止文字。當遇到這種模式時，LLM 將停止生成文本並返回。 <br>
+可以通過 stop 在模型文件中指定&quot;多個&quot;單獨的參數来設置多個停止模式。</p>
+</li>
+<li>
+<p>PARAMETER tfs_z [float]： <br>
+Tail free sampling for reducing less probable tokens&rsquo; impact. <br>
+Default=1, &gt;1 reduces impact more. <br>
+tfs_z：通過調整 tfs_z(尾自由採樣) 的影響力度来影響模型輸出的多樣性和連貫性。 <br>
+當 tfs_z 值較高（例如，2.0）時，它會減少不太可能的 token 的影響力，從而使輸出更加多樣化。
+相反，當 tfs_z 值為 1.0 時，這個設置被禁用，意味著尾自由采样的影響力度為最低，模型輸出的多樣性和連貫性可能會受到影響。 預設:1.0</p>
+</li>
+<li>
+<p>PARAMETER num_predict [int]： <br>
+Max tokens to predict. Default=128, -1=infinite generation, -2=fill context. <br>
+num_predict：參數代表了在生成文本时模型預測的最大 token 數量。這個參數的功能主要是控制文本生成的過程中模型的輸出長度。
+較小的 num_predict 值可以提高生成效率,但可能會限制模型生成更豐富的文本。較大的 num_predict 值則可以讓模型生成更長更複雜的文本,但可能會降低生成速度。預設:128, 無限制：-1 (模型無限制地生成文本,直到遇到停止標記), 填充上下文：-2 (會根據給定的上下文生成文本，而不會生成新的令牌)</p>
+</li>
+<li>
+<p>PARAMETER top_k [int]： <br>
+Limits nonsense generation. Higher values = more diverse answers. Default=40. <br>
+top_k: 參數用於控制模型在生成文本時考慮的候選 token 數量。
+較高的值（例如 100）將給出更多樣化的答案，而較低的值（例如 10）將更加保守。預設:40 (取前40個)</p>
+</li>
+<li>
+<p>PARAMETER top_p [float]： <br>
+Works with top-k for output diversity. Higher values = more diversity. Default=0.9. <br>
+top_p: 值會讓模型考慮累計概率較高的 token 。
+較高的值（例如，0.95）將導致更加多樣化的文本，而較低的值（例如，0.5）將生成更加集中和保守的文本。預設：0.9 (代表取權重前90%的)</p>
+</li>
 </ul>
-<ol>
-<li>
-<p><strong>Shared runners (適用範圍 GitLab 上全部的 Groups 與 Projects )</strong> <br>
-因為是全域 Runner 所以需要 admin 帳戶來創建 Runner <br>
-Admin Area -&gt; CI/CD -&gt;  Runner -&gt;
-Register an instance runner -&gt; Show runner installation and registration instuctions <br>
-到你安裝 GitLab runner 的地方照著 Command to register runner 執行 \</p>
-<pre tabindex="0"><code>Ex:(windows)
-.\gitlab-runner.exe register --url &lt;GitLab_Url&gt; --registration-token &lt;admin_registration_token&gt;
-</code></pre><p>有看到以下代表成功
-<img src="https://imgur.com/RwKJEVO.png" alt="admin">
-現在你創新的專案都可以看到這個 Runner
-<img src="https://imgur.com/PtaxYsc.png" alt="p-admin.png"></p>
-</li>
-<li>
-<p><strong>Group runners (這邊建立的是 Group 下所有的 Projects 皆可使用這個 runner)</strong>
-<img src="https://imgur.com/KxvZeSM.png" alt="g-runner.png">
-Select your group -&gt; CI/CD -&gt; Runners -&gt;
-Register an instance runner -&gt; Show runner installation and registration instuctions <br>
-到你安裝 GitLab runner 的地方照著 Command to register runner 執行 \</p>
-<pre tabindex="0"><code>Ex:(windows)
-.\gitlab-runner.exe register --url &lt;GitLab_Url&gt; --registration-token &lt;admin_registration_token&gt;
-</code></pre><p>有看到以下代表成功
-<img src="https://imgur.com/8rWWiwi.png" alt="g-runner-1.png">
-現在你創新的專案都可以看到這個 Runner
-<img src="https://imgur.com/ZBmxSjP.png" alt="g-runner-2.png"></p>
-</li>
-<li>
-<p><strong>Specific runners (專門給某個 Project 去做使用)</strong> <br>
-先到 project 下 CI/CD -&gt; Jobs -&gt;
-Creata CI/CD configuration file <br>
-之後你就能在你的 Project 下看到多了一個 <strong>.gitlab-ci.yml</strong> 這個就是用來跟 GitLab Runner 你這專案什麼時候會觸發 CI/CD 並且該做什麼動作等等&hellip;
-<img src="https://imgur.com/vTbnlgf.png" alt="0.png">
-在 Server 中安裝完 GitLab 之後到 Project -&gt; settings -&gt; CI/CD -&gt; Runners 跟著指令下就可以連結起 Gitlab Runner 跟 GitLab 兩者了
-<img src="https://imgur.com/MHXKCPr.png" alt="1.png">
-<img src="https://imgur.com/GE2gCr5.png" alt="2.png">
-連接好之後就能看到下面會有多一個 Assigned project runners 這樣就代表有連結成功了
-<img src="https://imgur.com/07rz4NA.png" alt="3.png"></p>
-</li>
-</ol>
-<h2 id="register-連接說明-">register 連接說明 :</h2>
-<p>Enter the GitLab instance URL (for example, <a href="https://gitlab.com/)">https://gitlab.com/)</a>: <br>
-輸入 GitLab-Url <br>
-Enter the registration token: <br>
-輸入 admin-registration-token <br>
-Enter tags for the runner (comma-separated): <br>
-你 CI/CD 是哪個 Tag 才能使用它 <br>
-Enter optional maintenance note for the runner: <br>
-runner 說明 <br>
-Enter an executor: virtualbox, docker-autoscaler, instance, kubernetes, custom, docker-windows, shell, ssh, docker, parallels, docker+machine: <br>
-輸入你要使用的類型</p>
-<h1 id="遇到問題">遇到問題:</h1>
-<ol>
-<li>
-<p>無法執行沒有 Tag 的 CI/CD <br>
-先進到 Runner 設定
-<img src="https://imgur.com/63L384Z.png" alt="p1.png">
-Run untagged jobs 打勾
-<img src="https://imgur.com/8m9HiV1.png" alt="p2.png"></p>
-</li>
-<li>
-<p>Runner 架在 Windows 無法順利執行 Runner <br>
-需修改 GitLab-Runner 資夾下的 config.toml 檔 <br>
-&ldquo;pwsh&rdquo; -&gt;  &ldquo;powershell&rdquo; <br>
-<img src="https://imgur.com/KR5boCj.png" alt="p3.png"></p>
-</li>
-</ol>
-<p>Reference：<br>
-<a href="https://ithelp.ithome.com.tw/articles/10239722">Day04 - GitLab CI 設計出自己的工作流程 - 流水線分析建立 .gitlab-ci.yml 概述</a></p>
-<p><a href="https://hackmd.io/@davidho9713/gitlab-runner-register">自架GitLab - 為GitLab添加Runner</a></p>
-<p><a href="https://sean22492249.medium.com/gitlab-ci-cd-%E4%BB%8B%E7%B4%B9%E8%88%87-runner-%E7%9A%84%E6%9E%B6%E8%A8%AD-afdbde9f22aa">Gitlab CI/CD 介紹與 Runner 的架設</a></p>
-<p><a href="https://juejin.cn/post/6999544642689564686">gitlab runner 的三种类型，创建以及使用</a></p>
-<p><a href="https://ithelp.ithome.com.tw/articles/10307946?sc=iThelpR">Day 28 GitLab Runner - 安裝起來分配工作吧！</a></p>
-<p><a href="https://stackoverflow.com/questions/68050125/gitlab-runner-prepare-environment-failed-to-start-process-pwsh-in-windows">gitlab-runner: prepare environment failed to start process pwsh in windows - Stack Overflow</a></p>
+<h2 id="prompt-template">Prompt template</h2>
+<p>TEMPLATE &quot;&rdquo;&quot; &hellip; &ldquo;&quot;&quot;： <br>
+Full prompt template including optional system message, user&rsquo;s message, and the model&rsquo;s response. <br>
+TEMPLATE：該參數用於定義模型的模板或系统提示，控制模型在生成文本時的輸出結構和風格。
+例如，可以使用 TEMPLATE 參數来指定模型在生成文本時是否包含系统提示、用户提示、模型響應等信息。 <br>
+控制模型生成文本的整體結構和格式。 (使用 Go 語法格式) <br>
+Example:</p>
+<pre tabindex="0"><code>	| Variable 		  | Description |
+	| {{ .System }}   | The system message used to specify custom behavior. 用於設定自訂義行為|
+	| {{ .Prompt }}   | The user prompt message. 使用者提示消息|
+	| {{ .Response }} | The response from the model. When generating a response, text after this variable is omitted. 模型生成的回复。在生成回复时，此变量后的文本将被省略。|
+</code></pre><pre tabindex="0"><code>TEMPLATE &#34;&#34;&#34;{{ if .System }}system
+{{ .System }}
+{{ end }}{{ if .Prompt }}user
+{{ .Prompt }}
+{{ end }}assistant
+&#34;&#34;&#34;
+</code></pre><h2 id="system-message">System message</h2>
+<p>SYSTEM &ldquo;&rdquo;&quot;[system message]&rdquo;&quot;&quot;： <br>
+Custom system message specifying chat assistant behavior. <br>
+SYSTEM：參數的主要功能是為模型提供一個初始的對話上下文。
+通過設置 SYSTEM 參數，開發者可以控制模型在開始生成文本之前，系统消息的内容。 <br>
+簡單來說就是開始回答前先跟它講是現在是哪種身分與設定，影響模型生成文本的風格和内容。<br>
+Example：</p>
+<pre tabindex="0"><code>SYSTEM &#34;&#34;&#34;You are a helpful medicine assistant.&#34;&#34;&#34;
+</code></pre><h2 id="lora-adapter">LoRA adapter</h2>
+<p>ADAPTER： <br>
+Specifies the LoRA adapter to apply. Path relative to the Modelfile or absolute. <br>
+ADAPTER: 指定要應用於基礎模型的 (Q)LoRA 檔案。
+必須采用 GGML 文件格式。 <br>
+Example：</p>
+<pre tabindex="0"><code>ADAPTER ./ollama-lora.bin
+</code></pre><h2 id="license">License</h2>
+<p>LICENSE： <br>
+Legal license under which the model is shared or distributed. <br>
+LICENSE：此模型分享與合法授權遵守的 License 規則。
+Example：</p>
+<pre tabindex="0"><code>LICENSE &#34;&#34;&#34;
+	&lt;license text&gt;
+&#34;&#34;&#34;
+</code></pre><h2 id="message">Message</h2>
+<p>MESSAGE [role] [message]： <br>
+Sets up a predefined message history for the model to consider when generating responses, helping to provide context or guide the model&rsquo;s outputs. <br>
+MESSAGE：指令允許您為模型指定消息歷史紀錄，以便在響應時使用。使用多個 MESSAGE 命令的迭代来建構對話，這將引導模型以類似的方式回答。 <br>
+Example:</p>
+<pre tabindex="0"><code>	| Variable 	| Description |
+	| system   	| Alternate way of providing the SYSTEM message for the model. 为模型提供系统消息的替代方式。|
+	| user   	| An example message of what the user could have asked. 用户可能会提出的示例消息。|
+	| assistant | An example message of how the model should respond. 模型应该如何回应的示例消息。|
+</code></pre><pre tabindex="0"><code>MESSAGE user Is Toronto in Canada?
+MESSAGE assistant yes
+  ...
+</code></pre><p>參考文件：
+翻譯與找資料：perplexity.ai and phind.ai
+<a href="https://www.53ai.com/news/qianyanjishu/772.html">https://www.53ai.com/news/qianyanjishu/772.html</a>
+<a href="https://github.com/b1ip/ollama_modelfile_template/blob/main/Modelfile">https://github.com/b1ip/ollama_modelfile_template/blob/main/Modelfile</a>
+<a href="https://github.com/ollama/ollama/blob/main/docs/modelfile.md">https://github.com/ollama/ollama/blob/main/docs/modelfile.md</a>
+<a href="https://github.com/ollama/ollama/blob/main/docs/import.md">https://github.com/ollama/ollama/blob/main/docs/import.md</a>
+<a href="https://zhuanlan.zhihu.com/p/690214323">https://zhuanlan.zhihu.com/p/690214323</a>
+<a href="https://www.53ai.com/news/qianyanjishu/1203.html">https://www.53ai.com/news/qianyanjishu/1203.html</a></p>
+<h2 id="筆記">筆記：</h2>
+<p>temperature, top_k, top_p 3者相關性：</p>
+<ul>
+<li>temperature：擷取 prompt 中的 token。</li>
+<li>top_k：從 tokens 里選擇 k 個作為候選，然后根据它們的 likelihood scores 来採樣。</li>
+<li>top_p：從 tokens 里按百分比選擇候選詞。</li>
+<li>順序：temperature 整體參數取樣 =&gt; top_k 取樣前n個重新賦予權重排名 =&gt; top_p 取前 n% 來使用</li>
+</ul>
+<p>閱讀文章： <br>
+<a href="https://www.promptingguide.ai/research/llm-agents">promptingguide.ai</a></p>
+<p><a href="https://learnprompting.org/zh-tw/docs/basics/configuration_hyperparameters">learnprompting.org</a></p>
+<p>GitHub：<br>
+<a href="https://github.com/ollama/ollama/tree/main">Ollama - GitHub</a></p>
               
 
 
@@ -384,9 +485,7 @@ Run untagged jobs 打勾
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/devops/">DevOps</a>
-
-  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/gitlab/">Gitlab</a>
+  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/ai/">AI</a>
 
                   </div>
                 
@@ -399,7 +498,7 @@ Run untagged jobs 打勾
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/docker-vm-df/" data-tooltip="Docker 與 VM 的不同 與 Docker 指令" aria-label="NEXT: Docker 與 VM 的不同 與 Docker 指令">
+            <a class="post-action-btn btn btn--disabled">
           
               <i class="fa fa-angle-left"></i>
               <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -407,7 +506,7 @@ Run untagged jobs 打勾
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/testlink-api-enabled/" data-tooltip="Testlink Api Enabled" aria-label="PREVIOUS: Testlink Api Enabled">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/ollama-deploy/" data-tooltip="Ollama Deploy LLM" aria-label="PREVIOUS: Ollama Deploy LLM">
           
               <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
               <i class="fa fa-angle-right"></i>
@@ -425,19 +524,19 @@ Run untagged jobs 打勾
     </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/gitlab-runner/" title="Share on Facebook" aria-label="Share on Facebook">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/ollama-modefile/" title="Share on Facebook" aria-label="Share on Facebook">
           <i class="fab fa-facebook-square" aria-hidden="true"></i>
         </a>
       </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/gitlab-runner/" title="Share on Twitter" aria-label="Share on Twitter">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/ollama-modefile/" title="Share on Twitter" aria-label="Share on Twitter">
           <i class="fab fa-twitter" aria-hidden="true"></i>
         </a>
       </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/gitlab-runner/" title="Share on Linkedin" aria-label="Share on Linkedin">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/ollama-modefile/" title="Share on Linkedin" aria-label="Share on Linkedin">
           <i class="fab fa-linkedin" aria-hidden="true"></i>
         </a>
       </li>
@@ -492,7 +591,7 @@ Run untagged jobs 打勾
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/docker-vm-df/" data-tooltip="Docker 與 VM 的不同 與 Docker 指令" aria-label="NEXT: Docker 與 VM 的不同 與 Docker 指令">
+            <a class="post-action-btn btn btn--disabled">
           
               <i class="fa fa-angle-left"></i>
               <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -500,7 +599,7 @@ Run untagged jobs 打勾
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/testlink-api-enabled/" data-tooltip="Testlink Api Enabled" aria-label="PREVIOUS: Testlink Api Enabled">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/ollama-deploy/" data-tooltip="Ollama Deploy LLM" aria-label="PREVIOUS: Ollama Deploy LLM">
           
               <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
               <i class="fa fa-angle-right"></i>
@@ -518,19 +617,19 @@ Run untagged jobs 打勾
     </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/gitlab-runner/" title="Share on Facebook" aria-label="Share on Facebook">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/ollama-modefile/" title="Share on Facebook" aria-label="Share on Facebook">
           <i class="fab fa-facebook-square" aria-hidden="true"></i>
         </a>
       </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/gitlab-runner/" title="Share on Twitter" aria-label="Share on Twitter">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/ollama-modefile/" title="Share on Twitter" aria-label="Share on Twitter">
           <i class="fab fa-twitter" aria-hidden="true"></i>
         </a>
       </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/gitlab-runner/" title="Share on Linkedin" aria-label="Share on Linkedin">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/ollama-modefile/" title="Share on Linkedin" aria-label="Share on Linkedin">
           <i class="fab fa-linkedin" aria-hidden="true"></i>
         </a>
       </li>
@@ -555,19 +654,19 @@ Run untagged jobs 打勾
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2FOKHand.org%2Fpost%2Fgitlab-runner%2F" aria-label="Share on Facebook">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2FOKHand.org%2Fpost%2Follama-modefile%2F" aria-label="Share on Facebook">
           <i class="fab fa-facebook-square" aria-hidden="true"></i><span>Share on Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2FOKHand.org%2Fpost%2Fgitlab-runner%2F" aria-label="Share on Twitter">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2FOKHand.org%2Fpost%2Follama-modefile%2F" aria-label="Share on Twitter">
           <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2FOKHand.org%2Fpost%2Fgitlab-runner%2F" aria-label="Share on Linkedin">
+        <a class="share-option-btn" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2FOKHand.org%2Fpost%2Follama-modefile%2F" aria-label="Share on Linkedin">
           <i class="fab fa-linkedin" aria-hidden="true"></i><span>Share on Linkedin</span>
         </a>
       </li>
