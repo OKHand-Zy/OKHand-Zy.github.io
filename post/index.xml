@@ -6,7 +6,16 @@
     <description>Recent content in Posts on OKH@nd&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 08 Jun 2024 19:56:17 +0800</lastBuildDate><atom:link href="https://OKHand.org/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 Jun 2024 15:40:46 +0800</lastBuildDate><atom:link href="https://OKHand.org/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>用 LangChain 實作出簡易版 RAG</title>
+      <link>https://OKHand.org/post/langchain2rag/</link>
+      <pubDate>Sun, 09 Jun 2024 15:40:46 +0800</pubDate>
+      
+      <guid>https://OKHand.org/post/langchain2rag/</guid>
+      <description>&lt;p&gt;此文紀錄使用 LLama3 + Langchain + llamacpp + Chroma 組合成一個簡單的 RAG !&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Ollama Modefile 可調參數紀錄</title>
       <link>https://OKHand.org/post/ollama-modefile/</link>
