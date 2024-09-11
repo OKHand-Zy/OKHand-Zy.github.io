@@ -6,7 +6,16 @@
     <description>Recent content in Posts on OKH@nd&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 09 Jun 2024 15:40:46 +0800</lastBuildDate><atom:link href="https://OKHand.org/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 11 Sep 2024 21:23:33 +0800</lastBuildDate><atom:link href="https://OKHand.org/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nvidia A100_Env</title>
+      <link>https://OKHand.org/post/nvidia-a100_env/</link>
+      <pubDate>Wed, 11 Sep 2024 21:23:33 +0800</pubDate>
+      
+      <guid>https://OKHand.org/post/nvidia-a100_env/</guid>
+      <description>&lt;p&gt;剛好有幸用到 8Core 80G GPU 的 A100 機台，但以為設定跟之前一樣卻要用 CUDA 跑 LLM 時遇到問題並紀錄解決方法。&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>用 LangChain 實作出簡易版 RAG</title>
       <link>https://OKHand.org/post/langchain2rag/</link>

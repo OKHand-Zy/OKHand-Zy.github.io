@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <script type="application/ld+json">
+
+{  
+  "@context":"http://schema.org",
+  "@type":"Website",
+  "@id":"https:\/\/OKHand.org\/",
+  "author": {
+    "@type": "Person",
+    "name": "OKH@nd",
+    
+    "image": "https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943"
+    
+  },
+  "name":"OKH@nd\u0027s Blog",
+  "description":"\u003cp\u003e剛好有幸用到 8Core 80G GPU 的 A100 機台，但以為設定跟之前一樣卻要用 CUDA 跑 LLM 時遇到問題並紀錄解決方法。\u003c\/p\u003e",
+  "url":"https:\/\/OKHand.org\/post\/nvidia-a100_env\/",
+  "keywords":"[GPU, Nvidia, A100]"
+}
+
+</script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.107.0 with theme Tranquilpeak 0.5.3-BETA">
+<meta name="author" content="OKH@nd">
+<meta name="keywords" content="GPU, Nvidia, A100">
+<meta name="description" content="剛好有幸用到 8Core 80G GPU 的 A100 機台，但以為設定跟之前一樣卻要用 CUDA 跑 LLM 時遇到問題並紀錄解決方法。">
+
+
+<meta property="og:description" content="剛好有幸用到 8Core 80G GPU 的 A100 機台，但以為設定跟之前一樣卻要用 CUDA 跑 LLM 時遇到問題並紀錄解決方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nvidia A100_Env">
+<meta name="twitter:title" content="Nvidia A100_Env">
+<meta property="og:url" content="https://OKHand.org/post/nvidia-a100_env/">
+<meta property="twitter:url" content="https://OKHand.org/post/nvidia-a100_env/">
+<meta property="og:site_name" content="OKH@nd&#39;s Blog">
+<meta property="og:description" content="剛好有幸用到 8Core 80G GPU 的 A100 機台，但以為設定跟之前一樣卻要用 CUDA 跑 LLM 時遇到問題並紀錄解決方法。">
+<meta name="twitter:description" content="剛好有幸用到 8Core 80G GPU 的 A100 機台，但以為設定跟之前一樣卻要用 CUDA 跑 LLM 時遇到問題並紀錄解決方法。">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2024-09-11T21:23:33">
+  
+  
+    <meta property="article:modified_time" content="2024-09-11T21:23:33">
+  
+  
+  
+    
+      <meta property="article:section" content="Environment">
+    
+  
+  
+    
+      <meta property="article:tag" content="GPU">
+    
+      <meta property="article:tag" content="Nvidia">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=640">
+
+
+
+
+
+  <meta property="og:image" content="https://imgur.com/hfmLiZi.png">
+  <meta property="twitter:image" content="https://imgur.com/hfmLiZi.png">
+
+
+    <title>Nvidia A100_Env</title>
+
+    <link rel="icon" href="https://OKHand.org/okhand.png">
+    
+
+    
+
+    <link rel="canonical" href="https://OKHand.org/post/nvidia-a100_env/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    
+    <link rel="stylesheet" href="https://OKHand.org/css/style-h6ccsoet3mzkbb0wngshlfbaweimexgqcxj0h5hu4h82olsdzz6wmqdkajm.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://OKHand.org/" aria-label="Go to homepage">OKH@nd&#39;s Blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://OKHand.org/#about" aria-label="Open the link: /#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://OKHand.org/#about" aria-label="Read more about the author">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">OKH@nd</h4>
+        
+          <h5 class="sidebar-profile-bio">致力於用我的知識，嘗試去改變現今的教育及社會，讓世界變得更美好</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/" title="Home">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-home" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/categories" title="Categories">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-bookmark" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/tags" title="Tags">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-tags" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/archives" title="Archives">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-archive" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/about_me/" title="About">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-question" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/OKHand-Zy" target="_blank" rel="noopener" title="GitHub">
+    
+      <i class="sidebar-button-icon fab fa-lg fa-github" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://home.gamer.com.tw/homeindex.php?owner=Az7899603" target="_blank" rel="noopener" title="Gamer Forum">
+    
+      <i class="sidebar-button-icon fa fa-gamepad" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Gamer Forum</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=okhand.ziyu@gmail.com" target="_blank" rel="noopener" title="Gmail">
+    
+      <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Gmail</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/index.xml" title="RSS">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-rss" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" id="top">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title">
+      Nvidia A100_Env
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time datetime="2024-09-11T21:23:33&#43;08:00">
+        
+  September 11, 2024
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://OKHand.org/categories/environment">Environment</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown">
+            <div class="main-content-wrap">
+              <p>剛好有幸用到 8Core 80G GPU 的 A100 機台，但以為設定跟之前一樣卻要用 CUDA 跑 LLM 時遇到問題並紀錄解決方法。</p>
+<p>當你今天是使用 ( V100 / A100 / A30 &hellip;等等 ) 時因為是使用 NVSwitch 連通所以需要安裝 3 以後的步驟才能正常使用 NVIDA GPU 的功能</p>
+<ol>
+<li>
+<p>Install CUDA</p>
+<p>Follow: <a href="https://developer.nvidia.com/cuda-downloads?target_os=Linux&amp;target_arch=x86_64&amp;Distribution=Ubuntu&amp;target_version=22.04&amp;target_type=deb_local">CUDA Toolkit 12.6 Downloads | NVIDIA Developer</a></p>
+<p>Base Installer:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
+</span></span><span style="display:flex;"><span>sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
+</span></span><span style="display:flex;"><span>wget https://developer.download.nvidia.com/compute/cuda/12.6.0/local_installers/cuda-repo-ubuntu2204-12-6-local_12.6.0-560.28.03-1_amd64.deb
+</span></span><span style="display:flex;"><span>sudo dpkg -i cuda-repo-ubuntu2204-12-6-local_12.6.0-560.28.03-1_amd64.deb
+</span></span><span style="display:flex;"><span>sudo cp /var/cuda-repo-ubuntu2204-12-6-local/cuda-*-keyring.gpg /usr/share/keyrings/
+</span></span><span style="display:flex;"><span>sudo apt-get update
+</span></span><span style="display:flex;"><span>sudo apt-get -y install cuda-toolkit-12-6
+</span></span></code></pre></div><p>Driver Installer:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt-get install -y nvidia-open
+</span></span></code></pre></div><p>Setting NVCC:</p>
+<p>Command 中的 cuda-12 請依照你安裝的版本去替換</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo vim ~/.bashrc
+</span></span><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span>/usr/local/cuda-12/bin<span style="color:#e6db74">${</span>PATH:+:<span style="color:#e6db74">${</span>PATH<span style="color:#e6db74">}}</span>
+</span></span><span style="display:flex;"><span>export LD_LIBRARY_PATH<span style="color:#f92672">=</span>/usr/local/cuda-12/lib64:<span style="color:#e6db74">${</span>LD_LIBRARY_PATH:+:<span style="color:#e6db74">${</span>LD_LIBRARY_PATH<span style="color:#e6db74">}}</span>
+</span></span></code></pre></div></li>
+<li>
+<p>Install cuDNN</p>
+<p>Follow: <a href="https://developer.nvidia.com/cudnn-downloads?target_os=Linux&amp;target_arch=x86_64&amp;Distribution=Ubuntu&amp;target_version=22.04&amp;target_type=deb_local">cuDNN 9.3.0 Downloads | NVIDIA Developer</a></p>
+<p>Base Installer:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wget https://developer.download.nvidia.com/compute/cudnn/9.3.0/local_installers/cudnn-local-repo-ubuntu2204-9.3.0_1.0-1_amd64.deb
+</span></span><span style="display:flex;"><span>sudo dpkg -i cudnn-local-repo-ubuntu2204-9.3.0_1.0-1_amd64.deb
+</span></span><span style="display:flex;"><span>sudo cp /var/cudnn-local-repo-ubuntu2204-9.3.0/cudnn-*-keyring.gpg /usr/share/keyrings/
+</span></span><span style="display:flex;"><span>sudo apt-get update
+</span></span><span style="display:flex;"><span>sudo apt-get -y install cudnn
+</span></span></code></pre></div><p>If install specific CUDA version package:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt-get -y install cudnn-cuda-&lt;CUDA-Version&gt;
+</span></span></code></pre></div><p>Install libfreeimage:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt install libfreeimage-dev
+</span></span></code></pre></div><p>Test cuDNN:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/NVIDIA/cuda-samples.git
+</span></span><span style="display:flex;"><span>cd cuda-samples/Samples/bandwidthTest
+</span></span><span style="display:flex;"><span>make
+</span></span><span style="display:flex;"><span>./bandwidthTest
+</span></span></code></pre></div><p>如果失敗請安裝接下來的步驟</p>
+</li>
+<li>
+<p>Install DCGM</p>
+<p>Follow: <a href="https://developer.nvidia.com/dcgm#Downloads">NVIDIA DCGM | NVIDIA Developer</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt-get update
+</span></span><span style="display:flex;"><span>sudo apt-get install -y datacenter-gpu-manager
+</span></span></code></pre></div></li>
+<li>
+<p>Install nvidia-fabricmanager</p>
+<p>Follow: <a href="https://docs.nvidia.com/datacenter/tesla/pdf/fabric-manager-user-guide.pdf">fabric-manager-user-guide.pdf (nvidia.com) - Chapter 2.6</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>version<span style="color:#f92672">=</span>&lt;your-gpu-Driver Version&gt;
+</span></span><span style="display:flex;"><span>main_version<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo $version | awk -F <span style="color:#e6db74">&#39;.&#39;</span> <span style="color:#e6db74">&#39;{print $1}&#39;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>apt-get update
+</span></span><span style="display:flex;"><span>apt-get -y install nvidia-fabricmanager-<span style="color:#e6db74">${</span>main_version<span style="color:#e6db74">}</span><span style="color:#f92672">=</span><span style="color:#e6db74">${</span>version<span style="color:#e6db74">}</span>-*
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Nvidia-smi:
+</span></span><span style="display:flex;"><span>+-----------------------------------------------------------------------------------------+
+</span></span><span style="display:flex;"><span>| NVIDIA-SMI 560.35.03              Driver Version: 560.35.03      CUDA Version: 12.6     |
+</span></span><span style="display:flex;"><span>|-----------------------------------------+------------------------+----------------------+
+</span></span><span style="display:flex;"><span>以此為例 version <span style="color:#f92672">=</span> 560.35.03
+</span></span></code></pre></div></li>
+<li>
+<p>Disabel nv-hostengine</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo nv-hostengine -t
+</span></span></code></pre></div></li>
+<li>
+<p>Start the fabricmanager</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo service nvidia-fabricmanager start
+</span></span></code></pre></div></li>
+<li>
+<p>Test cuDNN again</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git clone https://github.com/NVIDIA/cuda-samples.git
+</span></span><span style="display:flex;"><span>cd cuda-samples/Samples/bandwidthTest
+</span></span><span style="display:flex;"><span>make
+</span></span><span style="display:flex;"><span>./bandwidthT
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>root@test-ORACLE-SERVER-E4-2c:~/cudnn_samples_v9/mnistCUDNN# ./mnistCUDNN
+</span></span><span style="display:flex;"><span>Executing: mnistCUDNN
+</span></span><span style="display:flex;"><span>cudnnGetVersion<span style="color:#f92672">()</span> : <span style="color:#ae81ff">90400</span> , CUDNN_VERSION from cudnn.h : <span style="color:#ae81ff">90400</span> <span style="color:#f92672">(</span>9.4.0<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Host compiler version : GCC 11.4.0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>There are <span style="color:#ae81ff">8</span> CUDA capable devices on your machine :
+</span></span><span style="display:flex;"><span>device <span style="color:#ae81ff">0</span> : sms <span style="color:#ae81ff">108</span>  Capabilities 8.0, SmClock 1410.0 Mhz, MemSize <span style="color:#f92672">(</span>Mb<span style="color:#f92672">)</span> 81155, MemClock 1593.0 Mhz, Ecc<span style="color:#f92672">=</span>1, boardGroupID<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>device <span style="color:#ae81ff">1</span> : sms <span style="color:#ae81ff">108</span>  Capabilities 8.0, SmClock 1410.0 Mhz, MemSize <span style="color:#f92672">(</span>Mb<span style="color:#f92672">)</span> 81155, MemClock 1593.0 Mhz, Ecc<span style="color:#f92672">=</span>1, boardGroupID<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>device <span style="color:#ae81ff">2</span> : sms <span style="color:#ae81ff">108</span>  Capabilities 8.0, SmClock 1410.0 Mhz, MemSize <span style="color:#f92672">(</span>Mb<span style="color:#f92672">)</span> 81155, MemClock 1593.0 Mhz, Ecc<span style="color:#f92672">=</span>1, boardGroupID<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>device <span style="color:#ae81ff">3</span> : sms <span style="color:#ae81ff">108</span>  Capabilities 8.0, SmClock 1410.0 Mhz, MemSize <span style="color:#f92672">(</span>Mb<span style="color:#f92672">)</span> 81155, MemClock 1593.0 Mhz, Ecc<span style="color:#f92672">=</span>1, boardGroupID<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>device <span style="color:#ae81ff">4</span> : sms <span style="color:#ae81ff">108</span>  Capabilities 8.0, SmClock 1410.0 Mhz, MemSize <span style="color:#f92672">(</span>Mb<span style="color:#f92672">)</span> 81155, MemClock 1593.0 Mhz, Ecc<span style="color:#f92672">=</span>1, boardGroupID<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>device <span style="color:#ae81ff">5</span> : sms <span style="color:#ae81ff">108</span>  Capabilities 8.0, SmClok 1410.0 Mhz, MemSize <span style="color:#f92672">(</span>Mb<span style="color:#f92672">)</span> 81155, MemClock 1593.0 Mhz, Ecc<span style="color:#f92672">=</span>1, boardGroupID<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>device <span style="color:#ae81ff">6</span> : sms <span style="color:#ae81ff">108</span>  Capabilities 8.0, SmClock 1410.0 Mhz, MemSize <span style="color:#f92672">(</span>Mb<span style="color:#f92672">)</span> 81155, MemClock 1593.0 Mhz, Ecc<span style="color:#f92672">=</span>1, boardGroupID<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span>device <span style="color:#ae81ff">7</span> : sms <span style="color:#ae81ff">108</span>  Capabilities 8.0, SmClock 1410.0 Mhz, MemSize <span style="color:#f92672">(</span>Mb<span style="color:#f92672">)</span> 81155, MemClock 1593.0 Mhz, Ecc<span style="color:#f92672">=</span>1, boardGroupID<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>
+</span></span><span style="display:flex;"><span>Using device <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Testing single precision
+</span></span><span style="display:flex;"><span>Loading binary file data/conv1.bin
+</span></span><span style="display:flex;"><span>Loading binary file data/conv1.bias.bin
+</span></span><span style="display:flex;"><span>Loading binary file data/conv2.bin
+</span></span><span style="display:flex;"><span>Loading binary file data/conv2.bias.bin
+</span></span><span style="display:flex;"><span>Loading binary file data/ip1.bin
+</span></span><span style="display:flex;"><span>Loading binary file data/ip1.bias.bin
+</span></span><span style="display:flex;"><span>Loading binary file data/ip2.bin
+</span></span><span style="display:flex;"><span>Loading binary file data/ip2.bias.bin
+</span></span><span style="display:flex;"><span>Loading image data/one_28x28.pgm
+</span></span><span style="display:flex;"><span>Performing forward propagation ...
+</span></span><span style="display:flex;"><span>Testing cudnnGetConvolutionForwardAlgorithm_v7 ...
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 1: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 0: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 2: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 5: -1.000000 time requiring <span style="color:#ae81ff">178432</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 4: -1.000000 time requiring <span style="color:#ae81ff">184784</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 7: -1.000000 time requiring <span style="color:#ae81ff">2057744</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_NOT_SUPPORTED <span style="color:#66d9ef">for</span> Algo 6: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_NOT_SUPPORTED <span style="color:#66d9ef">for</span> Algo 3: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>Testing cudnnFindConvolutionForwardAlgorithm ...
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 0: 0.027648 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 1: 0.036864 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 2: 0.062464 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 5: 0.070656 time requiring <span style="color:#ae81ff">178432</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 7: 0.091136 time requiring <span style="color:#ae81ff">2057744</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 4: 0.092160 time requiring <span style="color:#ae81ff">184784</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_NOT_SUPPORTED <span style="color:#66d9ef">for</span> Algo 6: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_NOT_SUPPORTED <span style="color:#66d9ef">for</span> Algo 3: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>Testing cudnnGetConvolutionForwardAlgorithm_v7 ...
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 1: -1.000000 time requiring <span style="color:#ae81ff">129072</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 0: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 2: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 5: -1.000000 time requiring <span style="color:#ae81ff">4656640</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 4: -1.000000 time requiring <span style="color:#ae81ff">2450080</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 7: -1.000000 time requiring <span style="color:#ae81ff">1433120</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_NOT_SUPPORTED <span style="color:#66d9ef">for</span> Algo 6: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_NOT_SUPPORTED <span style="color:#66d9ef">for</span> Algo 3: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>Testing cudnnFindConvolutionForwardAlgorithm ...
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 0: 0.055296 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 7: 0.064512 time requiring <span style="color:#ae81ff">1433120</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 4: 0.090112 time requiring <span style="color:#ae81ff">2450080</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 2: 0.093184 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 5: 0.098304 time requiring <span style="color:#ae81ff">4656640</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 1: 0.189440 time requiring <span style="color:#ae81ff">129072</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_NOT_SUPPORTED <span style="color:#66d9ef">for</span> Algo 6: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_NOT_SUPPORTED <span style="color:#66d9ef">for</span> Algo 3: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>Resulting weights from Softmax:
+</span></span><span style="display:flex;"><span>0.0000000 0.9999399 0.0000000 0.0000000 0.0000561 0.0000000 0.0000012 0.0000017 0.0000010 0.0000000
+</span></span><span style="display:flex;"><span>Loading image data/three_28x28.pgm
+</span></span><span style="display:flex;"><span>Performing forward propagation ...
+</span></span><span style="display:flex;"><span>Testing cudnnGetConvolutionForwardAlgorithm_v7 ...
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 1: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 0: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 2: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 5: -1.000000 time requiring <span style="color:#ae81ff">178432</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 4: -1.000000 time requiring <span style="color:#ae81ff">184784</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 7: -1.000000 time requiring <span style="color:#ae81ff">2057744</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_NOT_SUPPORTED <span style="color:#66d9ef">for</span> Algo 6: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_NOT_SUPPORTED <span style="color:#66d9ef">for</span> Algo 3: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>Testing cudnnFindConvolutionForwardAlgorithm ...
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 2: 0.023552 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 0: 0.026624 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 1: 0.028672 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 4: 0.057344 time requiring <span style="color:#ae81ff">184784</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 5: 0.057344 time requiring <span style="color:#ae81ff">178432</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 7: 0.064512 time requiring <span style="color:#ae81ff">2057744</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_NOT_SUPPORTED <span style="color:#66d9ef">for</span> Algo 6: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_NOT_SUPPORTED <span style="color:#66d9ef">for</span> Algo 3: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>Testing cudnnGetConvolutionForwardAlgorithm_v7 ...
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 1: -1.000000 time requiring <span style="color:#ae81ff">129072</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 0: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 2: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 5: -1.000000 time requiring <span style="color:#ae81ff">4656640</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 4: -1.000000 time requiring <span style="color:#ae81ff">2450080</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 7: -1.000000 time requiring <span style="color:#ae81ff">1433120</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_NOT_SUPPORTED <span style="color:#66d9ef">for</span> Algo 6: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_NOT_SUPPORTED <span style="color:#66d9ef">for</span> Algo 3: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>Testing cudnnFindConvolutionForwardAlgorithm ...
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 4: 0.053248 time requiring <span style="color:#ae81ff">2450080</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 0: 0.055296 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 7: 0.063488 time requiring <span style="color:#ae81ff">1433120</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 5: 0.064512 time requiring <span style="color:#ae81ff">4656640</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 2: 0.092160 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_SUCCESS <span style="color:#66d9ef">for</span> Algo 1: 0.102400 time requiring <span style="color:#ae81ff">129072</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_NOT_SUPPORTED <span style="color:#66d9ef">for</span> Algo 6: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>^^^^ CUDNN_STATUS_NOT_SUPPORTED <span style="color:#66d9ef">for</span> Algo 3: -1.000000 time requiring <span style="color:#ae81ff">0</span> memory
+</span></span><span style="display:flex;"><span>Resulting weights from Softmax:
+</span></span><span style="display:flex;"><span>0.0000000 0.0000000 0.0000000 0.9999288 0.0000000 0.0000711 0.0000000 0.0000000 0.0000000 0.0000000
+</span></span><span style="display:flex;"><span>Loading image data/five_28x28.pgm
+</span></span><span style="display:flex;"><span>Performing forward propagation ...
+</span></span><span style="display:flex;"><span>Resulting weights from Softmax:
+</span></span><span style="display:flex;"><span>0.0000000 0.0000008 0.0000000 0.0000002 0.0000000 0.9999820 0.0000154 0.0000000 0.0000012 0.0000006
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Result of classification: <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Test passed!
+</span></span></code></pre></div><p>看到 Test passed 恭喜你成功可以正常使用 GPU 了!!</p>
+</li>
+</ol>
+<p>Ref: <br>
+<a href="https://github.com/pytorch/pytorch/issues/35710#issuecomment-901013741">cuda runtime error (802) : system not yet initialized &hellip;/THCGeneral.cpp:50 · Issue #35710 · pytorch/pytorch · GitHub</a></p>
+              
+
+
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/gpu/">GPU</a>
+
+  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/nvidia/">Nvidia</a>
+
+                  </div>
+                
+              
+            
+            
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/langchain2rag/" data-tooltip="用 LangChain 實作出簡易版 RAG" aria-label="PREVIOUS: 用 LangChain 實作出簡易版 RAG">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/nvidia-a100_env/" title="Share on Facebook" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/nvidia-a100_env/" title="Share on Twitter" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/nvidia-a100_env/" title="Share on Linkedin" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="Back to top">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+            
+  
+    <script src="https://giscus.app/client.js"
+      data-repo="OKHand-zy/web-giscus"
+      data-repo-id="R_kgDOJiGm_w"
+      data-category="Announcements"
+      data-category-id="DIC_kwDOJiGm_84CWb2E"
+      data-mapping="title"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="light_high_contrast"
+      data-lang="zh-TW"
+      crossorigin="anonymous"
+      async>
+    </script>
+  
+
+
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2024 OKH@nd. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/langchain2rag/" data-tooltip="用 LangChain 實作出簡易版 RAG" aria-label="PREVIOUS: 用 LangChain 實作出簡易版 RAG">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/nvidia-a100_env/" title="Share on Facebook" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/nvidia-a100_env/" title="Share on Twitter" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/nvidia-a100_env/" title="Share on Linkedin" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="Back to top">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+      </div>
+      
+<div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-times"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2FOKHand.org%2Fpost%2Fnvidia-a100_env%2F" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2FOKHand.org%2Fpost%2Fnvidia-a100_env%2F" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2FOKHand.org%2Fpost%2Fnvidia-a100_env%2F" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i><span>Share on Linkedin</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
+
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-times"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">OKH@nd</h4>
+    
+      <div id="about-card-bio">致力於用我的知識，嘗試去改變現今的教育及社會，讓世界變得更美好</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Automation Developer Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker-alt"></i>
+        <br/>
+        Taiwan
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://OKHand.org/images/nasa.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script src="https://OKHand.org/js/script-yqzy9wdlzix4lbbwdnzvwx3egsne77earqmn73v9uno8aupuph8wfguccut.min.js"></script>
+
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-gE8KAQyFIzV1C9+GZ8TKJHZS2s+n7EjNtC+IMRn1l5+WYJTHOODUM6JSjZhFhqXmc7bG8Av6XXpckA4tYhflnw==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/apache.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-EWROca+bote+7Oaaar1F6y74iZj1r1F9rm/ly7o+/FwJopbBaWtsFDmaKoZDd3QiGU2pGacBirHJNivmGLYrow==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/go.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-GDVzAn0wpx1yVtQsRWmFc6PhJiLBPdUic+h4GWgljBh904O3JU10fk9EKNpVyIoPqkFn54rgL2QBG4BmUTMpiQ==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/http.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-UgZlma8NzkrDb/NWgmLIcTrH7i/CSnLLDRFqCSNF5NGPpjKmzyM25qcoXGOup8+cDakKyaiTDd7N4dyH4YT+IA==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/less.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-lot9koe73sfXIrUvIPM/UEhuMciN56RPyBdOyZgfO53P2lkWyyXN7J+njcxIIBRV+nVDQeiWtiXg+bLAJZDTfg==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/nginx.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-Zd3e7XxHP00TD0Imr0PIfeM0fl0v95kMWuhyAS3Wn1UTSXTkz0OhtRgBAr4JlmADRgiXr4x7lpeUdqaGN8xIog==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/puppet.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-qtqDO052iXMSP+5d/aE/jMtL9vIIGvONgTJziC2K/ZIB1yEGa55WVxGE9/08rSQ62EoDifS9SWVGZ7ihSLhzMA==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/scss.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-1NmkjnEDnwwwcu28KoQF8vs3oaPFokQHbmbtwGhFfeDsQZtVFI8zW2aE9O8yMYdpdyKV/5blE4pSWw4Z/Sv97w==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/stylus.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-B2wSfruPjr8EJL6IIzQr1eAuDwrsfIfccNf/LCEdxELCgC/S/ZMt/Uvk80aD79m7IqOqW+Sw8nbkvha20yZpzg==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/swift.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-28oDiQZGKUVN6wQ7PSLPNipOcmkCALXKwOi7bnkyFf8QiMZQxG9EQoy/iiNx6Zxj2cG2SbVa4dXKigQhu7GiFw==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/yaml.min.js"></script>
+  
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+
+
+    
+  </body>
+</html>
+

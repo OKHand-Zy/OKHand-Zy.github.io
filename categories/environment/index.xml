@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Environment on OKH@nd&#39;s Blog</title>
+    <link>https://OKHand.org/categories/environment/</link>
+    <description>Recent content in Environment on OKH@nd&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 11 Sep 2024 21:23:33 +0800</lastBuildDate><atom:link href="https://OKHand.org/categories/environment/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nvidia A100_Env</title>
+      <link>https://OKHand.org/post/nvidia-a100_env/</link>
+      <pubDate>Wed, 11 Sep 2024 21:23:33 +0800</pubDate>
+      
+      <guid>https://OKHand.org/post/nvidia-a100_env/</guid>
+      <description>&lt;p&gt;剛好有幸用到 8Core 80G GPU 的 A100 機台，但以為設定跟之前一樣卻要用 CUDA 跑 LLM 時遇到問題並紀錄解決方法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Ollama Deploy LLM</title>
+      <link>https://OKHand.org/post/ollama-deploy/</link>
+      <pubDate>Thu, 02 May 2024 20:08:32 +0800</pubDate>
+      
+      <guid>https://OKHand.org/post/ollama-deploy/</guid>
+      <description>&lt;p&gt;此文章介紹如何從安裝 Nvidia 驅動到從 HuggingFace 下載的 LLM Model 使用 Ollama 啟動 LLM 並使用 OpenWeb ui 進行溝通的部署過程紀錄。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Windows Server S2D </title>
+      <link>https://OKHand.org/post/builds2d/</link>
+      <pubDate>Thu, 08 Feb 2024 13:29:55 +0800</pubDate>
+      
+      <guid>https://OKHand.org/post/builds2d/</guid>
+      <description>&lt;p&gt;本文紀錄 Windows Server 2019 上建立 S2D 的過程！！&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

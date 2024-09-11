@@ -2,22 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://OKHand.org/categories/</loc>
+    <lastmod>2024-09-11T21:23:33+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/categories/environment/</loc>
+    <lastmod>2024-09-11T21:23:33+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/tags/gpu/</loc>
+    <lastmod>2024-09-11T21:23:33+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/tags/nvidia/</loc>
+    <lastmod>2024-09-11T21:23:33+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/post/nvidia-a100_env/</loc>
+    <lastmod>2024-09-11T21:23:33+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/</loc>
+    <lastmod>2024-09-11T21:23:33+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/post/</loc>
+    <lastmod>2024-09-11T21:23:33+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/tags/</loc>
+    <lastmod>2024-09-11T21:23:33+08:00</lastmod>
+  </url><url>
     <loc>https://OKHand.org/tags/ai/</loc>
     <lastmod>2024-06-09T15:40:46+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/categories/ai/</loc>
-    <lastmod>2024-06-09T15:40:46+08:00</lastmod>
-  </url><url>
-    <loc>https://OKHand.org/categories/</loc>
-    <lastmod>2024-06-09T15:40:46+08:00</lastmod>
-  </url><url>
-    <loc>https://OKHand.org/</loc>
-    <lastmod>2024-06-09T15:40:46+08:00</lastmod>
-  </url><url>
-    <loc>https://OKHand.org/post/</loc>
-    <lastmod>2024-06-09T15:40:46+08:00</lastmod>
-  </url><url>
-    <loc>https://OKHand.org/tags/</loc>
     <lastmod>2024-06-09T15:40:46+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/post/langchain2rag/</loc>
@@ -33,9 +45,6 @@
     <lastmod>2024-02-28T13:01:40+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/tags/docker/</loc>
-    <lastmod>2024-02-28T13:01:40+08:00</lastmod>
-  </url><url>
-    <loc>https://OKHand.org/tags/gpu/</loc>
     <lastmod>2024-02-28T13:01:40+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/tags/k8s/</loc>
@@ -59,13 +68,13 @@
     <loc>https://OKHand.org/post/how2dogreatwork/</loc>
     <lastmod>2023-12-30T01:39:20+08:00</lastmod>
   </url><url>
-    <loc>https://OKHand.org/tags/my-thoughts/</loc>
-    <lastmod>2023-12-30T01:39:20+08:00</lastmod>
-  </url><url>
-    <loc>https://OKHand.org/categories/my-thoughts/</loc>
-    <lastmod>2023-12-30T01:39:20+08:00</lastmod>
-  </url><url>
     <loc>https://OKHand.org/tags/paul-graham/</loc>
+    <lastmod>2023-12-30T01:39:20+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/tags/thinking/</loc>
+    <lastmod>2023-12-30T01:39:20+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/categories/thinking/</loc>
     <lastmod>2023-12-30T01:39:20+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/tags/devops/</loc>

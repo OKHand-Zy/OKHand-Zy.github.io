@@ -6,7 +6,25 @@
     <description>Recent content in Tags on OKH@nd&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 09 Jun 2024 15:40:46 +0800</lastBuildDate><atom:link href="https://OKHand.org/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 11 Sep 2024 21:23:33 +0800</lastBuildDate><atom:link href="https://OKHand.org/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GPU</title>
+      <link>https://OKHand.org/tags/gpu/</link>
+      <pubDate>Wed, 11 Sep 2024 21:23:33 +0800</pubDate>
+      
+      <guid>https://OKHand.org/tags/gpu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nvidia</title>
+      <link>https://OKHand.org/tags/nvidia/</link>
+      <pubDate>Wed, 11 Sep 2024 21:23:33 +0800</pubDate>
+      
+      <guid>https://OKHand.org/tags/nvidia/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>AI</title>
       <link>https://OKHand.org/tags/ai/</link>
@@ -22,15 +40,6 @@
       <pubDate>Wed, 28 Feb 2024 13:01:40 +0800</pubDate>
       
       <guid>https://OKHand.org/tags/docker/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>GPU</title>
-      <link>https://OKHand.org/tags/gpu/</link>
-      <pubDate>Wed, 28 Feb 2024 13:01:40 +0800</pubDate>
-      
-      <guid>https://OKHand.org/tags/gpu/</guid>
       <description></description>
     </item>
     
@@ -62,20 +71,20 @@
     </item>
     
     <item>
-      <title>My thoughts</title>
-      <link>https://OKHand.org/tags/my-thoughts/</link>
-      <pubDate>Sat, 30 Dec 2023 01:39:20 +0800</pubDate>
-      
-      <guid>https://OKHand.org/tags/my-thoughts/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Paul Graham</title>
       <link>https://OKHand.org/tags/paul-graham/</link>
       <pubDate>Sat, 30 Dec 2023 01:39:20 +0800</pubDate>
       
       <guid>https://OKHand.org/tags/paul-graham/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Thinking</title>
+      <link>https://OKHand.org/tags/thinking/</link>
+      <pubDate>Sat, 30 Dec 2023 01:39:20 +0800</pubDate>
+      
+      <guid>https://OKHand.org/tags/thinking/</guid>
       <description></description>
     </item>
     
