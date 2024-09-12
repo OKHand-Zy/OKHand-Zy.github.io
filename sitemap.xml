@@ -3,10 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://OKHand.org/categories/</loc>
-    <lastmod>2024-09-11T21:23:33+08:00</lastmod>
+    <lastmod>2024-09-12T19:56:47+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/post/pypi_proxy/</loc>
+    <lastmod>2024-09-12T19:56:47+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/tags/environment/</loc>
+    <lastmod>2024-09-12T19:56:47+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/categories/environment/</loc>
-    <lastmod>2024-09-11T21:23:33+08:00</lastmod>
+    <lastmod>2024-09-12T19:56:47+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/</loc>
+    <lastmod>2024-09-12T19:56:47+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/post/</loc>
+    <lastmod>2024-09-12T19:56:47+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/tags/python/</loc>
+    <lastmod>2024-09-12T19:56:47+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/tags/</loc>
+    <lastmod>2024-09-12T19:56:47+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/tags/gpu/</loc>
     <lastmod>2024-09-11T21:23:33+08:00</lastmod>
@@ -15,15 +33,6 @@
     <lastmod>2024-09-11T21:23:33+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/post/nvidia-a100_env/</loc>
-    <lastmod>2024-09-11T21:23:33+08:00</lastmod>
-  </url><url>
-    <loc>https://OKHand.org/</loc>
-    <lastmod>2024-09-11T21:23:33+08:00</lastmod>
-  </url><url>
-    <loc>https://OKHand.org/post/</loc>
-    <lastmod>2024-09-11T21:23:33+08:00</lastmod>
-  </url><url>
-    <loc>https://OKHand.org/tags/</loc>
     <lastmod>2024-09-11T21:23:33+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/tags/ai/</loc>
@@ -37,6 +46,15 @@
   </url><url>
     <loc>https://OKHand.org/post/ollama-modefile/</loc>
     <lastmod>2024-06-08T19:56:17+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/tags/llama/</loc>
+    <lastmod>2024-05-02T20:08:32+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/tags/llm/</loc>
+    <lastmod>2024-05-02T20:08:32+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/tags/ollama/</loc>
+    <lastmod>2024-05-02T20:08:32+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/post/ollama-deploy/</loc>
     <lastmod>2024-05-02T20:08:32+08:00</lastmod>
@@ -57,9 +75,6 @@
     <lastmod>2024-02-08T13:29:55+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/tags/windows-server/</loc>
-    <lastmod>2024-02-08T13:29:55+08:00</lastmod>
-  </url><url>
-    <loc>https://OKHand.org/categories/windows-server/</loc>
     <lastmod>2024-02-08T13:29:55+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/post/builds2d/</loc>

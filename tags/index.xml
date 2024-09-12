@@ -6,7 +6,25 @@
     <description>Recent content in Tags on OKH@nd&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 11 Sep 2024 21:23:33 +0800</lastBuildDate><atom:link href="https://OKHand.org/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 12 Sep 2024 19:56:47 +0800</lastBuildDate><atom:link href="https://OKHand.org/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Environment</title>
+      <link>https://OKHand.org/tags/environment/</link>
+      <pubDate>Thu, 12 Sep 2024 19:56:47 +0800</pubDate>
+      
+      <guid>https://OKHand.org/tags/environment/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://OKHand.org/tags/python/</link>
+      <pubDate>Thu, 12 Sep 2024 19:56:47 +0800</pubDate>
+      
+      <guid>https://OKHand.org/tags/python/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>GPU</title>
       <link>https://OKHand.org/tags/gpu/</link>
@@ -31,6 +49,33 @@
       <pubDate>Sun, 09 Jun 2024 15:40:46 +0800</pubDate>
       
       <guid>https://OKHand.org/tags/ai/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>LLama</title>
+      <link>https://OKHand.org/tags/llama/</link>
+      <pubDate>Thu, 02 May 2024 20:08:32 +0800</pubDate>
+      
+      <guid>https://OKHand.org/tags/llama/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>LLM</title>
+      <link>https://OKHand.org/tags/llm/</link>
+      <pubDate>Thu, 02 May 2024 20:08:32 +0800</pubDate>
+      
+      <guid>https://OKHand.org/tags/llm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ollama</title>
+      <link>https://OKHand.org/tags/ollama/</link>
+      <pubDate>Thu, 02 May 2024 20:08:32 +0800</pubDate>
+      
+      <guid>https://OKHand.org/tags/ollama/</guid>
       <description></description>
     </item>
     

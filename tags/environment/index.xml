@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Environment on OKH@nd&#39;s Blog</title>
-    <link>https://OKHand.org/categories/environment/</link>
+    <link>https://OKHand.org/tags/environment/</link>
     <description>Recent content in Environment on OKH@nd&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 12 Sep 2024 19:56:47 +0800</lastBuildDate><atom:link href="https://OKHand.org/categories/environment/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 12 Sep 2024 19:56:47 +0800</lastBuildDate><atom:link href="https://OKHand.org/tags/environment/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Conda &amp; Pip Proxy 設定</title>
       <link>https://OKHand.org/post/pypi_proxy/</link>
@@ -14,15 +14,6 @@
       
       <guid>https://OKHand.org/post/pypi_proxy/</guid>
       <description>&lt;p&gt;某次因 Server 上需先掛 Proxy 後才能上網導致 Python 安裝套件過程中需要設定 Proxy 才能下載套件紀錄。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Nvidia A100 環境設定</title>
-      <link>https://OKHand.org/post/nvidia-a100_env/</link>
-      <pubDate>Wed, 11 Sep 2024 21:23:33 +0800</pubDate>
-      
-      <guid>https://OKHand.org/post/nvidia-a100_env/</guid>
-      <description>&lt;p&gt;剛好有幸用到 8Core 80G GPU 的 A100 機台，但以為設定跟之前一樣卻要用 CUDA 跑 LLM 時遇到問題並紀錄解決方法。&lt;/p&gt;</description>
     </item>
     
     <item>
