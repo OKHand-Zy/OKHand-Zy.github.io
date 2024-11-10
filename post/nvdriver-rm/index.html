@@ -16,9 +16,9 @@
     
   },
   "name":"OKH@nd\u0027s Blog",
-  "description":"\u003cp\u003e本文是我在閱讀 Paul Graham 在2023年7月時在他自己 Blog 所寫下的 How to Do Great Work 這篇文章的個人想法！！\u003c\/p\u003e",
-  "url":"https:\/\/OKHand.org\/post\/how2dogreatwork\/",
-  "keywords":"[Paul Graham, How to Do Great Work]"
+  "description":"\u003cp\u003e因為Nvidia驅動每次都會莫名其妙不見，然後又要重裝套件，紀錄一下如何完整的移除驅動與套件。\u003c\/p\u003e",
+  "url":"https:\/\/OKHand.org\/post\/nvdriver-rm\/",
+  "keywords":"[GPU, Nvidia]"
 }
 
 </script>
@@ -27,38 +27,38 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Hugo 0.107.0 with theme Tranquilpeak 0.5.3-BETA">
 <meta name="author" content="OKH@nd">
-<meta name="keywords" content="Paul Graham, How to Do Great Work">
-<meta name="description" content="本文是我在閱讀 Paul Graham 在2023年7月時在他自己 Blog 所寫下的 How to Do Great Work 這篇文章的個人想法！！">
+<meta name="keywords" content="GPU, Nvidia">
+<meta name="description" content="因為Nvidia驅動每次都會莫名其妙不見，然後又要重裝套件，紀錄一下如何完整的移除驅動與套件。">
 
 
-<meta property="og:description" content="本文是我在閱讀 Paul Graham 在2023年7月時在他自己 Blog 所寫下的 How to Do Great Work 這篇文章的個人想法！！">
+<meta property="og:description" content="因為Nvidia驅動每次都會莫名其妙不見，然後又要重裝套件，紀錄一下如何完整的移除驅動與套件。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="How to Do Great Work 自我反思與心得">
-<meta name="twitter:title" content="How to Do Great Work 自我反思與心得">
-<meta property="og:url" content="https://OKHand.org/post/how2dogreatwork/">
-<meta property="twitter:url" content="https://OKHand.org/post/how2dogreatwork/">
+<meta property="og:title" content="移除Nvidia驅動與CUDA套件">
+<meta name="twitter:title" content="移除Nvidia驅動與CUDA套件">
+<meta property="og:url" content="https://OKHand.org/post/nvdriver-rm/">
+<meta property="twitter:url" content="https://OKHand.org/post/nvdriver-rm/">
 <meta property="og:site_name" content="OKH@nd&#39;s Blog">
-<meta property="og:description" content="本文是我在閱讀 Paul Graham 在2023年7月時在他自己 Blog 所寫下的 How to Do Great Work 這篇文章的個人想法！！">
-<meta name="twitter:description" content="本文是我在閱讀 Paul Graham 在2023年7月時在他自己 Blog 所寫下的 How to Do Great Work 這篇文章的個人想法！！">
+<meta property="og:description" content="因為Nvidia驅動每次都會莫名其妙不見，然後又要重裝套件，紀錄一下如何完整的移除驅動與套件。">
+<meta name="twitter:description" content="因為Nvidia驅動每次都會莫名其妙不見，然後又要重裝套件，紀錄一下如何完整的移除驅動與套件。">
 <meta property="og:locale" content="en-us">
 
   
-    <meta property="article:published_time" content="2023-12-30T01:39:20">
+    <meta property="article:published_time" content="2024-11-11T01:15:55">
   
   
-    <meta property="article:modified_time" content="2023-12-30T01:39:20">
+    <meta property="article:modified_time" content="2024-11-11T01:15:55">
   
-  
-  
-    
-      <meta property="article:section" content="Thinking">
-    
   
   
     
-      <meta property="article:tag" content="Paul Graham">
+      <meta property="article:section" content="Environment">
     
-      <meta property="article:tag" content="Thinking">
+  
+  
+    
+      <meta property="article:tag" content="GPU">
+    
+      <meta property="article:tag" content="Nvidia">
     
   
 
@@ -78,18 +78,18 @@
 
 
 
-  <meta property="og:image" content="https://imgur.com/hfmLiZi.png">
-  <meta property="twitter:image" content="https://imgur.com/hfmLiZi.png">
+  <meta property="og:image" content="https://imgur.com/q39NEjQ.png">
+  <meta property="twitter:image" content="https://imgur.com/q39NEjQ.png">
 
 
-    <title>How to Do Great Work 自我反思與心得</title>
+    <title>移除Nvidia驅動與CUDA套件</title>
 
     <link rel="icon" href="https://OKHand.org/okhand.png">
     
 
     
 
-    <link rel="canonical" href="https://OKHand.org/post/how2dogreatwork/">
+    <link rel="canonical" href="https://OKHand.org/post/nvdriver-rm/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -259,15 +259,15 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title">
-      How to Do Great Work 自我反思與心得
+      移除Nvidia驅動與CUDA套件
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time datetime="2023-12-30T01:39:20&#43;08:00">
+      <time datetime="2024-11-11T01:15:55&#43;08:00">
         
-  December 30, 2023
+  November 11, 2024
 
       </time>
     
@@ -276,7 +276,7 @@
   
     <span>in</span>
     
-      <a class="category-link" href="https://OKHand.org/categories/thinking">Thinking</a>
+      <a class="category-link" href="https://OKHand.org/categories/environment">Environment</a>
     
   
 
@@ -286,45 +286,50 @@
           
           <div class="post-content markdown">
             <div class="main-content-wrap">
-              <p>本文是我在閱讀 Paul Graham 在2023年7月時在他自己 Blog 所寫下的 How to Do Great Work 這篇文章的個人想法！！</p>
-<p>Paul Graham 以創業家的過來人寫給現在想創業或是在創業過程中的你的一封信。</p>
-<ul>
-<li>
-<p>序： <br>
-Paul Graham 想寫出一份可以作出 Great Work 的文章並且可以被套用在任何領域之中。 <br>
-Great Work 在研究的過程中發顯要創造 Great Work 是有一個明確的形式，他不僅僅只是努力造就出來的。  <br>
-以下是預設在很有抱負的狀況下。</p>
-</li>
-<li>
-<p>開始的四個步驟： <br>
-對於還很迷茫的人就多多嘗試不同的事物，我覺得對於你來說是超級划算的，它不只可以讓你多多的認識到你自己，並且還能知道你對這些事是否有興趣或是有沒有天賦，當你接觸的東西愈多你就能把各個不同領域知識串連起來。 <br>
-並且要養成自己可以找到你能做的事情，不能依賴別人給你任務你就只做啥，需要找到自己現在感到興奮並且充滿挑戰的 Work，這個 Work 的品味會隨著你得年紀與程度漸漸變的有一定的品質與難度。 <br>
-至於 Great Work 因為你需要有很大的熱情與興趣才能長久的努力堅持下去，然後你必須要有該領域的天賦你才能快速的到達該領域的前沿。 <br>
-而好奇心會幫助你拓展知識並且在這過程中如果有發現奇怪的答案請擁抱他，並且擁抱那些與眾不同的想法，因為有可能抓到那些有潛力的&quot;缺口&quot;。 <br>
-然而基礎知識是最重要的根基，每一個知識只要有一個完好的基礎就能快速的學習到該領域的知識前沿。 <br>
-當你滿足以上條件時並且發現到那缺口時，只要深挖下去你就能像哥倫布一樣發現新大陸。 <br>
-以下是 Paul Graham 提到的4個步驟</p>
-<ul>
-<li>步驟一：決定要從事什麼工作 <br>
-選擇工作需要有三點特質：
+              <p>因為Nvidia驅動每次都會莫名其妙不見，然後又要重裝套件，紀錄一下如何完整的移除驅動與套件。</p>
 <ol>
-<li>你有天賦的事物</li>
-<li>你有深厚興趣的事物</li>
-<li>有能夠做出 Great Work 範疇</li>
+<li>查看是否有 nvidia 驅動：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>dpkg -l | grep -i nvidia
+</span></span></code></pre></div></li>
+<li>移除<code>nvidia-cuda-toolkit</code>驅動：
+<ul>
+<li>只移除<code>nvidia-cuda-toolkit</code>驅動
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt-get remove nvidia-cuda-toolkit
+</span></span></code></pre></div></li>
+<li>移除<code>nvidia-cuda-toolkit</code>及其依賴套件
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt-get remove --auto-remove nvidia-cuda-toolkit
+</span></span></code></pre></div></li>
+<li>移除 <code>nvidia-cuda-toolkit</code>與其依賴套件跟環境配置：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt-get purge --auto-remove nvidia-cuda-toolkit
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>移除所有關於<code>cuda</code>的内容：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt-get --purge -y remove <span style="color:#e6db74">&#39;cuda*&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># cuda10.1及以上的卸载</span>
+</span></span><span style="display:flex;"><span>cd /usr/local/cuda-xx.x/bin/
+</span></span><span style="display:flex;"><span>sudo ./cuda-uninstaller
+</span></span><span style="display:flex;"><span>sudo rm -rf /usr/local/cuda-xx.x
+</span></span></code></pre></div></li>
+<li>移除所有關於<code>nvidia</code>的内容：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt-get --purge -y remove <span style="color:#e6db74">&#39;nvidia*&#39;</span>
+</span></span></code></pre></div></li>
+<li>檢查<code>cuda</code>的文件夾是否還存在：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls /usr/local/ | grep cuda
+</span></span></code></pre></div></li>
+<li>Reboot：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo reboot
+</span></span></code></pre></div></li>
+<li>查看是否有 cudnn 驅動：
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>dpkg -l | grep cudnn
+</span></span></code></pre></div></li>
+<li>移除 cudnn 驅動：  <br>
+移除剛剛查詢到系统中存在的<code>cudnn</code>套件, command 以 cudnn8 為例
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dpkg --remove libcudnn8 libcudnn8-dev libcudnn9-samples
+</span></span></code></pre></div></li>
 </ol>
-</li>
-<li>步驟二：養成自己找出 Work 的習慣</li>
-<li>步驟三：保持著 懷疑 與 好奇心</li>
-<li>步驟四：學習你選擇的領域知識的前沿，並探尋事物的缺口</li>
-</ul>
-</li>
-<li>
-<p>找到該做的事： <br>
-fgdfg</p>
-</li>
-<li></li>
-</ul>
-<p>原文：http://www.paulgraham.com/greatwork.html</p>
+<p>Ref: <br>
+<a href="https://blog.csdn.net/shudderYYL/article/details/134891084">Ubuntu下完全移除cuda和nvidia驱动并重新安装新版本cuda_ubuntu卸载cuda toolkit-CSDN博客</a></p>
               
 
 
@@ -338,9 +343,9 @@ fgdfg</p>
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/paul-graham/">Paul Graham</a>
+  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/gpu/">GPU</a>
 
-  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/thinking/">Thinking</a>
+  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/nvidia/">Nvidia</a>
 
                   </div>
                 
@@ -353,7 +358,7 @@ fgdfg</p>
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/builds2d/" data-tooltip="Windows Server S2D " aria-label="NEXT: Windows Server S2D ">
+            <a class="post-action-btn btn btn--disabled">
           
               <i class="fa fa-angle-left"></i>
               <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -361,7 +366,7 @@ fgdfg</p>
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/docker-swarm/" data-tooltip="Docker Swarm 入門教學" aria-label="PREVIOUS: Docker Swarm 入門教學">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/cookiecutter/" data-tooltip="Cookiecutter" aria-label="PREVIOUS: Cookiecutter">
           
               <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
               <i class="fa fa-angle-right"></i>
@@ -379,19 +384,19 @@ fgdfg</p>
     </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/how2dogreatwork/" title="Share on Facebook" aria-label="Share on Facebook">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/nvdriver-rm/" title="Share on Facebook" aria-label="Share on Facebook">
           <i class="fab fa-facebook-square" aria-hidden="true"></i>
         </a>
       </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/how2dogreatwork/" title="Share on Twitter" aria-label="Share on Twitter">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/nvdriver-rm/" title="Share on Twitter" aria-label="Share on Twitter">
           <i class="fab fa-twitter" aria-hidden="true"></i>
         </a>
       </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/how2dogreatwork/" title="Share on Linkedin" aria-label="Share on Linkedin">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/nvdriver-rm/" title="Share on Linkedin" aria-label="Share on Linkedin">
           <i class="fab fa-linkedin" aria-hidden="true"></i>
         </a>
       </li>
@@ -446,7 +451,7 @@ fgdfg</p>
       
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/builds2d/" data-tooltip="Windows Server S2D " aria-label="NEXT: Windows Server S2D ">
+            <a class="post-action-btn btn btn--disabled">
           
               <i class="fa fa-angle-left"></i>
               <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -454,7 +459,7 @@ fgdfg</p>
         </li>
         <li class="post-action">
           
-            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/docker-swarm/" data-tooltip="Docker Swarm 入門教學" aria-label="PREVIOUS: Docker Swarm 入門教學">
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/cookiecutter/" data-tooltip="Cookiecutter" aria-label="PREVIOUS: Cookiecutter">
           
               <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
               <i class="fa fa-angle-right"></i>
@@ -472,19 +477,19 @@ fgdfg</p>
     </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/how2dogreatwork/" title="Share on Facebook" aria-label="Share on Facebook">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/nvdriver-rm/" title="Share on Facebook" aria-label="Share on Facebook">
           <i class="fab fa-facebook-square" aria-hidden="true"></i>
         </a>
       </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/how2dogreatwork/" title="Share on Twitter" aria-label="Share on Twitter">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/nvdriver-rm/" title="Share on Twitter" aria-label="Share on Twitter">
           <i class="fab fa-twitter" aria-hidden="true"></i>
         </a>
       </li>
     
       <li class="post-action hide-xs">
-        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/how2dogreatwork/" title="Share on Linkedin" aria-label="Share on Linkedin">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/nvdriver-rm/" title="Share on Linkedin" aria-label="Share on Linkedin">
           <i class="fab fa-linkedin" aria-hidden="true"></i>
         </a>
       </li>
@@ -509,19 +514,19 @@ fgdfg</p>
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2FOKHand.org%2Fpost%2Fhow2dogreatwork%2F" aria-label="Share on Facebook">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2FOKHand.org%2Fpost%2Fnvdriver-rm%2F" aria-label="Share on Facebook">
           <i class="fab fa-facebook-square" aria-hidden="true"></i><span>Share on Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2FOKHand.org%2Fpost%2Fhow2dogreatwork%2F" aria-label="Share on Twitter">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2FOKHand.org%2Fpost%2Fnvdriver-rm%2F" aria-label="Share on Twitter">
           <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2FOKHand.org%2Fpost%2Fhow2dogreatwork%2F" aria-label="Share on Linkedin">
+        <a class="share-option-btn" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2FOKHand.org%2Fpost%2Fnvdriver-rm%2F" aria-label="Share on Linkedin">
           <i class="fab fa-linkedin" aria-hidden="true"></i><span>Share on Linkedin</span>
         </a>
       </li>

@@ -3,21 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://OKHand.org/categories/</loc>
-    <lastmod>2024-09-12T21:20:28+08:00</lastmod>
+    <lastmod>2024-11-11T01:15:55+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/categories/environment/</loc>
+    <lastmod>2024-11-11T01:15:55+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/tags/gpu/</loc>
+    <lastmod>2024-11-11T01:15:55+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/tags/nvidia/</loc>
+    <lastmod>2024-11-11T01:15:55+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/</loc>
+    <lastmod>2024-11-11T01:15:55+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/post/</loc>
+    <lastmod>2024-11-11T01:15:55+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/tags/</loc>
+    <lastmod>2024-11-11T01:15:55+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/post/nvdriver-rm/</loc>
+    <lastmod>2024-11-11T01:15:55+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/post/cookiecutter/</loc>
     <lastmod>2024-09-12T21:20:28+08:00</lastmod>
   </url><url>
-    <loc>https://OKHand.org/</loc>
-    <lastmod>2024-09-12T21:20:28+08:00</lastmod>
-  </url><url>
-    <loc>https://OKHand.org/post/</loc>
-    <lastmod>2024-09-12T21:20:28+08:00</lastmod>
-  </url><url>
     <loc>https://OKHand.org/tags/python/</loc>
-    <lastmod>2024-09-12T21:20:28+08:00</lastmod>
-  </url><url>
-    <loc>https://OKHand.org/tags/</loc>
     <lastmod>2024-09-12T21:20:28+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/tags/tool/</loc>
@@ -31,15 +43,6 @@
   </url><url>
     <loc>https://OKHand.org/tags/environment/</loc>
     <lastmod>2024-09-12T19:56:47+08:00</lastmod>
-  </url><url>
-    <loc>https://OKHand.org/categories/environment/</loc>
-    <lastmod>2024-09-12T19:56:47+08:00</lastmod>
-  </url><url>
-    <loc>https://OKHand.org/tags/gpu/</loc>
-    <lastmod>2024-09-11T21:23:33+08:00</lastmod>
-  </url><url>
-    <loc>https://OKHand.org/tags/nvidia/</loc>
-    <lastmod>2024-09-11T21:23:33+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/post/nvidia-a100_env/</loc>
     <lastmod>2024-09-11T21:23:33+08:00</lastmod>
