@@ -525,12 +525,12 @@ Clear-Disk  –Number 1,2,3,4  -RemoveData  -RemoveOEM
 手動執行 S2D Storage Pool Rebalance
 <pre tabindex="0"><code>Get-StoragePool *S2D* | Optimize-StoragePool
 </code></pre></li>
-<li>透過 Show-PrettyPool.ps1 這隻腳本可以看到硬碟上已經寫回 Slab 資料</li>
+<li>透過 <a href="https://github.com/microsoft/MSLab/tree/master/Scenarios/S2D%20Tools/ShowPrettyPool">Show-PrettyPool.ps1</a> 這隻腳本可以看到硬碟上已經寫回 Slab 資料</li>
 <li>查看平衡進度
 <pre tabindex="0"><code>Get-StorageJob
 </code></pre></li>
 </ul>
-<h3 id="reference">Reference：</h3>
+<h2 id="reference">Reference</h2>
 <p><a href="https://www.weithenn.org/2015/10/netadmin-117.html">117 期 - 微軟最新 S2D 儲存技術，跨伺服器硬碟組成資源池 (weithenn blog)</a></p>
 <p><a href="https://learn.microsoft.com/zh-tw/windows-server/storage/storage-spaces/deploy-storage-spaces-direct">在 Windows Server 上部署儲存空間直接存取 (microsoft.com)</a></p>
 <p><a href="https://www.weithenn.org/2017/01/s2d-storage-pool.html">深入剖析 S2D Storage Pool (weithenn blog)</a></p>

@@ -6,7 +6,16 @@
     <description>Recent content in AI on OKH@nd&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 09 Jun 2024 15:40:46 +0800</lastBuildDate><atom:link href="https://OKHand.org/tags/ai/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 05 Dec 2024 23:56:27 +0800</lastBuildDate><atom:link href="https://OKHand.org/tags/ai/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hybrid Search</title>
+      <link>https://OKHand.org/post/hybrid-search/</link>
+      <pubDate>Thu, 05 Dec 2024 23:56:27 +0800</pubDate>
+      
+      <guid>https://OKHand.org/post/hybrid-search/</guid>
+      <description>&lt;p&gt;想說都建立 Elastic 不試試看這 DB 的搜尋效果就不夠意思了吧，就有了這篇 Elastic 搜尋篇&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>用 LangChain 實作出簡易版 RAG</title>
       <link>https://OKHand.org/post/langchain2rag/</link>

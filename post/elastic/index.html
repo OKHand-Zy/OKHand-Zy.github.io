@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <script type="application/ld+json">
+
+{  
+  "@context":"http://schema.org",
+  "@type":"Website",
+  "@id":"https:\/\/OKHand.org\/",
+  "author": {
+    "@type": "Person",
+    "name": "OKH@nd",
+    
+    "image": "https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943"
+    
+  },
+  "name":"OKH@nd\u0027s Blog",
+  "description":"\u003cp\u003e今天來嘗試使用 Elastic 向量 DB 聽說是有針對資料搜尋特化的一個向量DB，那我們就來試試看吧！！\u003c\/p\u003e",
+  "url":"https:\/\/OKHand.org\/post\/elastic\/",
+  "keywords":"[Environment, VectorDB, Elastic]"
+}
+
+</script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.107.0 with theme Tranquilpeak 0.5.3-BETA">
+<meta name="author" content="OKH@nd">
+<meta name="keywords" content="Environment, VectorDB, Elastic">
+<meta name="description" content="今天來嘗試使用 Elastic 向量 DB 聽說是有針對資料搜尋特化的一個向量DB，那我們就來試試看吧！！">
+
+
+<meta property="og:description" content="今天來嘗試使用 Elastic 向量 DB 聽說是有針對資料搜尋特化的一個向量DB，那我們就來試試看吧！！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Elastic">
+<meta name="twitter:title" content="Elastic">
+<meta property="og:url" content="https://OKHand.org/post/elastic/">
+<meta property="twitter:url" content="https://OKHand.org/post/elastic/">
+<meta property="og:site_name" content="OKH@nd&#39;s Blog">
+<meta property="og:description" content="今天來嘗試使用 Elastic 向量 DB 聽說是有針對資料搜尋特化的一個向量DB，那我們就來試試看吧！！">
+<meta name="twitter:description" content="今天來嘗試使用 Elastic 向量 DB 聽說是有針對資料搜尋特化的一個向量DB，那我們就來試試看吧！！">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2024-12-05T23:54:28">
+  
+  
+    <meta property="article:modified_time" content="2024-12-05T23:54:28">
+  
+  
+  
+    
+      <meta property="article:section" content="Environment">
+    
+  
+  
+    
+      <meta property="article:tag" content="DataBase">
+    
+      <meta property="article:tag" content="Environment">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=640">
+
+
+
+
+
+  <meta property="og:image" content="https://imgur.com/JJz1bRU.png">
+  <meta property="twitter:image" content="https://imgur.com/JJz1bRU.png">
+
+
+    <title>Elastic</title>
+
+    <link rel="icon" href="https://OKHand.org/okhand.png">
+    
+
+    
+
+    <link rel="canonical" href="https://OKHand.org/post/elastic/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    
+    <link rel="stylesheet" href="https://OKHand.org/css/style-h6ccsoet3mzkbb0wngshlfbaweimexgqcxj0h5hu4h82olsdzz6wmqdkajm.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://OKHand.org/" aria-label="Go to homepage">OKH@nd&#39;s Blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://OKHand.org/#about" aria-label="Open the link: /#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://OKHand.org/#about" aria-label="Read more about the author">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">OKH@nd</h4>
+        
+          <h5 class="sidebar-profile-bio">致力於用我的知識，嘗試去改變現今的教育及社會，讓世界變得更美好</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/" title="Home">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-home" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/categories" title="Categories">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-bookmark" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/tags" title="Tags">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-tags" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/archives" title="Archives">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-archive" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/about_me/" title="About">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-question" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/OKHand-Zy" target="_blank" rel="noopener" title="GitHub">
+    
+      <i class="sidebar-button-icon fab fa-lg fa-github" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://home.gamer.com.tw/homeindex.php?owner=Az7899603" target="_blank" rel="noopener" title="Gamer Forum">
+    
+      <i class="sidebar-button-icon fa fa-gamepad" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Gamer Forum</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=okhand.ziyu@gmail.com" target="_blank" rel="noopener" title="Gmail">
+    
+      <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Gmail</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/index.xml" title="RSS">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-rss" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" id="top">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title">
+      Elastic
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time datetime="2024-12-05T23:54:28&#43;08:00">
+        
+  December 5, 2024
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://OKHand.org/categories/environment">Environment</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown">
+            <div class="main-content-wrap">
+              <p>今天來嘗試使用 Elastic 向量 DB 聽說是有針對資料搜尋特化的一個向量DB，那我們就來試試看吧！！</p>
+<p>我是使用 Docker 來搭建 Service 所以以下範例都是以 Docker 來操作。
+<br>
+我這邊是使用 Single Node 來架設DB，但因為 Elastic 是可以有多節點來作分散式備份等功能有興趣可以參考最下面的參考資料。</p>
+<h2 id="建立環境">建立環境</h2>
+<ul>
+<li>Step1. (Option) Create a new docker network
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>docker network create elastic
+</span></span></code></pre></div></li>
+<li>Step2. docker run elastic <br>
+這邊有分有無要在 Elastic 內部使用 LLM 設定因為會有關 Ram 使用的大小 <br>
+普通建構 無須在內部使用 LLM
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>docker run --name elasticsearch --net elastic -p 9200:9200 -it -m 1GB -e <span style="color:#e6db74">&#34;discovery.type=single-node&#34;</span> docker.elastic.co/elasticsearch/elasticsearch:8.16.1
+</span></span></code></pre></div>需使用機器學習功能，例如使用 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/semantic-search-elser.html">ELSER 進行語義搜索</a> 需要記憶體超過 1GB 的更大容器。
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>docker run -d --name elasticsearch --net elastic -p 9200:9200 -m 6GB -it -e <span style="color:#e6db74">&#34;xpack.ml.use_auto_machine_memory_percent=true&#34;</span> -e <span style="color:#e6db74">&#34;discovery.type=single-node&#34;</span> docker.elastic.co/elasticsearch/elasticsearch:8.16.1
+</span></span></code></pre></div>補充：
+<ul>
+<li>不要啟動 security feature (強制使用https選項) ⇒ &ldquo;xpack.security.enabled=false&rdquo;</li>
+<li>設定 single-node ⇒ &ldquo;discovery.type=single-node&rdquo;</li>
+</ul>
+</li>
+<li>Step3. Kibana 的 elastic 使用者密碼和註冊令牌 <br>
+我們在有啟用 security feature 情況下首次登入 elastic  (https://0.0.0.0:9200) 是需要輸入帳號密碼的
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>docker exec -it elasticsearch /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic
+</span></span></code></pre></div>就能看到 elastic 重製好的密碼顯示在上面
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>  ❯ docker exec -it elasticsearch /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic
+</span></span><span style="display:flex;"><span>  WARNING: Owner of file <span style="color:#f92672">[</span>/usr/share/elasticsearch/config/users<span style="color:#f92672">]</span> used to be <span style="color:#f92672">[</span>root<span style="color:#f92672">]</span>, but now is <span style="color:#f92672">[</span>elasticsearch<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  WARNING: Owner of file <span style="color:#f92672">[</span>/usr/share/elasticsearch/config/users_roles<span style="color:#f92672">]</span> used to be <span style="color:#f92672">[</span>root<span style="color:#f92672">]</span>, but now is <span style="color:#f92672">[</span>elasticsearch<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  This tool will reset the password of the <span style="color:#f92672">[</span>elastic<span style="color:#f92672">]</span> user to an autogenerated value.
+</span></span><span style="display:flex;"><span>  The password will be printed in the console.
+</span></span><span style="display:flex;"><span>  Please confirm that you would like to <span style="color:#66d9ef">continue</span> <span style="color:#f92672">[</span>y/N<span style="color:#f92672">]</span>y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  Password <span style="color:#66d9ef">for</span> the <span style="color:#f92672">[</span>elastic<span style="color:#f92672">]</span> user successfully reset.
+</span></span><span style="display:flex;"><span>  New value: 4If*lQS*fXrh3iq_bvnc
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  What<span style="color:#960050;background-color:#1e0010">&#39;</span>s next:
+</span></span><span style="display:flex;"><span>      Try Docker Debug <span style="color:#66d9ef">for</span> seamless, persistent debugging tools in any container or image → docker debug elasticsearch
+</span></span><span style="display:flex;"><span>      Learn more at https://docs.docker.com/go/debug-cli/
+</span></span></code></pre></div></li>
+<li>Step4. docker run kibana (GUI Web)
+這邊建立一個官方用來方便管理 Elastic 的 GUI Web Kibana \
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>docker run -d --name kibana --net elastic -p 5601:5601 docker.elastic.co/kibana/kibana:8.16.1
+</span></span></code></pre></div>之後我們就能到 http://0.0.0.0:5601 看到 Kibana Web
+一樣如果有啟用 security feature 情況下首次登入Token</li>
+<li>Step5. 取得 Kibana Token
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>docker exec -it elasticsearch /usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>  ❯ docker exec -it elasticsearch /usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana
+</span></span><span style="display:flex;"><span>  eyJ2ZXIiOiI4LjE0LjAiLCJhZHIiOlsiMTcyLjE4LjAuMjo5MjAwIl0sImZnciI6ImJjMjI0N2Q3ODNlY2FjYWQ1Zjc0YzdlN2I4ZjM1YTU4YWMyYjBjZGM4NTI3Mzc5MWM0Yjc4OTVmNjQxMWIyNDUiLCJrZXkiOiJMOGFKZHBNQlRra0lBWHVNTk40Zzpqa3RxQ1Q4U1JHaXRlb25YMExjdm9RIn0<span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  What<span style="color:#960050;background-color:#1e0010">&#39;</span>s next:
+</span></span><span style="display:flex;"><span>      Try Docker Debug <span style="color:#66d9ef">for</span> seamless, persistent debugging tools in any container or image → docker debug elasticsearch
+</span></span><span style="display:flex;"><span>      Learn more at https://docs.docker.com/go/debug-cli/
+</span></span></code></pre></div>之後我們就能輸入Token，讓 Kibana 跟 Elastic 連接之後就會看到要輸入認證 Code
+<img src="https://imgur.com/2EdNJ97.png" alt="kibana-verification-code"></li>
+<li>Step6. 取得認證 Code
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>&gt; docker exec -it kibana /bin/bash
+</span></span><span style="display:flex;"><span>&gt; kibana@da057b8cc1fa:~$ bin/kibana-verification-code
+</span></span><span style="display:flex;"><span>  Kibana is currently running with legacy OpenSSL providers enabled! For details and instructions on how to disable see https://www.elastic.co/guide/en/kibana/8.16/production.html#openssl-legacy-provider
+</span></span><span style="display:flex;"><span>  Your verification code is:  <span style="color:#ae81ff">632</span> <span style="color:#ae81ff">200</span>
+</span></span><span style="display:flex;"><span>  kibana@da057b8cc1fa:~$
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="手動取消安全安全認證">手動取消安全安全認證</h2>
+<p>為了之後我們方便開發時連線不用帶金鑰等等…麻煩的設定</p>
+<ul>
+<li>Elastic
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>❯ docker exec -u root -it elasticsearch /bin/bash
+</span></span><span style="display:flex;"><span>  root@1604ebd3d6d6:/usr/share/elasticsearch# cd config/
+</span></span><span style="display:flex;"><span>  root@1604ebd3d6d6:/usr/share/elasticsearch/config# cat elasticsearch.yml
+</span></span><span style="display:flex;"><span>  cluster.name: <span style="color:#e6db74">&#34;docker-cluster&#34;</span>
+</span></span><span style="display:flex;"><span>  network.host: 0.0.0.0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#----------------------- BEGIN SECURITY AUTO CONFIGURATION -----------------------</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># The following settings, TLS certificates, and keys have been automatically</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># generated to configure Elasticsearch security features on 29-11-2024 07:00:36</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># --------------------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Enable security features</span>
+</span></span><span style="display:flex;"><span>  xpack.security.enabled: false
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  xpack.security.enrollment.enabled: true
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Enable encryption for HTTP API client connections, such as Kibana, Logstash, and Agents</span>
+</span></span><span style="display:flex;"><span>  xpack.security.http.ssl:
+</span></span><span style="display:flex;"><span>  enabled: false
+</span></span><span style="display:flex;"><span>  keystore.path: certs/http.p12
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Enable encryption and mutual authentication between cluster nodes</span>
+</span></span><span style="display:flex;"><span>  xpack.security.transport.ssl:
+</span></span><span style="display:flex;"><span>  enabled: true
+</span></span><span style="display:flex;"><span>  verification_mode: certificate
+</span></span><span style="display:flex;"><span>  keystore.path: certs/transport.p12
+</span></span><span style="display:flex;"><span>  truststore.path: certs/transport.p12
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#----------------------- END SECURITY AUTO CONFIGURATION -------------------------</span>
+</span></span><span style="display:flex;"><span>  root@1604ebd3d6d6:/usr/share/elasticsearch/config#
+</span></span></code></pre></div>補充： <br>
+這邊是要把 <code>xpack.security.enabled</code> 跟 <code>xpack.security.http.ssl</code> 修改成 false 即可</li>
+<li>Kibana
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>❯ docker exec -u root -it kibana /bin/bash
+</span></span><span style="display:flex;"><span>root@7bf3cda51529:/usr/share/kibana# cd config/
+</span></span><span style="display:flex;"><span>root@7bf3cda51529:/usr/share/kibana/config# cat kibana.yml
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ** THIS IS AN AUTO-GENERATED FILE **</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Default Kibana configuration for docker target</span>
+</span></span><span style="display:flex;"><span>  server.host: <span style="color:#e6db74">&#34;0.0.0.0&#34;</span>
+</span></span><span style="display:flex;"><span>  server.shutdownTimeout: <span style="color:#e6db74">&#34;5s&#34;</span>
+</span></span><span style="display:flex;"><span>  elasticsearch.hosts: <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;http://elasticsearch:9200&#34;</span> <span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>  monitoring.ui.container.elasticsearch.enabled: true
+</span></span><span style="display:flex;"><span>  root@7bf3cda51529:/usr/share/kibana/config#
+</span></span></code></pre></div>補充： \
+<ul>
+<li>elasticsearch.hosts: [ &ldquo;http://elasticsearch:9200&rdquo; ] 這邊的 elasticsearch 是依照你的 elastic 的 container 名去修改(這是因為 DNS指向的關係) , 並且注意要是 http 開頭</li>
+</ul>
+</li>
+</ul>
+<p>停用後頁面會顯示 Could not retrieve current user, security plugin is not ready 不用怕照樣能用
+<img src="https://imgur.com/ksZl0Wc.png" alt="disable-security"></p>
+<p>這樣就建立好一個 ElasticSearch 的服務了！！</p>
+<h2 id="reference">Reference</h2>
+<p><a href="https://godleon.github.io/blog/Elasticsearch/Elasticsearch-distributed-mechanism/">[Elasticsearch] 分散式特性 &amp; 分散式搜尋的機制 - 小信豬的原始部落</a></p>
+              
+
+
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/database/">DataBase</a>
+
+  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/environment/">Environment</a>
+
+                  </div>
+                
+              
+            
+            
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/hybrid-search/" data-tooltip="Hybrid Search" aria-label="NEXT: Hybrid Search">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/nvdriver-rm/" data-tooltip="移除Nvidia驅動與CUDA套件" aria-label="PREVIOUS: 移除Nvidia驅動與CUDA套件">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/elastic/" title="Share on Facebook" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/elastic/" title="Share on Twitter" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/elastic/" title="Share on Linkedin" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="Back to top">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+            
+  
+    <script src="https://giscus.app/client.js"
+      data-repo="OKHand-zy/web-giscus"
+      data-repo-id="R_kgDOJiGm_w"
+      data-category="Announcements"
+      data-category-id="DIC_kwDOJiGm_84CWb2E"
+      data-mapping="title"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="light_high_contrast"
+      data-lang="zh-TW"
+      crossorigin="anonymous"
+      async>
+    </script>
+  
+
+
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2024 OKH@nd. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/hybrid-search/" data-tooltip="Hybrid Search" aria-label="NEXT: Hybrid Search">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/nvdriver-rm/" data-tooltip="移除Nvidia驅動與CUDA套件" aria-label="PREVIOUS: 移除Nvidia驅動與CUDA套件">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/elastic/" title="Share on Facebook" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/elastic/" title="Share on Twitter" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/elastic/" title="Share on Linkedin" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="Back to top">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+      </div>
+      
+<div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-times"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2FOKHand.org%2Fpost%2Felastic%2F" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2FOKHand.org%2Fpost%2Felastic%2F" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2FOKHand.org%2Fpost%2Felastic%2F" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i><span>Share on Linkedin</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
+
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-times"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">OKH@nd</h4>
+    
+      <div id="about-card-bio">致力於用我的知識，嘗試去改變現今的教育及社會，讓世界變得更美好</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Automation Developer Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker-alt"></i>
+        <br/>
+        Taiwan
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://OKHand.org/images/nasa.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script src="https://OKHand.org/js/script-yqzy9wdlzix4lbbwdnzvwx3egsne77earqmn73v9uno8aupuph8wfguccut.min.js"></script>
+
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-gE8KAQyFIzV1C9+GZ8TKJHZS2s+n7EjNtC+IMRn1l5+WYJTHOODUM6JSjZhFhqXmc7bG8Av6XXpckA4tYhflnw==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/apache.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-EWROca+bote+7Oaaar1F6y74iZj1r1F9rm/ly7o+/FwJopbBaWtsFDmaKoZDd3QiGU2pGacBirHJNivmGLYrow==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/go.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-GDVzAn0wpx1yVtQsRWmFc6PhJiLBPdUic+h4GWgljBh904O3JU10fk9EKNpVyIoPqkFn54rgL2QBG4BmUTMpiQ==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/http.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-UgZlma8NzkrDb/NWgmLIcTrH7i/CSnLLDRFqCSNF5NGPpjKmzyM25qcoXGOup8+cDakKyaiTDd7N4dyH4YT+IA==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/less.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-lot9koe73sfXIrUvIPM/UEhuMciN56RPyBdOyZgfO53P2lkWyyXN7J+njcxIIBRV+nVDQeiWtiXg+bLAJZDTfg==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/nginx.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-Zd3e7XxHP00TD0Imr0PIfeM0fl0v95kMWuhyAS3Wn1UTSXTkz0OhtRgBAr4JlmADRgiXr4x7lpeUdqaGN8xIog==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/puppet.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-qtqDO052iXMSP+5d/aE/jMtL9vIIGvONgTJziC2K/ZIB1yEGa55WVxGE9/08rSQ62EoDifS9SWVGZ7ihSLhzMA==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/scss.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-1NmkjnEDnwwwcu28KoQF8vs3oaPFokQHbmbtwGhFfeDsQZtVFI8zW2aE9O8yMYdpdyKV/5blE4pSWw4Z/Sv97w==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/stylus.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-B2wSfruPjr8EJL6IIzQr1eAuDwrsfIfccNf/LCEdxELCgC/S/ZMt/Uvk80aD79m7IqOqW+Sw8nbkvha20yZpzg==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/swift.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-28oDiQZGKUVN6wQ7PSLPNipOcmkCALXKwOi7bnkyFf8QiMZQxG9EQoy/iiNx6Zxj2cG2SbVa4dXKigQhu7GiFw==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/yaml.min.js"></script>
+  
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+
+
+    
+  </body>
+</html>
+

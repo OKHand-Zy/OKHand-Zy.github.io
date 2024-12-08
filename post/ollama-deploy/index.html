@@ -526,8 +526,7 @@ sudo apt-get update
 </ul>
 <p>Nvidia container toolkit：</p>
 <ul>
-<li>
-<p>install Nvidia container toolkit</p>
+<li>install Nvidia container toolkit
 <pre tabindex="0"><code>=&gt; curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
 &amp;&amp; curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
     sed &#39;s#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g&#39; | \
@@ -541,11 +540,11 @@ sudo apt-get update
 
 # Test GPU integration
 =&gt; docker run --gpus all nvidia/cuda:11.5.2-base-ubuntu20.04 nvidia-smi
-</code></pre><p>Ref：</p>
+</code></pre></li>
+</ul>
+<h2 id="reference">Reference</h2>
 <p><a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">Nvidia container-toolkit</a></p>
 <p><a href="https://blog.darkthread.net/blog/ollam-open-webui/">傻瓜 LLM 架設 - Ollama + Open WebUI 之 Docker Compose 懶人包</a></p>
-</li>
-</ul>
               
 
 

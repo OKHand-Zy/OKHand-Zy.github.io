@@ -451,15 +451,7 @@ Example:</p>
 </code></pre><pre tabindex="0"><code>MESSAGE user Is Toronto in Canada?
 MESSAGE assistant yes
   ...
-</code></pre><p>參考文件：
-翻譯與找資料：perplexity.ai and phind.ai
-<a href="https://www.53ai.com/news/qianyanjishu/772.html">基于Ollama定制自己的大语言模型 - 53ai</a>
-<a href="https://www.53ai.com/news/qianyanjishu/1203.html">上百大语言模型快速部署调用工具 Ollama使用指南</a>
-<a href="https://github.com/b1ip/ollama_modelfile_template/blob/main/Modelfile">Ollama GitHub - Modefile</a>
-<a href="https://github.com/ollama/ollama/blob/main/docs/modelfile.md">Ollama GitHub - Modefile</a>
-<a href="https://github.com/ollama/ollama/blob/main/docs/import.md">Ollama GitHub - import</a>
-<a href="https://zhuanlan.zhihu.com/p/690214323">自定义大型语言模型-使用OLLAMA和Modelfile定制、运行和保存LLM - 知乎</a></p>
-<h2 id="筆記">筆記：</h2>
+</code></pre><h2 id="筆記">筆記：</h2>
 <p>temperature, top_k, top_p 3者相關性：</p>
 <ul>
 <li>temperature：擷取 prompt 中的 token。</li>
@@ -467,6 +459,14 @@ MESSAGE assistant yes
 <li>top_p：從 tokens 里按百分比選擇候選詞。</li>
 <li>順序：temperature 整體參數取樣 =&gt; top_k 取樣前n個重新賦予權重排名 =&gt; top_p 取前 n% 來使用</li>
 </ul>
+<h2 id="reference">Reference</h2>
+<p>翻譯與找資料：perplexity.ai and phind.ai <br>
+<a href="https://www.53ai.com/news/qianyanjishu/772.html">基于Ollama定制自己的大语言模型 - 53ai</a></p>
+<p><a href="https://www.53ai.com/news/qianyanjishu/1203.html">上百大语言模型快速部署调用工具 Ollama使用指南</a></p>
+<p><a href="https://github.com/b1ip/ollama_modelfile_template/blob/main/Modelfile">Ollama GitHub - Modefile</a></p>
+<p><a href="https://github.com/ollama/ollama/blob/main/docs/modelfile.md">Ollama GitHub - Modefile</a></p>
+<p><a href="https://github.com/ollama/ollama/blob/main/docs/import.md">Ollama GitHub - import</a>
+<a href="https://zhuanlan.zhihu.com/p/690214323">自定义大型语言模型-使用OLLAMA和Modelfile定制、运行和保存LLM - 知乎</a></p>
 <p>閱讀文章： <br>
 <a href="https://www.promptingguide.ai/research/llm-agents">promptingguide.ai</a></p>
 <p><a href="https://learnprompting.org/zh-tw/docs/basics/configuration_hyperparameters">learnprompting.org</a></p>

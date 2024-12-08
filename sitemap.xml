@@ -2,25 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://OKHand.org/tags/ai/</loc>
+    <lastmod>2024-12-05T23:56:27+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/categories/ai/</loc>
+    <lastmod>2024-12-05T23:56:27+08:00</lastmod>
+  </url><url>
     <loc>https://OKHand.org/categories/</loc>
-    <lastmod>2024-11-11T01:15:55+08:00</lastmod>
+    <lastmod>2024-12-05T23:56:27+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/post/hybrid-search/</loc>
+    <lastmod>2024-12-05T23:56:27+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/</loc>
+    <lastmod>2024-12-05T23:56:27+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/post/</loc>
+    <lastmod>2024-12-05T23:56:27+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/tags/rag/</loc>
+    <lastmod>2024-12-05T23:56:27+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/tags/</loc>
+    <lastmod>2024-12-05T23:56:27+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/tags/database/</loc>
+    <lastmod>2024-12-05T23:54:28+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/post/elastic/</loc>
+    <lastmod>2024-12-05T23:54:28+08:00</lastmod>
+  </url><url>
+    <loc>https://OKHand.org/tags/environment/</loc>
+    <lastmod>2024-12-05T23:54:28+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/categories/environment/</loc>
-    <lastmod>2024-11-11T01:15:55+08:00</lastmod>
+    <lastmod>2024-12-05T23:54:28+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/tags/gpu/</loc>
     <lastmod>2024-11-11T01:15:55+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/tags/nvidia/</loc>
-    <lastmod>2024-11-11T01:15:55+08:00</lastmod>
-  </url><url>
-    <loc>https://OKHand.org/</loc>
-    <lastmod>2024-11-11T01:15:55+08:00</lastmod>
-  </url><url>
-    <loc>https://OKHand.org/post/</loc>
-    <lastmod>2024-11-11T01:15:55+08:00</lastmod>
-  </url><url>
-    <loc>https://OKHand.org/tags/</loc>
     <lastmod>2024-11-11T01:15:55+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/post/nvdriver-rm/</loc>
@@ -41,17 +62,8 @@
     <loc>https://OKHand.org/post/pypi_proxy/</loc>
     <lastmod>2024-09-12T19:56:47+08:00</lastmod>
   </url><url>
-    <loc>https://OKHand.org/tags/environment/</loc>
-    <lastmod>2024-09-12T19:56:47+08:00</lastmod>
-  </url><url>
     <loc>https://OKHand.org/post/nvidia-a100_env/</loc>
     <lastmod>2024-09-11T21:23:33+08:00</lastmod>
-  </url><url>
-    <loc>https://OKHand.org/tags/ai/</loc>
-    <lastmod>2024-06-09T15:40:46+08:00</lastmod>
-  </url><url>
-    <loc>https://OKHand.org/categories/ai/</loc>
-    <lastmod>2024-06-09T15:40:46+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/post/langchain2rag/</loc>
     <lastmod>2024-06-09T15:40:46+08:00</lastmod>

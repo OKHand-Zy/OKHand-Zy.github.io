@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <script type="application/ld+json">
+
+{  
+  "@context":"http://schema.org",
+  "@type":"Website",
+  "@id":"https:\/\/OKHand.org\/",
+  "author": {
+    "@type": "Person",
+    "name": "OKH@nd",
+    
+    "image": "https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943"
+    
+  },
+  "name":"OKH@nd\u0027s Blog",
+  "description":"\u003cp\u003e想說都建立 Elastic 不試試看這 DB 的搜尋效果就不夠意思了吧，就有了這篇 Elastic 搜尋篇\u003c\/p\u003e",
+  "url":"https:\/\/OKHand.org\/post\/hybrid-search\/",
+  "keywords":"[AI, RAG, Embedding, Search]"
+}
+
+</script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.107.0 with theme Tranquilpeak 0.5.3-BETA">
+<meta name="author" content="OKH@nd">
+<meta name="keywords" content="AI, RAG, Embedding, Search">
+<meta name="description" content="想說都建立 Elastic 不試試看這 DB 的搜尋效果就不夠意思了吧，就有了這篇 Elastic 搜尋篇">
+
+
+<meta property="og:description" content="想說都建立 Elastic 不試試看這 DB 的搜尋效果就不夠意思了吧，就有了這篇 Elastic 搜尋篇">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hybrid Search">
+<meta name="twitter:title" content="Hybrid Search">
+<meta property="og:url" content="https://OKHand.org/post/hybrid-search/">
+<meta property="twitter:url" content="https://OKHand.org/post/hybrid-search/">
+<meta property="og:site_name" content="OKH@nd&#39;s Blog">
+<meta property="og:description" content="想說都建立 Elastic 不試試看這 DB 的搜尋效果就不夠意思了吧，就有了這篇 Elastic 搜尋篇">
+<meta name="twitter:description" content="想說都建立 Elastic 不試試看這 DB 的搜尋效果就不夠意思了吧，就有了這篇 Elastic 搜尋篇">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2024-12-05T23:56:27">
+  
+  
+    <meta property="article:modified_time" content="2024-12-05T23:56:27">
+  
+  
+  
+    
+      <meta property="article:section" content="AI">
+    
+  
+  
+    
+      <meta property="article:tag" content="AI">
+    
+      <meta property="article:tag" content="RAG">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=640">
+
+
+
+
+
+  <meta property="og:image" content="https://imgur.com/g0FL0AO.png">
+  <meta property="twitter:image" content="https://imgur.com/g0FL0AO.png">
+
+
+    <title>Hybrid Search</title>
+
+    <link rel="icon" href="https://OKHand.org/okhand.png">
+    
+
+    
+
+    <link rel="canonical" href="https://OKHand.org/post/hybrid-search/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    
+    <link rel="stylesheet" href="https://OKHand.org/css/style-h6ccsoet3mzkbb0wngshlfbaweimexgqcxj0h5hu4h82olsdzz6wmqdkajm.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://OKHand.org/" aria-label="Go to homepage">OKH@nd&#39;s Blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://OKHand.org/#about" aria-label="Open the link: /#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://OKHand.org/#about" aria-label="Read more about the author">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">OKH@nd</h4>
+        
+          <h5 class="sidebar-profile-bio">致力於用我的知識，嘗試去改變現今的教育及社會，讓世界變得更美好</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/" title="Home">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-home" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/categories" title="Categories">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-bookmark" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/tags" title="Tags">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-tags" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/archives" title="Archives">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-archive" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/about_me/" title="About">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-question" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/OKHand-Zy" target="_blank" rel="noopener" title="GitHub">
+    
+      <i class="sidebar-button-icon fab fa-lg fa-github" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://home.gamer.com.tw/homeindex.php?owner=Az7899603" target="_blank" rel="noopener" title="Gamer Forum">
+    
+      <i class="sidebar-button-icon fa fa-gamepad" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Gamer Forum</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=okhand.ziyu@gmail.com" target="_blank" rel="noopener" title="Gmail">
+    
+      <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Gmail</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/index.xml" title="RSS">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-rss" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" id="top">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title">
+      Hybrid Search
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time datetime="2024-12-05T23:56:27&#43;08:00">
+        
+  December 5, 2024
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://OKHand.org/categories/ai">AI</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown">
+            <div class="main-content-wrap">
+              <p>想說都建立 Elastic 不試試看這 DB 的搜尋效果就不夠意思了吧，就有了這篇 Elastic 搜尋篇</p>
+<p>上次我們建立好了一個基礎的 Elastic 環境，這部份就來試試如何添加資料進 Elastic 並搜尋出來。 <br>
+！！注意！！
+以下因為 Elastic 已關閉安全驗證，並且接是使用 Python 去作操作 \</p>
+<h2 id="normal-search">Normal Search</h2>
+<h3 id="寫入-data">寫入 Data</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#f92672">from</span> elasticsearch <span style="color:#f92672">import</span> Elasticsearch
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1. 連接到 Elasticsearch</span>
+</span></span><span style="display:flex;"><span>es <span style="color:#f92672">=</span> Elasticsearch(<span style="color:#e6db74">&#34;http://172.20.10.8:9200/&#34;</span>) <span style="color:#75715e"># 確保 Elasticsearch 在該位址運行</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. 建立索引</span>
+</span></span><span style="display:flex;"><span>index_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;defect_data&#34;</span>
+</span></span><span style="display:flex;"><span>mapping <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;mappings&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;properties&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;project&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;text&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;fields&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;keyword&#34;</span>: {<span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>}  <span style="color:#75715e"># 新增 keyword 類型</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;title&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;text&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;fields&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;keyword&#34;</span>: {<span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>}  <span style="color:#75715e"># 新增 keyword 類型</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;description&#34;</span>: {<span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;text&#34;</span>},
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;project_title&#34;</span>: {  <span style="color:#75715e"># 組合索引欄位</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> es<span style="color:#f92672">.</span>indices<span style="color:#f92672">.</span>exists(index<span style="color:#f92672">=</span>index_name):
+</span></span><span style="display:flex;"><span>    es<span style="color:#f92672">.</span>indices<span style="color:#f92672">.</span>create(index<span style="color:#f92672">=</span>index_name, body<span style="color:#f92672">=</span>mapping)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Index &#39;</span><span style="color:#e6db74">{</span>index_name<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39; created.&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3. 插入文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> key, value <span style="color:#f92672">in</span> data<span style="color:#f92672">.</span>items():
+</span></span><span style="display:flex;"><span>    title <span style="color:#f92672">=</span> key
+</span></span><span style="display:flex;"><span>    description <span style="color:#f92672">=</span> value
+</span></span><span style="display:flex;"><span>    document <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;project&#34;</span>: <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>project<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;title&#34;</span>: <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>title<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>description<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;project_title&#34;</span>: <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>project<span style="color:#e6db74">}</span><span style="color:#e6db74">|</span><span style="color:#e6db74">{</span>title<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>  <span style="color:#75715e"># 組合索引值</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 檢查是否在同一個 Project 下有相同的 Title</span>
+</span></span><span style="display:flex;"><span>    query <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;query&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;term&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;project_title&#34;</span>: <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>project<span style="color:#e6db74">}</span><span style="color:#e6db74">|</span><span style="color:#e6db74">{</span>title<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    search_response <span style="color:#f92672">=</span> es<span style="color:#f92672">.</span>search(index<span style="color:#f92672">=</span>index_name, body<span style="color:#f92672">=</span>query)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> search_response[<span style="color:#e6db74">&#34;hits&#34;</span>][<span style="color:#e6db74">&#34;total&#34;</span>][<span style="color:#e6db74">&#34;value&#34;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        response <span style="color:#f92672">=</span> es<span style="color:#f92672">.</span>index(index<span style="color:#f92672">=</span>index_name, body<span style="color:#f92672">=</span>document)
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Document inserted:&#34;</span>, response)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Document already exists. Skipping insert.&#34;</span>)
+</span></span></code></pre></div><h3 id="查詢">查詢</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#f92672">from</span> elasticsearch <span style="color:#f92672">import</span> Elasticsearch
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 1. 連接到 Elasticsearch</span>
+</span></span><span style="display:flex;"><span>es <span style="color:#f92672">=</span> Elasticsearch(<span style="color:#e6db74">&#34;http://0.0.0.0:9200/&#34;</span>) <span style="color:#75715e"># 確保 Elasticsearch 在該位址運行</span>
+</span></span><span style="display:flex;"><span>index_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;defect_data&#34;</span>
+</span></span><span style="display:flex;"><span>query <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;query&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;multi_match&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;query&#34;</span>: <span style="color:#e6db74">&#34;RM&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;fields&#34;</span>: [<span style="color:#e6db74">&#34;title&#34;</span>, <span style="color:#e6db74">&#34;description&#34;</span>]
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>search_response <span style="color:#f92672">=</span> es<span style="color:#f92672">.</span>search(index<span style="color:#f92672">=</span>index_name, body<span style="color:#f92672">=</span>query)
+</span></span><span style="display:flex;"><span>print(len(search_response[<span style="color:#e6db74">&#39;hits&#39;</span>][<span style="color:#e6db74">&#39;hits&#39;</span>]))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> hits <span style="color:#f92672">in</span> search_response[<span style="color:#e6db74">&#39;hits&#39;</span>][<span style="color:#e6db74">&#39;hits&#39;</span>]:
+</span></span><span style="display:flex;"><span>    print(hits)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;===================&#34;</span>)
+</span></span></code></pre></div><h2 id="hybrid-search">Hybrid Search</h2>
+<p>此方法是藉由外部啟動 LLM Embedding 所以不用搭建較多 Ram 的 Elastic</p>
+<h3 id="寫入-data-1">寫入 Data</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#f92672">from</span> elasticsearch <span style="color:#f92672">import</span> Elasticsearch
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sentence_transformers <span style="color:#f92672">import</span> SentenceTransformer
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 初始化 Elasticsearch 客戶端</span>
+</span></span><span style="display:flex;"><span>es <span style="color:#f92672">=</span> Elasticsearch(<span style="color:#e6db74">&#34;http://0.0.0.0:9200&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> SentenceTransformer(<span style="color:#e6db74">&#34;Alibaba-NLP/gte-Qwen2-1.5B-instruct&#34;</span>, trust_remote_code<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># In case you want to reduce the maximum length:</span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>max_seq_length <span style="color:#f92672">=</span> <span style="color:#ae81ff">131072</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_embedding</span>(text):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 使用 SentenceTransformer 直接生成嵌入</span>
+</span></span><span style="display:flex;"><span>    embedding <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>encode(text, convert_to_numpy<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 如果需要轉換為列表，使用 tolist()</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> embedding<span style="color:#f92672">.</span>tolist()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 定義索引結構，包含 kNN 向量欄位</span>
+</span></span><span style="display:flex;"><span>index_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;defect_embed_data&#34;</span>
+</span></span><span style="display:flex;"><span>index_mapping <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;mappings&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;properties&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;project&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;text&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;fields&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;keyword&#34;</span>: {<span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>}  <span style="color:#75715e"># 保留 keyword 用於精確查詢</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;title&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;text&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;fields&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;keyword&#34;</span>: {<span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>}  <span style="color:#75715e"># 保留 keyword 用於精確查詢</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;description&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;text&#34;</span>  <span style="color:#75715e"># 保留 description 作為全文檢索用</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;project_title&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;keyword&#34;</span>  <span style="color:#75715e"># 用於組合索引查詢</span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;embedding&#34;</span>: {  <span style="color:#75715e"># 新增 embedding 欄位</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;dense_vector&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;dims&#34;</span>: <span style="color:#ae81ff">1536</span>,  <span style="color:#75715e"># 嵌入向量的維度，需與嵌入模型一致</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;similarity&#34;</span>: <span style="color:#e6db74">&#34;cosine&#34;</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 建立索引</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> es<span style="color:#f92672">.</span>indices<span style="color:#f92672">.</span>exists(index<span style="color:#f92672">=</span>index_name):
+</span></span><span style="display:flex;"><span>    es<span style="color:#f92672">.</span>indices<span style="color:#f92672">.</span>create(index<span style="color:#f92672">=</span>index_name, body<span style="color:#f92672">=</span>index_mapping)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;project&#34;</span>: <span style="color:#e6db74">&#34;Login System&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;title&#34;</span>: <span style="color:#e6db74">&#34;Fix login timeout issue&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Users are experiencing timeouts when logging in.&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;project_title&#34;</span>: <span style="color:#e6db74">&#34;Login System - Fix login timeout issue&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;project&#34;</span>: <span style="color:#e6db74">&#34;Database&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;title&#34;</span>: <span style="color:#e6db74">&#34;Database connection failure&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Database connection intermittently fails.&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;project_title&#34;</span>: <span style="color:#e6db74">&#34;Database - Connection failure&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;project&#34;</span>: <span style="color:#e6db74">&#34;UI&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;title&#34;</span>: <span style="color:#e6db74">&#34;UI layout breaks on small screens&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Responsive design issue causing layout to break.&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;project_title&#34;</span>: <span style="color:#e6db74">&#34;UI - Layout issue on small screens&#34;</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 匯入資料到 Elasticsearch</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> record <span style="color:#f92672">in</span> data:
+</span></span><span style="display:flex;"><span>    embedding <span style="color:#f92672">=</span> generate_embedding(record[<span style="color:#e6db74">&#34;title&#34;</span>])  <span style="color:#75715e"># 生成嵌入向量</span>
+</span></span><span style="display:flex;"><span>    record[<span style="color:#e6db74">&#34;embedding&#34;</span>] <span style="color:#f92672">=</span> embedding  <span style="color:#75715e"># 加入嵌入</span>
+</span></span><span style="display:flex;"><span>    es<span style="color:#f92672">.</span>index(index<span style="color:#f92672">=</span>index_name, body<span style="color:#f92672">=</span>record)  <span style="color:#75715e"># 匯入到 Elasticsearch</span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;資料匯入完成&#34;</span>)
+</span></span></code></pre></div><h3 id="向量查詢">向量查詢</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#75715e"># 查詢標題</span>
+</span></span><span style="display:flex;"><span>query_title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Timeout during login&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 生成查詢向量</span>
+</span></span><span style="display:flex;"><span>query_vector <span style="color:#f92672">=</span> generate_embedding(query_title)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># kNN 搜尋</span>
+</span></span><span style="display:flex;"><span>knn_query <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;size&#34;</span>: <span style="color:#ae81ff">5</span>,  <span style="color:#75715e"># 返回最相似的 5 筆結果</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;knn&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;field&#34;</span>: <span style="color:#e6db74">&#34;embedding&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;query_vector&#34;</span>: query_vector,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;k&#34;</span>: <span style="color:#ae81ff">10</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;num_candidates&#34;</span>: <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;_source&#34;</span>: [<span style="color:#e6db74">&#34;title&#34;</span>, <span style="color:#e6db74">&#34;description&#34;</span>]  <span style="color:#75715e"># 指定返回的欄位</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 執行查詢</span>
+</span></span><span style="display:flex;"><span>response <span style="color:#f92672">=</span> es<span style="color:#f92672">.</span>search(index<span style="color:#f92672">=</span>index_name, body<span style="color:#f92672">=</span>knn_query)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 顯示結果</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> hit <span style="color:#f92672">in</span> response[<span style="color:#e6db74">&#34;hits&#34;</span>][<span style="color:#e6db74">&#34;hits&#34;</span>]:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Title: </span><span style="color:#e6db74">{</span>hit[<span style="color:#e6db74">&#39;_source&#39;</span>][<span style="color:#e6db74">&#39;title&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">, Score: </span><span style="color:#e6db74">{</span>hit[<span style="color:#e6db74">&#39;_score&#39;</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><h3 id="hybrid-search-1">Hybrid Search</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#75715e"># 構建 Hybrid 查詢</span>
+</span></span><span style="display:flex;"><span>query_text <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Troubleshooting login issues&#34;</span>
+</span></span><span style="display:flex;"><span>query_vector <span style="color:#f92672">=</span> generate_embedding(query_text)  <span style="color:#75715e"># 生成查詢向量</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>hybrid_query <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;size&#34;</span>: <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;_source&#34;</span>: [<span style="color:#e6db74">&#34;title&#34;</span>, <span style="color:#e6db74">&#34;description&#34;</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;query&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;bool&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;should&#34;</span>: [
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;match&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;title&#34;</span>: {
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;query&#34;</span>: query_title,
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;boost&#34;</span>: <span style="color:#ae81ff">1.5</span>  <span style="color:#75715e"># 可選：提高標題匹配的權重</span>
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;match&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;description&#34;</span>: {
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;query&#34;</span>: query_title,
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;boost&#34;</span>: <span style="color:#ae81ff">1.0</span>
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;script_score&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;query&#34;</span>: {
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;exists&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                <span style="color:#e6db74">&#34;field&#34;</span>: <span style="color:#e6db74">&#34;embedding&#34;</span>  <span style="color:#75715e"># 確保文檔有 embedding 欄位</span>
+</span></span><span style="display:flex;"><span>                            }
+</span></span><span style="display:flex;"><span>                        },
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;script&#34;</span>: {
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;source&#34;</span>: <span style="color:#e6db74">&#34;cosineSimilarity(params.query_vector, &#39;embedding&#39;) + 1.0&#34;</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;params&#34;</span>: {
+</span></span><span style="display:flex;"><span>                                <span style="color:#e6db74">&#34;query_vector&#34;</span>: query_vector
+</span></span><span style="display:flex;"><span>                            }
+</span></span><span style="display:flex;"><span>                        },
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;boost&#34;</span>: <span style="color:#ae81ff">0.5</span>  <span style="color:#75715e"># 向量相似性的權重</span>
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;minimum_should_match&#34;</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>補充： <br>
+如果是要對全文件向量搜尋 script_score 可以改成以下</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#75715e"># 匹配所有文檔的查詢</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;script_score&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;query&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;match_all&#34;</span>: {}
+</span></span><span style="display:flex;"><span>    },
+</span></span></code></pre></div><p>總結：</p>
+<ul>
+<li>普通搜尋： <br>
+Elastic 先把句子把你的字詞記下地理位置，之後搜尋時依照你輸入的詞彙去對應地址去搜尋大致相對應地理位置的DB中的句子，並使用 BM25 方式區對你的句子去搜尋，依照出現的頻率去計算平均出現機率。</li>
+<li>向量搜尋： <br>
+是依照句子轉換成向量之後去使用 歐氏距離 與 餘弦相似度 去搜尋相似度。</li>
+<li>混合搜尋： <br>
+透過你設定普通搜尋會有分數，向量搜尋也會有分數，之後透過 script_score 的計算方式去計算出你的混合分數。</li>
+</ul>
+<h2 id="reference">Reference</h2>
+<p><a href="https://elastic.dev.org.tw/guide/en/elasticsearch/reference/current/dense-vector.html#index-vectors-knn-search">密集向量欄位類型 - elastic 中文</a></p>
+              
+
+
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/ai/">AI</a>
+
+  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/rag/">RAG</a>
+
+                  </div>
+                
+              
+            
+            
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/elastic/" data-tooltip="Elastic" aria-label="PREVIOUS: Elastic">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/hybrid-search/" title="Share on Facebook" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/hybrid-search/" title="Share on Twitter" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/hybrid-search/" title="Share on Linkedin" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="Back to top">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+            
+  
+    <script src="https://giscus.app/client.js"
+      data-repo="OKHand-zy/web-giscus"
+      data-repo-id="R_kgDOJiGm_w"
+      data-category="Announcements"
+      data-category-id="DIC_kwDOJiGm_84CWb2E"
+      data-mapping="title"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="light_high_contrast"
+      data-lang="zh-TW"
+      crossorigin="anonymous"
+      async>
+    </script>
+  
+
+
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2024 OKH@nd. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/elastic/" data-tooltip="Elastic" aria-label="PREVIOUS: Elastic">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/hybrid-search/" title="Share on Facebook" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/hybrid-search/" title="Share on Twitter" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/hybrid-search/" title="Share on Linkedin" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="Back to top">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+      </div>
+      
+<div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-times"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2FOKHand.org%2Fpost%2Fhybrid-search%2F" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2FOKHand.org%2Fpost%2Fhybrid-search%2F" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2FOKHand.org%2Fpost%2Fhybrid-search%2F" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i><span>Share on Linkedin</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
+
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-times"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">OKH@nd</h4>
+    
+      <div id="about-card-bio">致力於用我的知識，嘗試去改變現今的教育及社會，讓世界變得更美好</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Automation Developer Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker-alt"></i>
+        <br/>
+        Taiwan
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://OKHand.org/images/nasa.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script src="https://OKHand.org/js/script-yqzy9wdlzix4lbbwdnzvwx3egsne77earqmn73v9uno8aupuph8wfguccut.min.js"></script>
+
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-gE8KAQyFIzV1C9+GZ8TKJHZS2s+n7EjNtC+IMRn1l5+WYJTHOODUM6JSjZhFhqXmc7bG8Av6XXpckA4tYhflnw==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/apache.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-EWROca+bote+7Oaaar1F6y74iZj1r1F9rm/ly7o+/FwJopbBaWtsFDmaKoZDd3QiGU2pGacBirHJNivmGLYrow==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/go.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-GDVzAn0wpx1yVtQsRWmFc6PhJiLBPdUic+h4GWgljBh904O3JU10fk9EKNpVyIoPqkFn54rgL2QBG4BmUTMpiQ==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/http.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-UgZlma8NzkrDb/NWgmLIcTrH7i/CSnLLDRFqCSNF5NGPpjKmzyM25qcoXGOup8+cDakKyaiTDd7N4dyH4YT+IA==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/less.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-lot9koe73sfXIrUvIPM/UEhuMciN56RPyBdOyZgfO53P2lkWyyXN7J+njcxIIBRV+nVDQeiWtiXg+bLAJZDTfg==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/nginx.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-Zd3e7XxHP00TD0Imr0PIfeM0fl0v95kMWuhyAS3Wn1UTSXTkz0OhtRgBAr4JlmADRgiXr4x7lpeUdqaGN8xIog==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/puppet.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-qtqDO052iXMSP+5d/aE/jMtL9vIIGvONgTJziC2K/ZIB1yEGa55WVxGE9/08rSQ62EoDifS9SWVGZ7ihSLhzMA==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/scss.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-1NmkjnEDnwwwcu28KoQF8vs3oaPFokQHbmbtwGhFfeDsQZtVFI8zW2aE9O8yMYdpdyKV/5blE4pSWw4Z/Sv97w==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/stylus.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-B2wSfruPjr8EJL6IIzQr1eAuDwrsfIfccNf/LCEdxELCgC/S/ZMt/Uvk80aD79m7IqOqW+Sw8nbkvha20yZpzg==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/swift.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-28oDiQZGKUVN6wQ7PSLPNipOcmkCALXKwOi7bnkyFf8QiMZQxG9EQoy/iiNx6Zxj2cG2SbVa4dXKigQhu7GiFw==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/yaml.min.js"></script>
+  
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+
+
+    
+  </body>
+</html>
+
