@@ -326,7 +326,7 @@
 </span></span><span style="display:flex;"><span>      Learn more at https://docs.docker.com/go/debug-cli/
 </span></span></code></pre></div></li>
 <li>Step4. docker run kibana (GUI Web)
-這邊建立一個官方用來方便管理 Elastic 的 GUI Web Kibana \
+這邊建立一個官方用來方便管理 Elastic 的 GUI Web Kibana
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Shell" data-lang="Shell"><span style="display:flex;"><span>docker run -d --name kibana --net elastic -p 5601:5601 docker.elastic.co/kibana/kibana:8.16.1
 </span></span></code></pre></div>之後我們就能到 http://0.0.0.0:5601 看到 Kibana Web
 一樣如果有啟用 security feature 情況下首次登入Token</li>
@@ -399,7 +399,7 @@
 </span></span><span style="display:flex;"><span>  elasticsearch.hosts: <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;http://elasticsearch:9200&#34;</span> <span style="color:#f92672">]</span>
 </span></span><span style="display:flex;"><span>  monitoring.ui.container.elasticsearch.enabled: true
 </span></span><span style="display:flex;"><span>  root@7bf3cda51529:/usr/share/kibana/config#
-</span></span></code></pre></div>補充： \
+</span></span></code></pre></div>補充：
 <ul>
 <li>elasticsearch.hosts: [ &ldquo;http://elasticsearch:9200&rdquo; ] 這邊的 elasticsearch 是依照你的 elastic 的 container 名去修改(這是因為 DNS指向的關係) , 並且注意要是 http 開頭</li>
 </ul>
@@ -518,7 +518,7 @@
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2024 OKH@nd. All Rights Reserved
+    &copy; 2025 OKH@nd. All Rights Reserved
   </span>
 </footer>
 

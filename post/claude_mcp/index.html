@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <script type="application/ld+json">
+
+{  
+  "@context":"http://schema.org",
+  "@type":"Website",
+  "@id":"https:\/\/OKHand.org\/",
+  "author": {
+    "@type": "Person",
+    "name": "OKH@nd",
+    
+    "image": "https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943"
+    
+  },
+  "name":"OKH@nd\u0027s Blog",
+  "description":"\u003cp\u003eClaude Model Context Protocol(MCP)，在 Windows 環境中 Step By Step 安裝步驟！\u003c\/p\u003e",
+  "url":"https:\/\/OKHand.org\/post\/claude_mcp\/",
+  "keywords":"[AI, Claude, MCP]"
+}
+
+</script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.107.0 with theme Tranquilpeak 0.5.3-BETA">
+<meta name="author" content="OKH@nd">
+<meta name="keywords" content="AI, Claude, MCP">
+<meta name="description" content="Claude Model Context Protocol(MCP)，在 Windows 環境中 Step By Step 安裝步驟！">
+
+
+<meta property="og:description" content="Claude Model Context Protocol(MCP)，在 Windows 環境中 Step By Step 安裝步驟！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Claude MCP">
+<meta name="twitter:title" content="Claude MCP">
+<meta property="og:url" content="https://OKHand.org/post/claude_mcp/">
+<meta property="twitter:url" content="https://OKHand.org/post/claude_mcp/">
+<meta property="og:site_name" content="OKH@nd&#39;s Blog">
+<meta property="og:description" content="Claude Model Context Protocol(MCP)，在 Windows 環境中 Step By Step 安裝步驟！">
+<meta name="twitter:description" content="Claude Model Context Protocol(MCP)，在 Windows 環境中 Step By Step 安裝步驟！">
+<meta property="og:locale" content="en-us">
+
+  
+    <meta property="article:published_time" content="2025-01-26T15:23:05">
+  
+  
+    <meta property="article:modified_time" content="2025-01-26T15:23:05">
+  
+  
+  
+    
+      <meta property="article:section" content="AI">
+    
+  
+  
+    
+      <meta property="article:tag" content="AI">
+    
+      <meta property="article:tag" content="Claude">
+    
+      <meta property="article:tag" content="MCP">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=640">
+
+
+
+
+
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/182288589?s=200&v=4.png">
+  <meta property="twitter:image" content="https://avatars.githubusercontent.com/u/182288589?s=200&v=4.png">
+
+
+    <title>Claude MCP</title>
+
+    <link rel="icon" href="https://OKHand.org/okhand.png">
+    
+
+    
+
+    <link rel="canonical" href="https://OKHand.org/post/claude_mcp/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    
+    <link rel="stylesheet" href="https://OKHand.org/css/style-h6ccsoet3mzkbb0wngshlfbaweimexgqcxj0h5hu4h82olsdzz6wmqdkajm.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://OKHand.org/" aria-label="Go to homepage">OKH@nd&#39;s Blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://OKHand.org/#about" aria-label="Open the link: /#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=90" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://OKHand.org/#about" aria-label="Read more about the author">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=110" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">OKH@nd</h4>
+        
+          <h5 class="sidebar-profile-bio">致力於用我的知識，嘗試去改變現今的教育及社會，讓世界變得更美好</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/" title="Home">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-home" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/categories" title="Categories">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-bookmark" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/tags" title="Tags">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-tags" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/archives" title="Archives">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-archive" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/about_me/" title="About">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-question" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/OKHand-Zy" target="_blank" rel="noopener" title="GitHub">
+    
+      <i class="sidebar-button-icon fab fa-lg fa-github" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://home.gamer.com.tw/homeindex.php?owner=Az7899603" target="_blank" rel="noopener" title="Gamer Forum">
+    
+      <i class="sidebar-button-icon fa fa-gamepad" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Gamer Forum</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=okhand.ziyu@gmail.com" target="_blank" rel="noopener" title="Gmail">
+    
+      <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">Gmail</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://OKHand.org/index.xml" title="RSS">
+    
+      <i class="sidebar-button-icon fas fa-lg fa-rss" aria-hidden="true"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" id="top">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title">
+      Claude MCP
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time datetime="2025-01-26T15:23:05&#43;08:00">
+        
+  January 26, 2025
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="https://OKHand.org/categories/ai">AI</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown">
+            <div class="main-content-wrap">
+              <p>Claude Model Context Protocol(MCP)，在 Windows 環境中 Step By Step 安裝步驟！</p>
+<h2 id="環境確認">環境確認：</h2>
+<ol>
+<li>
+<p>Enable Develop Mode
+Claude Desktop 左上角選項 -&gt; Help -&gt; Enable Develop Mode
+<img src="https://imgur.com/TxFMZDk.png" alt="Enable Develop Mode"> <br>
+按 Enable
+<img src="https://imgur.com/A6FFwYA.png" alt="Imgur"> <br>
+之後重啟就能在看到
+左上角選項 -&gt; Developer -&gt; Open MCP Log File</p>
+</li>
+<li>
+<p>確認 Node.js and Python Env</p>
+<ul>
+<li>
+<p>版本要求：</p>
+<ul>
+<li>Node.js &gt;= 18</li>
+<li>Python &gt;= 3.10</li>
+</ul>
+</li>
+<li>
+<p>Node：</p>
+<ul>
+<li>install node.js or npm</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Check Version Command</span>
+</span></span><span style="display:flex;"><span>node --version
+</span></span><span style="display:flex;"><span>or
+</span></span><span style="display:flex;"><span>npm --version
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Check root Path Command</span>
+</span></span><span style="display:flex;"><span>where node
+</span></span><span style="display:flex;"><span>or
+</span></span><span style="display:flex;"><span>npm root -g
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Record the paths returned by the last two commands - you&#39;ll need them later</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Ex: C:\Users\&lt;UserName&gt;\AppData\Roaming\npm\node_modules</span>
+</span></span></code></pre></div><ul>
+<li>Python：
+<ul>
+<li>install python&gt;=3.10 and &ldquo;Add Python to PATH&rdquo;</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># PowerShell or Cmd</span>
+</span></span><span style="display:flex;"><span>➜ python -V
+</span></span><span style="display:flex;"><span>Python 3.12.8
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="install-package-managers">Install Package Managers</h2>
+<p>Open Command Prompt (CMD) as administrator and run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># For Python-based servers</span>
+</span></span><span style="display:flex;"><span>npm install -g uv
+</span></span></code></pre></div><p><img src="https://imgur.com/gXddoWg.png" alt="uv_install"></p>
+<h2 id="install-mcp-servers">Install MCP Servers</h2>
+<ul>
+<li>
+<p>Global NPM Installation (Recommended for getting started)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Install core servers globally</span>
+</span></span><span style="display:flex;"><span>npm install -g @modelcontextprotocol/server-filesystem
+</span></span><span style="display:flex;"><span>npm install -g @modelcontextprotocol/server-memory
+</span></span><span style="display:flex;"><span>npm install -g @modelcontextprotocol/server-brave-search
+</span></span></code></pre></div></li>
+<li>
+<p>Python-based Servers</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Install the fetch server using pip</span>
+</span></span><span style="display:flex;"><span>pip install mcp-server-fetch
+</span></span></code></pre></div></li>
+<li>
+<p>Configure Claude Desktop</p>
+<ol>
+<li>
+<p>Claude 文件位置：<code>%AppData%\Claude Desktop\</code></p>
+</li>
+<li>
+<p>創建或修改 Claude Config 文件：<code>claude_desktop_config.json</code></p>
+</li>
+<li>
+<p>Config 使用以下 json 配置 (請自行替換成你環境中的 Node.js 或 npm 路徑):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;globalShortcut&#34;</span>: <span style="color:#e6db74">&#34;Ctrl+Space&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;mcpServers&#34;</span>: {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;sqlite&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;uvx&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;args&#34;</span>: [<span style="color:#e6db74">&#34;mcp-server-sqlite&#34;</span>, <span style="color:#e6db74">&#34;--db-path&#34;</span>, <span style="color:#e6db74">&#34;C:\\Users\\YourUsername\\test.db&#34;</span>]
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;filesystem&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;npx&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;args&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;-y&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;@modelcontextprotocol/server-filesystem&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;C:\\Users\\&lt;UserName&gt;\\Downloads&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;C:\\Users\\&lt;UserName&gt;\\Documents&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;C:\\Users\\&lt;UserName&gt;\\Desktop&#34;</span>
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;env&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;DEBUG&#34;</span>: <span style="color:#e6db74">&#34;*&#34;</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;memory&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;C:\\Program Files\\nodejs\\node.exe&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;args&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;C:\\Users\\&lt;UserName&gt;\\AppData\\Roaming\\npm\\node_modules\\@modelcontextprotocol\\server-memory\\dist\\index.js&#34;</span>
+</span></span><span style="display:flex;"><span>      ],
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;env&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;DEBUG&#34;</span>: <span style="color:#e6db74">&#34;*&#34;</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;mcp-installer&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;npx&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;args&#34;</span>: [
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;@anaisbetts/mcp-installer&#34;</span>
+</span></span><span style="display:flex;"><span>      ]
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+</li>
+<li>
+<p>補充：</p>
+<ul>
+<li>MCP安裝與資料設定好後重啟 Claude Desktop</li>
+<li>開進去因該就有顯示 MCP Tool</li>
+<li>因為我們還沒設定好 SQLite 所以會有 Error</li>
+<li>SQLite 我是用Docker架設所以等等會修改</li>
+<li>filesystem 裡的 args 中的 Path 是他能使用到的地方</li>
+<li>memory 中的 args 要設定成剛剛 node or npm 的 path 中的 model 位置</li>
+</ul>
+</li>
+</ul>
+<h3 id="sqlite---docker版">SQLite - Docker版</h3>
+<p><a href="https://github.com/modelcontextprotocol/servers/tree/main/src/sqlite">modelcontextprotocol/servers - sqlite · GitHub</a></p>
+<p>先把檔案下載下來並執行下列 command：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker build -t mcp/sqlite .
+</span></span><span style="display:flex;"><span>docker volume create claude_sqlite
+</span></span></code></pre></div><p>修改 claude_desktop_config.json：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#75715e">//claude_desktop_config.json
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#e6db74">&#34;mcpServers&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;sqlite&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;command&#34;</span>: <span style="color:#e6db74">&#34;docker&#34;</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;args&#34;</span>: [<span style="color:#e6db74">&#34;run&#34;</span>,<span style="color:#e6db74">&#34;--rm&#34;</span>,<span style="color:#e6db74">&#34;-i&#34;</span>,<span style="color:#e6db74">&#34;-v&#34;</span>,<span style="color:#e6db74">&#34;claude_sqlite:/mcp&#34;</span>,<span style="color:#e6db74">&#34;mcp/sqlite&#34;</span>,<span style="color:#e6db74">&#34;--db-path&#34;</span>,<span style="color:#e6db74">&#34;/mcp/claude_sqlite.db&#34;</span>]
+</span></span><span style="display:flex;"><span>      },
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><img src="https://imgur.com/d2Nm2h2.png" alt="SQLite-Docker"></p>
+<p>嘗試執行 Claude 使用 MCP： <br>
+嘗試叫他幫我找尋 D:\Project 底下有哪些專案的資料夾 <br>
+他會先跟你確認要用哪個 MCP Serve 並之後執行
+<img src="https://imgur.com/mcOg01C.png" alt="run-mcp">
+完美的找出 Project 下的資料夾有哪些！！
+<img src="https://imgur.com/vxjMDaH.png" alt="find_project"></p>
+<p>之後要使用別的套件基本上也是參照 MCP Server 安裝方式安裝即可使用！ <br>
+檢查 MCP Server 錯誤時可以透過 Developer 中的 Open MCP Log File 檢查 Log</p>
+<h2 id="reference">Reference</h2>
+<p><a href="https://gist.github.com/feveromo/7a340d7795fca1ccd535a5802b976e1f">MCP-Windows · GitHub</a></p>
+<p><a href="https://github.com/modelcontextprotocol/servers/tree/main">modelcontextprotocol/servers: Model Context Protocol Servers · GitHub</a></p>
+<p><a href="https://modelcontextprotocol.io/introduction">modelcontextprotocol.io</a></p>
+              
+
+
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/ai/">AI</a>
+
+  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/claude/">Claude</a>
+
+  <a class="tag tag--primary tag--small" href="https://OKHand.org/tags/mcp/">MCP</a>
+
+                  </div>
+                
+              
+            
+            
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/hybrid-search/" data-tooltip="Hybrid Search" aria-label="PREVIOUS: Hybrid Search">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/claude_mcp/" title="Share on Facebook" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/claude_mcp/" title="Share on Twitter" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/claude_mcp/" title="Share on Linkedin" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="Back to top">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+            
+  
+    <script src="https://giscus.app/client.js"
+      data-repo="OKHand-zy/web-giscus"
+      data-repo-id="R_kgDOJiGm_w"
+      data-category="Announcements"
+      data-category-id="DIC_kwDOJiGm_84CWb2E"
+      data-mapping="title"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="light_high_contrast"
+      data-lang="zh-TW"
+      crossorigin="anonymous"
+      async>
+    </script>
+  
+
+
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2025 OKH@nd. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        
+<div class="post-actions-wrap">
+  <nav >
+    <ul class="post-actions post-action-nav">
+      
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--disabled">
+          
+              <i class="fa fa-angle-left"></i>
+              <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+            </a>
+        </li>
+        <li class="post-action">
+          
+            <a class="post-action-btn btn btn--default tooltip--top" href="https://OKHand.org/post/hybrid-search/" data-tooltip="Hybrid Search" aria-label="PREVIOUS: Hybrid Search">
+          
+              <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+              <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+      
+    </ul>
+  </nav>
+<ul class="post-actions post-action-share" >
+  
+    <li class="post-action hide-lg hide-md hide-sm">
+      <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+      </a>
+    </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://OKHand.org/post/claude_mcp/" title="Share on Facebook" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://OKHand.org/post/claude_mcp/" title="Share on Twitter" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https://OKHand.org/post/claude_mcp/" title="Share on Linkedin" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    
+  
+  
+  <li class="post-action">
+    
+      <a class="post-action-btn btn btn--default" href="#top" aria-label="Back to top">
+      <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    
+    </a>
+  </li>
+</ul>
+</div>
+
+
+      </div>
+      
+<div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-times"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2FOKHand.org%2Fpost%2Fclaude_mcp%2F" aria-label="Share on Facebook">
+          <i class="fab fa-facebook-square" aria-hidden="true"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2FOKHand.org%2Fpost%2Fclaude_mcp%2F" aria-label="Share on Twitter">
+          <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2FOKHand.org%2Fpost%2Fclaude_mcp%2F" aria-label="Share on Linkedin">
+          <i class="fab fa-linkedin" aria-hidden="true"></i><span>Share on Linkedin</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
+
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-times"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/0a88f300e8a78663dc185b5f890b9943?s=110" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">OKH@nd</h4>
+    
+      <div id="about-card-bio">致力於用我的知識，嘗試去改變現今的教育及社會，讓世界變得更美好</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Automation Developer Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker-alt"></i>
+        <br/>
+        Taiwan
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://OKHand.org/images/nasa.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js" integrity="sha512-z+/WWfyD5tccCukM4VvONpEtLmbAm5LDu7eKiyMQJ9m7OfPEDL7gENyDRL3Yfe8XAuGsS2fS4xSMnl6d30kqGQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script src="https://OKHand.org/js/script-yqzy9wdlzix4lbbwdnzvwx3egsne77earqmn73v9uno8aupuph8wfguccut.min.js"></script>
+
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-gE8KAQyFIzV1C9+GZ8TKJHZS2s+n7EjNtC+IMRn1l5+WYJTHOODUM6JSjZhFhqXmc7bG8Av6XXpckA4tYhflnw==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/apache.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-EWROca+bote+7Oaaar1F6y74iZj1r1F9rm/ly7o+/FwJopbBaWtsFDmaKoZDd3QiGU2pGacBirHJNivmGLYrow==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/go.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-GDVzAn0wpx1yVtQsRWmFc6PhJiLBPdUic+h4GWgljBh904O3JU10fk9EKNpVyIoPqkFn54rgL2QBG4BmUTMpiQ==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/http.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-UgZlma8NzkrDb/NWgmLIcTrH7i/CSnLLDRFqCSNF5NGPpjKmzyM25qcoXGOup8+cDakKyaiTDd7N4dyH4YT+IA==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/less.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-lot9koe73sfXIrUvIPM/UEhuMciN56RPyBdOyZgfO53P2lkWyyXN7J+njcxIIBRV+nVDQeiWtiXg+bLAJZDTfg==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/nginx.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-Zd3e7XxHP00TD0Imr0PIfeM0fl0v95kMWuhyAS3Wn1UTSXTkz0OhtRgBAr4JlmADRgiXr4x7lpeUdqaGN8xIog==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/puppet.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-qtqDO052iXMSP+5d/aE/jMtL9vIIGvONgTJziC2K/ZIB1yEGa55WVxGE9/08rSQ62EoDifS9SWVGZ7ihSLhzMA==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/scss.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-1NmkjnEDnwwwcu28KoQF8vs3oaPFokQHbmbtwGhFfeDsQZtVFI8zW2aE9O8yMYdpdyKV/5blE4pSWw4Z/Sv97w==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/stylus.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-B2wSfruPjr8EJL6IIzQr1eAuDwrsfIfccNf/LCEdxELCgC/S/ZMt/Uvk80aD79m7IqOqW+Sw8nbkvha20yZpzg==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/swift.min.js"></script>
+  
+
+  
+    <script async crossorigin="anonymous" defer integrity="sha512-28oDiQZGKUVN6wQ7PSLPNipOcmkCALXKwOi7bnkyFf8QiMZQxG9EQoy/iiNx6Zxj2cG2SbVa4dXKigQhu7GiFw==" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/languages/yaml.min.js"></script>
+  
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+
+
+    
+  </body>
+</html>
+
