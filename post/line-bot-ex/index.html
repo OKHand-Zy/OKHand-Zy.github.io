@@ -80,8 +80,8 @@
 
 
 
-  <meta property="og:image" content="https://imgur.com/OiYgKZ8.png">
-  <meta property="twitter:image" content="https://imgur.com/OiYgKZ8.png">
+  <meta property="og:image" content="https://image.okhand.org/line-bot-ex/flyio_icon.webp">
+  <meta property="twitter:image" content="https://image.okhand.org/line-bot-ex/flyio_icon.webp">
 
 
     <title>Line Notify 搬家計畫</title>
@@ -295,37 +295,46 @@
 進去就先創建帳號然後綁個信用卡，我看一些文章之前好像不用綁信用卡不知道是不是現在因為太多免費仔所以要綁了？ <br>
 他現在知道很多人要從 Heroku 轉出來所以有出這 Turbocharge Your Heroku App with Fly <br>
 我看文件因該是，按一按就能把 Heroku 上的資料轉移到 Fly.io 上去運行之後你只要在 Heroku 那邊修改這邊好像會自動同步過來？
-<img src="https://imgur.com/wex4xfd.png" alt="Heroku_sync_fly.io">
+<img src="https://image.okhand.org/line-bot-ex/Heroku_sync_flyio.webp" alt="Heroku_sync_fly.io">
 因為我覺得之後還要從 Heroku 那邊上傳很麻煩我就在 Fly.io 創一個一樣的專案就好了！ <br>
 我們要用 Fly.io 要先裝他的 Flyctl 去讓我們可以部署專案，我們可以透過<a href="https://fly.io/docs/hands-on/install-flyctl/">官方文章</a>去安裝</p>
 <ol>
-<li>先登入Fly.io =&gt; flyctl auth login</li>
-<li>先創一個資料夾並把我們資料放進去並在此資料夾下執行 Command
-<img src="https://imgur.com/11aoOJl.png" alt="fly.io_folder">
-我們可以看到 fly.toml 是我們沒有的其他都是我們原本就有的，沒關西因為等等創建專案時 flyctl 會幫你補上。</li>
-<li>使用指令創建專案後並初次佈署
+<li>
+<p>先登入Fly.io =&gt; flyctl auth login</p>
+</li>
+<li>
+<p>先創一個資料夾並把我們資料放進去並在此資料夾下執行 Command
+<img src="https://image.okhand.org/line-bot-ex/flyio_folder.webp" alt="fly.io_folder">
+我們可以看到 fly.toml 是我們沒有的其他都是我們原本就有的，沒關西因為等等創建專案時 flyctl 會幫你補上。</p>
+</li>
+<li>
+<p>使用指令創建專案後並初次佈署</p>
 <ol>
 <li>創建專案指令：flyctl launch</li>
 <li>部署指令：fly deploy</li>
 </ol>
-</li>
-</ol>
 <p>過程看得懂英文因該都不難理解不懂就照我圖片做ㄅ。 <br>
-<img src="https://imgur.com/j2briUb.png" alt="flyctl_launch">
-比較要注意的是你如果需要用到他的 database 服務這邊請打 yes <br>
+<img src="https://image.okhand.org/line-bot-ex/flyctl_launch.webp" alt="flyctl_launch">
 ? Would you like to set up a Postgresql database now? <br>
-專案建立完我們就有fly.toml檔了裡面有紀錄你的一些專案設置跟名稱 <br>
-4. 接下來執行 fly deploy 基本上接下來他就會自動部屬了 <br>
+比較要注意的是你如果需要用到他的 database 服務這邊請打 yes <br>
+專案建立完我們就有fly.toml檔了裡面有紀錄你的一些專案設置跟名稱</p>
+</li>
+<li>
+<p>接下來執行 fly deploy 基本上接下來他就會自動部屬了 <br>
 部屬完我們就可以在 Dashboard 下看到我們的專案是不是很簡單啊！
-<img src="https://imgur.com/7k9qx98.png" alt="fly.io_Dashboard">
+<img src="https://image.okhand.org/line-bot-ex/flyio_Dashboard.webp" alt="fly.io_Dashboard">
 你因該部署完會說你的 Code 裡面有一些變數他沒辦法 get 到，但我們還沒設定完還記得之前 Heroku 有設定環境變數嗎？ <br>
-我們 Fly.io 也能設定 指令：<strong>fly secrets set  &lt;setting_name&gt; = &lt;your_input&gt;</strong> <br>
-每次設定完他都會重新部屬所以都會跑很長一條，設定完後基本上就能像之前一樣使用但記得 Line bot 跟 Line Notify 的 callback 網址要去修改喔！！</p>
+我們 Fly.io 也能設定 指令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>fly secrets set  &lt;setting_name&gt; = &lt;your_input&gt;
+</span></span></code></pre></div></li>
+</ol>
+<p>每次設定完他都會重新部屬所以都會跑很長一條，設定完後基本上就能像之前一樣使用但記得 Line bot 跟 Line Notify 的 callback 網址要去修改喔！！</p>
 <p>最後我要抱怨一下好像是很多人搬到這平台它 deploy 常常會沒辦法正常 deploy 上去，還要看運氣，我第一天用基本上完全無法完整的部署上去我是到隔天早上再試一次才行的。還在想是否要換到別的平台是還是在等等看這平台能不能解決，不過至少這平台的論壇是很多人的而且回的也很快有興趣可以看看有沒有人遇到一樣的問題！ <br>
 有問題或有不懂的可以私訊或留言給我，我有空就會看唷！！</p>
 <h3 id="updateline-宣布將於-2025-年-3-月-31-日結束-line-notify-服務">Update：LINE 宣布將於 2025 年 3 月 31 日結束 LINE Notify 服務。</h3>
 <p>目前我是先把通知服務串在 Discord 上，看了一下比較有機會取代的因該是使用 Telegram Bot + Google App Script 取代。 <br>
-有興趣可以看這系列文章：<a href="https://ithelp.ithome.com.tw/users/20130283/ironman/3553">利用Google App Script 實作Telegram Bot 系列 - iT邦幫忙</a></p>
+有興趣可以看這系列文章：
+<a href="https://ithelp.ithome.com.tw/users/20130283/ironman/3553">利用Google App Script 實作Telegram Bot 系列 - iT邦幫忙</a></p>
 <h2 id="reference">Reference</h2>
 <p>平台參考： <br>
 <a href="https://blog.back4app.com/top-10-heroku-alternatives/">Top 10 Alternatives to Heroku in 2022</a> <br>
