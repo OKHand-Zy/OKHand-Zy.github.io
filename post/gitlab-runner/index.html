@@ -78,8 +78,8 @@
 
 
 
-  <meta property="og:image" content="https://imgur.com/eFgK5Kj.png">
-  <meta property="twitter:image" content="https://imgur.com/eFgK5Kj.png">
+  <meta property="og:image" content="https://image.okhand.org/gitlab-runner/gitlab-runner-icon.webp">
+  <meta property="twitter:image" content="https://image.okhand.org/gitlab-runner/gitlab-runner-icon.webp">
 
 
     <title>Gitlab Runner</title>
@@ -288,7 +288,7 @@
             <div class="main-content-wrap">
               <p>本文講述 Gitlab Runner 的各種類別與建立使用方法!!</p>
 <p>GitLab CI/CD 的 Runner 是藉由另一台電腦去執行 CI/CD 動作完後再回傳給 GitLab 資訊
-<img src="https://imgur.com/qhtaCY2.png" alt="gitlab-runner">
+<img src="https://image.okhand.org/gitlab-runner/gitlab-runner.webp" alt="gitlab-runner">
 自架 Gitlab 要使用到 Gitlab CI/CD 功能需安裝 Git-runner 到一台 Server or Container 下去做使用
 <a href="https://docs.gitlab.com/runner/install/">Install GitLab Runner | GitLab</a> <br>
 Gitlab Runner 有三種不同的權限 :</p>
@@ -307,34 +307,34 @@ Register an instance runner -&gt; Show runner installation and registration inst
 <pre tabindex="0"><code>Ex:(windows)
 .\gitlab-runner.exe register --url &lt;GitLab_Url&gt; --registration-token &lt;admin_registration_token&gt;
 </code></pre><p>有看到以下代表成功
-<img src="https://imgur.com/RwKJEVO.png" alt="admin">
+<img src="https://image.okhand.org/gitlab-runner/admin.webp" alt="admin">
 現在你創新的專案都可以看到這個 Runner
-<img src="https://imgur.com/PtaxYsc.png" alt="p-admin.png"></p>
+<img src="https://image.okhand.org/gitlab-runner/p-admin.webp" alt="p-admin"></p>
 </li>
 <li>
 <p><strong>Group runners (這邊建立的是 Group 下所有的 Projects 皆可使用這個 runner)</strong>
-<img src="https://imgur.com/KxvZeSM.png" alt="g-runner.png">
+<img src="https://image.okhand.org/gitlab-runner/g-runner.webp" alt="g-runner">
 Select your group -&gt; CI/CD -&gt; Runners -&gt;
 Register an instance runner -&gt; Show runner installation and registration instuctions <br>
 到你安裝 GitLab runner 的地方照著 Command to register runner 執行 \</p>
 <pre tabindex="0"><code>Ex:(windows)
 .\gitlab-runner.exe register --url &lt;GitLab_Url&gt; --registration-token &lt;admin_registration_token&gt;
 </code></pre><p>有看到以下代表成功
-<img src="https://imgur.com/8rWWiwi.png" alt="g-runner-1.png">
+<img src="https://image.okhand.org/gitlab-runner/g-runner-1.webp" alt="g-runner-1">
 現在你創新的專案都可以看到這個 Runner
-<img src="https://imgur.com/ZBmxSjP.png" alt="g-runner-2.png"></p>
+<img src="https://image.okhand.org/gitlab-runner/g-runner-2.webp" alt="g-runner-2"></p>
 </li>
 <li>
 <p><strong>Specific runners (專門給某個 Project 去做使用)</strong> <br>
 先到 project 下 CI/CD -&gt; Jobs -&gt;
 Creata CI/CD configuration file <br>
 之後你就能在你的 Project 下看到多了一個 <strong>.gitlab-ci.yml</strong> 這個就是用來跟 GitLab Runner 你這專案什麼時候會觸發 CI/CD 並且該做什麼動作等等&hellip;
-<img src="https://imgur.com/vTbnlgf.png" alt="0.png">
+<img src="https://image.okhand.org/gitlab-runner/CI-CD-Jobs.webp" alt="CI/CD-Jobs">
 在 Server 中安裝完 GitLab 之後到 Project -&gt; settings -&gt; CI/CD -&gt; Runners 跟著指令下就可以連結起 Gitlab Runner 跟 GitLab 兩者了
-<img src="https://imgur.com/MHXKCPr.png" alt="1.png">
-<img src="https://imgur.com/GE2gCr5.png" alt="2.png">
+<img src="https://image.okhand.org/gitlab-runner/p-runner-cnt.webp" alt="p-runner-cnt">
+<img src="https://image.okhand.org/gitlab-runner/p-runner-cli.webp" alt="p-runner-cli">
 連接好之後就能看到下面會有多一個 Assigned project runners 這樣就代表有連結成功了
-<img src="https://imgur.com/07rz4NA.png" alt="3.png"></p>
+<img src="https://image.okhand.org/gitlab-runner/cnt-success.webp" alt="cnt-success"></p>
 </li>
 </ol>
 <h2 id="register-連接說明-">register 連接說明 :</h2>
@@ -353,15 +353,15 @@ Enter an executor: virtualbox, docker-autoscaler, instance, kubernetes, custom, 
 <li>
 <p>無法執行沒有 Tag 的 CI/CD <br>
 先進到 Runner 設定
-<img src="https://imgur.com/63L384Z.png" alt="p1.png">
+<img src="https://image.okhand.org/gitlab-runner/edit-runner_1.webp" alt="edit-runner_1">
 Run untagged jobs 打勾
-<img src="https://imgur.com/8m9HiV1.png" alt="p2.png"></p>
+<img src="https://image.okhand.org/gitlab-runner/edit-runner_2.webp" alt="edit-runner_2"></p>
 </li>
 <li>
 <p>Runner 架在 Windows 無法順利執行 Runner <br>
 需修改 GitLab-Runner 資夾下的 config.toml 檔 <br>
 &ldquo;pwsh&rdquo; -&gt;  &ldquo;powershell&rdquo; <br>
-<img src="https://imgur.com/KR5boCj.png" alt="p3.png"></p>
+<img src="https://image.okhand.org/gitlab-runner/edit-runner_toml.webp" alt="edit-runner_toml"></p>
 </li>
 </ol>
 <h2 id="reference">Reference</h2>

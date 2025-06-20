@@ -80,8 +80,8 @@
 
 
 
-  <meta property="og:image" content="https://imgur.com/dU3wGA3.png">
-  <meta property="twitter:image" content="https://imgur.com/dU3wGA3.png">
+  <meta property="og:image" content="https://image.okhand.org/line-bot2/line-notify_icon.webp">
+  <meta property="twitter:image" content="https://image.okhand.org/line-bot2/line-notify_icon.webp">
 
 
     <title>Line Bot 之利用 Line Notify 突破限制吧！</title>
@@ -292,19 +292,19 @@
 <h1 id="前情提要">前情提要：</h1>
 <p>繼之前 <a href="https://okhand.org/post/line-bot1/">讓我們用Python開發一個LineBot</a> 這篇文，我們已經有了一個基本的 Line Bot，但是 Line 有對 Line Bot 有給免費仔們做一些限制(Ex：每個月主動發送訊息(push_message)只能發送500則訊息，回傳訊息(reply_message)不受限制)，那我們要如何突破他的上限呢？ <br>
 那就是利用有官方認證的 Line Notify 去幫我們發送訊息，因為是官方認證的帳號所以可以無限發送訊息重點是還免費啊！
-<img src="https://imgur.com/mKKKNlR.png" alt="Line_Bot_price"></p>
+<img src="https://image.okhand.org/line-bot2/Line_Bot_price.webp" alt="Line_Bot_price"></p>
 <h1 id="正題">正題：</h1>
 <p>建立個人 Line Notify： <br>
 我們要先去 <a href="https://notify-bot.line.me/zh_TW/">Line Notify</a> 去申請一個我們的 Line Notify ！ <br>
 登入之後 =&gt; 右上點你的 Account =&gt; 管理登入服務 =&gt; 下面的登入服務 =&gt; 創建你的 Line Notify <br>
 裡面有一個要注意的是 Callback URL 這個，這邊要填入你的 webhook 這樣之後他才能跟我們的程式去做互動。 <br>
 Ex: https://你的Heroku APP名字.herokuapp.com/callback/notify
-<img src="https://imgur.com/DTqT7FS.png" alt="Callback_URL"></p>
+<img src="https://image.okhand.org/line-bot2/Callback_URL.webp" alt="Callback_URL"></p>
 <h1 id="讓-line-bot-發送訊息讓使用者-跟-linenotify-綁定-">讓 Line Bot 發送訊息讓使用者 跟 LineNotify 綁定 ：</h1>
 <p>創造綁定的URL： <br>
 我們剛剛有了我們創好的 Line Notify，之後我們要叫使用者去綁定我們的 Line Notify 這樣之後才能對使用者發送訊息！ <br>
 在剛剛你創好的 Line Notify 裡看到 Client ID 與 Client Secret <br>
-<img src="https://imgur.com/87fhiha.png" alt="Client_ID&amp;Secret">
+<img src="https://image.okhand.org/line-bot2/Client_ID-Secret.webp" alt="Client_ID&amp;Secret">
 接下來就是用程式創造出我們的URL讓使用者去綁定！ \</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 創造URL程式碼：</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 這邊的 os.environ 就是把資料從 Heroku 的設定檔那邊找到並拿下來用，不知道整麼用的可以看上一篇</span>

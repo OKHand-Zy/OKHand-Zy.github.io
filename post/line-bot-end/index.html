@@ -80,8 +80,8 @@
 
 
 
-  <meta property="og:image" content="https://imgur.com/hfmLiZi.png">
-  <meta property="twitter:image" content="https://imgur.com/hfmLiZi.png">
+  <meta property="og:image" content="https://image.okhand.org/icon/OKHand.webp">
+  <meta property="twitter:image" content="https://image.okhand.org/icon/OKHand.webp">
 
 
     <title>Line Bot 懶人包 - 總結</title>
@@ -295,7 +295,7 @@
 <a href="https://okhand.org/post/line-bot2/">Line Bot 之利用 Line Notify 突破限制吧！</a> <br>
 <a href="https://okhand.org/post/line-bot3/">Line Notify 建立資料庫並提供不休息的服務</a></p>
 <p>我們要最後做出來的架構會是下圖這樣，會是 Line_Bot + Line_Notify + Heroku + GoogleSheet
-<img src="https://imgur.com/0xgyVOZ.png" alt="Program_Architecture_Diagram">
+<img src="https://image.okhand.org/line-bot-end/Program_Architecture_Diagram.webp" alt="Program_Architecture_Diagram">
 我們 Line Bot or Line Notify 等等&hellip;，這邊就可以參考前面的文章創出一個基本的 Line Bot + Notify 然後設定一下 Heroku 這邊就不在贅述。 <br>
 我們這邊的重點先放在理解整個 Line Bot 程式碼！！</p>
 <p>我們先從 route 這邊看</p>
@@ -314,7 +314,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;恭喜完成 LINE Notify 連動！請關閉此視窗。&#39;</span>
 </span></span></code></pre></div><p><strong>Q.</strong> 有些人會說這邊的 &ldquo;/callback/notify&rdquo; 用在哪裡？ <br>
 <strong>A.</strong> 會在 Notify 裡的設定看到，Web 後端接收到這個 URL 的 &ldquo;GET&rdquo; 之後去觸發
-<img src="https://imgur.com/DTqT7FS.png" alt="callback"></p>
+<img src="https://image.okhand.org/line-bot-end/callback.webp" alt="callback"></p>
 <p><strong>Q.</strong> 我該如何新增功能？ <br>
 <strong>A.</strong> 如果只是要新增利用文字去互動的功能的話只需要在下面增加就可以了</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Python" data-lang="Python"><span style="display:flex;"><span><span style="color:#a6e22e">@handler.add</span>(MessageEvent, message<span style="color:#f92672">=</span>TextMessage) <span style="color:#75715e"># 監聽當有新訊息時</span>
@@ -378,7 +378,7 @@
 </span></span><span style="display:flex;"><span>        print(key, value)
 </span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;戳一下&#34;</span>)
 </span></span></code></pre></div><p>接下來在排程器設定每天執行
-<img src="https://imgur.com/P2pmd6A.png" alt="Scheduler">
+<img src="https://image.okhand.org/line-bot-end/Scheduler.webp" alt="Scheduler">
 然後在動作的地方看要是直接執行python檔或是直接把命令寫成bat檔執行都可以摟！</p>
 <p>最後附上已經用好的模版GitHub： <br>
 <a href="https://github.com/OKHand-Zy/Line-Bot_Module">https://github.com/OKHand-Zy/Line-Bot_Module</a> <br>

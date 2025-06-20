@@ -76,8 +76,8 @@
 
 
 
-  <meta property="og:image" content="https://static.coderbridge.com/img/jerryeml/ad11f75c7f6a4cc6ae4478db0ffd05a6.png">
-  <meta property="twitter:image" content="https://static.coderbridge.com/img/jerryeml/ad11f75c7f6a4cc6ae4478db0ffd05a6.png">
+  <meta property="og:image" content="https://image.okhand.org/jenkins-build/Jenkins_Docker-cover.webp">
+  <meta property="twitter:image" content="https://image.okhand.org/jenkins-build/Jenkins_Docker-cover.webp">
 
 
     <title>Jenkins 環境搭建</title>
@@ -301,7 +301,7 @@ jenkins/jenkins  =&gt; container image 版本
 進container root身分進 bash =&gt; docker exec -u 0 -it &lt;container_id or name&gt; /bin/bash
 </code></pre><p>服務啟動好之後我們開啟網頁輸入 http://localhost:8080 就能看到 Jenkins 了！
 先初始化我們的密碼
-<img src="https://i.imgur.com/rCy1Nib.png" alt="Jenkins_getting_started"></p>
+<img src="https://image.okhand.org/jenkins-build/Jenkins_getting_started.webp" alt="Jenkins_getting_started"></p>
 <p>利用上面剛剛說的 command 就能進到container 底下之後輸入下面的 command 就可以看到初始化密碼了</p>
 <pre tabindex="0"><code>cat /var/jenkins_home/secrets/initialAdminPassword
 </code></pre><p>之後我們就能安裝想安裝的 pluging , 並設置我們的帳號密碼</p>

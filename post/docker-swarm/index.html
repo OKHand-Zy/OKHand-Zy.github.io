@@ -78,8 +78,8 @@
 
 
 
-  <meta property="og:image" content="https://raw.githubusercontent.com/docker-library/docs/471fa6e4cb58062ccbf91afc111980f9c7004981/swarm/logo.png">
-  <meta property="twitter:image" content="https://raw.githubusercontent.com/docker-library/docs/471fa6e4cb58062ccbf91afc111980f9c7004981/swarm/logo.png">
+  <meta property="og:image" content="https://image.okhand.org/docker-swarm/docker-swarm_logo.webp">
+  <meta property="twitter:image" content="https://image.okhand.org/docker-swarm/docker-swarm_logo.webp">
 
 
     <title>Docker Swarm 入門教學</title>
@@ -320,9 +320,9 @@ Scaling本身概念簡單，也是雲端能帶來的其中一項價值所需，�
 </li>
 </ul>
 <h2 id="docker-swarm-整體架構圖">Docker Swarm 整體架構圖：</h2>
-<p><img src="https://imgur.com/RgRVnfV.png" alt="Docker-Swarm-Arch"></p>
+<p><img src="https://image.okhand.org/docker-swarm/Docker-Swarm-Arch.webp" alt="Docker-Swarm-Arch"></p>
 <h2 id="docker-swarm-網路架構圖">Docker Swarm 網路架構圖：</h2>
-<p><img src="https://i.imgur.com/iPuAi70.png" alt="Docker-Swarm-Network"></p>
+<p><img src="https://image.okhand.org/docker-swarm/Docker-Swarm-Network.webp" alt="Docker-Swarm-Network"></p>
 <h2 id="docker-swarm-command">Docker Swarm Command：</h2>
 <p>查看 cluster 內的 server：<code>docker node ls</code></p>
 <p>建立服務：<code>docker service create --replicas &lt;數量&gt; --name=&lt;service_name&gt; -p &lt;host_port&gt;:&lt;container_port&gt; &lt;image&gt;</code></p>
@@ -339,39 +339,39 @@ Scaling本身概念簡單，也是雲端能帶來的其中一項價值所需，�
 </span></span><span style="display:flex;"><span>機台上有多個 ip 請使用下面的
 </span></span><span style="display:flex;"><span>docker swarm init --advertise-addr &lt;互ping的到的ip&gt;
 </span></span></code></pre></div><p>IP 太多的 Error message：
-<img src="https://imgur.com/1dJPbE6.png" alt="ErrorMessage"></p>
+<img src="https://image.okhand.org/docker-swarm/ErrorMessage.webp" alt="ErrorMessage"></p>
 <p>init 成功：
-<img src="https://imgur.com/l6mLNGD.png" alt="init-success"></p>
+<img src="https://image.okhand.org/docker-swarm/init-success.webp" alt="init-success"></p>
 </li>
 <li>
 <p>docker swarm join (in node)</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker swarm join --token &lt;docker_swarm_token&gt; &lt;IP&gt;:2377
 </span></span></code></pre></div><p>連結成功：
-<img src="https://imgur.com/ONrcDap.png" alt="Link-success"></p>
+<img src="https://image.okhand.org/docker-swarm/link-success.webp" alt="link-success"></p>
 </li>
 <li>
 <p>查看 node 是否正確</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker node ls
-</span></span></code></pre></div><p><img src="https://imgur.com/KkSWx1G.png" alt="node-ls"></p>
+</span></span></code></pre></div><p><img src="https://image.okhand.org/docker-swarm/node-ls.webp" alt="node-ls"></p>
 </li>
 <li>
 <p>建立服務</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker service create
-</span></span></code></pre></div><p><img src="https://imgur.com/YOmEHN0.png" alt="service-create"></p>
+</span></span></code></pre></div><p><img src="https://image.okhand.org/docker-swarm/service-create.webp" alt="service-create"></p>
 </li>
 <li>
 <p>查看服務是否建立</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker service ps <span style="color:#e6db74">&#34;gyhello&#34;</span>
-</span></span></code></pre></div><p><img src="https://imgur.com/ICRu1Xb.png" alt="check-service-create"></p>
+</span></span></code></pre></div><p><img src="https://image.okhand.org/docker-swarm/check-service-create.webp" alt="check-service-create"></p>
 </li>
 <li>
 <p>查看服務是否正常啟用
-<img src="https://imgur.com/LnPdGUN.png" alt="check-service-status"></p>
+<img src="https://image.okhand.org/docker-swarm/check-service-status.webp" alt="check-service-status"></p>
 </li>
 <li>
 <p>查看服務 Logs</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker service logs gyhello -f
-</span></span></code></pre></div><p><img src="https://imgur.com/7A71S9A.png" alt="service-logs"></p>
+</span></span></code></pre></div><p><img src="https://image.okhand.org/docker-swarm/service-logs.webp" alt="service-logs"></p>
 </li>
 </ol>
 <h2 id="docker-swarm-load-balancer-實作">Docker Swarm Load Balancer 實作：</h2>
@@ -379,13 +379,13 @@ Scaling本身概念簡單，也是雲端能帶來的其中一項價值所需，�
 <h3 id="擴增scaling-up">擴增(scaling up)：</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker service scale &lt;service_name&gt;<span style="color:#f92672">=</span>&lt;數量&gt;
 </span></span><span style="display:flex;"><span>Ex: docker service scale gyhello<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>
-</span></span></code></pre></div><p><img src="https://imgur.com/2iks0Br.png" alt="scaling-up"></p>
-<p><img src="https://imgur.com/gBXMyJZ.png" alt="befor-service-status"></p>
+</span></span></code></pre></div><p><img src="https://image.okhand.org/docker-swarm/scaling-up.webp" alt="scaling-up"></p>
+<p><img src="https://image.okhand.org/docker-swarm/befor-service-status.webp" alt="befor-service-status"></p>
 <h3 id="縮容scaling-down">縮容(scaling down)：</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker service scale &lt;service_name&gt;<span style="color:#f92672">=</span>&lt;數量&gt;
 </span></span><span style="display:flex;"><span>Ex: docker service scale gyhello<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>
-</span></span></code></pre></div><p><img src="https://imgur.com/gRpCJPC.png" alt="scaling-down"></p>
-<p><img src="https://imgur.com/AaMn1UZ.png" alt="after-service-status"></p>
+</span></span></code></pre></div><p><img src="https://image.okhand.org/docker-swarm/scaling-down.webp" alt="scaling-down"></p>
+<p><img src="https://image.okhand.org/docker-swarm/after-service-status.webp" alt="after-service-status"></p>
 <h3 id="負載平衡驗證">負載平衡驗證：</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Linux Command:
 </span></span><span style="display:flex;"><span>iptables -L -t nat
@@ -394,12 +394,12 @@ Scaling本身概念簡單，也是雲端能帶來的其中一項價值所需，�
 </span></span><span style="display:flex;"><span>NAT : 流量本身跟此台宿主機並無直接關係，主要作為來源與目的 IP &amp; Port間轉至後端容器主機。
 </span></span><span style="display:flex;"><span>Mangle : 屬特殊表格，會去標記某些規格並改寫封包。
 </span></span></code></pre></div><p>驗證會被導入到 172.18.0.2:8080</p>
-<p><img src="https://imgur.com/zJtAsZE.png" alt="iptables"></p>
+<p><img src="https://image.okhand.org/docker-swarm/iptables.webp" alt="iptables"></p>
 <p>ifconfig 確認 <code>docker_gwbridge</code> 網路介面相關聯，透過 <code>Ｎode建立Container</code> 後在與容器建立連線，故節點中涵蓋一組容器 IP：172.18.0.2</p>
-<p><img src="https://imgur.com/kAv8VsQ.png" alt="ifconfig"></p>
+<p><img src="https://image.okhand.org/docker-swarm/ifconfig.webp" alt="ifconfig"></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>docker network inspect docker_gwbridge
 </span></span></code></pre></div><p>這裡有一個被隱藏的 Container 叫 ingress-sbox，看起來流量是先進入此 Container 後再把流量分配到真正的 Service</p>
-<p><img src="https://imgur.com/LfmhvKP.png" alt="net_inspect"></p>
+<p><img src="https://image.okhand.org/docker-swarm/net_inspect.webp" alt="net_inspect"></p>
 <h2 id="ingress">Ingress：</h2>
 <p>docker swarm 跟 k8s 依樣是透過在 Master端 建立網段可以與外網溝通並利用 ipvs 方式把 iptables 加在每個 node 中並導出服務的 port , 達到外網只要連線到 master端ip:port 就能使用服務</p>
 <h2 id="reference">Reference</h2>

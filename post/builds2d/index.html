@@ -80,8 +80,8 @@
 
 
 
-  <meta property="og:image" content="https://imgur.com/z7aJjzo.png">
-  <meta property="twitter:image" content="https://imgur.com/z7aJjzo.png">
+  <meta property="og:image" content="https://image.okhand.org/buildS2D/s2d-cover.webp">
+  <meta property="twitter:image" content="https://image.okhand.org/buildS2D/s2d-cover.webp">
 
 
     <title>Windows Server S2D </title>
@@ -307,7 +307,7 @@ Quorum 仲裁機制 : &lt;Host IP&gt;/Q:\\
 </span></span><span style="display:flex;"><span>192.8.1.43       Node2
 </span></span><span style="display:flex;"><span>192.8.1.42       Node1
 </span></span><span style="display:flex;"><span>192.8.1.57       S2D-Cluster
-</span></span></code></pre></div><p><img src="https://imgur.com/xrm4oLq.png" alt="hosts"></p>
+</span></span></code></pre></div><p><img src="https://image.okhand.org/buildS2D/hosts.webp" alt="hosts"></p>
 </li>
 <li>
 <p>設定 TrustedHosts (每個 Node 都需要設定)</p>
@@ -319,7 +319,7 @@ Quorum 仲裁機制 : &lt;Host IP&gt;/Q:\\
 <li>確認 TrustedHosts</li>
 </ul>
 <pre tabindex="0"><code>Get-Item WSMAN:\Localhost\Client\TrustedHosts
-</code></pre><p><img src="https://imgur.com/WfVMuSv.png" alt="TrustedHosts"></p>
+</code></pre><p><img src="https://image.okhand.org/buildS2D/Trusted_Hosts.webp" alt="TrustedHosts"></p>
 </li>
 <li>
 <p>安裝需要用到的服務 (每個 Node 都需要設定)</p>
@@ -327,7 +327,7 @@ Quorum 仲裁機制 : &lt;Host IP&gt;/Q:\\
 <li>安裝套件 Windows 腳色和功能</li>
 </ul>
 <pre tabindex="0"><code>Install-WindowsFeature -Name &#34;Hyper-V&#34;, &#34;Failover-Clustering&#34;, &#34;Data-Center-Bridging&#34;, &#34;RSAT-Clustering-PowerShell&#34;, &#34;Hyper-V-PowerShell&#34;, &#34;FS-FileServer&#34; -IncludeManagementTools
-</code></pre><p><img src="https://imgur.com/q2PofhE.png" alt="Install-WindowsFeature"></p>
+</code></pre><p><img src="https://image.okhand.org/buildS2D/Install-WindowsFeature.webp" alt="Install-WindowsFeature"></p>
 </li>
 <li>
 <p>清空 S2D 磁碟 (每個 Node 都需要設定)</p>
@@ -341,14 +341,14 @@ Clear-Disk  –Number 1  -RemoveData  -RemoveOEM
 Clear-Disk  –Number 1,2,3,4  -RemoveData  -RemoveOEM
 </code></pre><p>執行完 Clear-Disk 動作後，硬碟的狀態應恢復到「Unknown、Not Initialized、Unallocated」才是正確狀態</p>
 <p>請注意 !! 若硬碟未呈現正確狀態的話，稍後啟動「Software Storage Bus」機制時，將無法順利把節點主機的本機硬碟加入至儲存資源池中。</p>
-<p><img src="https://imgur.com/CgntOO5.png" alt="ClearDisk"></p>
+<p><img src="https://image.okhand.org/buildS2D/ClearDisk.webp" alt="ClearDisk"></p>
 </li>
 <li>
 <p>測試建立 Cluster 環境 (Node1)</p>
 <p>測試 Node1 Node2 是否符合建立 Cluster 的環境</p>
 <pre tabindex="0"><code>Test-Cluster Node1 , Node2
 </code></pre><p>測試完會顯示目前問題與報告產生的地方，有問題建議去看報告會有詳細的問題說明
-<img src="https://imgur.com/JoMrKxQ.png" alt="Test-Cluster"></p>
+<img src="https://image.okhand.org/buildS2D/Test-Cluster.webp" alt="Test-Cluster"></p>
 </li>
 <li>
 <p>建立 Cluster (Node1)</p>
@@ -356,14 +356,14 @@ Clear-Disk  –Number 1,2,3,4  -RemoveData  -RemoveOEM
 <li>建立 Cluster</li>
 </ul>
 <pre tabindex="0"><code>New-Cluster –Name S2DCluster -Node Node1,Node2 -AdministrativeAccessPoint DNS -StaticAddress 192.8.1.57
-</code></pre><p><img src="https://imgur.com/3CbuGxu.png" alt="CreateCluster"></p>
+</code></pre><p><img src="https://image.okhand.org/buildS2D/CreateCluster.webp" alt="CreateCluster"></p>
 </li>
 <li>
 <p>Quorum USB 設定 (Node2)</p>
 <ul>
 <li>先到 USB Properties，之後開啟 Share…</li>
 <li>Advanced Shareing… &gt; Permissions &gt; Everyone 點選 Full Control
-<img src="https://imgur.com/GQab2uo.png" alt="USB-Enable"></li>
+<img src="https://image.okhand.org/buildS2D/USB-Enable.webp" alt="USB-Enable"></li>
 </ul>
 </li>
 <li>
@@ -373,13 +373,13 @@ Clear-Disk  –Number 1,2,3,4  -RemoveData  -RemoveOEM
 </ul>
 <pre tabindex="0"><code>Set-ClusterQuorum -FileShareWitness \\192.8.1.43\q -Credential $(Get-Credential)
 </code></pre><p>之後會出現登入畫面請輸入相對應機台的帳號與密碼
-<img src="https://imgur.com/FvRfqST.png" alt="ClusterQuorum"></p>
+<img src="https://image.okhand.org/buildS2D/ClusterQuorum.webp" alt="ClusterQuorum"></p>
 </li>
 <li>
 <p>開啟 Storage Spaces Direct 服務 (Node1)</p>
 <pre tabindex="0"><code>Enable-ClusterStorageSpacesDirect
 </code></pre><p>跑完一小段之後它會問你是不是要使用你剛剛創的 Cluster 輸入 Y 開始建立
-<img src="https://imgur.com/mwtKLYt.png" alt="Enable-ClusterStorageSpacesDirect"></p>
+<img src="https://image.okhand.org/buildS2D/Enable-ClusterStorageSpacesDirect.webp" alt="Enable-ClusterStorageSpacesDirect"></p>
 </li>
 <li>
 <p>查看 Failover Cluster Manager (Node1 or Node2)</p>
@@ -388,8 +388,8 @@ Clear-Disk  –Number 1,2,3,4  -RemoveData  -RemoveOEM
 <li>點擊 Failover Cluster Manager 右鍵 &gt; Connect to Cluster &gt; 點擊 OK</li>
 <li>它會自己找到目前機台有連接的 Cluster</li>
 <li>你可以在 Disks, Pools 下找到剛剛建立好的 Disks, Pools
-<img src="https://imgur.com/2B6Flna.png" alt="Disk">
-<img src="https://imgur.com/3gFfKXM.png" alt="Pool"></li>
+<img src="https://image.okhand.org/buildS2D/Disk.webp" alt="Disk">
+<img src="https://image.okhand.org/buildS2D/Pool.webp" alt="Pool"></li>
 </ul>
 </li>
 </ol>
@@ -409,16 +409,16 @@ Clear-Disk  –Number 1,2,3,4  -RemoveData  -RemoveOEM
 <li>盡量不要選 Max 因為我們架構沒有空間給它快取有可能在建構的時候會造成 Fail</li>
 <li>切好之後的彈出視窗是可以幫你建立槽區但現在的架構不是單純的一個機台或有AD的情境下所以不適用</li>
 <li>之後我們自己手動切槽區
-<img src="https://imgur.com/0HGLem8.png" alt="CreateVD"></li>
+<img src="https://image.okhand.org/buildS2D/CreateVD.webp" alt="CreateVD"></li>
 <li>切完之後我們可以看到下面會長出一個新的 Virtual Disk
-<img src="https://imgur.com/9WX64pJ.png" alt="NewVD"></li>
+<img src="https://image.okhand.org/buildS2D/NewVD.webp" alt="NewVD"></li>
 </ul>
 </li>
 <li>
 <p>確認有切出虛擬磁碟 (Node2)</p>
 <ul>
 <li>跳到 Node2 的 Disk Management 我們可以看到會有一個新的未啟用的 Disk
-<img src="https://imgur.com/UkMf7HG.png" alt="CheckN2VD"></li>
+<img src="https://image.okhand.org/buildS2D/CheckN2VD.webp" alt="CheckN2VD"></li>
 </ul>
 </li>
 <li>
@@ -426,28 +426,28 @@ Clear-Disk  –Number 1,2,3,4  -RemoveData  -RemoveOEM
 <ul>
 <li>我們手動先手動建立跟格式化(ReFS or NTFS 都可以)</li>
 <li>之後按右鍵 Change Drive Letter and Paths … 幫它上槽區
-<img src="https://imgur.com/EEWnm9Q.png" alt="N2CreateDisk"></li>
+<img src="https://image.okhand.org/buildS2D/N2CreateDisk.webp" alt="N2CreateDisk"></li>
 </ul>
 </li>
 <li>
 <p>確認 Cluster 的 Pool 上是否有建立出一個磁碟 (Node1)</p>
 <ul>
 <li>回到 Node1 的 Failover Cluster Manager &gt; Pool 下可以看到有了槽區並且是 ReFS 格式跟我們剛剛做的符合
-<img src="https://imgur.com/KuhTpdA.png" alt="CheckPoolDisk"></li>
+<img src="https://image.okhand.org/buildS2D/CheckPoolDisk.webp" alt="CheckPoolDisk"></li>
 </ul>
 </li>
 <li>
 <p>確認 Cluster 的 Disk 上的資訊 (Node1)</p>
 <ul>
 <li>我們到 Disks 確認可以看到類似的內容，並且可以注意到它目前狀態是 <strong>Avalable Storage</strong>
-<img src="https://imgur.com/jWRr6W7.png" alt="CheckDiskDiskInfo"></li>
+<img src="https://image.okhand.org/buildS2D/CheckDiskDiskInfo.webp" alt="CheckDiskDiskInfo"></li>
 </ul>
 </li>
 <li>
 <p>新增到 Cluster Share Volumes (Node1)</p>
 <ul>
 <li>我們右鍵剛剛創建的 Virtual Disk 按下 Add to Cluster Share Volumes 把我們的硬碟加到 Cluster Share Volumes 讓兩個 node 都能用到
-<img src="https://imgur.com/7L9B2c6.png" alt="Add to Cluster Share Volumes"></li>
+<img src="https://image.okhand.org/buildS2D/Add2Cluster-Share-Volumes.webp" alt="Add2Cluster-Share-Volumes"></li>
 </ul>
 </li>
 <li>
@@ -456,14 +456,14 @@ Clear-Disk  –Number 1,2,3,4  -RemoveData  -RemoveOEM
 <li>加完之後我們就可以看見上面的狀態變成 Cluster Share Volume</li>
 <li>下面變成 CSVFS 的格式了</li>
 <li>會掛載到每個 Node 的 C:\ClusterStorage 下
-<img src="https://imgur.com/qEJDmD8.png" alt="Check Cluster Share Volume"></li>
+<img src="https://image.okhand.org/buildS2D/Check-Cluster-Share-Volume.webp" alt="Check-Cluster-Share-Volume"></li>
 </ul>
 </li>
 <li>
 <p>確認是否都有掛載到每個 Node 上 (Node1 and Node2)</p>
 <ul>
 <li>到每個 Node 下去驗證 <strong>C:\ClusterStorage</strong> 下是否有空間
-<img src="https://imgur.com/CZ1btK0.png" alt="CheckClusterStorage"></li>
+<img src="https://image.okhand.org/buildS2D/CheckClusterStorage.webp" alt="CheckClusterStorage"></li>
 </ul>
 </li>
 </ol>

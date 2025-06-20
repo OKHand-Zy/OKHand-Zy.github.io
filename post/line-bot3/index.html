@@ -80,8 +80,8 @@
 
 
 
-  <meta property="og:image" content="https://imgur.com/kOoKkoG.png">
-  <meta property="twitter:image" content="https://imgur.com/kOoKkoG.png">
+  <meta property="og:image" content="https://image.okhand.org/line-bot3/linebot3-cover.webp">
+  <meta property="twitter:image" content="https://image.okhand.org/line-bot3/linebot3-cover.webp">
 
 
     <title>Line Notify 建立資料庫並提供不休息的服務</title>
@@ -316,20 +316,20 @@
 requirements.txt =&gt; 多加 APScheduler == 3.8.1 <br>
 Procfile          =&gt; 多加 clock: python clock.py <br>
 加好之後上傳 Heroku 之後記得去開啟 Clock 才會啟用喔！！
-<img src="https://imgur.com/lZguAHu.png" alt="Configure_Dynos">
-<img src="https://imgur.com/WhM6JMF.png" alt="Active_clock">
+<img src="https://image.okhand.org/line-bot3/Configure_Dynos.webp" alt="Configure_Dynos">
+<img src="https://image.okhand.org/line-bot3/Active_clock.webp" alt="Active_clock">
 之後就能去看 Log 或是 app 狀態 觀察它是否一直有在運作。</p>
 <h1 id="建立我們的資料庫">建立我們的資料庫</h1>
 <p>我遠本是想用 Heroku 內的資料庫可是我學了一下覺的很難用於是我就把目光轉到 Google Sheet 上了，對於我們只要儲存一些 Access Token 跟使用者名字是夠用的！！(如果想要用Heroku內的資料庫可以去看麥田捕手的文章連結在下面) <br>
 我們這邊就講要整麼利用 GoogleSheet 當我們的資料庫 <br>
 先到 <a href="https://console.developers.google.com">Google Cloud Platform</a> 建立一份 Google Sheet 和一個 Google Sheet  的 API 身份
-<img src="https://imgur.com/v4FyKrn.png" alt="Google_sheet_api">
+<img src="https://image.okhand.org/line-bot3/Google_sheet_api.webp" alt="Google_sheet_api">
 然後再去申請一下金鑰讓我們可以跟 Google Sheet 去做互動 <br>
 申請憑證在：側邊欄裡的 API 和服務 =&gt; 憑證 =&gt; 服務帳戶旁邊的管理帳戶 =&gt; 建立服務帳戶 <br>
 <img src="https://www.maxlist.xyz/wp-content/uploads/2018/09/%E5%BB%BA%E7%AB%8B%E6%86%91%E8%AD%89-GCP.png" alt="Apply_authority">
 憑證申請完之後會給你下載一個 jason 檔就是之後要引用的金鑰(請保存好沒了就要重申請！) <br>
 之後你會在服務帳戶那邊看到電子郵件之後我們去建立一個 GoogleSheet 並且分享編輯權限給這個 Email
-<img src="https://imgur.com/RDHz5n5.png" alt="Share_authority">
+<img src="https://image.okhand.org/line-bot3/Share_authority.webp" alt="Share_authority">
 安裝環境測試需要的套件 pygsheets 套件 =&gt; pip3 install pygsheets <br>
 記得！第一篇有說的 Heroku 的設定檔(requirements.txt)也要加才入套件才能在 Heroku 上使用喔 <br>
 之後我們就可以開始使用 Google Sheet 當我們的資料庫去做使用了 \</p>

@@ -78,8 +78,8 @@
 
 
 
-  <meta property="og:image" content="https://raw.githubusercontent.com/github/explore/8753900cdf248290844b22340000825a102dd5a2/topics/giscus/giscus.png">
-  <meta property="twitter:image" content="https://raw.githubusercontent.com/github/explore/8753900cdf248290844b22340000825a102dd5a2/topics/giscus/giscus.png">
+  <meta property="og:image" content="https://image.okhand.org/hugo-giscus/giscus-cover.webp">
+  <meta property="twitter:image" content="https://image.okhand.org/hugo-giscus/giscus-cover.webp">
 
 
     <title>Hugo 加裝 Giscus 留言板</title>
@@ -294,13 +294,13 @@
 <li>安裝 <a href="https://github.com/apps/giscus">giscus</a> 應用程式，否則訪客將無法留言或回應。 <br>
 接下來會看到選擇你是要給 giscus 權限是 <strong>全部的專案</strong> 還是 <strong>選擇的專案</strong>，我自己是選擇自己剛剛建的那個新的 repository。<br>
 如果選錯可以到 頭像 -&gt; Integrations -&gt; Applications -&gt; giscus -&gt; configure 去調整
-<img src="https://imgur.com/hr9KGel.png" alt="giscus_access_option"></li>
+<img src="https://image.okhand.org/hugo-giscus/giscus_access_option.webp" alt="giscus_access_option"></li>
 <li>到剛剛新建的 repository 下的 Setting -&gt; Features 勾選 Discussions 啟用它。<br>
-<img src="https://imgur.com/VnNA3oD.png" alt="enable_Discussions"></li>
+<img src="https://image.okhand.org/hugo-giscus/enable_Discussions.webp" alt="enable_Discussions"></li>
 <li>之後到 <a href="https://giscus.app/zh-TW">giscus.app</a> 輸入並勾選一些資訊，勾選完輸入完之後就可以在下面<strong>啟用 giscus</strong>部分看到可以嵌入留言板的code
 下面的可以不用照著我的勾選，可以依照你的需求與喜好去做選擇
-<img src="https://imgur.com/HBmG4UW.png" alt="giscus.app_1">
-<img src="https://imgur.com/saS0Pae.png" alt="giscus.app_2"></li>
+<img src="https://image.okhand.org/hugo-giscus/giscus-app_1.webp" alt="giscus.app_1">
+<img src="https://image.okhand.org/hugo-giscus/giscus-app_2.webp" alt="giscus.app_2"></li>
 </ol>
 <h2 id="修改-hugo-theme">修改 Hugo theme</h2>
 <p>這邊要先說一下每個 Hugo theme 裡面的config.tomal跟一些擺放資料的位置或方法會有些許不一樣，我用的是 <a href="https://github.com/kakawait/hugo-tranquilpeak-theme/tree/master">hugo-tranquilpeak-theme</a></p>
@@ -308,14 +308,14 @@
 <li>之後到 hugo web 的資料夾下找到 <strong>config.tomal</strong> 添加下面的 Code
 <pre tabindex="0"><code>[params.comment.giscus]
   enable = true
-</code></pre><img src="https://imgur.com/exXQTCO.png" alt="add-code_config.tomal"></li>
+</code></pre><img src="https://image.okhand.org/hugo-giscus/add-code_config_tomal.webp" alt="add-code_config.tomal"></li>
 <li>之後到 layouts/partials/post 找到 <strong>comment.html</strong>，到最下面{{END}}上面添加以下的Code
 <pre tabindex="0"><code>{{ else if .Site.Params.comment.giscus.enable }}
     剛剛在 giscus.app 啟用 giscus 的 code 貼過來
-</code></pre><img src="https://imgur.com/cNQpBXZ.png" alt="add-code_comment.html"></li>
+</code></pre><img src="https://image.okhand.org/hugo-giscus/add-code_comment_html.webp" alt="add-code_comment.html"></li>
 </ol>
 <p>就完成拉！現在拉到你的個人網頁下因該就會有這個樣子的留言板了
-<img src="https://imgur.com/0JdCHs4.png" alt="giscus_message-board"></p>
+<img src="https://image.okhand.org/hugo-giscus/giscus_message-board.webp" alt="giscus_message-board"></p>
 <h2 id="reference">Reference</h2>
 <p><a href="https://ivonblog.com/posts/hugo-giscus-comment/">安裝Giscus作為Hugo網站的留言板，支援轉換Gitalk/Utterances的留言</a> <br>
 <a href="https://giscus.app/zh-TW">Giscus官方協助安裝網頁</a></p>
