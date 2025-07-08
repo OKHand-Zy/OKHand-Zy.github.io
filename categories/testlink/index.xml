@@ -4,17 +4,16 @@
     <title>TestLink on OKH@nd&#39;s Blog</title>
     <link>https://OKHand.org/categories/testlink/</link>
     <description>Recent content in TestLink on OKH@nd&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 17 Jun 2023 14:11:42 +0800</lastBuildDate><atom:link href="https://OKHand.org/categories/testlink/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 17 Jun 2023 14:11:42 +0800</lastBuildDate>
+    <atom:link href="https://OKHand.org/categories/testlink/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Testlink Api Enabled</title>
       <link>https://OKHand.org/post/testlink-api-enabled/</link>
       <pubDate>Sat, 17 Jun 2023 14:11:42 +0800</pubDate>
-      
       <guid>https://OKHand.org/post/testlink-api-enabled/</guid>
       <description>&lt;p&gt;本文講述當初剛使用 TestLink 時想透過 TestLink 的 API 去互動時遇到的問題並解決的紀錄！！&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

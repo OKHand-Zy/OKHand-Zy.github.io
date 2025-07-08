@@ -4,305 +4,240 @@
     <title>Tags on OKH@nd&#39;s Blog</title>
     <link>https://OKHand.org/tags/</link>
     <description>Recent content in Tags on OKH@nd&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 20 Jun 2025 14:04:42 +0800</lastBuildDate><atom:link href="https://OKHand.org/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 20 Jun 2025 14:04:42 +0800</lastBuildDate>
+    <atom:link href="https://OKHand.org/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cloudflare</title>
       <link>https://OKHand.org/tags/cloudflare/</link>
       <pubDate>Fri, 20 Jun 2025 14:04:42 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/cloudflare/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Storage</title>
       <link>https://OKHand.org/tags/storage/</link>
       <pubDate>Fri, 20 Jun 2025 14:04:42 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/storage/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Environment</title>
       <link>https://OKHand.org/tags/environment/</link>
       <pubDate>Mon, 27 Jan 2025 16:16:10 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/environment/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>SID</title>
       <link>https://OKHand.org/tags/sid/</link>
       <pubDate>Mon, 27 Jan 2025 16:16:10 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/sid/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Windows Server</title>
       <link>https://OKHand.org/tags/windows-server/</link>
       <pubDate>Mon, 27 Jan 2025 16:16:10 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/windows-server/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>AI</title>
       <link>https://OKHand.org/tags/ai/</link>
       <pubDate>Sun, 26 Jan 2025 15:23:05 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/ai/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Claude</title>
       <link>https://OKHand.org/tags/claude/</link>
       <pubDate>Sun, 26 Jan 2025 15:23:05 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/claude/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>MCP</title>
       <link>https://OKHand.org/tags/mcp/</link>
       <pubDate>Sun, 26 Jan 2025 15:23:05 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/mcp/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>RAG</title>
       <link>https://OKHand.org/tags/rag/</link>
       <pubDate>Thu, 05 Dec 2024 23:56:27 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/rag/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>DataBase</title>
       <link>https://OKHand.org/tags/database/</link>
       <pubDate>Thu, 05 Dec 2024 23:54:28 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/database/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>GPU</title>
       <link>https://OKHand.org/tags/gpu/</link>
       <pubDate>Mon, 11 Nov 2024 01:15:55 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/gpu/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Nvidia</title>
       <link>https://OKHand.org/tags/nvidia/</link>
       <pubDate>Mon, 11 Nov 2024 01:15:55 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/nvidia/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Python</title>
       <link>https://OKHand.org/tags/python/</link>
       <pubDate>Thu, 12 Sep 2024 21:20:28 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/python/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Tool</title>
       <link>https://OKHand.org/tags/tool/</link>
       <pubDate>Thu, 12 Sep 2024 21:20:28 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/tool/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>LLama</title>
       <link>https://OKHand.org/tags/llama/</link>
       <pubDate>Thu, 02 May 2024 20:08:32 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/llama/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>LLM</title>
       <link>https://OKHand.org/tags/llm/</link>
       <pubDate>Thu, 02 May 2024 20:08:32 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/llm/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Ollama</title>
       <link>https://OKHand.org/tags/ollama/</link>
       <pubDate>Thu, 02 May 2024 20:08:32 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/ollama/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Docker</title>
       <link>https://OKHand.org/tags/docker/</link>
       <pubDate>Wed, 28 Feb 2024 13:01:40 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/docker/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>K8s</title>
       <link>https://OKHand.org/tags/k8s/</link>
       <pubDate>Wed, 28 Feb 2024 13:01:40 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/k8s/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>S2D</title>
       <link>https://OKHand.org/tags/s2d/</link>
       <pubDate>Thu, 08 Feb 2024 13:29:55 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/s2d/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Paul Graham</title>
       <link>https://OKHand.org/tags/paul-graham/</link>
       <pubDate>Sat, 30 Dec 2023 01:39:20 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/paul-graham/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Thinking</title>
       <link>https://OKHand.org/tags/thinking/</link>
       <pubDate>Sat, 30 Dec 2023 01:39:20 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/thinking/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>DevOps</title>
       <link>https://OKHand.org/tags/devops/</link>
       <pubDate>Sun, 26 Nov 2023 22:39:37 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/devops/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Gitlab</title>
       <link>https://OKHand.org/tags/gitlab/</link>
       <pubDate>Sat, 17 Jun 2023 15:33:12 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/gitlab/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>TestLink</title>
       <link>https://OKHand.org/tags/testlink/</link>
       <pubDate>Sat, 17 Jun 2023 14:11:42 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/testlink/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Giscus</title>
       <link>https://OKHand.org/tags/giscus/</link>
       <pubDate>Fri, 12 May 2023 15:05:04 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/giscus/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Hugo</title>
       <link>https://OKHand.org/tags/hugo/</link>
       <pubDate>Fri, 12 May 2023 15:05:04 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/hugo/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Jenkins</title>
       <link>https://OKHand.org/tags/jenkins/</link>
       <pubDate>Fri, 12 May 2023 11:21:49 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/jenkins/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Profile</title>
       <link>https://OKHand.org/tags/profile/</link>
       <pubDate>Sat, 04 Feb 2023 15:15:39 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/profile/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>fly.io</title>
+      <title>Fly.io</title>
       <link>https://OKHand.org/tags/fly.io/</link>
       <pubDate>Sat, 04 Feb 2023 15:00:40 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/fly.io/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Line Bot</title>
       <link>https://OKHand.org/tags/line-bot/</link>
       <pubDate>Sat, 04 Feb 2023 15:00:40 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/line-bot/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Line Notify</title>
       <link>https://OKHand.org/tags/line-notify/</link>
       <pubDate>Sat, 04 Feb 2023 15:00:40 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/line-notify/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Heroku</title>
       <link>https://OKHand.org/tags/heroku/</link>
       <pubDate>Sat, 04 Feb 2023 13:43:16 +0800</pubDate>
-      
       <guid>https://OKHand.org/tags/heroku/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

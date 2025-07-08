@@ -4,17 +4,16 @@
     <title>Profile on OKH@nd&#39;s Blog</title>
     <link>https://OKHand.org/categories/profile/</link>
     <description>Recent content in Profile on OKH@nd&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 04 Feb 2023 15:15:39 +0800</lastBuildDate><atom:link href="https://OKHand.org/categories/profile/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 04 Feb 2023 15:15:39 +0800</lastBuildDate>
+    <atom:link href="https://OKHand.org/categories/profile/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About_Me</title>
       <link>https://OKHand.org/about_me/</link>
       <pubDate>Sat, 04 Feb 2023 15:15:39 +0800</pubDate>
-      
       <guid>https://OKHand.org/about_me/</guid>
-      <description>Hi 👋, I&#39;m OKH@nd Automation Developer from Taiwan Work Experience: System Integration Testing Engineer, SIT, Foxconn, Nov.2021 ~ Mar.2023 1. Responsible for x86-64 and arm server operation test 2. Test and verify system function (functional test) 3. compatibility (options compatibility test), performance (performance) 4. stress loading (stress loading) 5. reliability (RAS feature test) and integration test BIOS, BMC, and all accessories for server hardware. Automation Developer, SIT, Foxconn, Mar.2023 ~ Present 1.</description>
+      <description>&lt;!---&#xA;- 👋 Hi, I’m @OKHand-Zy&#xA;- 👀 I’m interested in ...&#xA;- 🌱 I’m currently learning ...&#xA;- 💞️ I’m looking to collaborate on ...&#xA;- 📫 How to reach me ...&#xA;&#xA;&#xA;OKHand-Zy/OKHand-Zy is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.&#xA;You can click the Preview link to take a look at your changes.&#xA;---&gt;&#xA;&lt;h1 align=&#34;center&#34;&gt;Hi 👋, I&#39;m OKH@nd&lt;/h1&gt;&#xA;&lt;h3 align=&#34;center&#34;&gt;NKUST CSIE student from Taiwan&lt;/h3&gt;&#xA;&lt;h3 align=&#34;left&#34;&gt;Work Experience：&lt;/h3&gt;&#xA;&lt;p align=&#34;left&#34;&gt;&#xA;  System Integration Testing Engineer, SIT, Foxconn,    Nov.2021 ~ Mar.2023 &lt;/br&gt;&#xA;&lt;p&gt;Automation Developer, SIT, Foxconn,                   Mar.2023 ~ Jun.2025 &lt;/br&gt;&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

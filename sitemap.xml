@@ -5,10 +5,10 @@
     <loc>https://OKHand.org/categories/</loc>
     <lastmod>2025-06-20T14:04:42+08:00</lastmod>
   </url><url>
-    <loc>https://OKHand.org/tags/cloudflare/</loc>
+    <loc>https://OKHand.org/categories/cloudflare/</loc>
     <lastmod>2025-06-20T14:04:42+08:00</lastmod>
   </url><url>
-    <loc>https://OKHand.org/categories/cloudflare/</loc>
+    <loc>https://OKHand.org/tags/cloudflare/</loc>
     <lastmod>2025-06-20T14:04:42+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/post/cloudflare-r2/</loc>
@@ -26,10 +26,10 @@
     <loc>https://OKHand.org/tags/</loc>
     <lastmod>2025-06-20T14:04:42+08:00</lastmod>
   </url><url>
-    <loc>https://OKHand.org/tags/environment/</loc>
+    <loc>https://OKHand.org/categories/environment/</loc>
     <lastmod>2025-01-27T16:16:10+08:00</lastmod>
   </url><url>
-    <loc>https://OKHand.org/categories/environment/</loc>
+    <loc>https://OKHand.org/tags/environment/</loc>
     <lastmod>2025-01-27T16:16:10+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/tags/sid/</loc>
@@ -41,10 +41,10 @@
     <loc>https://OKHand.org/tags/windows-server/</loc>
     <lastmod>2025-01-27T16:16:10+08:00</lastmod>
   </url><url>
-    <loc>https://OKHand.org/tags/ai/</loc>
+    <loc>https://OKHand.org/categories/ai/</loc>
     <lastmod>2025-01-26T15:23:05+08:00</lastmod>
   </url><url>
-    <loc>https://OKHand.org/categories/ai/</loc>
+    <loc>https://OKHand.org/tags/ai/</loc>
     <lastmod>2025-01-26T15:23:05+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/tags/claude/</loc>
@@ -83,10 +83,10 @@
     <loc>https://OKHand.org/tags/python/</loc>
     <lastmod>2024-09-12T21:20:28+08:00</lastmod>
   </url><url>
-    <loc>https://OKHand.org/tags/tool/</loc>
+    <loc>https://OKHand.org/categories/tool/</loc>
     <lastmod>2024-09-12T21:20:28+08:00</lastmod>
   </url><url>
-    <loc>https://OKHand.org/categories/tool/</loc>
+    <loc>https://OKHand.org/tags/tool/</loc>
     <lastmod>2024-09-12T21:20:28+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/post/pypi_proxy/</loc>
@@ -137,10 +137,10 @@
     <loc>https://OKHand.org/tags/paul-graham/</loc>
     <lastmod>2023-12-30T01:39:20+08:00</lastmod>
   </url><url>
-    <loc>https://OKHand.org/tags/thinking/</loc>
+    <loc>https://OKHand.org/categories/thinking/</loc>
     <lastmod>2023-12-30T01:39:20+08:00</lastmod>
   </url><url>
-    <loc>https://OKHand.org/categories/thinking/</loc>
+    <loc>https://OKHand.org/tags/thinking/</loc>
     <lastmod>2023-12-30T01:39:20+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/tags/devops/</loc>
@@ -158,10 +158,10 @@
     <loc>https://OKHand.org/post/gitlab-runner/</loc>
     <lastmod>2023-06-17T15:33:12+08:00</lastmod>
   </url><url>
-    <loc>https://OKHand.org/tags/testlink/</loc>
+    <loc>https://OKHand.org/categories/testlink/</loc>
     <lastmod>2023-06-17T14:11:42+08:00</lastmod>
   </url><url>
-    <loc>https://OKHand.org/categories/testlink/</loc>
+    <loc>https://OKHand.org/tags/testlink/</loc>
     <lastmod>2023-06-17T14:11:42+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/post/testlink-api-enabled/</loc>
@@ -170,10 +170,10 @@
     <loc>https://OKHand.org/tags/giscus/</loc>
     <lastmod>2023-05-12T15:05:04+08:00</lastmod>
   </url><url>
-    <loc>https://OKHand.org/tags/hugo/</loc>
+    <loc>https://OKHand.org/categories/hugo/</loc>
     <lastmod>2023-05-12T15:05:04+08:00</lastmod>
   </url><url>
-    <loc>https://OKHand.org/categories/hugo/</loc>
+    <loc>https://OKHand.org/tags/hugo/</loc>
     <lastmod>2023-05-12T15:05:04+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/post/hugo-giscus/</loc>
@@ -188,10 +188,10 @@
     <loc>https://OKHand.org/about_me/</loc>
     <lastmod>2023-02-04T15:15:39+08:00</lastmod>
   </url><url>
-    <loc>https://OKHand.org/tags/profile/</loc>
+    <loc>https://OKHand.org/categories/profile/</loc>
     <lastmod>2023-02-04T15:15:39+08:00</lastmod>
   </url><url>
-    <loc>https://OKHand.org/categories/profile/</loc>
+    <loc>https://OKHand.org/tags/profile/</loc>
     <lastmod>2023-02-04T15:15:39+08:00</lastmod>
   </url><url>
     <loc>https://OKHand.org/tags/fly.io/</loc>
