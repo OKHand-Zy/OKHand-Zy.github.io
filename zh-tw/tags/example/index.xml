@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Example on OKH@nd&#39;s Blog</title>
-    <link>http://localhost:1313/zh-tw/tags/example/</link>
+    <link>https://okhand.org/zh-tw/tags/example/</link>
     <description>Recent content in Example on OKH@nd&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <copyright>© 2025 OKHand.ZiYu</copyright>
-    <lastBuildDate>Sun, 03 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/zh-tw/tags/example/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Aug 2025 23:24:43 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/tags/example/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>first-post</title>
-      <link>http://localhost:1313/zh-tw/posts/1754196886591-first-post/</link>
-      <pubDate>Sun, 03 Aug 2025 00:00:00 +0000</pubDate>
+      <title>Test Post</title>
+      <link>https://okhand.org/zh-tw/posts/test-post/</link>
+      <pubDate>Wed, 13 Aug 2025 23:24:43 +0800</pubDate>
       
-      <guid>http://localhost:1313/zh-tw/posts/1754196886591-first-post/</guid>
-      <description></description>
-      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/zh-tw/posts/1754196886591-first-post/featured.png" />
+      <guid>https://okhand.org/zh-tw/posts/test-post/</guid>
+      <description>&lt;p&gt;test&lt;/p&gt;</description>
+      
     </item>
     
   </channel>

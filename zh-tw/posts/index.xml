@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <copyright>© 2025 OKHand.ZiYu</copyright>
-    <lastBuildDate>Sun, 03 Aug 2025 12:58:03 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Aug 2025 23:24:43 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Test Post</title>
+      <link>https://okhand.org/zh-tw/posts/test-post/</link>
+      <pubDate>Wed, 13 Aug 2025 23:24:43 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/test-post/</guid>
+      <description>&lt;p&gt;test&lt;/p&gt;</description>
+      
+    </item>
     
     <item>
       <title>Conda &amp; Pip Proxy 設定</title>

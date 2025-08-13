@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://okhand.org/zh-tw/</loc>
-    <lastmod>2025-08-03T12:58:03+08:00</lastmod>
+    <lastmod>2025-08-13T23:24:43+08:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -20,7 +20,7 @@
   </url>
   <url>
     <loc>https://okhand.org/zh-tw/posts/</loc>
-    <lastmod>2025-08-03T12:58:03+08:00</lastmod>
+    <lastmod>2025-08-13T23:24:43+08:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -33,6 +33,12 @@
       hreflang="zh-tw"
       href="https://okhand.org/zh-tw/posts/"
     />
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/test-post/</loc>
+    <lastmod>2025-08-13T23:24:43+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://okhand.org/zh-tw/posts/pypi_proxy/</loc>
