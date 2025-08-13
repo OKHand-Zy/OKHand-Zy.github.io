@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Conda on OKH@nd&#39;s Blog</title>
+    <link>https://okhand.org/zh-tw/tags/conda/</link>
+    <description>Recent content in Conda on OKH@nd&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>© 2025 OKHand.ZiYu</copyright>
+    <lastBuildDate>Thu, 12 Sep 2024 19:56:47 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/tags/conda/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Conda &amp; Pip Proxy 設定</title>
+      <link>https://okhand.org/zh-tw/posts/pypi_proxy/</link>
+      <pubDate>Thu, 12 Sep 2024 19:56:47 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/pypi_proxy/</guid>
+      <description>&lt;p&gt;某次因 Server 上需先掛 Proxy 後才能上網導致 Python 安裝套件過程中需要設定 Proxy 才能下載套件紀錄。&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://okhand.org/sitemap.xml

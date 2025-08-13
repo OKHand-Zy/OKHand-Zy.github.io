@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://okhand.org/en/</loc>
+    <lastmod>2025-08-03T12:58:03+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+      rel="alternate"
+      hreflang="zh-tw"
+      href="https://okhand.org/zh-tw/"
+    />
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://okhand.org/en/"
+    />
+  </url>
+  <url>
+    <loc>https://okhand.org/en/posts/</loc>
+    <lastmod>2025-08-03T12:58:03+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+      rel="alternate"
+      hreflang="zh-tw"
+      href="https://okhand.org/zh-tw/posts/"
+    />
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://okhand.org/en/posts/"
+    />
+  </url>
+</urlset>

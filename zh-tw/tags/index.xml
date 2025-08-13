@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on OKH@nd&#39;s Blog</title>
+    <link>https://okhand.org/zh-tw/tags/</link>
+    <description>Recent content in Tags on OKH@nd&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>© 2025 OKHand.ZiYu</copyright>
+    <lastBuildDate>Thu, 12 Sep 2024 19:56:47 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Conda</title>
+      <link>https://okhand.org/zh-tw/tags/conda/</link>
+      <pubDate>Thu, 12 Sep 2024 19:56:47 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/tags/conda/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Pip</title>
+      <link>https://okhand.org/zh-tw/tags/pip/</link>
+      <pubDate>Thu, 12 Sep 2024 19:56:47 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/tags/pip/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Proxy</title>
+      <link>https://okhand.org/zh-tw/tags/proxy/</link>
+      <pubDate>Thu, 12 Sep 2024 19:56:47 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/tags/proxy/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://okhand.org/zh-tw/tags/python/</link>
+      <pubDate>Thu, 12 Sep 2024 19:56:47 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/tags/python/</guid>
+      <description></description>
+      
+    </item>
+    
+  </channel>
+</rss>
