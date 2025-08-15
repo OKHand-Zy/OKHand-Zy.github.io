@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TestLink on OKH@nd&#39;s Blog</title>
+    <link>https://okhand.org/zh-tw/tags/testlink/</link>
+    <description>Recent content in TestLink on OKH@nd&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>© 2025 OKH@nd.ZiYu</copyright>
+    <lastBuildDate>Thu, 12 Sep 2024 19:56:47 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/tags/testlink/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Testlink Api Enabled</title>
+      <link>https://okhand.org/zh-tw/posts/testlink-api-enabled/</link>
+      <pubDate>Thu, 12 Sep 2024 19:56:47 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/testlink-api-enabled/</guid>
+      <description>&lt;p&gt;本文講述當初剛使用 TestLink 時想透過 TestLink 的 API 去互動時遇到的問題並解決的紀錄！！&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

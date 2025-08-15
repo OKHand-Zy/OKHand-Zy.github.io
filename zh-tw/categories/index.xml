@@ -6,13 +6,53 @@
     <description>Recent content in Categories on OKH@nd&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <copyright>© 2025 OKHand.ZiYu</copyright>
-    <lastBuildDate>Thu, 12 Sep 2024 19:56:47 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/categories/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>© 2025 OKH@nd.ZiYu</copyright>
+    <lastBuildDate>Fri, 20 Jun 2025 14:04:42 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Cloudflare</title>
+      <link>https://okhand.org/zh-tw/categories/cloudflare/</link>
+      <pubDate>Fri, 20 Jun 2025 14:04:42 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/categories/cloudflare/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Windows Server</title>
+      <link>https://okhand.org/zh-tw/categories/windows-server/</link>
+      <pubDate>Mon, 27 Jan 2025 16:16:10 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/categories/windows-server/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>AI</title>
+      <link>https://okhand.org/zh-tw/categories/ai/</link>
+      <pubDate>Sun, 26 Jan 2025 15:23:05 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/categories/ai/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>DataBase</title>
+      <link>https://okhand.org/zh-tw/categories/database/</link>
+      <pubDate>Thu, 05 Dec 2024 23:54:28 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/categories/database/</guid>
+      <description></description>
+      
+    </item>
     
     <item>
       <title>Environment</title>
       <link>https://okhand.org/zh-tw/categories/environment/</link>
-      <pubDate>Thu, 12 Sep 2024 19:56:47 +0800</pubDate>
+      <pubDate>Mon, 11 Nov 2024 01:15:55 +0800</pubDate>
       
       <guid>https://okhand.org/zh-tw/categories/environment/</guid>
       <description></description>
@@ -22,9 +62,39 @@
     <item>
       <title>Python</title>
       <link>https://okhand.org/zh-tw/categories/python/</link>
-      <pubDate>Thu, 12 Sep 2024 19:56:47 +0800</pubDate>
+      <pubDate>Thu, 12 Sep 2024 21:20:28 +0800</pubDate>
       
       <guid>https://okhand.org/zh-tw/categories/python/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>DevOps</title>
+      <link>https://okhand.org/zh-tw/categories/devops/</link>
+      <pubDate>Wed, 28 Feb 2024 13:01:40 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/categories/devops/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Hugo</title>
+      <link>https://okhand.org/zh-tw/categories/hugo/</link>
+      <pubDate>Fri, 12 May 2023 15:05:04 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/categories/hugo/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Line_Bot</title>
+      <link>https://okhand.org/zh-tw/categories/line_bot/</link>
+      <pubDate>Sat, 04 Feb 2023 15:00:40 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/categories/line_bot/</guid>
       <description></description>
       
     </item>

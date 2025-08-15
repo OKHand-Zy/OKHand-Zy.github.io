@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows_Server on OKH@nd&#39;s Blog</title>
+    <link>http://localhost:1313/zh-tw/tags/windows_server/</link>
+    <description>Recent content in Windows_Server on OKH@nd&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>© 2025 OKH@nd.ZiYu</copyright>
+    <lastBuildDate>Thu, 08 Feb 2024 13:29:55 +0800</lastBuildDate><atom:link href="http://localhost:1313/zh-tw/tags/windows_server/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Windows Server S2D</title>
+      <link>http://localhost:1313/zh-tw/posts/builds2d/</link>
+      <pubDate>Thu, 08 Feb 2024 13:29:55 +0800</pubDate>
+      
+      <guid>http://localhost:1313/zh-tw/posts/builds2d/</guid>
+      <description>&lt;p&gt;本文紀錄 Windows Server 2019 上建立 S2D 的過程！！&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

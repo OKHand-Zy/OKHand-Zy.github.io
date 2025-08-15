@@ -1,0 +1,1384 @@
+<!doctype html>
+<html
+  lang="TWN"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="dark"
+  data-auto-appearance="true"><head>
+  <meta charset="utf-8">
+  
+    <meta http-equiv="content-language" content="zh-tw">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color">
+
+  
+  <title>Docker Swarm 入門教學 &middot; OKH@nd&#39;s Blog</title>
+    <meta name="title" content="Docker Swarm 入門教學 &middot; OKH@nd&#39;s Blog">
+
+  
+  <meta name="description" content="Docker Swarm 入門教學">
+  <meta name="keywords" content="Docker,">
+  
+  
+  <link rel="canonical" href="https://okhand.org/zh-tw/posts/docker-swarm/">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="/css/main.bundle.min.0cdf364bd8bccd8f78e3774d46019e8d8c56c6b3dabbef6aec152bc371b533ab5764946c8710de044c0911f5cd58b63e1c22f50b97da09a2b1d35dd1839da22d.css"
+    integrity="sha512-DN82S9i8zY9443dNRgGejYxWxrPau&#43;9q7BUrw3G1M6tXZJRshxDeBEwJEfXNWLY&#43;HCL1C5faCaKx013Rg52iLQ==">
+
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js"
+    integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj&#43;e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg=="></script>
+  
+  
+    
+    
+    
+  
+  
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    <script
+      defer
+      type="text/javascript"
+      id="script-bundle"
+      src="/js/main.bundle.min.98bb8ce8f123e03c4d2171eeec151dd404b5c476beb5ef1068d0e8b1a2afb923065e6552fc14b2d867c85ee4bd8529a43193f729f874d3908517ba03b5d1cc57.js"
+      integrity="sha512-mLuM6PEj4DxNIXHu7BUd1AS1xHa&#43;te8QaNDosaKvuSMGXmVS/BSy2GfIXuS9hSmkMZP3Kfh005CFF7oDtdHMVw=="
+      data-copy="複製"
+      data-copied="已複製"></script>
+  
+  
+    
+    <script src="/lib/zoom/zoom.min.umd.a527109b68c082a70f3697716dd72a9d5aa8b545cf800cecbbc7399f2ca6f6e0ce3e431f2062b48bbfa47c9ea42822714060bef309be073f49b9c0e30d318d7b.js" integrity="sha512-pScQm2jAgqcPNpdxbdcqnVqotUXPgAzsu8c5nyym9uDOPkMfIGK0i7&#43;kfJ6kKCJxQGC&#43;8wm&#43;Bz9JucDjDTGNew=="></script>
+  
+
+  
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  <meta property="og:url" content="https://okhand.org/zh-tw/posts/docker-swarm/">
+  <meta property="og:site_name" content="OKH@nd&#39;s Blog">
+  <meta property="og:title" content="Docker Swarm 入門教學">
+  <meta property="og:description" content="Docker Swarm 入門教學">
+  <meta property="og:locale" content="zh_tw">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-11-26T22:39:37+08:00">
+    <meta property="article:modified_time" content="2023-11-26T22:39:37+08:00">
+    <meta property="article:tag" content="Docker">
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Docker Swarm 入門教學">
+  <meta name="twitter:description" content="Docker Swarm 入門教學">
+
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Posts",
+    "name": "Docker Swarm 入門教學",
+    "headline": "Docker Swarm 入門教學",
+    "description": "Docker Swarm 入門教學",
+    "abstract": "\u003cp\u003e本文介紹基礎的 Docker Swarm 該如何使用\u003c\/p\u003e",
+    "inLanguage": "zh-tw",
+    "url" : "https:\/\/okhand.org\/zh-tw\/posts\/docker-swarm\/",
+    "author" : {
+      "@type": "Person",
+      "name": "OKH@nd.ZiYu"
+    },
+    "copyrightYear": "2023",
+    "dateCreated": "2023-11-26T22:39:37\u002b08:00",
+    "datePublished": "2023-11-26T22:39:37\u002b08:00",
+    
+    "dateModified": "2023-11-26T22:39:37\u002b08:00",
+    
+    "keywords": ["Docker"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "306"
+  }]
+  </script>
+
+
+
+  
+  
+    <meta name="author" content="OKH@nd.ZiYu">
+  
+  
+    
+      
+        
+      
+    
+      
+        
+          <link href="https://github.com/OKHand-Zy" rel="me">
+        
+      
+    
+      
+        
+          <link href="https://www.instagram.com/okhand_ziyu/" rel="me">
+        
+      
+    
+      
+        
+          <link href="https://www.linkedin.com/in/okhand-ziyu/" rel="me">
+        
+      
+    
+  
+
+  
+  
+
+<script src="/lib/jquery/jquery.slim.min.b0dca576e87d7eaa5850ae4e61759c065786cdb6489d68fcc82240539eebd5da522bdb4fda085ffd245808c8fe2acb2516408eb774ef26b5f6015fc6737c0ea8.js" integrity="sha512-sNylduh9fqpYUK5OYXWcBleGzbZInWj8yCJAU57r1dpSK9tP2ghf/SRYCMj&#43;KsslFkCOt3TvJrX2AV/Gc3wOqA=="></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  <script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-F39WJMWNM4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-F39WJMWNM4');
+</script>
+
+
+
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</head>
+<body
+    class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32 scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-neutral-400 dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600">
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
+        href="#main-content">
+        <span class="font-bold text-primary-600 ltr:pr-2 rtl:pl-2 dark:text-primary-400">&darr;</span>
+        快轉到主要內容
+      </a>
+    </div>
+    
+    
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div
+  class="main-menu flex items-center justify-between px-4 py-6 sm:px-6 md:justify-start gap-x-3 pt-[2px] pr-0 pb-[3px] pl-0">
+  
+  
+    
+    
+      <div>
+        <a href="/zh-tw/" class="flex">
+          <span class="sr-only">OKH@nd&rsquo;s Blog</span>
+          
+            <img
+              src="/OKHand-Logo.png"
+              width="64"
+              height="64"
+              class="logo max-h-[5rem] max-w-[5rem] object-scale-down object-left nozoom"
+              alt="OKH@nd&#39;s Blog">
+          
+        </a>
+      </div>
+    
+
+  <div class="flex flex-1 items-center justify-between">
+    <nav class="flex space-x-3">
+      
+        <a href="/zh-tw/" class="text-base font-medium text-gray-500 hover:text-gray-900">
+          OKH@nd&rsquo;s Blog
+        </a>
+      
+    </nav>
+    
+  <nav class="hidden md:flex items-center gap-x-5 md:ml-12 h-12">
+    
+      
+        
+  <a
+  href="/zh-tw/"
+  
+  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+  
+  <p class="text-base font-medium" title="OKH@nd&#39;s Blog">
+    首頁
+  </p>
+</a>
+
+
+
+      
+        
+  <a
+  href="/zh-tw/posts/"
+  
+  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+  
+  <p class="text-base font-medium" title="Posts">
+    文章
+  </p>
+</a>
+
+
+
+      
+        
+  <a
+  href="/zh-tw/categories/"
+  
+  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+  
+  <p class="text-base font-medium" title="Categories">
+    分類
+  </p>
+</a>
+
+
+
+      
+        
+  <a
+  href="/zh-tw/tags/"
+  
+  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+  
+  <p class="text-base font-medium" title="Tags">
+    標籤
+  </p>
+</a>
+
+
+
+      
+        
+  <a
+  href="/zh-tw/about/"
+  
+  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+  
+  <p class="text-base font-medium" title="關於 我">
+    關於我
+  </p>
+</a>
+
+
+
+      
+    
+
+    
+
+    
+
+    
+      <button
+        id="search-button"
+        aria-label="Search"
+        class="text-base hover:text-primary-600 dark:hover:text-primary-400"
+        title="搜尋 (/)">
+        <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+      </button>
+    
+
+    
+      <div class=" flex items-center">
+        <button
+          id="appearance-switcher"
+          aria-label="Dark mode switcher"
+          type="button"
+          class="text-base hover:text-primary-600 dark:hover:text-primary-400">
+          <div class="flex items-center justify-center dark:hidden">
+            <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+</span>
+          </div>
+          <div class="items-center justify-center hidden dark:flex">
+            <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+</span>
+          </div>
+        </button>
+      </div>
+    
+  </nav>
+
+    
+  <div class="flex md:hidden items-center gap-x-5 md:ml-12 h-12">
+    <span></span>
+
+    
+
+    
+
+    
+      <button
+        id="search-button-mobile"
+        aria-label="Search"
+        class="text-base hover:text-primary-600 dark:hover:text-primary-400"
+        title="搜尋 (/)">
+        <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+      </button>
+    
+
+    
+      <button
+        id="appearance-switcher-mobile"
+        aria-label="Dark mode switcher"
+        type="button"
+        class="text-base hover:text-primary-600 dark:hover:text-primary-400 ltr:mr-1 rtl:ml-1">
+        <div class="flex items-center justify-center dark:hidden">
+          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+</span>
+        </div>
+        <div class="items-center justify-center hidden dark:flex">
+          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+</span>
+        </div>
+      </button>
+    
+  </div>
+
+  </div>
+  
+  <div class="-my-2 md:hidden">
+    <div id="menu-button" class="block">
+      
+        <div class="cursor-pointer hover:text-primary-600 dark:hover:text-primary-400">
+          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
+</span>
+        </div>
+        <div
+          id="menu-wrapper"
+          class="fixed inset-0 z-30 invisible w-screen h-screen m-0 overflow-auto transition-opacity opacity-0 cursor-default bg-neutral-100/50 backdrop-blur-sm dark:bg-neutral-900/50 pt-[5px]">
+          <ul
+            class="flex space-y-2 mt-3 flex-col items-end w-full px-6 py-6 mx-auto overflow-visible list-none ltr:text-right rtl:text-left max-w-7xl">
+            <li id="menu-close-button">
+              <span
+                class="cursor-pointer inline-block align-text-bottom hover:text-primary-600 dark:hover:text-primary-400">
+                <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+</span>
+              </span>
+            </li>
+
+            
+              
+  <li class="mt-1">
+  <a
+    href="/zh-tw/"
+    
+    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-bg font-bg" title="OKH@nd&#39;s Blog">
+      首頁
+    </p>
+  </a>
+</li>
+
+
+
+            
+              
+  <li class="mt-1">
+  <a
+    href="/zh-tw/posts/"
+    
+    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-bg font-bg" title="Posts">
+      文章
+    </p>
+  </a>
+</li>
+
+
+
+            
+              
+  <li class="mt-1">
+  <a
+    href="/zh-tw/categories/"
+    
+    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-bg font-bg" title="Categories">
+      分類
+    </p>
+  </a>
+</li>
+
+
+
+            
+              
+  <li class="mt-1">
+  <a
+    href="/zh-tw/tags/"
+    
+    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-bg font-bg" title="Tags">
+      標籤
+    </p>
+  </a>
+</li>
+
+
+
+            
+              
+  <li class="mt-1">
+  <a
+    href="/zh-tw/about/"
+    
+    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-bg font-bg" title="關於 我">
+      關於我
+    </p>
+  </a>
+</li>
+
+
+
+            
+
+          </ul>
+          
+        </div>
+      
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+    
+    <div class="relative flex flex-col grow">
+      <main id="main-content" class="grow">
+        
+  
+  <article>
+    
+    
+
+    
+    <header id="single_header" class="mt-5 max-w-prose">
+      
+      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        Docker Swarm 入門教學
+      </h1>
+      <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+        
+
+
+
+
+
+  
+  
+
+
+
+  
+
+  
+  
+  
+
+  
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <div class="flex flex-row flex-wrap items-center">
+    
+    
+      <time datetime="2023-11-26T22:39:37&#43;08:00">2023年11月26日</time><span class="px-2 text-primary-500">&middot;</span><span>306 字</span><span class="px-2 text-primary-500">&middot;</span><span title="預計閱讀時間">2 分鐘</span>
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  
+    <div class="flex flex-row flex-wrap items-center">
+      
+        
+      
+        
+          
+            
+              <a class="relative mt-[0.5rem] mr-2" href="/zh-tw/categories/devops/"
+                ><span class="flex cursor-pointer">
+  <span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    DevOps
+  </span>
+</span>
+</a
+              >
+            
+          
+        
+      
+        
+      
+        
+          
+            
+              <a class="relative mt-[0.5rem] mr-2" href="/zh-tw/tags/docker/"
+                ><span class="flex cursor-pointer">
+  <span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Docker
+  </span>
+</span>
+</a
+              >
+            
+          
+        
+      
+    </div>
+  
+
+  
+  
+
+
+
+      </div>
+      
+        
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+      
+    </header>
+
+    
+    <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+      
+      
+      
+      
+      
+
+
+      <div class="min-w-0 min-h-0 max-w-fit">
+        
+
+        <div class="article-content max-w-prose mb-20">
+          <p>本文介紹基礎的 Docker Swarm 該如何使用</p>
+
+<h2 class="relative group">建立測試機並建立測試環境 
+    <div id="建立測試機並建立測試環境" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#%e5%bb%ba%e7%ab%8b%e6%b8%ac%e8%a9%a6%e6%a9%9f%e4%b8%a6%e5%bb%ba%e7%ab%8b%e6%b8%ac%e8%a9%a6%e7%92%b0%e5%a2%83" aria-label="定位點">#</a>
+    </span>        
+    
+</h2>
+<p>我們這邊用 Docker-Machine 建立測試環境也可以用一般的VM 建立測試環境都OK，只要確保環境上網路能連通 Docker 能用即可！</p>
+<p><strong>Docker-Machine (用來建立虛擬機 for virtualbox)：</strong></p>
+<p><a
+  href="https://github.com/docker/machine/releases/"
+    target="_blank"
+  >docker/machine (github.com)</a> ⇒ 改名為 docker-machine.exe</p>
+<p><strong>Windows</strong>：放在 C:\Windows\System32</p>
+<p><strong>Linux</strong>：放在 /usr/bin ⇒ chmod 755 docker-machine</p>
+
+<h2 class="relative group">Docker Swarm 腳色： 
+    <div id="docker-swarm-腳色" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#docker-swarm-%e8%85%b3%e8%89%b2" aria-label="定位點">#</a>
+    </span>        
+    
+</h2>
+<ul>
+<li>
+<p><strong>Manager 叢集管理</strong> <br>
+目的就是負責來管理叢集的宿主機，並調用安排每個需要的服務容器應該要被放在哪一台來做啟動，當服務停止時也要負責啟動服務容器使之正常來做服務的提供。</p>
+</li>
+<li>
+<p><strong>Worker Nodes 工作節點</strong> <br>
+Node翻譯成節點，簡單說就是代表一台台的宿主機，而執行Service的地方就是在任意的Node節點上。</p>
+</li>
+</ul>
+
+<h2 class="relative group">Docker Swarm 優點： 
+    <div id="docker-swarm-優點" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#docker-swarm-%e5%84%aa%e9%bb%9e" aria-label="定位點">#</a>
+    </span>        
+    
+</h2>
+<ul>
+<li>
+<p><strong>Scaling 自動擴展</strong> <br>
+Scaling本身概念簡單，也是雲端能帶來的其中一項價值所需，當回應需求服務數量或連線流量過大時，能透過自動擴展機制一次啟動多個相應的服務同時處理需求回應與因應流量，直到流量或需求恢復正常，就可以透過縮容來減少服務數量，以節省主機成本。</p>
+</li>
+<li>
+<p><strong>Load Balacning 負載平衡</strong> <br>
+當流量進到Docker Swarm的服務中，會透過像輪詢(<code>Round Robin</code>)的機制去把進來的流量做分流，也就是輪流把流量送到各服務去，舉例第一個進來給A容器，第二個進來給B容器，第三個進來再給A，以此類推&hellip;</p>
+</li>
+<li>
+<p><strong>Service Discovery 服務探索</strong> <br>
+在 Docker swarm 中每個服務都可以定義自己服務獨有的DNS，而接下來就可以讓其他容器透過自訂的DNS來使用服務。</p>
+</li>
+</ul>
+
+<h2 class="relative group">Docker Swarm 整體架構圖： 
+    <div id="docker-swarm-整體架構圖" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#docker-swarm-%e6%95%b4%e9%ab%94%e6%9e%b6%e6%a7%8b%e5%9c%96" aria-label="定位點">#</a>
+    </span>        
+    
+</h2>
+<p>
+
+
+
+
+
+
+<figure>
+    <img class="my-0 rounded-md" loading="lazy" alt="Docker-Swarm-Arch" src="https://image.okhand.org/docker-swarm/Docker-Swarm-Arch.webp">
+
+  
+</figure>
+</p>
+
+<h2 class="relative group">Docker Swarm 網路架構圖： 
+    <div id="docker-swarm-網路架構圖" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#docker-swarm-%e7%b6%b2%e8%b7%af%e6%9e%b6%e6%a7%8b%e5%9c%96" aria-label="定位點">#</a>
+    </span>        
+    
+</h2>
+<p>
+
+
+
+
+
+
+<figure>
+    <img class="my-0 rounded-md" loading="lazy" alt="Docker-Swarm-Network" src="https://image.okhand.org/docker-swarm/Docker-Swarm-Network.webp">
+
+  
+</figure>
+</p>
+
+<h2 class="relative group">Docker Swarm Command： 
+    <div id="docker-swarm-command" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#docker-swarm-command" aria-label="定位點">#</a>
+    </span>        
+    
+</h2>
+<p>查看 cluster 內的 server：<code>docker node ls</code></p>
+<p>建立服務：<code>docker service create --replicas &lt;數量&gt; --name=&lt;service_name&gt; -p &lt;host_port&gt;:&lt;container_port&gt; &lt;image&gt;</code></p>
+<p>刪除服務：<code>docker service rm &lt;service_name&gt;</code></p>
+<p>查看服務：<code>docker service ps &lt;service_name&gt;</code></p>
+<p>查看服務 Log：<code>docker service logs &lt;service_name&gt; -f</code></p>
+<p>更新服務參數：<code>docker service update &lt;option&gt; &lt;service_name&gt;</code></p>
+<p>查看服務詳細參數：<code>docker service inspect &lt;service_name&gt;</code></p>
+
+<h2 class="relative group">Docker Swarm 搭建基礎實作： 
+    <div id="docker-swarm-搭建基礎實作" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#docker-swarm-%e6%90%ad%e5%bb%ba%e5%9f%ba%e7%a4%8e%e5%af%a6%e4%bd%9c" aria-label="定位點">#</a>
+    </span>        
+    
+</h2>
+<ol>
+<li>
+<p>init docker swarm (in master)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker swarm init
+</span></span><span class="line"><span class="cl"><span class="c1"># 機台上有多個 ip 請使用下面的</span>
+</span></span><span class="line"><span class="cl">docker swarm init --advertise-addr &lt;互ping的到的ip&gt;
+</span></span></code></pre></div><p>IP 太多的 Error message：
+
+
+
+
+
+
+
+<figure>
+    <img class="my-0 rounded-md" loading="lazy" alt="ErrorMessage" src="https://image.okhand.org/docker-swarm/ErrorMessage.webp">
+
+  
+</figure>
+</p>
+<p>init 成功：
+
+
+
+
+
+
+
+<figure>
+    <img class="my-0 rounded-md" loading="lazy" alt="init-success" src="https://image.okhand.org/docker-swarm/init-success.webp">
+
+  
+</figure>
+</p>
+</li>
+<li>
+<p>docker swarm join (in node) <br>
+複製上面的 Join Command</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker swarm join --token &lt;docker_swarm_token&gt; &lt;IP&gt;:2377
+</span></span></code></pre></div><p>連結成功：
+
+
+
+
+
+
+
+<figure>
+    <img class="my-0 rounded-md" loading="lazy" alt="link-success" src="https://image.okhand.org/docker-swarm/link-success.webp">
+
+  
+</figure>
+</p>
+</li>
+<li>
+<p>查看 node 是否正確</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker node ls
+</span></span></code></pre></div><p>
+
+
+
+
+
+
+<figure>
+    <img class="my-0 rounded-md" loading="lazy" alt="node-ls" src="https://image.okhand.org/docker-swarm/node-ls.webp">
+
+  
+</figure>
+</p>
+</li>
+<li>
+<p>建立服務</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker service create
+</span></span></code></pre></div><p>
+
+
+
+
+
+
+<figure>
+    <img class="my-0 rounded-md" loading="lazy" alt="service-create" src="https://image.okhand.org/docker-swarm/service-create.webp">
+
+  
+</figure>
+</p>
+</li>
+<li>
+<p>查看服務是否建立</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker service ps <span class="s2">&#34;gyhello&#34;</span>
+</span></span></code></pre></div><p>
+
+
+
+
+
+
+<figure>
+    <img class="my-0 rounded-md" loading="lazy" alt="check-service-create" src="https://image.okhand.org/docker-swarm/check-service-create.webp">
+
+  
+</figure>
+</p>
+</li>
+<li>
+<p>查看服務是否正常啟用
+
+
+
+
+
+
+
+<figure>
+    <img class="my-0 rounded-md" loading="lazy" alt="check-service-status" src="https://image.okhand.org/docker-swarm/check-service-status.webp">
+
+  
+</figure>
+</p>
+</li>
+<li>
+<p>查看服務 Logs</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker service logs gyhello -f
+</span></span></code></pre></div><p>
+
+
+
+
+
+
+<figure>
+    <img class="my-0 rounded-md" loading="lazy" alt="service-logs" src="https://image.okhand.org/docker-swarm/service-logs.webp">
+
+  
+</figure>
+</p>
+</li>
+</ol>
+
+<h2 class="relative group">Docker Swarm Load Balancer 實作： 
+    <div id="docker-swarm-load-balancer-實作" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#docker-swarm-load-balancer-%e5%af%a6%e4%bd%9c" aria-label="定位點">#</a>
+    </span>        
+    
+</h2>
+<p>這邊是示範後端設定 , 前端還需要掛載一個 nginx 去做 Load Balancer , 連到前端 nginx 後會自動導入後端兩台其中一個 ip 去使用服務</p>
+
+<h3 class="relative group">擴增(scaling up)： 
+    <div id="擴增scaling-up" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#%e6%93%b4%e5%a2%9escaling-up" aria-label="定位點">#</a>
+    </span>        
+    
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker service scale &lt;service_name&gt;<span class="o">=</span>&lt;數量&gt;
+</span></span><span class="line"><span class="cl"><span class="c1"># Ex: docker service scale gyhello=5</span>
+</span></span></code></pre></div><p>
+
+
+
+
+
+
+<figure>
+    <img class="my-0 rounded-md" loading="lazy" alt="scaling-up" src="https://image.okhand.org/docker-swarm/scaling-up.webp">
+
+  
+</figure>
+</p>
+<p>
+
+
+
+
+
+
+<figure>
+    <img class="my-0 rounded-md" loading="lazy" alt="befor-service-status" src="https://image.okhand.org/docker-swarm/befor-service-status.webp">
+
+  
+</figure>
+</p>
+
+<h3 class="relative group">縮容(scaling down)： 
+    <div id="縮容scaling-down" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#%e7%b8%ae%e5%ae%b9scaling-down" aria-label="定位點">#</a>
+    </span>        
+    
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker service scale &lt;service_name&gt;<span class="o">=</span>&lt;數量&gt;
+</span></span><span class="line"><span class="cl"><span class="c1"># Ex: docker service scale gyhello=2</span>
+</span></span></code></pre></div><p>
+
+
+
+
+
+
+<figure>
+    <img class="my-0 rounded-md" loading="lazy" alt="scaling-down" src="https://image.okhand.org/docker-swarm/scaling-down.webp">
+
+  
+</figure>
+</p>
+<p>
+
+
+
+
+
+
+<figure>
+    <img class="my-0 rounded-md" loading="lazy" alt="after-service-status" src="https://image.okhand.org/docker-swarm/after-service-status.webp">
+
+  
+</figure>
+</p>
+
+<h3 class="relative group">負載平衡驗證： 
+    <div id="負載平衡驗證" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#%e8%b2%a0%e8%bc%89%e5%b9%b3%e8%a1%a1%e9%a9%97%e8%ad%89" aria-label="定位點">#</a>
+    </span>        
+    
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Linux Command:</span>
+</span></span><span class="line"><span class="cl">iptables -L -t nat
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># filter : 是流量進到宿主機本身來決定是否 Accept or Drop or Forward的方式。</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># NAT : 流量本身跟此台宿主機並無直接關係，主要作為來源與目的 IP &amp; Port間轉至後端容器主機。</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Mangle : 屬特殊表格，會去標記某些規格並改寫封包。</span>
+</span></span></code></pre></div><p>驗證會被導入到 172.18.0.2:8080</p>
+<p>
+
+
+
+
+
+
+<figure>
+    <img class="my-0 rounded-md" loading="lazy" alt="iptables" src="https://image.okhand.org/docker-swarm/iptables.webp">
+
+  
+</figure>
+</p>
+<p>ifconfig 確認 <code>docker_gwbridge</code> 網路介面相關聯，透過 <code>Ｎode建立Container</code> 後在與容器建立連線，故節點中涵蓋一組容器 IP：172.18.0.2</p>
+<p>
+
+
+
+
+
+
+<figure>
+    <img class="my-0 rounded-md" loading="lazy" alt="ifconfig" src="https://image.okhand.org/docker-swarm/ifconfig.webp">
+
+  
+</figure>
+</p>
+<p>檢視 Docker 網路的詳細資訊：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker network inspect docker_gwbridge
+</span></span></code></pre></div><p>這裡有一個被隱藏的 Container 叫 ingress-sbox，看起來流量是先進入此 Container 後再把流量分配到真正的 Service</p>
+<p>
+
+
+
+
+
+
+<figure>
+    <img class="my-0 rounded-md" loading="lazy" alt="net_inspect" src="https://image.okhand.org/docker-swarm/net_inspect.webp">
+
+  
+</figure>
+</p>
+
+<h2 class="relative group">Ingress： 
+    <div id="ingress" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#ingress" aria-label="定位點">#</a>
+    </span>        
+    
+</h2>
+<p>docker swarm 跟 k8s 依樣是透過在 Master端 建立網段可以與外網溝通並利用 ipvs 方式把 iptables 加在每個 node 中並導出服務的 port , 達到外網只要連線到 master端ip:port 就能使用服務</p>
+
+<h2 class="relative group">Reference 
+    <div id="reference" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#reference" aria-label="定位點">#</a>
+    </span>        
+    
+</h2>
+<p><a
+  href="https://blog.daocloud.io/233.html"
+    target="_blank"
+  >深入浅出Swarm(Blog DaoCloud)</a></p>
+<p><a
+  href="https://zhuanlan.zhihu.com/p/618481784"
+    target="_blank"
+  >【云原生】一文理解Swarm解决docker server的集群化管理和部署(知乎)</a></p>
+<p><a
+  href="https://yu-jack.github.io/2020/05/25/docker-swarm-load-balancing/"
+    target="_blank"
+  >Docker Swarm 網路架構介紹 - load balancing traffic path </a></p>
+          
+          
+          
+        </div>
+        
+        
+
+        
+
+        
+
+      </div>
+
+      
+      
+        
+        
+          
+          
+        
+        
+        
+        <script
+          type="text/javascript"
+          src="/js/page.min.54b6f4371722649edbe871e431d8670d670878c22be8f36e229fe53cc9b786fe25a834def5e6de621f7a3e37b72bc8cd73839aa5ed907ed6cbd45cd3e1b0fa20.js"
+          integrity="sha512-VLb0NxciZJ7b6HHkMdhnDWcIeMIr6PNuIp/lPMm3hv4lqDTe9ebeYh96Pje3K8jNc4Oape2QftbL1FzT4bD6IA=="
+          data-oid="views_posts/docker-swarm.md"
+          data-oid-likes="likes_posts/docker-swarm.md"></script>
+      
+    </section>
+
+    
+    <footer class="pt-8 max-w-prose print:hidden">
+      
+
+      
+        
+          <div class="pt-3">
+            <hr class="border-dotted border-neutral-300 dark:border-neutral-600">
+            <div class="pt-3">
+              
+
+<script src="https://giscus.app/client.js"
+        data-repo="OKHand-Zy/OKHand-Zy.github.io"
+        data-repo-id="R_kgDOI4u6xw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOI4u6x84CuITR"
+        data-mapping="url"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-TW"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+            </div>
+          </div>
+        
+      
+    </footer>
+  </article>
+
+        <div id="top-scroller" class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0 z-10">
+  <a
+    href="#the-top"
+    class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+    aria-label="捲動到頁頂"
+    title="捲動到頁頂">
+    &uarr;
+  </a>
+</div>
+
+      </main><footer id="site-footer" class="py-10 print:hidden">
+  
+  
+    
+      
+      
+        
+          
+          
+      
+      
+      
+      <nav class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400 ">
+        <ul class="flex list-none flex-col sm:flex-row">
+          
+            <li class=" flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0 ">
+              <a
+                class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center"
+                href="https://github.com/OKHand-Zy"
+                title="">
+                
+                  <span class="mr-1">
+                    <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+</span>
+                  </span>
+                
+                GitHub
+              </a>
+            </li>
+          
+            <li class=" flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0 ">
+              <a
+                class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center"
+                href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=okhand.ziyu@gmail.com"
+                title="">
+                
+                  <span class="mr-1">
+                    <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg></span>
+                  </span>
+                
+                Gmail
+              </a>
+            </li>
+          
+            <li class=" flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0 ">
+              <a
+                class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center"
+                href="https://okhand.org/index.xml"
+                title="">
+                
+                  <span class="mr-1">
+                    <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 64C0 46.3 14.3 32 32 32c229.8 0 416 186.2 416 416c0 17.7-14.3 32-32 32s-32-14.3-32-32C384 253.6 226.4 96 32 96C14.3 96 0 81.7 0 64zM128 416c0 35.3-28.7 64-64 64s-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64zM32 160c159.1 0 288 128.9 288 288c0 17.7-14.3 32-32 32s-32-14.3-32-32c0-123.7-100.3-224-224-224c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></svg></span>
+                  </span>
+                
+                RSS
+              </a>
+            </li>
+          
+        </ul>
+      </nav>
+    
+  
+  <div class="flex items-center justify-between">
+    
+    
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          &copy;
+          2025
+          <a
+  href="mailto:OKH@nd.ZiYu">OKH@nd.ZiYu</a>
+      </p>
+    
+
+    
+    
+      <p class="text-xs text-neutral-500 dark:text-neutral-400">
+        
+        
+        以 <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://blowfish.page/" target="_blank" rel="noopener noreferrer">Blowfish</a> 製作
+      </p>
+    
+  </div>
+  
+    <script>
+      mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+        margin: 24,
+        background: "rgba(0,0,0,0.5)",
+        scrollOffset: 0,
+      });
+    </script>
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/process.min.ee03488f19c93c2efb199e2e3014ea5f3cb2ce7d45154adb3399a158cac27ca52831db249ede5bb602700ef87eb02434139de0858af1818ab0fb4182472204a4.js"
+    integrity="sha512-7gNIjxnJPC77GZ4uMBTqXzyyzn1FFUrbM5mhWMrCfKUoMdsknt5btgJwDvh&#43;sCQ0E53ghYrxgYqw&#43;0GCRyIEpA=="></script>
+  
+  
+</footer>
+<div
+  id="search-wrapper"
+  class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh] z-500"
+  data-url="https://okhand.org/zh-tw/">
+  <div
+    id="search-modal"
+    class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800">
+    <header class="relative z-10 flex items-center justify-between flex-none px-2">
+      <form class="flex items-center flex-auto min-w-0">
+        <div class="flex items-center justify-center w-8 h-8 text-neutral-400">
+          <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+        </div>
+        <input
+          type="search"
+          id="search-query"
+          class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent"
+          placeholder="搜尋"
+          tabindex="0">
+      </form>
+      <button
+        id="close-search-button"
+        class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        title="關閉 (Esc)">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+</span>
+      </button>
+    </header>
+    <section class="flex-auto px-2 overflow-auto">
+      <ul id="search-results">
+        
+      </ul>
+    </section>
+  </div>
+</div>
+
+    </div>
+  </body>
+  
+</html>

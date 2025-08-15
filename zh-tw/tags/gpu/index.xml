@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GPU on OKH@nd&#39;s Blog</title>
+    <link>https://okhand.org/zh-tw/tags/gpu/</link>
+    <description>Recent content in GPU on OKH@nd&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>© 2025 OKH@nd.ZiYu</copyright>
+    <lastBuildDate>Mon, 11 Nov 2024 01:15:55 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/tags/gpu/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>移除 Nvidia 驅動與 CUDA 套件</title>
+      <link>https://okhand.org/zh-tw/posts/nvdriver-rm/</link>
+      <pubDate>Mon, 11 Nov 2024 01:15:55 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/nvdriver-rm/</guid>
+      <description>&lt;p&gt;因為Nvidia驅動每次都會莫名其妙不見，然後又要重裝套件，紀錄一下如何完整的移除驅動與套件。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Nvidia A100 環境設定</title>
+      <link>https://okhand.org/zh-tw/posts/nvidia-a100_env/</link>
+      <pubDate>Wed, 11 Sep 2024 21:23:33 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/nvidia-a100_env/</guid>
+      <description>&lt;p&gt;剛好有幸用到 8 Core 80G GPU 的 A100 機台，但以為設定跟之前一樣卻要用 CUDA 跑 LLM 時遇到問題並紀錄解決方法。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>如何正確在 Docker 與 K8s 使用 GPU</title>
+      <link>https://okhand.org/zh-tw/posts/k8sgpu/</link>
+      <pubDate>Wed, 28 Feb 2024 13:01:40 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/k8sgpu/</guid>
+      <description>&lt;p&gt;本文介紹在 Ubuntu Server 22.04 上安裝 Docker 與 Kubernetes 並在 Container 上使用 GPU 的紀錄&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

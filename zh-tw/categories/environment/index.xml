@@ -6,16 +6,46 @@
     <description>Recent content in Environment on OKH@nd&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <copyright>© 2025 OKHand.ZiYu</copyright>
-    <lastBuildDate>Thu, 12 Sep 2024 19:56:47 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/categories/environment/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>© 2025 OKH@nd.ZiYu</copyright>
+    <lastBuildDate>Mon, 11 Nov 2024 01:15:55 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/categories/environment/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Conda &amp; Pip Proxy 設定</title>
-      <link>https://okhand.org/zh-tw/posts/pypi_proxy/</link>
+      <title>移除 Nvidia 驅動與 CUDA 套件</title>
+      <link>https://okhand.org/zh-tw/posts/nvdriver-rm/</link>
+      <pubDate>Mon, 11 Nov 2024 01:15:55 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/nvdriver-rm/</guid>
+      <description>&lt;p&gt;因為Nvidia驅動每次都會莫名其妙不見，然後又要重裝套件，紀錄一下如何完整的移除驅動與套件。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Testlink Api Enabled</title>
+      <link>https://okhand.org/zh-tw/posts/testlink-api-enabled/</link>
       <pubDate>Thu, 12 Sep 2024 19:56:47 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/posts/pypi_proxy/</guid>
-      <description>&lt;p&gt;某次因 Server 上需先掛 Proxy 後才能上網導致 Python 安裝套件過程中需要設定 Proxy 才能下載套件紀錄。&lt;/p&gt;</description>
+      <guid>https://okhand.org/zh-tw/posts/testlink-api-enabled/</guid>
+      <description>&lt;p&gt;本文講述當初剛使用 TestLink 時想透過 TestLink 的 API 去互動時遇到的問題並解決的紀錄！！&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Nvidia A100 環境設定</title>
+      <link>https://okhand.org/zh-tw/posts/nvidia-a100_env/</link>
+      <pubDate>Wed, 11 Sep 2024 21:23:33 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/nvidia-a100_env/</guid>
+      <description>&lt;p&gt;剛好有幸用到 8 Core 80G GPU 的 A100 機台，但以為設定跟之前一樣卻要用 CUDA 跑 LLM 時遇到問題並紀錄解決方法。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Jenkins 環境搭建</title>
+      <link>https://okhand.org/zh-tw/posts/jenkins-build/</link>
+      <pubDate>Fri, 12 May 2023 11:21:49 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/jenkins-build/</guid>
+      <description>&lt;p&gt;本文講述如何使用 Docker 簡單搭建 Jenkins 服務，並紀錄過程！&lt;/p&gt;</description>
       
     </item>
     

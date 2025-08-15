@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker on OKH@nd&#39;s Blog</title>
+    <link>https://okhand.org/zh-tw/tags/docker/</link>
+    <description>Recent content in Docker on OKH@nd&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>© 2025 OKH@nd.ZiYu</copyright>
+    <lastBuildDate>Wed, 28 Feb 2024 13:01:40 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>如何正確在 Docker 與 K8s 使用 GPU</title>
+      <link>https://okhand.org/zh-tw/posts/k8sgpu/</link>
+      <pubDate>Wed, 28 Feb 2024 13:01:40 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/k8sgpu/</guid>
+      <description>&lt;p&gt;本文介紹在 Ubuntu Server 22.04 上安裝 Docker 與 Kubernetes 並在 Container 上使用 GPU 的紀錄&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Docker Swarm 入門教學</title>
+      <link>https://okhand.org/zh-tw/posts/docker-swarm/</link>
+      <pubDate>Sun, 26 Nov 2023 22:39:37 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/docker-swarm/</guid>
+      <description>&lt;p&gt;本文介紹基礎的 Docker Swarm 該如何使用&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Docker 與 VM 的不同 與 Docker 指令</title>
+      <link>https://okhand.org/zh-tw/posts/docker-vm-df/</link>
+      <pubDate>Sun, 19 Nov 2023 16:00:41 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/docker-vm-df/</guid>
+      <description>&lt;p&gt;本文講述 Docker 與 VM 的不同 與 Docker 指令&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

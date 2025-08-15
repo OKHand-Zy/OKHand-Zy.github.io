@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://okhand.org/zh-tw/</loc>
-    <lastmod>2025-08-13T23:24:43+08:00</lastmod>
+    <lastmod>2025-08-15T19:46:55+08:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -19,8 +19,30 @@
     />
   </url>
   <url>
+    <loc>https://okhand.org/zh-tw/about/</loc>
+    <lastmod>2025-08-15T19:46:55+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://okhand.org/en/about/"
+    />
+    <xhtml:link
+      rel="alternate"
+      hreflang="zh-tw"
+      href="https://okhand.org/zh-tw/about/"
+    />
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/cloudflare-r2/</loc>
+    <lastmod>2025-06-20T14:04:42+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://okhand.org/zh-tw/posts/</loc>
-    <lastmod>2025-08-13T23:24:43+08:00</lastmod>
+    <lastmod>2025-06-20T14:04:42+08:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -35,14 +57,146 @@
     />
   </url>
   <url>
-    <loc>https://okhand.org/zh-tw/posts/test-post/</loc>
-    <lastmod>2025-08-13T23:24:43+08:00</lastmod>
+    <loc>https://okhand.org/zh-tw/posts/win-sid-error/</loc>
+    <lastmod>2025-01-27T16:16:10+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/claude_mcp/</loc>
+    <lastmod>2025-01-26T15:23:05+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/elastic/</loc>
+    <lastmod>2024-12-05T23:54:28+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/hybrid-search/</loc>
+    <lastmod>2024-12-05T23:54:28+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/nvdriver-rm/</loc>
+    <lastmod>2024-11-11T01:15:55+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/cookiecutter/</loc>
+    <lastmod>2024-09-12T21:20:28+08:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://okhand.org/zh-tw/posts/pypi_proxy/</loc>
     <lastmod>2024-09-12T19:56:47+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/testlink-api-enabled/</loc>
+    <lastmod>2024-09-12T19:56:47+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/nvidia-a100_env/</loc>
+    <lastmod>2024-09-11T21:23:33+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/langchain2rag/</loc>
+    <lastmod>2024-06-09T15:40:46+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/ollama-modefile/</loc>
+    <lastmod>2024-06-08T19:56:17+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/ollama-deploy/</loc>
+    <lastmod>2024-05-02T20:08:32+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/k8sgpu/</loc>
+    <lastmod>2024-02-28T13:01:40+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/builds2d/</loc>
+    <lastmod>2024-02-08T13:29:55+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/docker-swarm/</loc>
+    <lastmod>2023-11-26T22:39:37+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/docker-vm-df/</loc>
+    <lastmod>2023-11-19T16:00:41+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/gitlab-runner/</loc>
+    <lastmod>2023-06-17T15:33:12+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/hugo-giscus/</loc>
+    <lastmod>2023-05-12T15:05:04+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/jenkins-build/</loc>
+    <lastmod>2023-05-12T11:21:49+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/line-bot-ex/</loc>
+    <lastmod>2023-02-04T15:00:40+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/line-bot-end/</loc>
+    <lastmod>2023-02-04T13:43:16+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/line-bot3/</loc>
+    <lastmod>2023-02-02T16:32:43+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/line-bot2/</loc>
+    <lastmod>2023-02-02T14:52:30+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/line-bot1/</loc>
+    <lastmod>2023-02-01T16:24:45+08:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tool on OKH@nd&#39;s Blog</title>
+    <link>https://okhand.org/zh-tw/tags/tool/</link>
+    <description>Recent content in Tool on OKH@nd&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>© 2025 OKH@nd.ZiYu</copyright>
+    <lastBuildDate>Sun, 26 Jan 2025 15:23:05 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/tags/tool/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Claude MCP</title>
+      <link>https://okhand.org/zh-tw/posts/claude_mcp/</link>
+      <pubDate>Sun, 26 Jan 2025 15:23:05 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/claude_mcp/</guid>
+      <description>&lt;p&gt;Claude Model Context Protocol(MCP)，在 Windows 環境中 Step By Step 安裝步驟！&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Cookiecutter</title>
+      <link>https://okhand.org/zh-tw/posts/cookiecutter/</link>
+      <pubDate>Thu, 12 Sep 2024 21:20:28 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/cookiecutter/</guid>
+      <description>&lt;p&gt;最近在寫 Python 想說把一些 Model 匯聚成一個 Package 使用時，突然發現好像沒有一個像 Next.js 那種建立一個初始化 Templates 的工具，然後我就找到了這個。&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

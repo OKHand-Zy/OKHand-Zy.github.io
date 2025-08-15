@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Claude on OKH@nd&#39;s Blog</title>
+    <link>https://okhand.org/zh-tw/tags/claude/</link>
+    <description>Recent content in Claude on OKH@nd&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>© 2025 OKH@nd.ZiYu</copyright>
+    <lastBuildDate>Sun, 26 Jan 2025 15:23:05 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/tags/claude/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Claude MCP</title>
+      <link>https://okhand.org/zh-tw/posts/claude_mcp/</link>
+      <pubDate>Sun, 26 Jan 2025 15:23:05 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/claude_mcp/</guid>
+      <description>&lt;p&gt;Claude Model Context Protocol(MCP)，在 Windows 環境中 Step By Step 安裝步驟！&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

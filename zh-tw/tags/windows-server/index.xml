@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows Server on OKH@nd&#39;s Blog</title>
+    <link>http://localhost:1313/zh-tw/tags/windows-server/</link>
+    <description>Recent content in Windows Server on OKH@nd&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>© 2025 OKH@nd.ZiYu</copyright>
+    <lastBuildDate>Mon, 27 Jan 2025 16:16:10 +0800</lastBuildDate><atom:link href="http://localhost:1313/zh-tw/tags/windows-server/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Window SID 相同錯誤</title>
+      <link>http://localhost:1313/zh-tw/posts/win-sid-error/</link>
+      <pubDate>Mon, 27 Jan 2025 16:16:10 +0800</pubDate>
+      
+      <guid>http://localhost:1313/zh-tw/posts/win-sid-error/</guid>
+      <description>&lt;p&gt;在 Windows 上 Clone 同份 Image 為多個 VM 上要加入 Domain 時發生的 SID 相同問題與解決方法！&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

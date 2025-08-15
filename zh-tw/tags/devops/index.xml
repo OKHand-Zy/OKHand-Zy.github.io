@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DevOps on OKH@nd&#39;s Blog</title>
+    <link>http://localhost:1313/zh-tw/tags/devops/</link>
+    <description>Recent content in DevOps on OKH@nd&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>© 2025 OKH@nd.ZiYu</copyright>
+    <lastBuildDate>Sat, 17 Jun 2023 15:33:12 +0800</lastBuildDate><atom:link href="http://localhost:1313/zh-tw/tags/devops/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Gitlab Runner</title>
+      <link>http://localhost:1313/zh-tw/posts/gitlab-runner/</link>
+      <pubDate>Sat, 17 Jun 2023 15:33:12 +0800</pubDate>
+      
+      <guid>http://localhost:1313/zh-tw/posts/gitlab-runner/</guid>
+      <description>&lt;p&gt;本文講述 Gitlab Runner 的各種類別與建立使用方法!!&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

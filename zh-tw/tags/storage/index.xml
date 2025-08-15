@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Storage on OKH@nd&#39;s Blog</title>
+    <link>https://okhand.org/zh-tw/tags/storage/</link>
+    <description>Recent content in Storage on OKH@nd&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>© 2025 OKH@nd.ZiYu</copyright>
+    <lastBuildDate>Fri, 20 Jun 2025 14:04:42 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/tags/storage/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Cloudflare R2</title>
+      <link>https://okhand.org/zh-tw/posts/cloudflare-r2/</link>
+      <pubDate>Fri, 20 Jun 2025 14:04:42 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/cloudflare-r2/</guid>
+      <description>&lt;p&gt;因為 Imgur 大約從2025年5月16日開始，無預警地封鎖了來自台灣的 IP，不再允許台灣使用者登入或是上傳圖片等&amp;hellip;動作。所以就想說之後都把圖片改放在 Cloudflare R2 上面。&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>A100 on OKH@nd&#39;s Blog</title>
+    <link>https://okhand.org/zh-tw/tags/a100/</link>
+    <description>Recent content in A100 on OKH@nd&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>© 2025 OKH@nd.ZiYu</copyright>
+    <lastBuildDate>Wed, 11 Sep 2024 21:23:33 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/tags/a100/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Nvidia A100 環境設定</title>
+      <link>https://okhand.org/zh-tw/posts/nvidia-a100_env/</link>
+      <pubDate>Wed, 11 Sep 2024 21:23:33 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/nvidia-a100_env/</guid>
+      <description>&lt;p&gt;剛好有幸用到 8 Core 80G GPU 的 A100 機台，但以為設定跟之前一樣卻要用 CUDA 跑 LLM 時遇到問題並紀錄解決方法。&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

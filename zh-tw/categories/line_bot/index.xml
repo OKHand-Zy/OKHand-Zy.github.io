@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Line_Bot on OKH@nd&#39;s Blog</title>
+    <link>https://okhand.org/zh-tw/categories/line_bot/</link>
+    <description>Recent content in Line_Bot on OKH@nd&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>© 2025 OKH@nd.ZiYu</copyright>
+    <lastBuildDate>Sat, 04 Feb 2023 15:00:40 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/categories/line_bot/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Line Notify 搬家計畫</title>
+      <link>https://okhand.org/zh-tw/posts/line-bot-ex/</link>
+      <pubDate>Sat, 04 Feb 2023 15:00:40 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/line-bot-ex/</guid>
+      <description>&lt;p&gt;本篇文章是因為 Heroku 的免費制度結束，只好把 Service 搬遷到 Fly.io 的故事。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Line Bot 懶人包 - 總結</title>
+      <link>https://okhand.org/zh-tw/posts/line-bot-end/</link>
+      <pubDate>Sat, 04 Feb 2023 13:43:16 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/line-bot-end/</guid>
+      <description>&lt;p&gt;本篇是前面三篇文章的綜合懶人包跟總結一下目前的架構與程式！！&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Line Notify 建立資料庫並提供不休息的服務</title>
+      <link>https://okhand.org/zh-tw/posts/line-bot3/</link>
+      <pubDate>Thu, 02 Feb 2023 16:32:43 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/line-bot3/</guid>
+      <description>&lt;p&gt;本文是實作如何 Heroku 持續不間段服務 與 連結 Google Sheet 當作我們的資料庫。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Line Bot 之利用 Line Notify 突破限制吧！</title>
+      <link>https://okhand.org/zh-tw/posts/line-bot2/</link>
+      <pubDate>Thu, 02 Feb 2023 14:52:30 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/line-bot2/</guid>
+      <description>&lt;p&gt;本文主要是實作如何從基本的 Line Bot 串接 Line Notify，回傳出 URL 讓使用者去綁定達到可以去互動的效果！&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>讓我們用 Python 開發一個 Line Bot</title>
+      <link>https://okhand.org/zh-tw/posts/line-bot1/</link>
+      <pubDate>Wed, 01 Feb 2023 16:24:45 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/line-bot1/</guid>
+      <description>&lt;p&gt;本文主要是實作如何從無到有一個簡單的 Line Bot 並把程式上傳到 Heroku 當一個 Service 可以去跟我們做簡單的互動。&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

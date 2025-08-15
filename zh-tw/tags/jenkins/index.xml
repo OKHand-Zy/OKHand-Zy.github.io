@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jenkins on OKH@nd&#39;s Blog</title>
+    <link>https://okhand.org/zh-tw/tags/jenkins/</link>
+    <description>Recent content in Jenkins on OKH@nd&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>© 2025 OKH@nd.ZiYu</copyright>
+    <lastBuildDate>Fri, 12 May 2023 11:21:49 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/tags/jenkins/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Jenkins 環境搭建</title>
+      <link>https://okhand.org/zh-tw/posts/jenkins-build/</link>
+      <pubDate>Fri, 12 May 2023 11:21:49 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/jenkins-build/</guid>
+      <description>&lt;p&gt;本文講述如何使用 Docker 簡單搭建 Jenkins 服務，並紀錄過程！&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

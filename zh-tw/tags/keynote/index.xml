@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Keynote on OKH@nd&#39;s Blog</title>
+    <link>http://localhost:1313/zh-tw/tags/keynote/</link>
+    <description>Recent content in Keynote on OKH@nd&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>© 2025 OKH@nd.ZiYu</copyright>
+    <lastBuildDate>Sat, 30 Dec 2023 01:39:20 +0800</lastBuildDate><atom:link href="http://localhost:1313/zh-tw/tags/keynote/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>How to Do Great Work 摘要筆記</title>
+      <link>http://localhost:1313/zh-tw/posts/how2dogreatwork/</link>
+      <pubDate>Sat, 30 Dec 2023 01:39:20 +0800</pubDate>
+      
+      <guid>http://localhost:1313/zh-tw/posts/how2dogreatwork/</guid>
+      <description>&lt;p&gt;本文是我在閱讀 Paul Graham 在2023年7月時在他自己 Blog 所寫下的 How to Do Great Work 這篇文章的個人摘要！！&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

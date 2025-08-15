@@ -6,16 +6,76 @@
     <description>Recent content in Posts on OKH@nd&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <copyright>© 2025 OKHand.ZiYu</copyright>
-    <lastBuildDate>Wed, 13 Aug 2025 23:24:43 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/posts/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>© 2025 OKH@nd.ZiYu</copyright>
+    <lastBuildDate>Fri, 20 Jun 2025 14:04:42 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/posts/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Test Post</title>
-      <link>https://okhand.org/zh-tw/posts/test-post/</link>
-      <pubDate>Wed, 13 Aug 2025 23:24:43 +0800</pubDate>
+      <title>Cloudflare R2</title>
+      <link>https://okhand.org/zh-tw/posts/cloudflare-r2/</link>
+      <pubDate>Fri, 20 Jun 2025 14:04:42 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/posts/test-post/</guid>
-      <description>&lt;p&gt;test&lt;/p&gt;</description>
+      <guid>https://okhand.org/zh-tw/posts/cloudflare-r2/</guid>
+      <description>&lt;p&gt;因為 Imgur 大約從2025年5月16日開始，無預警地封鎖了來自台灣的 IP，不再允許台灣使用者登入或是上傳圖片等&amp;hellip;動作。所以就想說之後都把圖片改放在 Cloudflare R2 上面。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Window SID 相同錯誤</title>
+      <link>https://okhand.org/zh-tw/posts/win-sid-error/</link>
+      <pubDate>Mon, 27 Jan 2025 16:16:10 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/win-sid-error/</guid>
+      <description>&lt;p&gt;在 Windows 上 Clone 同份 Image 為多個 VM 上要加入 Domain 時發生的 SID 相同問題與解決方法！&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Claude MCP</title>
+      <link>https://okhand.org/zh-tw/posts/claude_mcp/</link>
+      <pubDate>Sun, 26 Jan 2025 15:23:05 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/claude_mcp/</guid>
+      <description>&lt;p&gt;Claude Model Context Protocol(MCP)，在 Windows 環境中 Step By Step 安裝步驟！&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Elastic 搭建</title>
+      <link>https://okhand.org/zh-tw/posts/elastic/</link>
+      <pubDate>Thu, 05 Dec 2024 23:54:28 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/elastic/</guid>
+      <description>&lt;p&gt;今天來嘗試使用 Elastic 向量 DB 聽說是有針對資料搜尋特化的一個向量DB，那我們就來試試看吧！！&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Hybrid Search</title>
+      <link>https://okhand.org/zh-tw/posts/hybrid-search/</link>
+      <pubDate>Thu, 05 Dec 2024 23:54:28 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/hybrid-search/</guid>
+      <description>&lt;p&gt;想說都建立 Elastic 不試試看這 DB 的搜尋效果就不夠意思了吧，就有了這篇 Elastic 搜尋篇&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>移除 Nvidia 驅動與 CUDA 套件</title>
+      <link>https://okhand.org/zh-tw/posts/nvdriver-rm/</link>
+      <pubDate>Mon, 11 Nov 2024 01:15:55 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/nvdriver-rm/</guid>
+      <description>&lt;p&gt;因為Nvidia驅動每次都會莫名其妙不見，然後又要重裝套件，紀錄一下如何完整的移除驅動與套件。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Cookiecutter</title>
+      <link>https://okhand.org/zh-tw/posts/cookiecutter/</link>
+      <pubDate>Thu, 12 Sep 2024 21:20:28 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/cookiecutter/</guid>
+      <description>&lt;p&gt;最近在寫 Python 想說把一些 Model 匯聚成一個 Package 使用時，突然發現好像沒有一個像 Next.js 那種建立一個初始化 Templates 的工具，然後我就找到了這個。&lt;/p&gt;</description>
       
     </item>
     
@@ -26,6 +86,176 @@
       
       <guid>https://okhand.org/zh-tw/posts/pypi_proxy/</guid>
       <description>&lt;p&gt;某次因 Server 上需先掛 Proxy 後才能上網導致 Python 安裝套件過程中需要設定 Proxy 才能下載套件紀錄。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Testlink Api Enabled</title>
+      <link>https://okhand.org/zh-tw/posts/testlink-api-enabled/</link>
+      <pubDate>Thu, 12 Sep 2024 19:56:47 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/testlink-api-enabled/</guid>
+      <description>&lt;p&gt;本文講述當初剛使用 TestLink 時想透過 TestLink 的 API 去互動時遇到的問題並解決的紀錄！！&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Nvidia A100 環境設定</title>
+      <link>https://okhand.org/zh-tw/posts/nvidia-a100_env/</link>
+      <pubDate>Wed, 11 Sep 2024 21:23:33 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/nvidia-a100_env/</guid>
+      <description>&lt;p&gt;剛好有幸用到 8 Core 80G GPU 的 A100 機台，但以為設定跟之前一樣卻要用 CUDA 跑 LLM 時遇到問題並紀錄解決方法。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>用 LangChain 實作出簡易版 RAG</title>
+      <link>https://okhand.org/zh-tw/posts/langchain2rag/</link>
+      <pubDate>Sun, 09 Jun 2024 15:40:46 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/langchain2rag/</guid>
+      <description>&lt;p&gt;此文紀錄使用 LLama3 + Langchain + llamacpp + Chroma 組合成一個簡單的 RAG !&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Ollama Modefile 可調參數紀錄</title>
+      <link>https://okhand.org/zh-tw/posts/ollama-modefile/</link>
+      <pubDate>Sat, 08 Jun 2024 19:56:17 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/ollama-modefile/</guid>
+      <description>&lt;p&gt;這邊紀錄從 Ollama github 上的 Modefile 紀錄有哪些可以修改的參數。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Ollama Deploy LLM</title>
+      <link>https://okhand.org/zh-tw/posts/ollama-deploy/</link>
+      <pubDate>Thu, 02 May 2024 20:08:32 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/ollama-deploy/</guid>
+      <description>&lt;p&gt;此文章介紹如何從安裝 Nvidia 驅動到從 HuggingFace 下載的 LLM Model 使用 Ollama 啟動 LLM 並使用 OpenWeb ui 進行溝通的部署過程紀錄。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>如何正確在 Docker 與 K8s 使用 GPU</title>
+      <link>https://okhand.org/zh-tw/posts/k8sgpu/</link>
+      <pubDate>Wed, 28 Feb 2024 13:01:40 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/k8sgpu/</guid>
+      <description>&lt;p&gt;本文介紹在 Ubuntu Server 22.04 上安裝 Docker 與 Kubernetes 並在 Container 上使用 GPU 的紀錄&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Windows Server S2D</title>
+      <link>https://okhand.org/zh-tw/posts/builds2d/</link>
+      <pubDate>Thu, 08 Feb 2024 13:29:55 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/builds2d/</guid>
+      <description>&lt;p&gt;本文紀錄 Windows Server 2019 上建立 S2D 的過程！！&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Docker Swarm 入門教學</title>
+      <link>https://okhand.org/zh-tw/posts/docker-swarm/</link>
+      <pubDate>Sun, 26 Nov 2023 22:39:37 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/docker-swarm/</guid>
+      <description>&lt;p&gt;本文介紹基礎的 Docker Swarm 該如何使用&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Docker 與 VM 的不同 與 Docker 指令</title>
+      <link>https://okhand.org/zh-tw/posts/docker-vm-df/</link>
+      <pubDate>Sun, 19 Nov 2023 16:00:41 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/docker-vm-df/</guid>
+      <description>&lt;p&gt;本文講述 Docker 與 VM 的不同 與 Docker 指令&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Gitlab Runner</title>
+      <link>https://okhand.org/zh-tw/posts/gitlab-runner/</link>
+      <pubDate>Sat, 17 Jun 2023 15:33:12 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/gitlab-runner/</guid>
+      <description>&lt;p&gt;本文講述 Gitlab Runner 的各種類別與建立使用方法!!&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Hugo 加裝 Giscus 留言板</title>
+      <link>https://okhand.org/zh-tw/posts/hugo-giscus/</link>
+      <pubDate>Fri, 12 May 2023 15:05:04 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/hugo-giscus/</guid>
+      <description>&lt;p&gt;本篇文章是自己記錄下來如何自己修改 hugo-tranquilpeak-theme 添加自己需要的 Giscus 留言板！&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Jenkins 環境搭建</title>
+      <link>https://okhand.org/zh-tw/posts/jenkins-build/</link>
+      <pubDate>Fri, 12 May 2023 11:21:49 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/jenkins-build/</guid>
+      <description>&lt;p&gt;本文講述如何使用 Docker 簡單搭建 Jenkins 服務，並紀錄過程！&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Line Notify 搬家計畫</title>
+      <link>https://okhand.org/zh-tw/posts/line-bot-ex/</link>
+      <pubDate>Sat, 04 Feb 2023 15:00:40 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/line-bot-ex/</guid>
+      <description>&lt;p&gt;本篇文章是因為 Heroku 的免費制度結束，只好把 Service 搬遷到 Fly.io 的故事。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Line Bot 懶人包 - 總結</title>
+      <link>https://okhand.org/zh-tw/posts/line-bot-end/</link>
+      <pubDate>Sat, 04 Feb 2023 13:43:16 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/line-bot-end/</guid>
+      <description>&lt;p&gt;本篇是前面三篇文章的綜合懶人包跟總結一下目前的架構與程式！！&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Line Notify 建立資料庫並提供不休息的服務</title>
+      <link>https://okhand.org/zh-tw/posts/line-bot3/</link>
+      <pubDate>Thu, 02 Feb 2023 16:32:43 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/line-bot3/</guid>
+      <description>&lt;p&gt;本文是實作如何 Heroku 持續不間段服務 與 連結 Google Sheet 當作我們的資料庫。&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Line Bot 之利用 Line Notify 突破限制吧！</title>
+      <link>https://okhand.org/zh-tw/posts/line-bot2/</link>
+      <pubDate>Thu, 02 Feb 2023 14:52:30 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/line-bot2/</guid>
+      <description>&lt;p&gt;本文主要是實作如何從基本的 Line Bot 串接 Line Notify，回傳出 URL 讓使用者去綁定達到可以去互動的效果！&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>讓我們用 Python 開發一個 Line Bot</title>
+      <link>https://okhand.org/zh-tw/posts/line-bot1/</link>
+      <pubDate>Wed, 01 Feb 2023 16:24:45 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/line-bot1/</guid>
+      <description>&lt;p&gt;本文主要是實作如何從無到有一個簡單的 Line Bot 並把程式上傳到 Heroku 當一個 Service 可以去跟我們做簡單的互動。&lt;/p&gt;</description>
       
     </item>
     

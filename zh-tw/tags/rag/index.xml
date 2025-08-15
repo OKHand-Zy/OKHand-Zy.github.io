@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RAG on OKH@nd&#39;s Blog</title>
+    <link>https://okhand.org/zh-tw/tags/rag/</link>
+    <description>Recent content in RAG on OKH@nd&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>© 2025 OKH@nd.ZiYu</copyright>
+    <lastBuildDate>Thu, 05 Dec 2024 23:54:28 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/tags/rag/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Elastic 搭建</title>
+      <link>https://okhand.org/zh-tw/posts/elastic/</link>
+      <pubDate>Thu, 05 Dec 2024 23:54:28 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/elastic/</guid>
+      <description>&lt;p&gt;今天來嘗試使用 Elastic 向量 DB 聽說是有針對資料搜尋特化的一個向量DB，那我們就來試試看吧！！&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Hybrid Search</title>
+      <link>https://okhand.org/zh-tw/posts/hybrid-search/</link>
+      <pubDate>Thu, 05 Dec 2024 23:54:28 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/hybrid-search/</guid>
+      <description>&lt;p&gt;想說都建立 Elastic 不試試看這 DB 的搜尋效果就不夠意思了吧，就有了這篇 Elastic 搜尋篇&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>用 LangChain 實作出簡易版 RAG</title>
+      <link>https://okhand.org/zh-tw/posts/langchain2rag/</link>
+      <pubDate>Sun, 09 Jun 2024 15:40:46 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/langchain2rag/</guid>
+      <description>&lt;p&gt;此文紀錄使用 LLama3 + Langchain + llamacpp + Chroma 組合成一個簡單的 RAG !&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>
