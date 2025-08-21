@@ -1,0 +1,1051 @@
+<!doctype html>
+<html
+  lang="TWN"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="dark"
+  data-auto-appearance="true"><head>
+  <meta charset="utf-8">
+  
+    <meta http-equiv="content-language" content="zh-tw">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color">
+
+  
+  <title>New API feature in GPT-5 &middot; OKH@nd&#39;s Blog</title>
+    <meta name="title" content="New API feature in GPT-5 &middot; OKH@nd&#39;s Blog">
+
+  
+  <meta name="description" content="New API feature in GPT-5">
+  <meta name="keywords" content="OpenAI,Model,API,">
+  
+  
+  <link rel="canonical" href="https://okhand.org/zh-tw/posts/gpt-5_api_feature/">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="/css/main.bundle.min.0cdf364bd8bccd8f78e3774d46019e8d8c56c6b3dabbef6aec152bc371b533ab5764946c8710de044c0911f5cd58b63e1c22f50b97da09a2b1d35dd1839da22d.css"
+    integrity="sha512-DN82S9i8zY9443dNRgGejYxWxrPau&#43;9q7BUrw3G1M6tXZJRshxDeBEwJEfXNWLY&#43;HCL1C5faCaKx013Rg52iLQ==">
+
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js"
+    integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj&#43;e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg=="></script>
+  
+  
+    
+    
+    
+  
+  
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    <script
+      defer
+      type="text/javascript"
+      id="script-bundle"
+      src="/js/main.bundle.min.98bb8ce8f123e03c4d2171eeec151dd404b5c476beb5ef1068d0e8b1a2afb923065e6552fc14b2d867c85ee4bd8529a43193f729f874d3908517ba03b5d1cc57.js"
+      integrity="sha512-mLuM6PEj4DxNIXHu7BUd1AS1xHa&#43;te8QaNDosaKvuSMGXmVS/BSy2GfIXuS9hSmkMZP3Kfh005CFF7oDtdHMVw=="
+      data-copy="複製"
+      data-copied="已複製"></script>
+  
+  
+    
+    <script src="/lib/zoom/zoom.min.umd.a527109b68c082a70f3697716dd72a9d5aa8b545cf800cecbbc7399f2ca6f6e0ce3e431f2062b48bbfa47c9ea42822714060bef309be073f49b9c0e30d318d7b.js" integrity="sha512-pScQm2jAgqcPNpdxbdcqnVqotUXPgAzsu8c5nyym9uDOPkMfIGK0i7&#43;kfJ6kKCJxQGC&#43;8wm&#43;Bz9JucDjDTGNew=="></script>
+  
+
+  
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  <meta property="og:url" content="https://okhand.org/zh-tw/posts/gpt-5_api_feature/">
+  <meta property="og:site_name" content="OKH@nd&#39;s Blog">
+  <meta property="og:title" content="New API feature in GPT-5">
+  <meta property="og:description" content="New API feature in GPT-5">
+  <meta property="og:locale" content="zh_tw">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-08-22T00:18:28+08:00">
+    <meta property="article:modified_time" content="2025-08-22T00:18:28+08:00">
+    <meta property="article:tag" content="OpenAI">
+    <meta property="article:tag" content="Model">
+    <meta property="article:tag" content="API">
+
+  
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="New API feature in GPT-5">
+  <meta name="twitter:description" content="New API feature in GPT-5">
+
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Posts",
+    "name": "New API feature in GPT-5",
+    "headline": "New API feature in GPT-5",
+    "description": "New API feature in GPT-5",
+    "abstract": "\u003cp\u003e因應最新的 GPT-5 出來的同時 API 多了幾個(對我來說的)新參數，Reasoning Effort 跟 Verbosity\u003c\/p\u003e",
+    "inLanguage": "zh-tw",
+    "url" : "https:\/\/okhand.org\/zh-tw\/posts\/gpt-5_api_feature\/",
+    "author" : {
+      "@type": "Person",
+      "name": "OKH@nd.ZiYu"
+    },
+    "copyrightYear": "2025",
+    "dateCreated": "2025-08-22T00:18:28\u002b08:00",
+    "datePublished": "2025-08-22T00:18:28\u002b08:00",
+    
+    "dateModified": "2025-08-22T00:18:28\u002b08:00",
+    
+    "keywords": ["OpenAI","Model","API"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "430"
+  }]
+  </script>
+
+
+
+  
+  
+    <meta name="author" content="OKH@nd.ZiYu">
+  
+  
+    
+      
+        
+      
+    
+      
+        
+          <link href="https://github.com/OKHand-Zy" rel="me">
+        
+      
+    
+      
+        
+          <link href="https://www.instagram.com/okhand_ziyu/" rel="me">
+        
+      
+    
+      
+        
+          <link href="https://www.linkedin.com/in/okhand-ziyu/" rel="me">
+        
+      
+    
+  
+
+  
+  
+
+<script src="/lib/jquery/jquery.slim.min.b0dca576e87d7eaa5850ae4e61759c065786cdb6489d68fcc82240539eebd5da522bdb4fda085ffd245808c8fe2acb2516408eb774ef26b5f6015fc6737c0ea8.js" integrity="sha512-sNylduh9fqpYUK5OYXWcBleGzbZInWj8yCJAU57r1dpSK9tP2ghf/SRYCMj&#43;KsslFkCOt3TvJrX2AV/Gc3wOqA=="></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  <script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-F39WJMWNM4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-F39WJMWNM4');
+</script>
+
+
+
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</head>
+<body
+    class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32 scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-neutral-400 dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600">
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
+        href="#main-content">
+        <span class="font-bold text-primary-600 ltr:pr-2 rtl:pl-2 dark:text-primary-400">&darr;</span>
+        快轉到主要內容
+      </a>
+    </div>
+    
+    
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div
+  class="main-menu flex items-center justify-between px-4 py-6 sm:px-6 md:justify-start gap-x-3 pt-[2px] pr-0 pb-[3px] pl-0">
+  
+  
+    
+    
+      <div>
+        <a href="/zh-tw/" class="flex">
+          <span class="sr-only">OKH@nd&rsquo;s Blog</span>
+          
+            <img
+              src="/OKHand-Logo.png"
+              width="64"
+              height="64"
+              class="logo max-h-[5rem] max-w-[5rem] object-scale-down object-left nozoom"
+              alt="OKH@nd&#39;s Blog">
+          
+        </a>
+      </div>
+    
+
+  <div class="flex flex-1 items-center justify-between">
+    <nav class="flex space-x-3">
+      
+        <a href="/zh-tw/" class="text-base font-medium text-gray-500 hover:text-gray-900">
+          OKH@nd&rsquo;s Blog
+        </a>
+      
+    </nav>
+    
+  <nav class="hidden md:flex items-center gap-x-5 md:ml-12 h-12">
+    
+      
+        
+  <a
+  href="/zh-tw/"
+  
+  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+  
+  <p class="text-base font-medium" title="OKH@nd&#39;s Blog">
+    首頁
+  </p>
+</a>
+
+
+
+      
+        
+  <a
+  href="/zh-tw/posts/"
+  
+  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+  
+  <p class="text-base font-medium" title="Posts">
+    文章
+  </p>
+</a>
+
+
+
+      
+        
+  <a
+  href="/zh-tw/categories/"
+  
+  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+  
+  <p class="text-base font-medium" title="Categories">
+    分類
+  </p>
+</a>
+
+
+
+      
+        
+  <a
+  href="/zh-tw/tags/"
+  
+  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+  
+  <p class="text-base font-medium" title="Tags">
+    標籤
+  </p>
+</a>
+
+
+
+      
+        
+  <a
+  href="/zh-tw/about/"
+  
+  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+  
+  <p class="text-base font-medium" title="關於 我">
+    關於我
+  </p>
+</a>
+
+
+
+      
+    
+
+    
+
+    
+
+    
+      <button
+        id="search-button"
+        aria-label="Search"
+        class="text-base hover:text-primary-600 dark:hover:text-primary-400"
+        title="搜尋 (/)">
+        <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+      </button>
+    
+
+    
+      <div class=" flex items-center">
+        <button
+          id="appearance-switcher"
+          aria-label="Dark mode switcher"
+          type="button"
+          class="text-base hover:text-primary-600 dark:hover:text-primary-400">
+          <div class="flex items-center justify-center dark:hidden">
+            <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+</span>
+          </div>
+          <div class="items-center justify-center hidden dark:flex">
+            <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+</span>
+          </div>
+        </button>
+      </div>
+    
+  </nav>
+
+    
+  <div class="flex md:hidden items-center gap-x-5 md:ml-12 h-12">
+    <span></span>
+
+    
+
+    
+
+    
+      <button
+        id="search-button-mobile"
+        aria-label="Search"
+        class="text-base hover:text-primary-600 dark:hover:text-primary-400"
+        title="搜尋 (/)">
+        <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+      </button>
+    
+
+    
+      <button
+        id="appearance-switcher-mobile"
+        aria-label="Dark mode switcher"
+        type="button"
+        class="text-base hover:text-primary-600 dark:hover:text-primary-400 ltr:mr-1 rtl:ml-1">
+        <div class="flex items-center justify-center dark:hidden">
+          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+</span>
+        </div>
+        <div class="items-center justify-center hidden dark:flex">
+          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+</span>
+        </div>
+      </button>
+    
+  </div>
+
+  </div>
+  
+  <div class="-my-2 md:hidden">
+    <div id="menu-button" class="block">
+      
+        <div class="cursor-pointer hover:text-primary-600 dark:hover:text-primary-400">
+          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
+</span>
+        </div>
+        <div
+          id="menu-wrapper"
+          class="fixed inset-0 z-30 invisible w-screen h-screen m-0 overflow-auto transition-opacity opacity-0 cursor-default bg-neutral-100/50 backdrop-blur-sm dark:bg-neutral-900/50 pt-[5px]">
+          <ul
+            class="flex space-y-2 mt-3 flex-col items-end w-full px-6 py-6 mx-auto overflow-visible list-none ltr:text-right rtl:text-left max-w-7xl">
+            <li id="menu-close-button">
+              <span
+                class="cursor-pointer inline-block align-text-bottom hover:text-primary-600 dark:hover:text-primary-400">
+                <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+</span>
+              </span>
+            </li>
+
+            
+              
+  <li class="mt-1">
+  <a
+    href="/zh-tw/"
+    
+    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-bg font-bg" title="OKH@nd&#39;s Blog">
+      首頁
+    </p>
+  </a>
+</li>
+
+
+
+            
+              
+  <li class="mt-1">
+  <a
+    href="/zh-tw/posts/"
+    
+    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-bg font-bg" title="Posts">
+      文章
+    </p>
+  </a>
+</li>
+
+
+
+            
+              
+  <li class="mt-1">
+  <a
+    href="/zh-tw/categories/"
+    
+    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-bg font-bg" title="Categories">
+      分類
+    </p>
+  </a>
+</li>
+
+
+
+            
+              
+  <li class="mt-1">
+  <a
+    href="/zh-tw/tags/"
+    
+    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-bg font-bg" title="Tags">
+      標籤
+    </p>
+  </a>
+</li>
+
+
+
+            
+              
+  <li class="mt-1">
+  <a
+    href="/zh-tw/about/"
+    
+    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-bg font-bg" title="關於 我">
+      關於我
+    </p>
+  </a>
+</li>
+
+
+
+            
+
+          </ul>
+          
+        </div>
+      
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+    
+    <div class="relative flex flex-col grow">
+      <main id="main-content" class="grow">
+        
+  
+  <article>
+    
+    
+
+    
+    <header id="single_header" class="mt-5 max-w-prose">
+      
+      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        New API feature in GPT-5
+      </h1>
+      <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+        
+
+
+
+
+
+  
+  
+
+
+
+  
+
+  
+  
+  
+
+  
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <div class="flex flex-row flex-wrap items-center">
+    
+    
+      <time datetime="2025-08-22T00:18:28&#43;08:00">2025年08月22日</time><span class="px-2 text-primary-500">&middot;</span><span>430 字</span><span class="px-2 text-primary-500">&middot;</span><span title="預計閱讀時間">3 分鐘</span>
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  
+    <div class="flex flex-row flex-wrap items-center">
+      
+        
+      
+        
+          
+            
+              <a class="relative mt-[0.5rem] mr-2" href="/zh-tw/categories/ai/"
+                ><span class="flex cursor-pointer">
+  <span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    AI
+  </span>
+</span>
+</a
+              >
+            
+          
+        
+      
+        
+      
+        
+          
+            
+              <a class="relative mt-[0.5rem] mr-2" href="/zh-tw/tags/openai/"
+                ><span class="flex cursor-pointer">
+  <span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    OpenAI
+  </span>
+</span>
+</a
+              >
+            
+              <a class="relative mt-[0.5rem] mr-2" href="/zh-tw/tags/model/"
+                ><span class="flex cursor-pointer">
+  <span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Model
+  </span>
+</span>
+</a
+              >
+            
+              <a class="relative mt-[0.5rem] mr-2" href="/zh-tw/tags/api/"
+                ><span class="flex cursor-pointer">
+  <span
+    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    API
+  </span>
+</span>
+</a
+              >
+            
+          
+        
+      
+    </div>
+  
+
+  
+  
+
+
+
+      </div>
+      
+        
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+      
+    </header>
+
+    
+    <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+      
+      
+      
+      
+      
+
+
+      <div class="min-w-0 min-h-0 max-w-fit">
+        
+
+        <div class="article-content max-w-prose mb-20">
+          <p>因應最新的 GPT-5 出來的同時 API 多了幾個(對我來說的)新參數，Reasoning Effort 跟 Verbosity</p>
+
+<h1 class="relative group"><strong>reasoning effort 推理</strong> 
+    <div id="reasoning-effort-推理" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#reasoning-effort-%e6%8e%a8%e7%90%86" aria-label="定位點">#</a>
+    </span>        
+    
+</h1>
+<p>reasoning.effort 參數有以下幾種程度可選擇</p>
+<ul>
+<li>minimal</li>
+<li>low</li>
+<li>medium</li>
+<li>high</li>
+</ul>
+<p>預設值為 <code>medium</code></p>
+<p>參數控制模型在產生回應之前 推理多久 與 產生多少推理 Token。</p>
+<p>其實 reasoning.effort 在之前 o 系列(Ex：o1, o3)能使用，這次新增的是 <code>minimal</code> 會以最快的輕量化的方式思考(需要或不需要)添加非常少的推理 token 。</p>
+
+<h1 class="relative group"><strong>Verbosity  詳細程度</strong> 
+    <div id="verbosity詳細程度" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#verbosity%e8%a9%b3%e7%b4%b0%e7%a8%8b%e5%ba%a6" aria-label="定位點">#</a>
+    </span>        
+    
+</h1>
+<p>verbosity 參數有以下幾種程度可選擇</p>
+<ul>
+<li>low</li>
+<li>medium</li>
+<li>high</li>
+</ul>
+<p>verbosity 決定了產生多少<strong>輸出</strong> Token。</p>
+<p>下面是詢問同一個問題並且使用同個 Model 與 reasoning 階段調整 verbosity 的回應</p>
+<p>model: gpt-5-nano</p>
+<p>effort: high</p>
+<p>verbosity: <code>low</code></p>
+<pre tabindex="0"><code>completion_tokens=3959, prompt_tokens=30, total_tokens=3989
+</code></pre><pre tabindex="0"><code>量子糾纏是指多個量子系統的整體狀態無法寫成各自子系統狀態的乘積，必須以共同的量子態存在，兩者之間有著不能用古典方式解釋的強相關。\n\n直觀要點\n- 兩個粒子（或量子位）一起被創建，彼此即使分開很遠，測量結果仍顯示高度相關。\n- 這種相關性在多個測量基底（如 Z、X 基底）都能看到，且不是單純的概率預測，而包含量子相干（干涉）信息。\n\n數學範例\n- 一個常見的糾纏態是 Bell 态 |Φ+&gt; = (|00&gt; + |11&gt;)/√2。\n  - 在 Z 基底測量：若第一粒子是 0，第二粒子必定是 0；若第一粒子是 1，第二粒子必定是 1。\n  - 在 X 基底測量：若對第一粒子得到 +，第二粒子也得到 +；若得到 −，第二粒子也得到 −。\n- 單粒子邊際的密度矩陣是混合態（資訊被「分裝」在整體中），但整體是純態，且包含跨基底的相干性。\n- 與古典混合相比，糾纏態具有無法用乘積狀態組合來描述的特性；同樣的邊際分布在某些情況下可能看起來相同，但缺少跨基底的相干性。\n\n重要性與限制\n- 這些量子相關性無法用局部隱變量模型解釋，屬於量子非局部性的一種表現。\n- 不能用單單糾纏量子態來傳遞訊息；需要經由經典通訊來比對結果。\n- 亮點應用：量子態傳送（ teleportation ）、超密編碼（ superdense coding ）、量子密鑰分發（ QKD，如 Ekert91）等。\n\n簡單总结\n糾纏是多粒子系統的一種「共同存在的」量子狀態，體現在跨粒子的測量結果上，既強烈相關又不能用古典機制完全解釋，並且是許多量子資訊技術的核心資源。
+</code></pre><p>model: gpt-5-nano</p>
+<p>effort: high</p>
+<p>verbosity: <code>medium</code></p>
+<pre tabindex="0"><code>completion_tokens=5433, prompt_tokens=30, total_tokens=5463,
+</code></pre><pre tabindex="0"><code>下面用比較直觀與幾何的方式，講解什麼是量子糾纏，以及它為什麼重要。\n\n1) 什麼是量子糾纏\n- 多個量子系統（例如兩個粒子、兩個光子）被處於一個整體的量子態，這個態不能寫成各自系統態的直積：ψ ≠ ψ_A ⊗ ψ_B。也就是說，整個系統的狀態無法分解成各部分各自的“預先決定的值”。\n- 這意味著：對其中任一子系統的測量結果，與另一子系統的測量結果之間存在著「非經典的相關性」，即使兩個系統相隔很遠，這種相關性也不依賴於傳遞信號。\n\n2) 用最常見的兩粒子例子說明\n- 貝爾態（Bell states）是兩個量子比特最典型的糾纏態，例如其中一個是：\n  - |Φ+⟩ = (|00⟩ + |11⟩) / √2\n  另外還有 |Φ−⟩、|Ψ+⟩、|Ψ−⟩，每一個都無法寫成 |a⟩⊗|b⟩ 的形式。\n- 另一個常見例子是“singlet”態：\n  - |Ψ−⟩ = (|01⟩ − |10⟩) / √2\n  這個態在測量兩個粒子自旋沿同一軸時，結果是完全反相關的（一個 +1，另一個 −1）。\n- 直覺重點：對單一粒子的性質來說，量子糾纏態的個別邊際狀態通常是混合的（看起來像是“未知的”，或是沒有 definite 值），只有把兩個粒子一起測量時，才會看到穩定的聯繫。\n\n3) 測量與相關性（不等於“資訊以光速瞬間傳遞”）\n- 對糾纏對而言，若在某個方向測量第一個粒子自旋（或偏振），第二個粒子的結果會以某種方式被“自動地”相關地顯示出來，這種相關性不需要任何信號傳遞。\n- 對不同測量方向的設定，相關性可以寫成：對兩個粒子分別在測量方向 a 和 b，其結果的相關函數 E(a,b) = ⟨σ(a) ⊗ σ(b)⟩，在 singlet 态中有 E(a,b) = -a · b，即兩測量方向的夾角 θ 的餘弦負值。\n- 這種現象不等於“預先設定的值”或“局部因果影響”；如果你用局部實在論去解釋，就會遇到 Bell 不等式等限制。\n\n4) Bell 不等式與實驗驗證\n- 局部實在論者會認為每個粒子在被測量前就已經有預先決定的結果，測量只是揭示這些值；這導致某些數學不等式（如 CHSH 不等式）必須成立。\n- 量子力學的預測在適當的設定下會違背這些不等式，最大可達到的量子值是 S = 2√2（Cirel’son 極限）。\n- 實驗中常做佛述的 Bell 測試（如 CHSH 測試）。多個實驗已經觀察到對應的量子預測的違背，支持量子糾纏與量子力學的非局部相關性。也出現了“漏洞自由”的實驗設計，以排除某些替代解釋。\n\n5) 如何產生與檢驗糾纏\n- 產生：實驗室常用機制包括光子的自發參量下轉換（SPDC）將一次光子對變為糾纏的二子光子（偏振、時間位、路徑等任一度態）。也有利用原子、離子、超導量子比特、氮空位（NV）中心等系統的糾纏。\n- 檢驗/證明：\n  - 量子態層析（quantum state tomography）以重複測量與統計推估整體態。\n  - 糾纏檢驗（entanglement witnesses）或計算糾纏度（如 concurrence、negativity）。\n  - Bell 測試（CHSH 不等式）用以證明非局部相關性。\n- 量子態的部分跡（例如單一粒子邊際密度矩陣）往往是完全混合的，而只有結合起來才呈現明顯的糾纏性。\n\n6) 為什麼量子糾纏重要（應用層面）\n- 量子遞送（量子 teleportation）：不以傳送物理粒子為前提，而是利用糾纏對結合一個未知量子態的傳送。\n- 超密碼編碼（superdense coding）：用一個量子比特與預先共享的糾纏對，傳送兩個資料比特的資訊。\n- 量子鑰匙分配（quantum key distribution, QKD，特別是 Ekert 協議）：利用糾纏帶來的測量結果相關性，探測竊聽並安全分發密鑰。\n- 量子計算中的資源：糾纏是實現某些量子演算法與量子錯誤更正的核心資源。\n\n7) 常見誤解與要點\n- 不存在“超光速資訊傳遞”：測量結果本身是隨機的，只有把兩端的結果透過經典通道比對後，才出現對應的相關性。\n- 糾纏不是「兩個粒子同時擁有某個確定值」的證明；相反，直到測量，個別粒子的性質往往是未確定的。\n- Entanglement 是不可分割的資源，但也有“單向分享”限制（monogamy of entanglement）：一個量子對的糾纏程度不能被任意地分配給第三方。\n\n如果你想，我可以再深入某一部分，例如：\n- 具體推導兩粒子 Bell state 的測量相關性與 E(a,b) 的公式\n- CHSH 不等式的推導與一個具體的實驗設定例子\n- 如何用量子態層析進行糾纏度的量測與計算\n- 具體的實驗平台比較（光子、離子、超導量子比特等）的糾纏產生與測量方式\n\n告訴我你想更深入哪個部分，我可以給你更精確的公式與步驟。
+</code></pre><p>model: gpt-5-nano</p>
+<p>effort: high</p>
+<p>verbosity: <code>high</code></p>
+<pre tabindex="0"><code>completion_tokens=8620, prompt_tokens=30, total_tokens=8650
+</code></pre><pre tabindex="0"><code>以下用比較直白的語言，並輔以一點點數學要點，幫你理解什麼是量子糾纏、為什麼它重要，以及它在實驗和應用上的意義。\n\n一、什麼是量子糾纏（Q.E.：量子糾纏）\n- 定義要點：當兩個或以上的量子系統組成一個整體時，它們的量子狀態有別於各自單獨狀態的乘積形式。也就是說，無法把整個系統寫成兩部分各自的狀態的乘積  |ψ&gt; ≠ |a&gt;⊗|b&gt;。這種“不可分割”的整體狀態就叫作糾纏狀態。\n- 核心特徵：對其中一個系統的測量結果，會與另一個系統的結果出現深刻的相關性，這些相關性在很多情況下無法用任何局部的“預先存在的屬性”來解釋。\n- 重要的約束：雖然這種相關性很「神祕」，但它並不會讓你用它進行超光速訊息傳遞（無法單獨用糾纏來傳送信息，必須借助經典通道的比較才能看到相關性）。\n\n二、用一個最常見的例子說明\n- 貝爾對（Bell pair）是兩個量子系統最典型的糾纏態之一。最常見的形式是：\n  |Φ+&gt; = (|00&gt; + |11&gt;)/√2\n  這裡的“|0&gt; 與 |1&gt;”是兩個量子比特的基態。\n- 如果你在兩個量子比特上都測量“計算基底”Z基底（即判定是0還是1），你會得到兩個結果總是相同的：要麼同時是 0-0，要麼同時是 1-1，各有 1/2 的機率。\n- 如果你在兩個量子比特上都測量另一個基底（例如X基底，|+&gt; = (|0&gt;+|1&gt;)/√2 與 |-&gt; = (|0&gt;-|1&gt;)/√2），你也會看到同樣的結果：兩者總是相同。\n- 這種在不同測量基底下仍保持高度相關的現象，就是量子糾纏的直觀寫照。對於不同的測量角度，相關的強度會依角度變化（這也正是後面要談的“不等式”背後的物理意義）。\n\n三、為什麼糾纏比一般的「相關」還要特別\n- 區別於經典相關：如果把兩個粒子放在一起，但實際上每個粒子事先就有某些屬性（提前设定好，例如顏色、方向等）可以被我們在實驗時就預測，這叫「局部實在論」。量子糾纏的相關性，讓這種局部實在論難以解釋，因而出現了著名的 Bell 不等式及實驗上的違背。\n- 混合態也可能糾纏：並非只有“純態”的 |Φ+&gt; 類型才糾纏。混合態的密度矩陣 ρ 也可能是糾纏的（但有時候看起來像是“部分預先決定的混合”，要用具體的糾纏檢驗才行）。\n- 糾纏與“資訊的控制”關係：糾纏提供了一種非局部的量子相關資源，讓量子通訊、量子計算等技術成為可能；但它本身不等於傳遞訊息的工具，必須結合經典通道與測量的後處理。\n\n四、數學觀點的快速入門（可選加深）\n- 對於兩個量子系統，整體狀態在希爾伯特空間 H_A ⊗ H_B。若存在兩個單獨的狀態 |α&gt;_A、|β&gt;_B，使得 |ψ&gt; = |α&gt;_A ⊗ |β&gt;_B，則該狀態是“非糾纏的”。若不能這樣寫，則為糾纏狀態。\n- Schmidt 展開：任意純態 |ψ&gt;_AB 都可以寫成 |ψ&gt; = ∑_i √λ_i |u_i&gt;_A ⊗ |v_i&gt;_B，其中 λ_i 為非負實數且 ∑ λ_i = 1。若只有一個非零 λ_i，則該狀態是非糾纏的；若有多個非零 λ_i，則糾纏存在。\n- 直觀的實驗檢驗法：Bell 不等式與 CHSH 不等式提供一個「局部實在論的邊界」，用實驗上的測量來檢驗是否有顯著違背。若違背，意味著量子力學的糾纏特性無法被局部隱變量解釋。\n\n五、實驗證據與里程碑\n- 歷史上的起點：EPR 論證（愛因斯坦、波多爾斯基、羅森）認為量子力學似乎缺乏完備性，糾纏被視為“超距作用”的問題。之後 Bell 的不等式提供了可檢驗的預測。\n- 實驗發展： Aspect 等人（1980s）用光子實驗測試 CHSH 不等式，看到量子預測的違背。\n- 後續改進：出現了“ loophole-free Bell test（不設漏洞的貝爾測試）”在 2015 年左右分別由多個團隊完成，同時克服了探測率與 局域性等漏洞的問題，給予對量子糾纏的更強證據。\n- 目前實驗對象廣泛：光子、冷離子、超導量子比特、中性原子等平台都能製備與操控糾纏態。\n\n六、實際的應用（糾纏作為資源）\n- 量子 teleportation（量子隧道傳輸）：利用事先共享的糾纏對與經典通道，在不直接傳送量子比特的情況下，將一個未知量子狀態“傳送”到遠端。核心步驟是先做一個 Bell 基態測量，然後根據測量結果進行經典位元的控制操作。\n- 超密编码（Superdense Coding）：用一個量子比特與一對糾纏比特，能讓一方傳送兩位經典訊息到另一方，超出單比特原本的資訊容量。\n- 量子密鑰分發（QKD）：例如 Ekert 指出，糾纏對的測量結果可以用來建立安全的密鑰，任何竄改都會被探測到。\n- 糾纏蒐集與糾纏淨化：在實際網路或量子計算中，常需要從雜訊中提取“高品質”的糾纏對，這就需要糾纏淨化/蒐集等技術。\n\n七、常見的誤解與釐清\n- 誤解1：糾纏就是“能瞬間傳遞訊息”。實際上，兩端的測量結果在局部看都是隨機的，只有把兩端的結果經過傳統通道比對後才看到相關性，因此不能用來超光速傳遞資訊。\n- 誤解2：糾纏等於“已經預先決定好了兩個結果”。其實，對於單端的任何測量，結果都是隨機的；關鍵在於聯合測量的統計關係，這種關係是無法用單純的預先存在的值來解釋。\n- 誤解3：所有相關都是“糾纏”。有些相關是因為古典相關性（例如同時看到兩個裝置的共同情況），而量子糾纏指的是無法用局部定義的隱變量去解釋的相關性，通常需要用 Bell 不等式來驗證。\n\n八、想更深入嗎？可以從以下方向拓展\n- 進階數學：學習密度矩陣、部分轉置（PPT）判別、負性（Negativity）作為糾纏量度、 Schmidt 分解等工具。\n- 不等式與實驗設計：熟悉 CHSH 不等式、實驗中的檢測率、局域性與自由意志假說等實驗細節。\n- 量子糾纏與量子計算的連結：理解在量子電腦中如何用糾纏作為量子門和多量子比特干涉的資源。\n- 參考案例與讀物：Ekert 1991 的 QKD 論文、Bell 不等式的教科書推導、Hensen/Shalm/Giustina 等的實驗報告，以及「Werner state」等混合狀態的研究。\n\n如果你願意，我可以再深挖某一部分，例如：\n- 更詳細的數學推導（例如 Schmidt 展開、CHSH 不等式的推導與量子機制）\n- 具體實驗裝置與測量設計的物理原理（比如 SPDC 產生的糾纏光子對、離子閘控與測量等）\n- 量子 teleportation、dense coding、QKD 的步驟與實例\n\n告訴我你想先深挖哪個部分，我可以給你更具體的說明與例子。
+</code></pre><p>推薦大家可以自己去試試看自己哪種組合比較喜歡，筆者是比較喜歡 Low 的簡短回答。</p>
+<p>範例 Code：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Python" data-lang="Python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">openai</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+</span></span><span class="line"><span class="cl"><span class="n">client</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="n">base_url</span><span class="o">=</span><span class="s2">&#34;&lt;router-url&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">api_key</span><span class="o">=</span><span class="s2">&#34;&lt;your-api-key&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">completion</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="n">model</span><span class="o">=</span><span class="s2">&#34;openai/gpt-5-nano&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">reasoning_effort</span><span class="o">=</span> <span class="s2">&#34;low&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">verbosity</span><span class="o">=</span><span class="s1">&#39;low&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;role&#34;</span><span class="p">:</span> <span class="s2">&#34;system&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;content&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="s2">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;text&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="s2">&#34;text&#34;</span><span class="p">:</span> <span class="s2">&#34;你是一位科學研究助理。&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;role&#34;</span><span class="p">:</span> <span class="s2">&#34;user&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;content&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="s2">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;text&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="s2">&#34;text&#34;</span><span class="p">:</span> <span class="s2">&#34;請解釋量子糾纏。&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div>
+<h2 class="relative group">Reference 
+    <div id="reference" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#reference" aria-label="定位點">#</a>
+    </span>        
+    
+</h2>
+<p><a
+  href="https://platform.openai.com/docs/guides/latest-model"
+    target="_blank"
+  >OpenAI Platform - Using GPT-5</a></p>
+          
+          
+          
+        </div>
+        
+        
+
+        
+
+        
+
+      </div>
+
+      
+      
+        
+        
+          
+          
+        
+        
+        
+        <script
+          type="text/javascript"
+          src="/js/page.min.54b6f4371722649edbe871e431d8670d670878c22be8f36e229fe53cc9b786fe25a834def5e6de621f7a3e37b72bc8cd73839aa5ed907ed6cbd45cd3e1b0fa20.js"
+          integrity="sha512-VLb0NxciZJ7b6HHkMdhnDWcIeMIr6PNuIp/lPMm3hv4lqDTe9ebeYh96Pje3K8jNc4Oape2QftbL1FzT4bD6IA=="
+          data-oid="views_posts/gpt-5_api_feature.md"
+          data-oid-likes="likes_posts/gpt-5_api_feature.md"></script>
+      
+    </section>
+
+    
+    <footer class="pt-8 max-w-prose print:hidden">
+      
+
+      
+        
+          <div class="pt-3">
+            <hr class="border-dotted border-neutral-300 dark:border-neutral-600">
+            <div class="pt-3">
+              
+
+<script src="https://giscus.app/client.js"
+        data-repo="OKHand-Zy/OKHand-Zy.github.io"
+        data-repo-id="R_kgDOI4u6xw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOI4u6x84CuITR"
+        data-mapping="url"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-TW"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+            </div>
+          </div>
+        
+      
+    </footer>
+  </article>
+
+        <div id="top-scroller" class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0 z-10">
+  <a
+    href="#the-top"
+    class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+    aria-label="捲動到頁頂"
+    title="捲動到頁頂">
+    &uarr;
+  </a>
+</div>
+
+      </main><footer id="site-footer" class="py-10 print:hidden">
+  
+  
+    
+      
+      
+        
+          
+          
+      
+      
+      
+      <nav class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400 ">
+        <ul class="flex list-none flex-col sm:flex-row">
+          
+            <li class=" flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0 ">
+              <a
+                class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center"
+                href="https://github.com/OKHand-Zy"
+                title="">
+                
+                  <span class="mr-1">
+                    <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+</span>
+                  </span>
+                
+                GitHub
+              </a>
+            </li>
+          
+            <li class=" flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0 ">
+              <a
+                class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center"
+                href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=okhand.ziyu@gmail.com"
+                title="">
+                
+                  <span class="mr-1">
+                    <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg></span>
+                  </span>
+                
+                Gmail
+              </a>
+            </li>
+          
+            <li class=" flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0 ">
+              <a
+                class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center"
+                href="https://okhand.org/index.xml"
+                title="">
+                
+                  <span class="mr-1">
+                    <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 64C0 46.3 14.3 32 32 32c229.8 0 416 186.2 416 416c0 17.7-14.3 32-32 32s-32-14.3-32-32C384 253.6 226.4 96 32 96C14.3 96 0 81.7 0 64zM128 416c0 35.3-28.7 64-64 64s-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64zM32 160c159.1 0 288 128.9 288 288c0 17.7-14.3 32-32 32s-32-14.3-32-32c0-123.7-100.3-224-224-224c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></svg></span>
+                  </span>
+                
+                RSS
+              </a>
+            </li>
+          
+        </ul>
+      </nav>
+    
+  
+  <div class="flex items-center justify-between">
+    
+    
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          &copy;
+          2025
+          <a
+  href="mailto:OKH@nd.ZiYu">OKH@nd.ZiYu</a>
+      </p>
+    
+
+    
+    
+      <p class="text-xs text-neutral-500 dark:text-neutral-400">
+        
+        
+        以 <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://blowfish.page/" target="_blank" rel="noopener noreferrer">Blowfish</a> 製作
+      </p>
+    
+  </div>
+  
+    <script>
+      mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+        margin: 24,
+        background: "rgba(0,0,0,0.5)",
+        scrollOffset: 0,
+      });
+    </script>
+  
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/process.min.ee03488f19c93c2efb199e2e3014ea5f3cb2ce7d45154adb3399a158cac27ca52831db249ede5bb602700ef87eb02434139de0858af1818ab0fb4182472204a4.js"
+    integrity="sha512-7gNIjxnJPC77GZ4uMBTqXzyyzn1FFUrbM5mhWMrCfKUoMdsknt5btgJwDvh&#43;sCQ0E53ghYrxgYqw&#43;0GCRyIEpA=="></script>
+  
+  
+</footer>
+<div
+  id="search-wrapper"
+  class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh] z-500"
+  data-url="https://okhand.org/zh-tw/">
+  <div
+    id="search-modal"
+    class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800">
+    <header class="relative z-10 flex items-center justify-between flex-none px-2">
+      <form class="flex items-center flex-auto min-w-0">
+        <div class="flex items-center justify-center w-8 h-8 text-neutral-400">
+          <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+        </div>
+        <input
+          type="search"
+          id="search-query"
+          class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent"
+          placeholder="搜尋"
+          tabindex="0">
+      </form>
+      <button
+        id="close-search-button"
+        class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        title="關閉 (Esc)">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+</span>
+      </button>
+    </header>
+    <section class="flex-auto px-2 overflow-auto">
+      <ul id="search-results">
+        
+      </ul>
+    </section>
+  </div>
+</div>
+
+    </div>
+  </body>
+  
+</html>

@@ -3,8 +3,14 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
+    <loc>https://okhand.org/zh-tw/posts/gpt-5_api_feature/</loc>
+    <lastmod>2025-08-22T00:18:28+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://okhand.org/zh-tw/</loc>
-    <lastmod>2025-08-15T19:46:55+08:00</lastmod>
+    <lastmod>2025-08-22T00:18:28+08:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -16,6 +22,22 @@
       rel="alternate"
       hreflang="zh-tw"
       href="https://okhand.org/zh-tw/"
+    />
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/</loc>
+    <lastmod>2025-08-22T00:18:28+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="https://okhand.org/en/posts/"
+    />
+    <xhtml:link
+      rel="alternate"
+      hreflang="zh-tw"
+      href="https://okhand.org/zh-tw/posts/"
     />
   </url>
   <url>
@@ -39,22 +61,6 @@
     <lastmod>2025-06-20T14:04:42+08:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://okhand.org/zh-tw/posts/</loc>
-    <lastmod>2025-06-20T14:04:42+08:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-    <xhtml:link
-      rel="alternate"
-      hreflang="en"
-      href="https://okhand.org/en/posts/"
-    />
-    <xhtml:link
-      rel="alternate"
-      hreflang="zh-tw"
-      href="https://okhand.org/zh-tw/posts/"
-    />
   </url>
   <url>
     <loc>https://okhand.org/zh-tw/posts/win-sid-error/</loc>

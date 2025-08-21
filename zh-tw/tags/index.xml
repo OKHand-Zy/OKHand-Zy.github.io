@@ -7,7 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <copyright>© 2025 OKH@nd.ZiYu</copyright>
-    <lastBuildDate>Fri, 20 Jun 2025 14:04:42 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Aug 2025 00:18:28 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>API</title>
+      <link>https://okhand.org/zh-tw/tags/api/</link>
+      <pubDate>Fri, 22 Aug 2025 00:18:28 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/tags/api/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Model</title>
+      <link>https://okhand.org/zh-tw/tags/model/</link>
+      <pubDate>Fri, 22 Aug 2025 00:18:28 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/tags/model/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>OpenAI</title>
+      <link>https://okhand.org/zh-tw/tags/openai/</link>
+      <pubDate>Fri, 22 Aug 2025 00:18:28 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/tags/openai/</guid>
+      <description></description>
+      
+    </item>
     
     <item>
       <title>Cloudflare-R2</title>
@@ -115,16 +145,6 @@
       <pubDate>Mon, 11 Nov 2024 01:15:55 +0800</pubDate>
       
       <guid>https://okhand.org/zh-tw/tags/nvdia/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>API</title>
-      <link>https://okhand.org/zh-tw/tags/api/</link>
-      <pubDate>Thu, 12 Sep 2024 19:56:47 +0800</pubDate>
-      
-      <guid>https://okhand.org/zh-tw/tags/api/</guid>
       <description></description>
       
     </item>

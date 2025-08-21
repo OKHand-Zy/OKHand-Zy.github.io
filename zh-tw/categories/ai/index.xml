@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
     <copyright>© 2025 OKH@nd.ZiYu</copyright>
-    <lastBuildDate>Sun, 26 Jan 2025 15:23:05 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/categories/ai/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Aug 2025 00:18:28 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/categories/ai/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>New API feature in GPT-5</title>
+      <link>https://okhand.org/zh-tw/posts/gpt-5_api_feature/</link>
+      <pubDate>Fri, 22 Aug 2025 00:18:28 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/gpt-5_api_feature/</guid>
+      <description>&lt;p&gt;因應最新的 GPT-5 出來的同時 API 多了幾個(對我來說的)新參數，Reasoning Effort 跟 Verbosity&lt;/p&gt;</description>
+      
+    </item>
     
     <item>
       <title>Claude MCP</title>
