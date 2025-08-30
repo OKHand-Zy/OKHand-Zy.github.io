@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gemini on OKH@nd&#39;s Blog</title>
+    <link>https://okhand.org/zh-tw/tags/gemini/</link>
+    <description>Recent content in Gemini on OKH@nd&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <copyright>© 2025 OKH@nd.ZiYu</copyright>
+    <lastBuildDate>Sun, 31 Aug 2025 00:03:55 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/tags/gemini/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Gemini for Workspace Prompt</title>
+      <link>https://okhand.org/zh-tw/posts/gemini-workspace-prompt/</link>
+      <pubDate>Sun, 31 Aug 2025 00:03:55 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/gemini-workspace-prompt/</guid>
+      <description>&lt;p&gt;這是一份 Googel 在2024年10月針對 Gemini 模型並如何正確下 Prompt 的一份文件。因為對於新手來說這對下 Prompt 也算是一個不錯的教學！&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>
