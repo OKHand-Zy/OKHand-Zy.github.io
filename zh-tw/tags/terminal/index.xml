@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Terminal on OKH@nd&#39;s Blog</title>
+    <link>https://okhand.org/zh-tw/tags/terminal/</link>
+    <description>Recent content in Terminal on OKH@nd&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-TW</language>
+    <copyright>© 2026 OKH@nd.ZiYu</copyright>
+    <lastBuildDate>Sat, 11 Jul 2026 22:20:09 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/tags/terminal/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>zsh&#43;Tmux&#43;Mosh 持續連線機制設定</title>
+      <link>https://okhand.org/zh-tw/posts/itemr2-tmux-mosh/</link>
+      <pubDate>Sat, 11 Jul 2026 22:20:09 +0800</pubDate>
+      
+      <guid>https://okhand.org/zh-tw/posts/itemr2-tmux-mosh/</guid>
+      <description>&lt;p&gt;基於 Zsh 上的 Tmux 和 Mosh 持續連線機制設定記錄&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

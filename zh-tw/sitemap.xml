@@ -3,14 +3,8 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
-    <loc>https://okhand.org/zh-tw/posts/dgx-spark-cluster-interconnect/</loc>
-    <lastmod>2026-03-10T15:38:57+08:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://okhand.org/zh-tw/</loc>
-    <lastmod>2026-03-10T15:38:57+08:00</lastmod>
+    <lastmod>2026-07-11T22:20:09+08:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -20,13 +14,13 @@
     />
     <xhtml:link
       rel="alternate"
-      hreflang="zh-tw"
+      hreflang="zh-TW"
       href="https://okhand.org/zh-tw/"
     />
   </url>
   <url>
     <loc>https://okhand.org/zh-tw/posts/</loc>
-    <lastmod>2026-03-10T15:38:57+08:00</lastmod>
+    <lastmod>2026-07-11T22:20:09+08:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -36,9 +30,21 @@
     />
     <xhtml:link
       rel="alternate"
-      hreflang="zh-tw"
+      hreflang="zh-TW"
       href="https://okhand.org/zh-tw/posts/"
     />
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/itemr2-tmux-mosh/</loc>
+    <lastmod>2026-07-11T22:20:09+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://okhand.org/zh-tw/posts/dgx-spark-cluster-interconnect/</loc>
+    <lastmod>2026-03-10T15:38:57+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://okhand.org/zh-tw/posts/gemini-workspace-prompt/</loc>
@@ -64,7 +70,7 @@
     />
     <xhtml:link
       rel="alternate"
-      hreflang="zh-tw"
+      hreflang="zh-TW"
       href="https://okhand.org/zh-tw/about/"
     />
   </url>

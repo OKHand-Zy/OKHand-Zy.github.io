@@ -7,145 +7,40 @@
   data-auto-appearance="true"><head>
   <meta charset="utf-8">
   
-    <meta http-equiv="content-language" content="zh-tw">
+    <meta http-equiv="content-language" content="zh-TW">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="theme-color">
 
   
-  <title>如何正確在 Docker 與 K8s 使用 GPU &middot; OKH@nd&#39;s Blog</title>
+  
+    <title>如何正確在 Docker 與 K8s 使用 GPU &middot; OKH@nd&#39;s Blog</title>
     <meta name="title" content="如何正確在 Docker 與 K8s 使用 GPU &middot; OKH@nd&#39;s Blog">
+  
 
   
-  <meta name="description" content="如何正確在 Docker 與 K8s 使用 GPU">
-  <meta name="keywords" content="K8s,Docker,NVIDIA,GPU,">
+  
+  
+  
+  
+    
+  
+    
+  
+    
+  
+  
+    <meta name="description" content="如何正確在 Docker 與 K8s 使用 GPU">
+  
+  
+    <meta name="keywords" content="K8s,Docker,NVIDIA,GPU,">
+  
   
   
   <link rel="canonical" href="https://okhand.org/zh-tw/posts/k8sgpu/">
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-    
-    
-  
-  
-  <link
-    type="text/css"
-    rel="stylesheet"
-    href="/css/main.bundle.min.0cdf364bd8bccd8f78e3774d46019e8d8c56c6b3dabbef6aec152bc371b533ab5764946c8710de044c0911f5cd58b63e1c22f50b97da09a2b1d35dd1839da22d.css"
-    integrity="sha512-DN82S9i8zY9443dNRgGejYxWxrPau&#43;9q7BUrw3G1M6tXZJRshxDeBEwJEfXNWLY&#43;HCL1C5faCaKx013Rg52iLQ==">
-
-  
-  
-  <script
-    type="text/javascript"
-    src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js"
-    integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj&#43;e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg=="></script>
-  
-  
-    
-    
-    
-  
-  
-    
-    
-  
-  
-  
-  
-  
-  
-  
-  
-  
-    
-    <script
-      defer
-      type="text/javascript"
-      id="script-bundle"
-      src="/js/main.bundle.min.98bb8ce8f123e03c4d2171eeec151dd404b5c476beb5ef1068d0e8b1a2afb923065e6552fc14b2d867c85ee4bd8529a43193f729f874d3908517ba03b5d1cc57.js"
-      integrity="sha512-mLuM6PEj4DxNIXHu7BUd1AS1xHa&#43;te8QaNDosaKvuSMGXmVS/BSy2GfIXuS9hSmkMZP3Kfh005CFF7oDtdHMVw=="
-      data-copy="複製"
-      data-copied="已複製"></script>
-  
-  
-    
-    <script src="/lib/zoom/zoom.min.umd.a527109b68c082a70f3697716dd72a9d5aa8b545cf800cecbbc7399f2ca6f6e0ce3e431f2062b48bbfa47c9ea42822714060bef309be073f49b9c0e30d318d7b.js" integrity="sha512-pScQm2jAgqcPNpdxbdcqnVqotUXPgAzsu8c5nyym9uDOPkMfIGK0i7&#43;kfJ6kKCJxQGC&#43;8wm&#43;Bz9JucDjDTGNew=="></script>
-  
-
-  
-  
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-  <meta property="og:url" content="https://okhand.org/zh-tw/posts/k8sgpu/">
-  <meta property="og:site_name" content="OKH@nd&#39;s Blog">
-  <meta property="og:title" content="如何正確在 Docker 與 K8s 使用 GPU">
-  <meta property="og:description" content="如何正確在 Docker 與 K8s 使用 GPU">
-  <meta property="og:locale" content="zh_tw">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-02-28T13:01:40+08:00">
-    <meta property="article:modified_time" content="2024-02-28T13:01:40+08:00">
-    <meta property="article:tag" content="K8s">
-    <meta property="article:tag" content="Docker">
-    <meta property="article:tag" content="NVIDIA">
-    <meta property="article:tag" content="GPU">
-
-  
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="如何正確在 Docker 與 K8s 使用 GPU">
-  <meta name="twitter:description" content="如何正確在 Docker 與 K8s 使用 GPU">
-
-  <script type="application/ld+json">
-  [{
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "articleSection": "Posts",
-    "name": "如何正確在 Docker 與 K8s 使用 GPU",
-    "headline": "如何正確在 Docker 與 K8s 使用 GPU",
-    "description": "如何正確在 Docker 與 K8s 使用 GPU",
-    "abstract": "\u003cp\u003e本文介紹在 Ubuntu Server 22.04 上安裝 Docker 與 Kubernetes 並在 Container 上使用 GPU 的紀錄\u003c\/p\u003e",
-    "inLanguage": "zh-tw",
-    "url" : "https:\/\/okhand.org\/zh-tw\/posts\/k8sgpu\/",
-    "author" : {
-      "@type": "Person",
-      "name": "OKH@nd.ZiYu"
-    },
-    "copyrightYear": "2024",
-    "dateCreated": "2024-02-28T13:01:40\u002b08:00",
-    "datePublished": "2024-02-28T13:01:40\u002b08:00",
-    
-    "dateModified": "2024-02-28T13:01:40\u002b08:00",
-    
-    "keywords": ["K8s","Docker","NVIDIA","GPU"],
-    
-    "mainEntityOfPage": "true",
-    "wordCount": "2577"
-  }]
-  </script>
-
-
 
   
   
@@ -178,34 +73,210 @@
   
 
   
+  <meta property="og:url" content="https://okhand.org/zh-tw/posts/k8sgpu/">
+  <meta property="og:site_name" content="OKH@nd&#39;s Blog">
+  <meta property="og:title" content="如何正確在 Docker 與 K8s 使用 GPU">
+  <meta property="og:description" content="如何正確在 Docker 與 K8s 使用 GPU">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-02-28T13:01:40+08:00">
+    <meta property="article:modified_time" content="2024-02-28T13:01:40+08:00">
+    <meta property="article:tag" content="K8s">
+    <meta property="article:tag" content="Docker">
+    <meta property="article:tag" content="NVIDIA">
+    <meta property="article:tag" content="GPU">
+
   
-
-<script src="/lib/jquery/jquery.slim.min.b0dca576e87d7eaa5850ae4e61759c065786cdb6489d68fcc82240539eebd5da522bdb4fda085ffd245808c8fe2acb2516408eb774ef26b5f6015fc6737c0ea8.js" integrity="sha512-sNylduh9fqpYUK5OYXWcBleGzbZInWj8yCJAU57r1dpSK9tP2ghf/SRYCMj&#43;KsslFkCOt3TvJrX2AV/Gc3wOqA=="></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="如何正確在 Docker 與 K8s 使用 GPU">
+  <meta name="twitter:description" content="如何正確在 Docker 與 K8s 使用 GPU">
 
   
   
+  
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+  
+    
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="/css/main.bundle.min.7e3c32600d8c7bd34ddb0521c17450b1bd660582bf452c50912fa8fdd5cb7fe02dc420e8c8d296b00b26baa1fff32dffbb01e8a7ee727f0af929a2d8d1455f82.css"
+    integrity="sha512-fjwyYA2Me9NN2wUhwXRQsb1mBYK/RSxQkS&#43;o/dXLf&#43;AtxCDoyNKWsAsmuqH/8y3/uwHop&#43;5yfwr5KaLY0UVfgg==">
+
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/appearance.min.07514f0a09be093289e3a94b3ef771391aebb37588ae2035345e460ff9ba92d3f5afea6b684f58e0118936d8a992d227977f5c30f770144b6d8d31610c340e20.js"
+    integrity="sha512-B1FPCgm&#43;CTKJ46lLPvdxORrrs3WIriA1NF5GD/m6ktP1r&#43;praE9Y4BGJNtipktInl39cMPdwFEttjTFhDDQOIA=="></script>
+  
+
+
+  
+  
+  
+  
+  
+  
+    
+    <script src="/lib/zoom/zoom.min.umd.a527109b68c082a70f3697716dd72a9d5aa8b545cf800cecbbc7399f2ca6f6e0ce3e431f2062b48bbfa47c9ea42822714060bef309be073f49b9c0e30d318d7b.js" integrity="sha512-pScQm2jAgqcPNpdxbdcqnVqotUXPgAzsu8c5nyym9uDOPkMfIGK0i7&#43;kfJ6kKCJxQGC&#43;8wm&#43;Bz9JucDjDTGNew=="></script>
+  
+
+  
+  
+  
+    
+  
+  
+    
+    
+    
+  
+  
+    
+  
+  
+  
+  
+  
+  
+    
+    <script
+      defer
+      type="text/javascript"
+      id="script-bundle"
+      src="/js/main.bundle.min.e3aad7167358eb4fd1cdc7e6708cbefd4b9a1f4e9e69902f63da0354804ea2b877b45772c5f0ed6f44a09074ad5a433fab0b346c53d7f08b0c145977fe480933.js"
+      integrity="sha512-46rXFnNY60/RzcfmcIy&#43;/UuaH06eaZAvY9oDVIBOorh3tFdyxfDtb0SgkHStWkM/qws0bFPX8IsMFFl3/kgJMw=="
+      data-copy="複製"
+      data-copied="已複製"></script>
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+  
+
+  
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Posts",
+    "name": "如何正確在 Docker 與 K8s 使用 GPU",
+    "headline": "如何正確在 Docker 與 K8s 使用 GPU",
+    "description": "如何正確在 Docker 與 K8s 使用 GPU",
+    "inLanguage": "zh-TW",
+    "url" : "https://okhand.org/zh-tw/posts/k8sgpu/",
+    "author" : {
+      "@type": "Person",
+      "name": "OKH@nd.ZiYu",
+      "image": "https://image.okhand.org/icon/Hero.webp",
+      "sameAs": ["https://github.com/OKHand-Zy", "https://www.instagram.com/okhand_ziyu/", "https://www.linkedin.com/in/okhand-ziyu/"]
+    },
+    "copyrightYear": "2024",
+    "dateCreated": "2024-02-28T13:01:40\u002b08:00",
+    "datePublished": "2024-02-28T13:01:40\u002b08:00",
+    
+    "dateModified": "2024-02-28T13:01:40\u002b08:00",
+    
+    "keywords": ["K8s","Docker","NVIDIA","GPU"],
+    
+    "mainEntityOfPage": "https://okhand.org/zh-tw/posts/k8sgpu/",
+    "wordCount": "2577"
+  }]
+  </script>
+
+
+
+  
+  
+    
 
   <script
   async
@@ -222,8 +293,6 @@
 
 
 
-
-  
   
 
   
@@ -235,35 +304,37 @@
   
   
 </head>
-<body
-    class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32 scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-neutral-400 dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <body class="flex flex-col h-screen m-auto leading-7 max-w-7xl px-6 sm:px-14 md:px-24 lg:px-32 text-lg bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral bf-scrollbar">
     <div id="the-top" class="absolute flex self-center">
       <a
         class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
         href="#main-content">
-        <span class="font-bold text-primary-600 ltr:pr-2 rtl:pl-2 dark:text-primary-400">&darr;</span>
+        <span class="font-bold text-primary-600 pe-2 dark:text-primary-400">&darr;</span>
         快轉到主要內容
       </a>
     </div>
     
     
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div
-  class="main-menu flex items-center justify-between px-4 py-6 sm:px-6 md:justify-start gap-x-3 pt-[2px] pr-0 pb-[3px] pl-0">
-  
+      <div class="main-menu flex items-center w-full gap-2 p-1 pl-0">
   
     
     
@@ -273,159 +344,140 @@
           
             <img
               src="/OKHand-Logo.png"
-              width="64"
-              height="64"
-              class="logo max-h-[5rem] max-w-[5rem] object-scale-down object-left nozoom"
-              alt="OKH@nd&#39;s Blog">
+              width="256"
+              height="256"
+              class="logo max-h-20 max-w-20 object-scale-down object-left nozoom"
+              alt="">
           
         </a>
       </div>
     
-
-  <div class="flex flex-1 items-center justify-between">
-    <nav class="flex space-x-3">
-      
-        <a href="/zh-tw/" class="text-base font-medium text-gray-500 hover:text-gray-900">
-          OKH@nd&rsquo;s Blog
-        </a>
-      
-    </nav>
+  
+  
+    <a href="/zh-tw/" class="text-base font-medium truncate min-w-0 shrink">
+      OKH@nd&rsquo;s Blog
+    </a>
+  
+  <div class="flex items-center ms-auto">
+    <div class="hidden md:flex">
+      <nav class="flex items-center gap-x-5 h-12">
+  
     
-  <nav class="hidden md:flex items-center gap-x-5 md:ml-12 h-12">
-    
       
-        
-  <a
-  href="/zh-tw/"
   
-  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
-  
-  <p class="text-base font-medium" title="OKH@nd&#39;s Blog">
-    首頁
-  </p>
-</a>
-
-
-
+    <a
+      href="/zh-tw/"
       
-        
-  <a
-  href="/zh-tw/posts/"
-  
-  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
-  
-  <p class="text-base font-medium" title="Posts">
-    文章
-  </p>
-</a>
-
-
-
+      class="flex items-center bf-icon-color-hover"
+      aria-label="首頁"
+      title="OKH@nd&#39;s Blog">
       
-        
-  <a
-  href="/zh-tw/categories/"
-  
-  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
-  
-  <p class="text-base font-medium" title="Categories">
-    分類
-  </p>
-</a>
-
-
-
       
-        
-  <a
-  href="/zh-tw/tags/"
-  
-  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
-  
-  <p class="text-base font-medium" title="Tags">
-    標籤
-  </p>
-</a>
-
-
-
+        <span class="text-base font-medium break-normal">
+          首頁
+        </span>
       
-        
-  <a
-  href="/zh-tw/about/"
+    </a>
   
-  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
-  
-  <p class="text-base font-medium" title="關於 我">
-    關於我
-  </p>
-</a>
-
-
-
-      
-    
 
     
+      
+  
+    <a
+      href="/zh-tw/posts/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="文章"
+      title="Posts">
+      
+      
+        <span class="text-base font-medium break-normal">
+          文章
+        </span>
+      
+    </a>
+  
 
     
+      
+  
+    <a
+      href="/zh-tw/categories/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="分類"
+      title="Categories">
+      
+      
+        <span class="text-base font-medium break-normal">
+          分類
+        </span>
+      
+    </a>
+  
 
     
+      
+  
+    <a
+      href="/zh-tw/tags/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="標籤"
+      title="Tags">
+      
+      
+        <span class="text-base font-medium break-normal">
+          標籤
+        </span>
+      
+    </a>
+  
+
+    
+      
+  
+    <a
+      href="/zh-tw/about/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="關於我"
+      title="關於 我">
+      
+      
+        <span class="text-base font-medium break-normal">
+          關於我
+        </span>
+      
+    </a>
+  
+
+    
+  
+
+  
+
+  
+
+  
+    <button
+      id="search-button"
+      aria-label="Search"
+      class="text-base bf-icon-color-hover"
+      title="搜尋 (/)">
+      <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+    </button>
+  
+
+  
+    <div class="flex items-center">
       <button
-        id="search-button"
-        aria-label="Search"
-        class="text-base hover:text-primary-600 dark:hover:text-primary-400"
-        title="搜尋 (/)">
-        <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
-</span>
-      </button>
-    
-
-    
-      <div class=" flex items-center">
-        <button
-          id="appearance-switcher"
-          aria-label="Dark mode switcher"
-          type="button"
-          class="text-base hover:text-primary-600 dark:hover:text-primary-400">
-          <div class="flex items-center justify-center dark:hidden">
-            <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
-</span>
-          </div>
-          <div class="items-center justify-center hidden dark:flex">
-            <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
-</span>
-          </div>
-        </button>
-      </div>
-    
-  </nav>
-
-    
-  <div class="flex md:hidden items-center gap-x-5 md:ml-12 h-12">
-    <span></span>
-
-    
-
-    
-
-    
-      <button
-        id="search-button-mobile"
-        aria-label="Search"
-        class="text-base hover:text-primary-600 dark:hover:text-primary-400"
-        title="搜尋 (/)">
-        <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
-</span>
-      </button>
-    
-
-    
-      <button
-        id="appearance-switcher-mobile"
-        aria-label="Dark mode switcher"
+        id="appearance-switcher"
+        aria-label="切換為深色模式"
         type="button"
-        class="text-base hover:text-primary-600 dark:hover:text-primary-400 ltr:mr-1 rtl:ml-1">
+        class="text-base bf-icon-color-hover"
+        title="切換為深色模式">
         <div class="flex items-center justify-center dark:hidden">
           <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
 </span>
@@ -435,120 +487,179 @@
 </span>
         </div>
       </button>
-    
-  </div>
-
-  </div>
+    </div>
   
-  <div class="-my-2 md:hidden">
-    <div id="menu-button" class="block">
-      
-        <div class="cursor-pointer hover:text-primary-600 dark:hover:text-primary-400">
-          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
+</nav>
+
+
+
+    </div>
+    <div class="flex md:hidden">
+      <div class="flex items-center h-14 gap-4">
+  
+    <button
+      id="search-button-mobile"
+      aria-label="Search"
+      class="flex items-center justify-center bf-icon-color-hover"
+      title="搜尋 (/)">
+      <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
 </span>
-        </div>
-        <div
-          id="menu-wrapper"
-          class="fixed inset-0 z-30 invisible w-screen h-screen m-0 overflow-auto transition-opacity opacity-0 cursor-default bg-neutral-100/50 backdrop-blur-sm dark:bg-neutral-900/50 pt-[5px]">
-          <ul
-            class="flex space-y-2 mt-3 flex-col items-end w-full px-6 py-6 mx-auto overflow-visible list-none ltr:text-right rtl:text-left max-w-7xl">
-            <li id="menu-close-button">
-              <span
-                class="cursor-pointer inline-block align-text-bottom hover:text-primary-600 dark:hover:text-primary-400">
-                <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+    </button>
+  
+
+  
+    <button
+      id="appearance-switcher-mobile"
+      type="button"
+      aria-label="切換為深色模式"
+      title="切換為深色模式"
+      class="flex items-center justify-center text-neutral-900 hover:text-primary-600 dark:text-neutral-200 dark:hover:text-primary-400">
+      <div class="dark:hidden">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
 </span>
-              </span>
-            </li>
+      </div>
+      <div class="hidden dark:block">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+</span>
+      </div>
+    </button>
+  
 
-            
-              
-  <li class="mt-1">
-  <a
-    href="/zh-tw/"
+  
+    <input type="checkbox" id="mobile-menu-toggle" autocomplete="off" class="hidden peer">
+    <label for="mobile-menu-toggle" class="flex items-center justify-center cursor-pointer bf-icon-color-hover">
+      <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
+</span>
+    </label>
+
+    <div
+      role="dialog"
+      aria-modal="true"
+      style="scrollbar-gutter: stable;"
+      class="fixed inset-0 z-50 invisible overflow-y-auto px-6 py-20 opacity-0 transition-[opacity,visibility] duration-300 peer-checked:visible peer-checked:opacity-100 bg-neutral-50/97 dark:bg-neutral-900/99
+      bf-scrollbar">
+      <label
+        for="mobile-menu-toggle"
+        class="fixed end-8 top-5 flex items-center justify-center z-50 h-12 w-12 cursor-pointer select-none rounded-full bf-icon-color-hover border bf-border-color bf-border-color-hover bg-neutral-50 dark:bg-neutral-900">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+</span>
+      </label>
+      <nav class="mx-auto max-w-md space-y-6">
+        
+  
     
-    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
-    
-    <p class="text-bg font-bg" title="OKH@nd&#39;s Blog">
-      首頁
-    </p>
-  </a>
-</li>
+    <div class="px-2">
+      <a
+        href="/zh-tw/"
+        aria-label="首頁"
+        
+        class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+        
+        <span title="OKH@nd&#39;s Blog" class="text-2xl font-bold tracking-tight">
+          首頁
+        </span>
+        
+      </a>
 
-
-
-            
-              
-  <li class="mt-1">
-  <a
-    href="/zh-tw/posts/"
-    
-    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
-    
-    <p class="text-bg font-bg" title="Posts">
-      文章
-    </p>
-  </a>
-</li>
-
-
-
-            
-              
-  <li class="mt-1">
-  <a
-    href="/zh-tw/categories/"
-    
-    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
-    
-    <p class="text-bg font-bg" title="Categories">
-      分類
-    </p>
-  </a>
-</li>
-
-
-
-            
-              
-  <li class="mt-1">
-  <a
-    href="/zh-tw/tags/"
-    
-    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
-    
-    <p class="text-bg font-bg" title="Tags">
-      標籤
-    </p>
-  </a>
-</li>
-
-
-
-            
-              
-  <li class="mt-1">
-  <a
-    href="/zh-tw/about/"
-    
-    class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
-    
-    <p class="text-bg font-bg" title="關於 我">
-      關於我
-    </p>
-  </a>
-</li>
-
-
-
-            
-
-          </ul>
-          
-        </div>
       
     </div>
-  </div>
+  
+    
+    <div class="px-2">
+      <a
+        href="/zh-tw/posts/"
+        aria-label="文章"
+        
+        class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+        
+        <span title="Posts" class="text-2xl font-bold tracking-tight">
+          文章
+        </span>
+        
+      </a>
 
+      
+    </div>
+  
+    
+    <div class="px-2">
+      <a
+        href="/zh-tw/categories/"
+        aria-label="分類"
+        
+        class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+        
+        <span title="Categories" class="text-2xl font-bold tracking-tight">
+          分類
+        </span>
+        
+      </a>
+
+      
+    </div>
+  
+    
+    <div class="px-2">
+      <a
+        href="/zh-tw/tags/"
+        aria-label="標籤"
+        
+        class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+        
+        <span title="Tags" class="text-2xl font-bold tracking-tight">
+          標籤
+        </span>
+        
+      </a>
+
+      
+    </div>
+  
+    
+    <div class="px-2">
+      <a
+        href="/zh-tw/about/"
+        aria-label="關於我"
+        
+        class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+        
+        <span title="關於 我" class="text-2xl font-bold tracking-tight">
+          關於我
+        </span>
+        
+      </a>
+
+      
+    </div>
+  
+
+        
+  
+
+        
+  
+    <div
+      class="flex flex-wrap items-center [&_span]:text-2xl [&_.translation_button_.icon]:text-4xl! [&_.translation_button_span]:text-base! [&_.translation_.menuhide_span]:text-sm! gap-x-6 ps-2 mt-8 pt-8 border-t bf-border-color">
+      
+
+
+      
+    </div>
+  
+
+      </nav>
+    </div>
+  
+</div>
+
+
+
+
+
+
+
+    </div>
+  </div>
 </div>
 
 
@@ -587,10 +698,9 @@
   
   
   
-
-  
-  
     
+  
+
   
 
   
@@ -639,15 +749,29 @@
         
           
             
-              <a class="relative mt-[0.5rem] mr-2" href="/zh-tw/categories/devops/"
-                ><span class="flex cursor-pointer">
-  <span
-    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+              
+                <a class="relative mt-[0.5rem] me-2" href="/zh-tw/categories/devops/">
+                  
+                  <span class="flex cursor-pointer">
+  
+  
+  
+    
+    
+  
+  
+    <span
+      class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+  
     DevOps
   </span>
 </span>
-</a
-              >
+
+                </a>
+              
+            
+            
+              
             
           
         
@@ -657,55 +781,97 @@
         
           
             
-              <a class="relative mt-[0.5rem] mr-2" href="/zh-tw/tags/k8s/"
-                ><span class="flex cursor-pointer">
-  <span
-    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+              
+            
+            
+              
+                <a class="relative mt-[0.5rem] me-2" href="/zh-tw/tags/k8s/">
+                  <span class="flex cursor-pointer">
+  
+  
+  
+  
+    <span
+      class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+  
     K8s
   </span>
 </span>
-</a
-              >
+
+                </a>
+              
             
-              <a class="relative mt-[0.5rem] mr-2" href="/zh-tw/tags/docker/"
-                ><span class="flex cursor-pointer">
-  <span
-    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+          
+            
+              
+            
+            
+              
+                <a class="relative mt-[0.5rem] me-2" href="/zh-tw/tags/docker/">
+                  <span class="flex cursor-pointer">
+  
+  
+  
+  
+    <span
+      class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+  
     Docker
   </span>
 </span>
-</a
-              >
+
+                </a>
+              
             
-              <a class="relative mt-[0.5rem] mr-2" href="/zh-tw/tags/nvidia/"
-                ><span class="flex cursor-pointer">
-  <span
-    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+          
+            
+              
+            
+            
+              
+                <a class="relative mt-[0.5rem] me-2" href="/zh-tw/tags/nvidia/">
+                  <span class="flex cursor-pointer">
+  
+  
+  
+  
+    <span
+      class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+  
     NVIDIA
   </span>
 </span>
-</a
-              >
+
+                </a>
+              
             
-              <a class="relative mt-[0.5rem] mr-2" href="/zh-tw/tags/gpu/"
-                ><span class="flex cursor-pointer">
-  <span
-    class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+          
+            
+              
+            
+            
+              
+                <a class="relative mt-[0.5rem] me-2" href="/zh-tw/tags/gpu/">
+                  <span class="flex cursor-pointer">
+  
+  
+  
+  
+    <span
+      class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+  
     GPU
   </span>
 </span>
-</a
-              >
+
+                </a>
+              
             
           
         
       
     </div>
   
-
-  
-  
-
 
 
       </div>
@@ -744,13 +910,13 @@
         <div class="article-content max-w-prose mb-20">
           <p>本文介紹在 Ubuntu Server 22.04 上安裝 Docker 與 Kubernetes 並在 Container 上使用 GPU 的紀錄</p>
 
-<h1 class="relative group">環境介紹 
+<h1 class="relative group">環境介紹
     <div id="環境介紹" class="anchor"></div>
     
     <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
-        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#%e7%92%b0%e5%a2%83%e4%bb%8b%e7%b4%b9" aria-label="定位點">#</a>
-    </span>        
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#%e7%92%b0%e5%a2%83%e4%bb%8b%e7%b4%b9" aria-label="定位點">#</a>
+    </span>
     
 </h1>
 <ul>
@@ -780,28 +946,25 @@
 </li>
 </ul>
 <p>如果不太懂 K8s 上該使用 GPU 整體架構可以先看這篇文章，可以大致上先了解等等會用到的套件
-K8s GPU 整體架構介紹：<a
-  href="https://zhuanlan.zhihu.com/p/670798727"
-    target="_blank"
-  >https://zhuanlan.zhihu.com/p/670798727</a></p>
+K8s GPU 整體架構介紹：<a href="https://zhuanlan.zhihu.com/p/670798727"  target="_blank" rel="noreferrer">https://zhuanlan.zhihu.com/p/670798727</a></p>
 
-<h1 class="relative group">GPU 設定 及 安裝 (每台都需要設定) 
+<h1 class="relative group">GPU 設定 及 安裝 (每台都需要設定)
     <div id="gpu-設定-及-安裝-每台都需要設定" class="anchor"></div>
     
     <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
-        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#gpu-%e8%a8%ad%e5%ae%9a-%e5%8f%8a-%e5%ae%89%e8%a3%9d-%e6%af%8f%e5%8f%b0%e9%83%bd%e9%9c%80%e8%a6%81%e8%a8%ad%e5%ae%9a" aria-label="定位點">#</a>
-    </span>        
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#gpu-%e8%a8%ad%e5%ae%9a-%e5%8f%8a-%e5%ae%89%e8%a3%9d-%e6%af%8f%e5%8f%b0%e9%83%bd%e9%9c%80%e8%a6%81%e8%a8%ad%e5%ae%9a" aria-label="定位點">#</a>
+    </span>
     
 </h1>
 
-<h2 class="relative group">環境設定 
+<h2 class="relative group">環境設定
     <div id="環境設定" class="anchor"></div>
     
     <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
-        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#%e7%92%b0%e5%a2%83%e8%a8%ad%e5%ae%9a" aria-label="定位點">#</a>
-    </span>        
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#%e7%92%b0%e5%a2%83%e8%a8%ad%e5%ae%9a" aria-label="定位點">#</a>
+    </span>
     
 </h2>
 <ol>
@@ -811,46 +974,46 @@ K8s GPU 整體架構介紹：<a
 <li>創建 <code>/etc/modprobe.d/blacklist-nouveau.conf</code> 文件</li>
 <li><code>sudo vim /etc/modprobe.d/blacklist-nouveau.conf</code>
 將下面内容添加進去：
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">blacklist nouveau
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">blacklist nouveau
 </span></span><span class="line"><span class="cl">blacklist lbm-nouveau
 </span></span><span class="line"><span class="cl">options nouveau <span class="nv">modeset</span><span class="o">=</span><span class="m">0</span>
 </span></span><span class="line"><span class="cl"><span class="nb">alias</span> nouveau off
-</span></span><span class="line"><span class="cl"><span class="nb">alias</span> lbm-nouveau off
-</span></span></code></pre></div></li>
+</span></span><span class="line"><span class="cl"><span class="nb">alias</span> lbm-nouveau off</span></span></code></pre></div></div>
+</li>
 <li>創建 <code>/etc/modprobe.d/nouveau-kms.conf</code> 文件，並將 options nouveau mdeset=0 添加進去：
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> options nouveau <span class="nv">modeset</span><span class="o">=</span><span class="m">0</span> <span class="p">|</span> sudo tee -a /etc/modprobe.d/nouveau-kms.conf
-</span></span></code></pre></div></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> options nouveau <span class="nv">modeset</span><span class="o">=</span><span class="m">0</span> <span class="p">|</span> sudo tee -a /etc/modprobe.d/nouveau-kms.conf</span></span></code></pre></div></div>
+</li>
 <li>更新一下 initramfs：
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo update-initramfs -u
-</span></span></code></pre></div></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo update-initramfs -u</span></span></code></pre></div></div>
+</li>
 <li>重啟伺服器：
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo reboot
-</span></span></code></pre></div></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo reboot</span></span></code></pre></div></div>
+</li>
 <li>查看 nouveau 是否加載，沒顯示的話就表示已經禁用：
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo lsmod <span class="p">|</span> grep nouveau
-</span></span></code></pre></div></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo lsmod <span class="p">|</span> grep nouveau</span></span></code></pre></div></div>
+</li>
 </ul>
 </li>
 </ol>
 
-<h2 class="relative group">套件安裝 
+<h2 class="relative group">套件安裝
     <div id="套件安裝" class="anchor"></div>
     
     <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
-        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#%e5%a5%97%e4%bb%b6%e5%ae%89%e8%a3%9d" aria-label="定位點">#</a>
-    </span>        
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#%e5%a5%97%e4%bb%b6%e5%ae%89%e8%a3%9d" aria-label="定位點">#</a>
+    </span>
     
 </h2>
 <p>有分 &ldquo;一次全部安裝好(CUDA Toolkit)&rdquo; 跟 &ldquo;各個小套件分別安裝&rdquo; 的方法,這邊推薦直接裝一次全部裝好的版本</p>
 
-<h3 class="relative group">安裝 Nvidia CUDA Toolkit 套件 (一次全裝版本) 
+<h3 class="relative group">安裝 Nvidia CUDA Toolkit 套件 (一次全裝版本)
     <div id="安裝-nvidia-cuda-toolkit-套件-一次全裝版本" class="anchor"></div>
     
     <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
-        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#%e5%ae%89%e8%a3%9d-nvidia-cuda-toolkit-%e5%a5%97%e4%bb%b6-%e4%b8%80%e6%ac%a1%e5%85%a8%e8%a3%9d%e7%89%88%e6%9c%ac" aria-label="定位點">#</a>
-    </span>        
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#%e5%ae%89%e8%a3%9d-nvidia-cuda-toolkit-%e5%a5%97%e4%bb%b6-%e4%b8%80%e6%ac%a1%e5%85%a8%e8%a3%9d%e7%89%88%e6%9c%ac" aria-label="定位點">#</a>
+    </span>
     
 </h3>
 
@@ -863,12 +1026,12 @@ K8s GPU 整體架構介紹：<a
 
 <div
   
-    class="flex px-4 py-3 rounded-md bg-primary-100 dark:bg-primary-900"
+    class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"
   
   >
   <span
     
-      class="text-primary-400 ltr:pr-3 rtl:pl-3 flex items-center"
+      class="text-primary-400 pe-3 flex items-center"
     
     >
     <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg>
@@ -886,13 +1049,13 @@ Nvidia CUDA Toolkit：https://developer.nvidia.com/cuda-downloads</span>
 <p>這邊是使用 Local deb 安裝, 安裝 Ubuntu 22.04 local deb 版本</p>
 <ol>
 <li>移除舊 NVIDIA 驅動
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get --purge remove nvidia*
-</span></span><span class="line"><span class="cl">sudo apt-get --purge remove libnvidia*
-</span></span></code></pre></div></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get --purge remove nvidia*
+</span></span><span class="line"><span class="cl">sudo apt-get --purge remove libnvidia*</span></span></code></pre></div></div>
+</li>
 <li>安装 CUDA Toolkit (裡面包含 Driver Cuda NVCC 等等&hellip;)
 <ul>
 <li>Base Installer:
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
 </span></span><span class="line"><span class="cl">
@@ -904,18 +1067,18 @@ Nvidia CUDA Toolkit：https://developer.nvidia.com/cuda-downloads</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">sudo apt-get update
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">sudo apt-get -y install cuda-toolkit-12-3
-</span></span></code></pre></div></li>
+</span></span><span class="line"><span class="cl">sudo apt-get -y install cuda-toolkit-12-3</span></span></code></pre></div></div>
+</li>
 <li>Driver Installer：二擇一即可我是裝上面就行了
 <ul>
 <li>To install the legacy kernel module flavor:
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install -y cuda-drivers
-</span></span></code></pre></div></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install -y cuda-drivers</span></span></code></pre></div></div>
+</li>
 <li>To install the open kernel module flavor:
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install -y nvidia-kernel-open-545
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install -y nvidia-kernel-open-545
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">sudo apt-get install -y cuda-drivers-545
-</span></span></code></pre></div></li>
+</span></span><span class="line"><span class="cl">sudo apt-get install -y cuda-drivers-545</span></span></code></pre></div></div>
+</li>
 </ul>
 </li>
 </ul>
@@ -923,13 +1086,13 @@ Nvidia CUDA Toolkit：https://developer.nvidia.com/cuda-downloads</span>
 </ol>
 <hr>
 
-<h3 class="relative group">單純安裝 Nvidia GPU Drive (之後還要裝 Cuda): 
+<h3 class="relative group">單純安裝 Nvidia GPU Drive (之後還要裝 Cuda):
     <div id="單純安裝-nvidia-gpu-drive-之後還要裝-cuda" class="anchor"></div>
     
     <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
-        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#%e5%96%ae%e7%b4%94%e5%ae%89%e8%a3%9d-nvidia-gpu-drive-%e4%b9%8b%e5%be%8c%e9%82%84%e8%a6%81%e8%a3%9d-cuda" aria-label="定位點">#</a>
-    </span>        
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#%e5%96%ae%e7%b4%94%e5%ae%89%e8%a3%9d-nvidia-gpu-drive-%e4%b9%8b%e5%be%8c%e9%82%84%e8%a6%81%e8%a3%9d-cuda" aria-label="定位點">#</a>
+    </span>
     
 </h3>
 
@@ -942,12 +1105,12 @@ Nvidia CUDA Toolkit：https://developer.nvidia.com/cuda-downloads</span>
 
 <div
   
-    class="flex px-4 py-3 rounded-md bg-primary-100 dark:bg-primary-900"
+    class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"
   
   >
   <span
     
-      class="text-primary-400 ltr:pr-3 rtl:pl-3 flex items-center"
+      class="text-primary-400 pe-3 flex items-center"
     
     >
     <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z"/></svg>
@@ -967,55 +1130,51 @@ Nvidia CUDA Toolkit：https://developer.nvidia.com/cuda-downloads</span>
 <p>wget NVIDIA GPU Driver</p>
 <ul>
 <li>找自己型號的 Driver 並複製下載連結： <br>
-<a
-  href="https://www.nvidia.com/Download/index.aspx?lang=en-us"
-    target="_blank"
-  >https://www.nvidia.com/Download/index.aspx?lang=en-us</a></li>
+<a href="https://www.nvidia.com/Download/index.aspx?lang=en-us"  target="_blank" rel="noreferrer">https://www.nvidia.com/Download/index.aspx?lang=en-us</a></li>
 <li>下載 Driver 到機台上
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget <span class="s2">&#34;Driver-Url&#34;</span>
-</span></span></code></pre></div></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget <span class="s2">&#34;Driver-Url&#34;</span></span></span></code></pre></div></div>
+</li>
 </ul>
 </li>
 <li>
 <p>install GPU Driver</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chmod <span class="m">777</span> <span class="s2">&#34;GPU-Driver&#34;</span>
-</span></span><span class="line"><span class="cl">./<span class="s2">&#34;GPU-Driver&#34;</span>
-</span></span></code></pre></div><p>安裝後就顯示這個錯誤</p>
-<pre tabindex="0"><code>ERROR: An error occurred while performing the step: &#34;Building kernel modules&#34;. See /var/log/nvidia-installer.log for details.
-ERROR: An error occurred while performing the step: &#34;Checking to see whether the nvidia kernel module was successfully built&#34;. See
-     /var/log/nvidia-installer.log for details.
-</code></pre><p>調整到跟 uname -r 一樣的版本或是調低 uname 到一樣的版本
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chmod <span class="m">777</span> <span class="s2">&#34;GPU-Driver&#34;</span>
+</span></span><span class="line"><span class="cl">./<span class="s2">&#34;GPU-Driver&#34;</span></span></span></code></pre></div></div>
+<p>安裝後就顯示這個錯誤</p>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">ERROR: An error occurred while performing the step: &#34;Building kernel modules&#34;. See /var/log/nvidia-installer.log for details.
+</span></span><span class="line"><span class="cl">ERROR: An error occurred while performing the step: &#34;Checking to see whether the nvidia kernel module was successfully built&#34;. See
+</span></span><span class="line"><span class="cl">     /var/log/nvidia-installer.log for details.</span></span></code></pre></div></div>
+<p>調整到跟 uname -r 一樣的版本或是調低 uname 到一樣的版本
 install linux-kernel-headers kernel-package:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install linux-kernel-headers kernel-package
-</span></span></code></pre></div><blockquote>
-<p>解決方法：https://www.linuxprobe.com/ubuntu-nvidia-v100-gpu.html</p></blockquote>
-</li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install linux-kernel-headers kernel-package</span></span></code></pre></div></div>
+<blockquote><p>解決方法：https://www.linuxprobe.com/ubuntu-nvidia-v100-gpu.html</p>
+</blockquote></li>
 </ol>
 <hr>
 
-<h2 class="relative group">補充： 
+<h2 class="relative group">補充：
     <div id="補充" class="anchor"></div>
     
     <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
-        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#%e8%a3%9c%e5%85%85" aria-label="定位點">#</a>
-    </span>        
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#%e8%a3%9c%e5%85%85" aria-label="定位點">#</a>
+    </span>
     
 </h2>
 
-<h3 class="relative group">裝完之後要使用 nvcc： 
+<h3 class="relative group">裝完之後要使用 nvcc：
     <div id="裝完之後要使用-nvcc" class="anchor"></div>
     
     <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
-        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#%e8%a3%9d%e5%ae%8c%e4%b9%8b%e5%be%8c%e8%a6%81%e4%bd%bf%e7%94%a8-nvcc" aria-label="定位點">#</a>
-    </span>        
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#%e8%a3%9d%e5%ae%8c%e4%b9%8b%e5%be%8c%e8%a6%81%e4%bd%bf%e7%94%a8-nvcc" aria-label="定位點">#</a>
+    </span>
     
 </h3>
 <ol>
 <li>
 <p>sudo nano ~/.bashrc</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 加在最下面</span>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 加在最下面</span>
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&#34;/usr/local/&lt;cuda-version-folder&gt;/bin:</span><span class="nv">$PATH</span><span class="s2">&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&#34;/usr/local/&lt;cuda-version-folder&gt;/lib64:</span><span class="nv">$LD_LIBRARY_PATH</span><span class="s2">&#34;</span>
 </span></span><span class="line"><span class="cl">
@@ -1041,8 +1200,8 @@ install linux-kernel-headers kernel-package:</p>
 </span></span><span class="line"><span class="cl">    <span class="nb">export</span> <span class="nv">CUDA_HOME</span><span class="o">=</span><span class="nv">$CUDA_HOME</span>:<span class="s1">&#39;/usr/local/cuda&#39;</span>
 </span></span><span class="line"><span class="cl"><span class="k">else</span>
 </span></span><span class="line"><span class="cl">    <span class="nb">export</span> <span class="nv">CUDA_HOME</span><span class="o">=</span><span class="s1">&#39;/usr/local/cuda&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="k">fi</span>
-</span></span></code></pre></div></li>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span></span></span></code></pre></div></div>
+</li>
 <li>
 <p><code>source ~/.bashrc</code></p>
 </li>
@@ -1062,41 +1221,31 @@ install linux-kernel-headers kernel-package:</p>
 </ul>
 </li>
 </ol>
-<blockquote>
-<p>參考資料：https://zhuanlan.zhihu.com/p/338507526</p></blockquote>
-<hr>
+<blockquote><p>參考資料：https://zhuanlan.zhihu.com/p/338507526</p>
+</blockquote><hr>
 
-<h3 class="relative group">GPU 相關資源： 
+<h3 class="relative group">GPU 相關資源：
     <div id="gpu-相關資源" class="anchor"></div>
     
     <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
-        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#gpu-%e7%9b%b8%e9%97%9c%e8%b3%87%e6%ba%90" aria-label="定位點">#</a>
-    </span>        
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#gpu-%e7%9b%b8%e9%97%9c%e8%b3%87%e6%ba%90" aria-label="定位點">#</a>
+    </span>
     
 </h3>
 <ul>
-<li>Nvidia Download Website: <a
-  href="https://developer.nvidia.com/downloads"
-    target="_blank"
-  >https://developer.nvidia.com/downloads</a></li>
-<li>Nvidia CUDA Toolkit : <a
-  href="https://developer.nvidia.com/cuda-downloads"
-    target="_blank"
-  >https://developer.nvidia.com/cuda-downloads</a></li>
-<li>Nvidia Driver : <a
-  href="https://www.nvidia.com.tw/Download/index.aspx?lang=tw"
-    target="_blank"
-  >https://www.nvidia.com.tw/Download/index.aspx?lang=tw</a></li>
+<li>Nvidia Download Website: <a href="https://developer.nvidia.com/downloads"  target="_blank" rel="noreferrer">https://developer.nvidia.com/downloads</a></li>
+<li>Nvidia CUDA Toolkit : <a href="https://developer.nvidia.com/cuda-downloads"  target="_blank" rel="noreferrer">https://developer.nvidia.com/cuda-downloads</a></li>
+<li>Nvidia Driver : <a href="https://www.nvidia.com.tw/Download/index.aspx?lang=tw"  target="_blank" rel="noreferrer">https://www.nvidia.com.tw/Download/index.aspx?lang=tw</a></li>
 </ul>
 
-<h3 class="relative group">GPU Check Command: 
+<h3 class="relative group">GPU Check Command:
     <div id="gpu-check-command" class="anchor"></div>
     
     <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
-        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#gpu-check-command" aria-label="定位點">#</a>
-    </span>        
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#gpu-check-command" aria-label="定位點">#</a>
+    </span>
     
 </h3>
 <ul>
@@ -1104,22 +1253,19 @@ install linux-kernel-headers kernel-package:</p>
 <li><code>nvcc -V</code></li>
 </ul>
 
-<h3 class="relative group">GPU 補充: 
+<h3 class="relative group">GPU 補充:
     <div id="gpu-補充" class="anchor"></div>
     
     <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
-        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#gpu-%e8%a3%9c%e5%85%85" aria-label="定位點">#</a>
-    </span>        
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#gpu-%e8%a3%9c%e5%85%85" aria-label="定位點">#</a>
+    </span>
     
 </h3>
 <ul>
 <li>搭配性 : GPU 驅動 去跟 CUDA 匹配， CUDA 可以裝低一點版本的只要 GPU 驅動有兼容到即可</li>
 <li>nvidia-smi 顯示的是當前驅動支持的最高版本的 cuda。 不是已經安裝的 cuda 版本。</li>
-<li>Cuda Toolkit 版本內裝的各套件版本 <a
-  href="https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html"
-    target="_blank"
-  >https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html</a></li>
+<li>Cuda Toolkit 版本內裝的各套件版本 <a href="https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html"  target="_blank" rel="noreferrer">https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html</a></li>
 <li>CUDA : 為 GPU 通用計算建構的運算平台</li>
 <li>cudnn : 為深度學習計算設計的套件</li>
 <li>CUDA Toolkit (nvidia) : CUDA 完整的工具安裝包，其中提供 Nvidia 驅動、開發 CUDA 程式相關開發工具等可供安裝的選項。包括 CUDA 編譯器、IDE、調適器等，CUDA 程式所對應的問件以及他們的頭文件</li>
@@ -1127,13 +1273,13 @@ install linux-kernel-headers kernel-package:</p>
 <li>NVCC 是 CUDA 的編譯器，只是 CUDA Toolkit 的一部分</li>
 </ul>
 
-<h1 class="relative group">K8s安裝 (會寫說在哪個 Node 上安裝，沒特別寫就是每台都要裝) 
+<h1 class="relative group">K8s安裝 (會寫說在哪個 Node 上安裝，沒特別寫就是每台都要裝)
     <div id="k8s安裝-會寫說在哪個-node-上安裝沒特別寫就是每台都要裝" class="anchor"></div>
     
     <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
-        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#k8s%e5%ae%89%e8%a3%9d-%e6%9c%83%e5%af%ab%e8%aa%aa%e5%9c%a8%e5%93%aa%e5%80%8b-node-%e4%b8%8a%e5%ae%89%e8%a3%9d%e6%b2%92%e7%89%b9%e5%88%a5%e5%af%ab%e5%b0%b1%e6%98%af%e6%af%8f%e5%8f%b0%e9%83%bd%e8%a6%81%e8%a3%9d" aria-label="定位點">#</a>
-    </span>        
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#k8s%e5%ae%89%e8%a3%9d-%e6%9c%83%e5%af%ab%e8%aa%aa%e5%9c%a8%e5%93%aa%e5%80%8b-node-%e4%b8%8a%e5%ae%89%e8%a3%9d%e6%b2%92%e7%89%b9%e5%88%a5%e5%af%ab%e5%b0%b1%e6%98%af%e6%af%8f%e5%8f%b0%e9%83%bd%e8%a6%81%e8%a3%9d" aria-label="定位點">#</a>
+    </span>
     
 </h1>
 <ol>
@@ -1147,74 +1293,73 @@ install linux-kernel-headers kernel-package:</p>
 </li>
 <li>
 <p>set /etc/hosts (All nodes)</p>
-<pre tabindex="0"><code>//    IP          Hostname  ServerName
-192.168.137.154   k8sc.net  k8sc
-192.168.137.168   k8sn1.net k8sn1
-192.168.137.249   k8sn2.net k8sn2
-</code></pre></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">//    IP          Hostname  ServerName
+</span></span><span class="line"><span class="cl">192.168.137.154   k8sc.net  k8sc
+</span></span><span class="line"><span class="cl">192.168.137.168   k8sn1.net k8sn1
+</span></span><span class="line"><span class="cl">192.168.137.249   k8sn2.net k8sn2</span></span></code></pre></div></div>
+</li>
 <li>
 <p>disable swap , selinux, firewall</p>
 <ul>
 <li>
 <p>swap:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">swapon --show
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">swapon --show
 </span></span><span class="line"><span class="cl">sudo sed -i <span class="s1">&#39;/ swap / s/^\(.*\)$/#\1/g&#39;</span> /etc/fstab
-</span></span><span class="line"><span class="cl">sudo swapoff -a
-</span></span></code></pre></div></li>
+</span></span><span class="line"><span class="cl">sudo swapoff -a</span></span></code></pre></div></div>
+</li>
 <li>
 <p>selinux:</p>
-<pre tabindex="0"><code>sudo selinux-config-enforcing
-# or
-sudo vim /etc/selinux/config
-
-Modify =&gt; SELINUX=disabled
-
-Reboot system
-</code></pre></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">sudo selinux-config-enforcing
+</span></span><span class="line"><span class="cl"># or
+</span></span><span class="line"><span class="cl">sudo vim /etc/selinux/config
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Modify =&gt; SELINUX=disabled
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Reboot system</span></span></code></pre></div></div>
+</li>
 <li>
 <p>firewall:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo ufw status
-</span></span><span class="line"><span class="cl">sudo ufw disabl
-</span></span></code></pre></div></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo ufw status
+</span></span><span class="line"><span class="cl">sudo ufw disabl</span></span></code></pre></div></div>
+</li>
 </ul>
-<blockquote>
-<p>參考資料：https://www.zhihu.com/question/374752553/answer/1052244227</p></blockquote>
+<blockquote><p>參考資料：https://www.zhihu.com/question/374752553/answer/1052244227</p>
+</blockquote></li>
+<li>
+<p>modify core</p>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl">sudo tee /etc/modules-load.d/containerd.conf <span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">overlay
+</span></span></span><span class="line"><span class="cl"><span class="s">br_netfilter
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></div></div>
+</li>
+<li>
+<p>reload mod</p>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo modprobe overlay
+</span></span><span class="line"><span class="cl">sudo modprobe br_netfilter</span></span></code></pre></div></div>
 </li>
 <li>
 <p>modify core</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl">sudo tee /etc/modules-load.d/containerd.conf <span class="s">&lt;&lt;EOF
-</span></span></span><span class="line"><span class="cl"><span class="s">overlay
-</span></span></span><span class="line"><span class="cl"><span class="s">br_netfilter
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></div></li>
-<li>
-<p>reload mod</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo modprobe overlay
-</span></span><span class="line"><span class="cl">sudo modprobe br_netfilter
-</span></span></code></pre></div></li>
-<li>
-<p>modify core</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl">sudo tee /etc/sysctl.d/kubernetes.conf <span class="s">&lt;&lt;EOF
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl">sudo tee /etc/sysctl.d/kubernetes.conf <span class="s">&lt;&lt;EOF
 </span></span></span><span class="line"><span class="cl"><span class="s">net.bridge.bridge-nf-call-ip6tables = 1
 </span></span></span><span class="line"><span class="cl"><span class="s">net.bridge.bridge-nf-call-iptables = 1
 </span></span></span><span class="line"><span class="cl"><span class="s">net.ipv4.ip_forward = 1
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span></code></pre></div></li>
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></div></div>
+</li>
 <li>
 <p>reload system</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo sysctl --system
-</span></span></code></pre></div></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo sysctl --system</span></span></code></pre></div></div>
+</li>
 <li>
 <p>install CRI suite</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install -y curl gnupg2 software-properties-common
-</span></span><span class="line"><span class="cl">apt-transport-https ca-certificates
-</span></span></code></pre></div></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install -y curl gnupg2 software-properties-common
+</span></span><span class="line"><span class="cl">apt-transport-https ca-certificates</span></span></code></pre></div></div>
+</li>
 <li>
 <p>add docker apt repository</p>
 <ul>
 <li>
 <p>Add Docker&rsquo;s official GPG key:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get update
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get update
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">sudo apt-get install ca-certificates curl gnupg
 </span></span><span class="line"><span class="cl">
@@ -1222,20 +1367,20 @@ Reboot system
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">curl -fsSL https://download.docker.com/linux/ubuntu/gpg <span class="p">|</span> sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">sudo chmod a+r /etc/apt/keyrings/docker.gpg
-</span></span></code></pre></div></li>
+</span></span><span class="line"><span class="cl">sudo chmod a+r /etc/apt/keyrings/docker.gpg</span></span></code></pre></div></div>
+</li>
 <li>
 <p>Add the repository to Apt sources:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  <span class="s2">&#34;deb [arch=</span><span class="k">$(</span>dpkg --print-architecture<span class="k">)</span><span class="s2"> signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">  <span class="s2">&#34;deb [arch=</span><span class="k">$(</span>dpkg --print-architecture<span class="k">)</span><span class="s2"> signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
 </span></span></span><span class="line"><span class="cl"><span class="s2">  </span><span class="k">$(</span>. /etc/os-release <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$VERSION_CODENAME</span><span class="s2">&#34;</span><span class="k">)</span><span class="s2"> stable&#34;</span> <span class="p">|</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
-</span></span></code></pre></div></li>
+</span></span></span><span class="line"><span class="cl">  sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null</span></span></code></pre></div></div>
+</li>
 </ul>
 </li>
 <li>
 <p>install Docker</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get update
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get update
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 安裝 docker 相關套件</span>
 </span></span><span class="line"><span class="cl">sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
@@ -1247,56 +1392,53 @@ Reboot system
 </span></span><span class="line"><span class="cl">sudo usermod -aG docker <span class="nv">$USER</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 切換到 docker 群組</span>
-</span></span><span class="line"><span class="cl">newgrp docker
-</span></span></code></pre></div></li>
+</span></span><span class="line"><span class="cl">newgrp docker</span></span></code></pre></div></div>
+</li>
 <li>
 <p>設置 docker 使用 cgroupdriver=systemd <br>
 因為要配合 k8s 使用 systemd 所以要設定 docker daemon</p>
 <ul>
 <li><code>mkdir -p /etc/docker</code></li>
 <li><code>vim /etc/docker/daemon.json</code>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">{</span>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">{</span>
 </span></span><span class="line"><span class="cl">  <span class="s2">&#34;exec-opts&#34;</span>: <span class="o">[</span><span class="s2">&#34;native.cgroupdriver=systemd&#34;</span><span class="o">]</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></div></li>
+</span></span><span class="line"><span class="cl"><span class="o">}</span></span></span></code></pre></div></div>
+</li>
 <li><code>systemctl enable docker &amp;&amp; systemctl</code></li>
 <li><code>systemctl status docker</code></li>
 </ul>
 </li>
 <li>
-<p>install <a
-  href="https://github.com/Mirantis/cri-dockerd"
-    target="_blank"
-  >cri-docker</a></p>
+<p>install <a href="https://github.com/Mirantis/cri-dockerd"  target="_blank" rel="noreferrer">cri-docker</a></p>
 <ul>
 <li>V0.3.9：
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.9/cri-dockerd_0.3.9.3-0.ubuntu-jammy_amd64.deb
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.9/cri-dockerd_0.3.9.3-0.ubuntu-jammy_amd64.deb
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">sudo dpkg -i cri-dockerd_0.3.9.3-0.ubuntu-jammy_amd64.deb
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">systemctl daemon-reload
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> cri-docker <span class="o">&amp;&amp;</span> systemctl start cri-docker <span class="o">&amp;&amp;</span> systemctl status cri-docker
-</span></span></code></pre></div></li>
+</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> cri-docker <span class="o">&amp;&amp;</span> systemctl start cri-docker <span class="o">&amp;&amp;</span> systemctl status cri-docker</span></span></code></pre></div></div>
+</li>
 <li>V0.3.10：
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.10/cri-dockerd_0.3.10.3-0.ubuntu-jammy_amd64.deb
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://github.com/Mirantis/cri-dockerd/releases/download/v0.3.10/cri-dockerd_0.3.10.3-0.ubuntu-jammy_amd64.deb
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">sudo dpkg -i cri-dockerd_0.3.10.3-0.ubuntu-jammy_amd64.deb
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">systemctl daemon-reload
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> cri-docker <span class="o">&amp;&amp;</span> systemctl start cri-docker <span class="o">&amp;&amp;</span> systemctl status cri-docker
-</span></span></code></pre></div></li>
+</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> cri-docker <span class="o">&amp;&amp;</span> systemctl start cri-docker <span class="o">&amp;&amp;</span> systemctl status cri-docker</span></span></code></pre></div></div>
+</li>
 <li>Docker 試跑:
-<pre tabindex="0"><code>Run container =&gt; docker run --name hello-world hello-world
-看資源 =&gt; docker ps -a
-刪除 container =&gt; docker rm hello-world
-</code></pre></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Run container =&gt; docker run --name hello-world hello-world
+</span></span><span class="line"><span class="cl">看資源 =&gt; docker ps -a
+</span></span><span class="line"><span class="cl">刪除 container =&gt; docker rm hello-world</span></span></code></pre></div></div>
+</li>
 </ul>
 </li>
 <li>
 <p>Add Kubernetes apt repository：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># (推薦)官方使用原生包管理工具安装</span>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># (推薦)官方使用原生包管理工具安装</span>
 </span></span><span class="line"><span class="cl">sudo apt-get update
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># apt-transport-https 可以是一个虚拟包；如果是这样，你可以跳过这个包</span>
@@ -1307,18 +1449,18 @@ Reboot system
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key <span class="p">|</span> sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /&#39;</span> <span class="p">|</span> sudo tee /etc/apt/sources.list.d/kubernetes.list
-</span></span></code></pre></div><pre tabindex="0"><code>!!註解:
-想要別的版本請改 V?.??
-要升级 kubectl 到别的次要版本，你需要先升级 /etc/apt/sources.list.d/kubernetes.list 中的版本， 再运行 apt-get update 和 apt-get upgrade。
-ref: https://kubernetes.io/zh-cn/docs/tasks/tools/install-kubectl-linux/
-</code></pre></li>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /&#39;</span> <span class="p">|</span> sudo tee /etc/apt/sources.list.d/kubernetes.list</span></span></code></pre></div></div>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">!!註解:
+</span></span><span class="line"><span class="cl">想要別的版本請改 V?.??
+</span></span><span class="line"><span class="cl">要升级 kubectl 到别的次要版本，你需要先升级 /etc/apt/sources.list.d/kubernetes.list 中的版本， 再运行 apt-get update 和 apt-get upgrade。
+</span></span><span class="line"><span class="cl">ref: https://kubernetes.io/zh-cn/docs/tasks/tools/install-kubectl-linux/</span></span></code></pre></div></div>
+</li>
 <li>
 <p>install Kubernetes suite for Kubectl, kubeadm, kubelet</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update
 </span></span><span class="line"><span class="cl">sudo apt install -y kubelet kubeadm kubectl
-</span></span><span class="line"><span class="cl"><span class="o">(</span>option<span class="o">)</span> sudo apt-mark hold kubelet kubeadm kubectl
-</span></span></code></pre></div></li>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>option<span class="o">)</span> sudo apt-mark hold kubelet kubeadm kubectl</span></span></code></pre></div></div>
+</li>
 <li>
 <p>Kubeadm init (Controller Node)
 
@@ -1331,12 +1473,12 @@ ref: https://kubernetes.io/zh-cn/docs/tasks/tools/install-kubectl-linux/
 
 <div
   
-    class="flex px-4 py-3 rounded-md bg-primary-100 dark:bg-primary-900"
+    class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"
   
   >
   <span
     
-      class="text-primary-400 ltr:pr-3 rtl:pl-3 flex items-center"
+      class="text-primary-400 pe-3 flex items-center"
     
     >
     <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg>
@@ -1354,13 +1496,13 @@ ref: https://kubernetes.io/zh-cn/docs/tasks/tools/install-kubectl-linux/
 </p>
 <ul>
 <li>Normal command:
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo kubeadm init --control-plane-endpoint<span class="o">=</span>k8sc.net --pod-network-cidr<span class="o">=</span>172.168.0.0/16
-</span></span></code></pre></div></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo kubeadm init --control-plane-endpoint<span class="o">=</span>k8sc.net --pod-network-cidr<span class="o">=</span>172.168.0.0/16</span></span></code></pre></div></div>
+</li>
 <li>Docekr cri-dockerd command:
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo kubeadm init --control-plane-endpoint<span class="o">=</span>k8sc.net --pod-network-cidr<span class="o">=</span>172.168.0.0/16 --cri-socket unix:///run/cri-dockerd.sock
-</span></span></code></pre></div></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo kubeadm init --control-plane-endpoint<span class="o">=</span>k8sc.net --pod-network-cidr<span class="o">=</span>172.168.0.0/16 --cri-socket unix:///run/cri-dockerd.sock</span></span></code></pre></div></div>
+</li>
 <li>初始化好會顯示
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl">Your Kubernetes control-plane has initialized successfully!
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Bash" data-lang="Bash"><span class="line"><span class="cl">Your Kubernetes control-plane has initialized successfully!
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">To start using your cluster, you need to run the following as a regular user:
 </span></span><span class="line"><span class="cl">
@@ -1380,14 +1522,14 @@ ref: https://kubernetes.io/zh-cn/docs/tasks/tools/install-kubectl-linux/
 </span></span><span class="line"><span class="cl">and service account keys on each node and <span class="k">then</span> running the following as root:
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  kubeadm join k8sc.net:6443 --token m4mgvk.ds9gbxubeelkyg1d <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --discovery-token-ca-cert-hash sha256:967a99a31596e6d6ad9b40dabf69813b8c605f9fe1c8590ddbe68fa23d58e095 <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --control-plane
+</span></span></span><span class="line"><span class="cl">  --discovery-token-ca-cert-hash sha256:967a99a31596e6d6ad9b40dabf69813b8c605f9fe1c8590ddbe68fa23d58e095 <span class="se">\
+</span></span></span><span class="line"><span class="cl">  --control-plane
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">Then you can join any number of worker nodes by running the following on each as root:
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kubeadm join k8sc.net:6443 --token m4mgvk.ds9gbxubeelkyg1d <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --discovery-token-ca-cert-hash sha256:967a99a31596e6d6ad9b40dabf69813b8c605f9fe1c8590ddbe68fa23d58e095
-</span></span></code></pre></div></li>
+</span></span></span><span class="line"><span class="cl">  --discovery-token-ca-cert-hash sha256:967a99a31596e6d6ad9b40dabf69813b8c605f9fe1c8590ddbe68fa23d58e095</span></span></code></pre></div></div>
+</li>
 </ul>
 </li>
 <li>
@@ -1402,12 +1544,12 @@ ref: https://kubernetes.io/zh-cn/docs/tasks/tools/install-kubectl-linux/
 
 <div
   
-    class="flex px-4 py-3 rounded-md bg-primary-100 dark:bg-primary-900"
+    class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"
   
   >
   <span
     
-      class="text-primary-400 ltr:pr-3 rtl:pl-3 flex items-center"
+      class="text-primary-400 pe-3 flex items-center"
     
     >
     <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg>
@@ -1424,14 +1566,14 @@ ref: https://kubernetes.io/zh-cn/docs/tasks/tools/install-kubectl-linux/
 <ul>
 <li>
 <p>Normal command:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubeadm join k8sc.net:6443 --token m4mgvk.ds9gbxubeelkyg1d <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>--discovery-token-ca-cert-hash sha256:967a99a31596e6d6ad9b40dabf69813b8c605f9fe1c8590ddbe68fa23d58e095
-</span></span></code></pre></div></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubeadm join k8sc.net:6443 --token m4mgvk.ds9gbxubeelkyg1d <span class="se">\
+</span></span></span><span class="line"><span class="cl">--discovery-token-ca-cert-hash sha256:967a99a31596e6d6ad9b40dabf69813b8c605f9fe1c8590ddbe68fa23d58e095</span></span></code></pre></div></div>
+</li>
 <li>
 <p>Docekr cri-dockerd command:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubeadm join k8sc.net:6443 --token m4mgvk.ds9gbxubeelkyg1d <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>--discovery-token-ca-cert-hash sha256:967a99a31596e6d6ad9b40dabf69813b8c605f9fe1c8590ddbe68fa23d58e095 --cri-socket unix:///run/cri-dockerd.sock
-</span></span></code></pre></div></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubeadm join k8sc.net:6443 --token m4mgvk.ds9gbxubeelkyg1d <span class="se">\
+</span></span></span><span class="line"><span class="cl">--discovery-token-ca-cert-hash sha256:967a99a31596e6d6ad9b40dabf69813b8c605f9fe1c8590ddbe68fa23d58e095 --cri-socket unix:///run/cri-dockerd.sock</span></span></code></pre></div></div>
+</li>
 </ul>
 </li>
 <li>
@@ -1441,36 +1583,36 @@ ref: https://kubernetes.io/zh-cn/docs/tasks/tools/install-kubectl-linux/
 <li>
 <p>install Calico Pod network suite (MasterNode)</p>
 <p>此版本為 V3.27.0 因為這次使用的是 <code>--pod-network-cidr=172.168.0.0/16</code> 所以需要改文件</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 建立它所需要的套件</span>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 建立它所需要的套件</span>
 </span></span><span class="line"><span class="cl">kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 下載設定檔</span>
-</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml
-</span></span></code></pre></div><p>修改設定檔：</p>
-<pre tabindex="0"><code># 因為預設是 192.168.0.0 跟我們 IP 撞到,修改成 172.168.0.0
-nano custom-resources.yaml
-
-# This section includes base Calico installation configuration.
-# For more information, see: https://docs.tigera.io/calico/latest/reference/installation/api#operator.tigera.io/v1.Installation
-apiVersion: operator.tigera.io/v1
-kind: Installation
-metadata:
-name: default
-spec:
-# Configures Calico networking.
-calicoNetwork:
-    # Note: The ipPools section cannot be modified post-install.
-    ipPools:
-    - blockSize: 26
-    cidr: 172.168.0.0/16 &lt;= 修改這
-    encapsulation: VXLANCrossSubnet
-    natOutgoing: Enabled
-    nodeSelector: all()
----
-</code></pre><p>部屬 CNI：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl create -f custom-resources.yaml
-</span></span></code></pre></div><p>Waite all pods Running：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">watch kubectl get pods -n calico-system
+</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml</span></span></code></pre></div></div>
+<p>修改設定檔：</p>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl"># 因為預設是 192.168.0.0 跟我們 IP 撞到,修改成 172.168.0.0
+</span></span><span class="line"><span class="cl">nano custom-resources.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># This section includes base Calico installation configuration.
+</span></span><span class="line"><span class="cl"># For more information, see: https://docs.tigera.io/calico/latest/reference/installation/api#operator.tigera.io/v1.Installation
+</span></span><span class="line"><span class="cl">apiVersion: operator.tigera.io/v1
+</span></span><span class="line"><span class="cl">kind: Installation
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">name: default
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl"># Configures Calico networking.
+</span></span><span class="line"><span class="cl">calicoNetwork:
+</span></span><span class="line"><span class="cl">    # Note: The ipPools section cannot be modified post-install.
+</span></span><span class="line"><span class="cl">    ipPools:
+</span></span><span class="line"><span class="cl">    - blockSize: 26
+</span></span><span class="line"><span class="cl">    cidr: 172.168.0.0/16 &lt;= 修改這
+</span></span><span class="line"><span class="cl">    encapsulation: VXLANCrossSubnet
+</span></span><span class="line"><span class="cl">    natOutgoing: Enabled
+</span></span><span class="line"><span class="cl">    nodeSelector: all()
+</span></span><span class="line"><span class="cl">---</span></span></code></pre></div></div>
+<p>部屬 CNI：</p>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl create -f custom-resources.yaml</span></span></code></pre></div></div>
+<p>Waite all pods Running：</p>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">watch kubectl get pods -n calico-system
 </span></span><span class="line"><span class="cl"><span class="c1"># or</span>
 </span></span><span class="line"><span class="cl">watch kubectl get pods --all-namespaces
 </span></span><span class="line"><span class="cl">
@@ -1478,159 +1620,159 @@ calicoNetwork:
 </span></span><span class="line"><span class="cl">kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 移除在 master 上的 汙點(taint)</span>
-</span></span><span class="line"><span class="cl">kubectl taint nodes --all node-role.kubernetes.io/master-
-</span></span></code></pre></div><pre tabindex="0"><code>參考資料：
-https://docs.tigera.io/calico/latest/getting-started/kubernetes/quickstart
-https://www.cnblogs.com/khtt/p/16563088.html
-</code></pre></li>
+</span></span><span class="line"><span class="cl">kubectl taint nodes --all node-role.kubernetes.io/master-</span></span></code></pre></div></div>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">參考資料：
+</span></span><span class="line"><span class="cl">https://docs.tigera.io/calico/latest/getting-started/kubernetes/quickstart
+</span></span><span class="line"><span class="cl">https://www.cnblogs.com/khtt/p/16563088.html</span></span></code></pre></div></div>
+</li>
 <li>
 <p>Check All Cluster Node STATUS</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl get nodes -o wide
-</span></span></code></pre></div><p>會都相下面一樣顯示 Ready 代表 k8s 以可以正常使用！！</p>
-<pre tabindex="0"><code>NAME            STATUS   ROLES           AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
-k8smaster.net   Ready    control-plane   52m   v1.29.1   192.8.1.66    &lt;none&gt;        Ubuntu 22.04.3 LTS   5.15.0-78-generic   containerd://1.6.27
-k8snode1.net    Ready    &lt;none&gt;          23m   v1.29.1   192.8.1.65    &lt;none&gt;        Ubuntu 22.04.3 LTS   5.15.0-78-generic   containerd://1.6.27
-k8snode2.net    Ready    &lt;none&gt;          23m   v1.29.1   192.8.1.69    &lt;none&gt;        Ubuntu 22.04.3 LTS   5.15.0-78-generic   containerd://1.6.27
-</code></pre></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl get nodes -o wide</span></span></code></pre></div></div>
+<p>會都相下面一樣顯示 Ready 代表 k8s 以可以正常使用！！</p>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">NAME            STATUS   ROLES           AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
+</span></span><span class="line"><span class="cl">k8smaster.net   Ready    control-plane   52m   v1.29.1   192.8.1.66    &lt;none&gt;        Ubuntu 22.04.3 LTS   5.15.0-78-generic   containerd://1.6.27
+</span></span><span class="line"><span class="cl">k8snode1.net    Ready    &lt;none&gt;          23m   v1.29.1   192.8.1.65    &lt;none&gt;        Ubuntu 22.04.3 LTS   5.15.0-78-generic   containerd://1.6.27
+</span></span><span class="line"><span class="cl">k8snode2.net    Ready    &lt;none&gt;          23m   v1.29.1   192.8.1.69    &lt;none&gt;        Ubuntu 22.04.3 LTS   5.15.0-78-generic   containerd://1.6.27</span></span></code></pre></div></div>
+</li>
 </ol>
 
-<h3 class="relative group">Trouble Shooting: 
+<h3 class="relative group">Trouble Shooting:
     <div id="trouble-shooting" class="anchor"></div>
     
     <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
-        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#trouble-shooting" aria-label="定位點">#</a>
-    </span>        
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#trouble-shooting" aria-label="定位點">#</a>
+    </span>
     
 </h3>
 <ul>
 <li>
 <p>&ldquo;初始錯誤&quot;要重建 k8s：</p>
-<pre tabindex="0"><code># 如果 kubeadm reset
-(使用 containerd.io)
-kubeadm reset
-
-(使用 cri-dockerd)
-kubeadm reset --cri-socket unix:///run/cri-dockerd.sock
-
-# 清除 k8s 文件
-rm -rf $HOME/.kube
-
-# 重啟 k8s 服務
-systemctl daemon-reload &amp;&amp; systemctl restart kubelet
-
-# 之後請回到 step.15
-</code></pre></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl"># 如果 kubeadm reset
+</span></span><span class="line"><span class="cl">(使用 containerd.io)
+</span></span><span class="line"><span class="cl">kubeadm reset
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">(使用 cri-dockerd)
+</span></span><span class="line"><span class="cl">kubeadm reset --cri-socket unix:///run/cri-dockerd.sock
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 清除 k8s 文件
+</span></span><span class="line"><span class="cl">rm -rf $HOME/.kube
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 重啟 k8s 服務
+</span></span><span class="line"><span class="cl">systemctl daemon-reload &amp;&amp; systemctl restart kubelet
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 之後請回到 step.15</span></span></code></pre></div></div>
+</li>
 <li>
 <p>&ldquo;建立 CNI 之後&quot;重建 k8s：</p>
-<pre tabindex="0"><code># 如果 kubeadm reset
-(使用 containerd.io)
-kubeadm reset
-
-(使用 cri-dockerd)
-kubeadm reset --cri-socket unix:///run/cri-dockerd.sock
-
-# 刪除 CNI 文件
-rm -rf /etc/cni/net.d
-
-# 刪除之前 CNI 所建立的 iptable
-sudo iptables -F &amp;&amp; sudo iptables -t nat -F &amp;&amp; sudo iptables -t mangle -F &amp;&amp; sudo iptables -X
-
-# 刪除 k8s 文件
-sudo rm -f $HOME/.kube/config
-</code></pre></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl"># 如果 kubeadm reset
+</span></span><span class="line"><span class="cl">(使用 containerd.io)
+</span></span><span class="line"><span class="cl">kubeadm reset
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">(使用 cri-dockerd)
+</span></span><span class="line"><span class="cl">kubeadm reset --cri-socket unix:///run/cri-dockerd.sock
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 刪除 CNI 文件
+</span></span><span class="line"><span class="cl">rm -rf /etc/cni/net.d
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 刪除之前 CNI 所建立的 iptable
+</span></span><span class="line"><span class="cl">sudo iptables -F &amp;&amp; sudo iptables -t nat -F &amp;&amp; sudo iptables -t mangle -F &amp;&amp; sudo iptables -X
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 刪除 k8s 文件
+</span></span><span class="line"><span class="cl">sudo rm -f $HOME/.kube/config</span></span></code></pre></div></div>
+</li>
 <li>
 <p>kubectl get nodes 如果出現</p>
-<pre tabindex="0"><code>root@k8sc:~/K8s# kubectl get node
-E0201 16:03:23.299872   18786 memcache.go:265] couldn&#39;t get current server API group list: Get &#34;http://localhost:8080/api?timeout=32s&#34;: dial tcp 127.0.0.1:8080: connect: connection refused
-E0201 16:03:23.300534   18786 memcache.go:265] couldn&#39;t get current server API group list: Get &#34;http://localhost:8080/api?timeout=32s&#34;: dial tcp 127.0.0.1:8080: connect: connection refused
-E0201 16:03:23.302286   18786 memcache.go:265] couldn&#39;t get current server API group list: Get &#34;http://localhost:8080/api?timeout=32s&#34;: dial tcp 127.0.0.1:8080: connect: connection refused
-E0201 16:03:23.302901   18786 memcache.go:265] couldn&#39;t get current server API group list: Get &#34;http://localhost:8080/api?timeout=32s&#34;: dial tcp 127.0.0.1:8080: connect: connection refused
-E0201 16:03:23.304646   18786 memcache.go:265] couldn&#39;t get current server API group list: Get &#34;http://localhost:8080/api?timeout=32s&#34;: dial tcp 127.0.0.1:8080: connect: connection refused
-The connection to the server localhost:8080 was refused - did you specify the right host or port?
-</code></pre><pre tabindex="0"><code>解決方法:
-=&gt; mkdir ~/.kube
-=&gt; cp /etc/kubernetes/admin.conf ~/.kube/config
-
-參考資料：
-rfe: https://www.gbase8.cn/12320
-</code></pre></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">root@k8sc:~/K8s# kubectl get node
+</span></span><span class="line"><span class="cl">E0201 16:03:23.299872   18786 memcache.go:265] couldn&#39;t get current server API group list: Get &#34;http://localhost:8080/api?timeout=32s&#34;: dial tcp 127.0.0.1:8080: connect: connection refused
+</span></span><span class="line"><span class="cl">E0201 16:03:23.300534   18786 memcache.go:265] couldn&#39;t get current server API group list: Get &#34;http://localhost:8080/api?timeout=32s&#34;: dial tcp 127.0.0.1:8080: connect: connection refused
+</span></span><span class="line"><span class="cl">E0201 16:03:23.302286   18786 memcache.go:265] couldn&#39;t get current server API group list: Get &#34;http://localhost:8080/api?timeout=32s&#34;: dial tcp 127.0.0.1:8080: connect: connection refused
+</span></span><span class="line"><span class="cl">E0201 16:03:23.302901   18786 memcache.go:265] couldn&#39;t get current server API group list: Get &#34;http://localhost:8080/api?timeout=32s&#34;: dial tcp 127.0.0.1:8080: connect: connection refused
+</span></span><span class="line"><span class="cl">E0201 16:03:23.304646   18786 memcache.go:265] couldn&#39;t get current server API group list: Get &#34;http://localhost:8080/api?timeout=32s&#34;: dial tcp 127.0.0.1:8080: connect: connection refused
+</span></span><span class="line"><span class="cl">The connection to the server localhost:8080 was refused - did you specify the right host or port?</span></span></code></pre></div></div>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">解決方法:
+</span></span><span class="line"><span class="cl">=&gt; mkdir ~/.kube
+</span></span><span class="line"><span class="cl">=&gt; cp /etc/kubernetes/admin.conf ~/.kube/config
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">參考資料：
+</span></span><span class="line"><span class="cl">rfe: https://www.gbase8.cn/12320</span></span></code></pre></div></div>
+</li>
 </ul>
 
-<h2 class="relative group">Docker use GPU 
+<h2 class="relative group">Docker use GPU
     <div id="docker-use-gpu" class="anchor"></div>
     
     <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
-        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#docker-use-gpu" aria-label="定位點">#</a>
-    </span>        
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#docker-use-gpu" aria-label="定位點">#</a>
+    </span>
     
 </h2>
 <p>有 GPU 的 host 都需要裝</p>
 <ol>
 <li>
 <p>install nvidia-container-toolkit</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">distribution</span><span class="o">=</span><span class="k">$(</span>. /etc/os-release<span class="p">;</span><span class="nb">echo</span> <span class="nv">$ID$VERSION_ID</span><span class="k">)</span>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">distribution</span><span class="o">=</span><span class="k">$(</span>. /etc/os-release<span class="p">;</span><span class="nb">echo</span> <span class="nv">$ID$VERSION_ID</span><span class="k">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">curl -s -L https://nvidia.github.io/libnvidia-container/gpgkey <span class="p">|</span> sudo apt-key add -
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">curl -s -L https://nvidia.github.io/libnvidia-container/<span class="nv">$distribution</span>/libnvidia-container.list <span class="p">|</span> sudo tee /etc/apt/sources.list.d/libnvidia-container.list
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get install -y nvidia-container-toolkit
-</span></span></code></pre></div></li>
+</span></span><span class="line"><span class="cl">sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get install -y nvidia-container-toolkit</span></span></code></pre></div></div>
+</li>
 <li>
 <p>Setting <code>/etc/docker/daemon.json</code></p>
 <ul>
 <li><code>nano /etc/docker/daemon.json</code>
-<pre tabindex="0"><code>{
-&#34;exec-opts&#34;: [&#34;native.cgroupdriver=systemd&#34;],
-&#34;default-runtime&#34;: &#34;nvidia&#34;,
-&#34;runtimes&#34;: {
-    &#34;nvidia&#34;: {
-            &#34;path&#34;: &#34;/usr/bin/nvidia-container-runtime&#34;,
-            &#34;runtimeArgs&#34;: []
-        }
-    }
-}
-</code></pre></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">&#34;exec-opts&#34;: [&#34;native.cgroupdriver=systemd&#34;],
+</span></span><span class="line"><span class="cl">&#34;default-runtime&#34;: &#34;nvidia&#34;,
+</span></span><span class="line"><span class="cl">&#34;runtimes&#34;: {
+</span></span><span class="line"><span class="cl">    &#34;nvidia&#34;: {
+</span></span><span class="line"><span class="cl">            &#34;path&#34;: &#34;/usr/bin/nvidia-container-runtime&#34;,
+</span></span><span class="line"><span class="cl">            &#34;runtimeArgs&#34;: []
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}</span></span></code></pre></div></div>
+</li>
 <li><code>sudo systemctl restart docker</code></li>
 </ul>
 </li>
 <li>
 <p>check container can use GPU</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run --rm -it nvcr.io/nvidia/cuda:10.2-base nvidia-smi
-</span></span></code></pre></div><p>如果可以看到下面這樣 Nvidia-smi 畫面就代表你的 docker container 裡可以使用 GPU 了!!</p>
-<pre tabindex="0"><code>Thu Feb  1 09:55:47 2024
-+---------------------------------------------------------------------------------------+
-| NVIDIA-SMI 545.23.08              Driver Version: 545.23.08    CUDA Version: 12.3     |
-|-----------------------------------------+----------------------+----------------------+
-| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
-| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
-|                                         |                      |               MIG M. |
-|=========================================+======================+======================|
-|   0  Tesla T4                       On  | 00000000:18:00.0 Off |                    0 |
-| N/A   28C    P8               9W /  70W |      7MiB / 15360MiB |      0%      Default |
-|                                         |                      |                  N/A |
-+-----------------------------------------+----------------------+----------------------+
-</code></pre></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run --rm -it nvcr.io/nvidia/cuda:10.2-base nvidia-smi</span></span></code></pre></div></div>
+<p>如果可以看到下面這樣 Nvidia-smi 畫面就代表你的 docker container 裡可以使用 GPU 了!!</p>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Thu Feb  1 09:55:47 2024
+</span></span><span class="line"><span class="cl">+---------------------------------------------------------------------------------------+
+</span></span><span class="line"><span class="cl">| NVIDIA-SMI 545.23.08              Driver Version: 545.23.08    CUDA Version: 12.3     |
+</span></span><span class="line"><span class="cl">|-----------------------------------------+----------------------+----------------------+
+</span></span><span class="line"><span class="cl">| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+</span></span><span class="line"><span class="cl">| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+</span></span><span class="line"><span class="cl">|                                         |                      |               MIG M. |
+</span></span><span class="line"><span class="cl">|=========================================+======================+======================|
+</span></span><span class="line"><span class="cl">|   0  Tesla T4                       On  | 00000000:18:00.0 Off |                    0 |
+</span></span><span class="line"><span class="cl">| N/A   28C    P8               9W /  70W |      7MiB / 15360MiB |      0%      Default |
+</span></span><span class="line"><span class="cl">|                                         |                      |                  N/A |
+</span></span><span class="line"><span class="cl">+-----------------------------------------+----------------------+----------------------+</span></span></code></pre></div></div>
+</li>
 </ol>
-<pre tabindex="0"><code>參考資料：
-https://github.com/NVIDIA/k8s-device-plugin?tab=readme-ov-file#enabling-gpu-support-in-kubernetes
-</code></pre>
-<h2 class="relative group">Install NGC 
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">參考資料：
+</span></span><span class="line"><span class="cl">https://github.com/NVIDIA/k8s-device-plugin?tab=readme-ov-file#enabling-gpu-support-in-kubernetes</span></span></code></pre></div></div>
+
+<h2 class="relative group">Install NGC
     <div id="install-ngc" class="anchor"></div>
     
     <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
-        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#install-ngc" aria-label="定位點">#</a>
-    </span>        
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#install-ngc" aria-label="定位點">#</a>
+    </span>
     
 </h2>
 <p>為了可以讓 k8s 可以找到 GPU 資源需要 Nvidia NGC 中的 images</p>
 <ol>
 <li>
 <p>Install NGC Command Line</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget --content-disposition https://api.ngc.nvidia.com/v2/resources/nvidia/ngc-apps/ngc_cli/versions/3.37.0/files/ngccli_linux.zip -O ngccli_linux.zip <span class="o">&amp;&amp;</span> unzip ngccli_linux.zip
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget --content-disposition https://api.ngc.nvidia.com/v2/resources/nvidia/ngc-apps/ngc_cli/versions/3.37.0/files/ngccli_linux.zip -O ngccli_linux.zip <span class="o">&amp;&amp;</span> unzip ngccli_linux.zip
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">find ngc-cli/ -type f -exec md5sum <span class="o">{}</span> + <span class="p">|</span> <span class="nv">LC_ALL</span><span class="o">=</span>C sort <span class="p">|</span> md5sum -c ngc-cli.md5
 </span></span><span class="line"><span class="cl">
@@ -1638,229 +1780,223 @@ https://github.com/NVIDIA/k8s-device-plugin?tab=readme-ov-file#enabling-gpu-supp
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;export PATH=\&#34;\$PATH:</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">/ngc-cli\&#34;&#34;</span> &gt;&gt; ~/.bash_profile <span class="o">&amp;&amp;</span> <span class="nb">source</span> ~/.bash_profile
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># rfe: https://ngc.nvidia.com/setup/installers/cli</span>
-</span></span></code></pre></div></li>
+</span></span><span class="line"><span class="cl"><span class="c1"># rfe: https://ngc.nvidia.com/setup/installers/cli</span></span></span></code></pre></div></div>
+</li>
 <li>
 <p>set NGC config set</p>
 <ol>
-<li><a
-  href="https://ngc.nvidia.com/"
-    target="_blank"
-  >ngc.nvidia.com</a></li>
+<li><a href="https://ngc.nvidia.com/"  target="_blank" rel="noreferrer">ngc.nvidia.com</a></li>
 <li>辦一個會員</li>
 <li>右上角頭像 SetUp -&gt; API Key</li>
 <li>Generate API Key</li>
 <li>ngc config set</li>
 <li>輸入 api key 跟一些資料</li>
 <li>docker login nvcr.io
-<pre tabindex="0"><code>Username:
-輸入 =&gt; $oauthtoken
-
-Password:
-輸入你的 token
-</code></pre>完成就會像這樣
-<pre tabindex="0"><code>root@k8sc:~/NVD# docker login nvcr.io
-Username: $oauthtoken
-Password:
-WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
-Configure a credential helper to remove this warning. See
-https://docs.docker.com/engine/reference/commandline/login/#credentials-store
-
-Login Succeeded
-</code></pre>確認是否可連上並下載回來 images
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker pull nvcr.io/nvidia/k8s-device-plugin:v0.14.4
-</span></span></code></pre></div></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Username:
+</span></span><span class="line"><span class="cl">輸入 =&gt; $oauthtoken
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Password:
+</span></span><span class="line"><span class="cl">輸入你的 token</span></span></code></pre></div></div>
+完成就會像這樣
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">root@k8sc:~/NVD# docker login nvcr.io
+</span></span><span class="line"><span class="cl">Username: $oauthtoken
+</span></span><span class="line"><span class="cl">Password:
+</span></span><span class="line"><span class="cl">WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+</span></span><span class="line"><span class="cl">Configure a credential helper to remove this warning. See
+</span></span><span class="line"><span class="cl">https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Login Succeeded</span></span></code></pre></div></div>
+確認是否可連上並下載回來 images
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker pull nvcr.io/nvidia/k8s-device-plugin:v0.14.4</span></span></code></pre></div></div>
+</li>
 </ol>
 </li>
 <li>
 <p>Check Pods Ruing</p>
-<pre tabindex="0"><code>root@k8sc:~/NVD/test# kubectl get pods -A
-NAMESPACE          NAME                                       READY   STATUS    RESTARTS       AGE
-........           ........                                   ......
-kube-system        nvidia-device-plugin-daemonset-g7pn5       1/1     Running   0              11m
-kube-system        nvidia-device-plugin-daemonset-j5t79       1/1     Running   0              11m
-kube-system        nvidia-device-plugin-daemonset-pjjr9       1/1     Running   0              11m
-........           ........                                   ......
-</code></pre></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">root@k8sc:~/NVD/test# kubectl get pods -A
+</span></span><span class="line"><span class="cl">NAMESPACE          NAME                                       READY   STATUS    RESTARTS       AGE
+</span></span><span class="line"><span class="cl">........           ........                                   ......
+</span></span><span class="line"><span class="cl">kube-system        nvidia-device-plugin-daemonset-g7pn5       1/1     Running   0              11m
+</span></span><span class="line"><span class="cl">kube-system        nvidia-device-plugin-daemonset-j5t79       1/1     Running   0              11m
+</span></span><span class="line"><span class="cl">kube-system        nvidia-device-plugin-daemonset-pjjr9       1/1     Running   0              11m
+</span></span><span class="line"><span class="cl">........           ........                                   ......</span></span></code></pre></div></div>
+</li>
 <li>
 <p>Check kubectl describe nodes <br>
 確認有 nvidia.com/gpu 就代表成功了</p>
-<pre tabindex="0"><code>Addresses:
-  InternalIP:  192.168.137.249
-  Hostname:    k8sn2.net
-Capacity:
-  cpu:                96
-  ephemeral-storage:  3843514416Ki
-  hugepages-1Gi:      0
-  hugepages-2Mi:      0
-  memory:             395820888Ki
-  nvidia.com/gpu:     5
-  pods:               110
-Allocatable:
-  cpu:                96
-  ephemeral-storage:  3542182879921
-  hugepages-1Gi:      0
-  hugepages-2Mi:      0
-  memory:             395718488Ki
-  nvidia.com/gpu:     5
-  pods:               110
-System Info:
-  Machine ID:                 99a1ca0433d9443aafba35201ede1a9b
-  System UUID:                d8c50c1b-e0ef-2445-bc45-140d4f639386
-  Boot ID:                    5a8a1c1f-f155-44af-9e70-105e821bd24c
-  Kernel Version:             6.5.0-15-generic
-  OS Image:                   Ubuntu 22.04.3 LTS
-  Operating System:           linux
-  Architecture:               amd64
-  Container Runtime Version:  docker://25.0.2
-  Kubelet Version:            v1.29.1
-  Kube-Proxy Version:         v1.29.1
-PodCIDR:                      172.168.2.0/24
-PodCIDRs:                     172.168.2.0/24
-Non-terminated Pods:          (5 in total)
-  Namespace                   Name                                    CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
-  ---------                   ----                                    ------------  ----------  ---------------  -------------  ---
-  calico-system               calico-node-rvhj8                       0 (0%)        0 (0%)      0 (0%)           0 (0%)         17h
-  calico-system               calico-typha-5f87879b7d-tjwld           0 (0%)        0 (0%)      0 (0%)           0 (0%)         17h
-  calico-system               csi-node-driver-b58b7                   0 (0%)        0 (0%)      0 (0%)           0 (0%)         17h
-  kube-system                 kube-proxy-xcf67                        0 (0%)        0 (0%)      0 (0%)           0 (0%)         17h
-  kube-system                 nvidia-device-plugin-daemonset-pjjr9    0 (0%)        0 (0%)      0 (0%)           0 (0%)         14m
-Allocated resources:
-  (Total limits may be over 100 percent, i.e., overcommitted.)
-  Resource           Requests  Limits
-  --------           --------  ------
-  cpu                0 (0%)    0 (0%)
-  memory             0 (0%)    0 (0%)
-  ephemeral-storage  0 (0%)    0 (0%)
-  hugepages-1Gi      0 (0%)    0 (0%)
-  hugepages-2Mi      0 (0%)    0 (0%)
-  nvidia.com/gpu     0         0
-Events:              &lt;none&gt;
-</code></pre></li>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Addresses:
+</span></span><span class="line"><span class="cl">  InternalIP:  192.168.137.249
+</span></span><span class="line"><span class="cl">  Hostname:    k8sn2.net
+</span></span><span class="line"><span class="cl">Capacity:
+</span></span><span class="line"><span class="cl">  cpu:                96
+</span></span><span class="line"><span class="cl">  ephemeral-storage:  3843514416Ki
+</span></span><span class="line"><span class="cl">  hugepages-1Gi:      0
+</span></span><span class="line"><span class="cl">  hugepages-2Mi:      0
+</span></span><span class="line"><span class="cl">  memory:             395820888Ki
+</span></span><span class="line"><span class="cl">  nvidia.com/gpu:     5
+</span></span><span class="line"><span class="cl">  pods:               110
+</span></span><span class="line"><span class="cl">Allocatable:
+</span></span><span class="line"><span class="cl">  cpu:                96
+</span></span><span class="line"><span class="cl">  ephemeral-storage:  3542182879921
+</span></span><span class="line"><span class="cl">  hugepages-1Gi:      0
+</span></span><span class="line"><span class="cl">  hugepages-2Mi:      0
+</span></span><span class="line"><span class="cl">  memory:             395718488Ki
+</span></span><span class="line"><span class="cl">  nvidia.com/gpu:     5
+</span></span><span class="line"><span class="cl">  pods:               110
+</span></span><span class="line"><span class="cl">System Info:
+</span></span><span class="line"><span class="cl">  Machine ID:                 99a1ca0433d9443aafba35201ede1a9b
+</span></span><span class="line"><span class="cl">  System UUID:                d8c50c1b-e0ef-2445-bc45-140d4f639386
+</span></span><span class="line"><span class="cl">  Boot ID:                    5a8a1c1f-f155-44af-9e70-105e821bd24c
+</span></span><span class="line"><span class="cl">  Kernel Version:             6.5.0-15-generic
+</span></span><span class="line"><span class="cl">  OS Image:                   Ubuntu 22.04.3 LTS
+</span></span><span class="line"><span class="cl">  Operating System:           linux
+</span></span><span class="line"><span class="cl">  Architecture:               amd64
+</span></span><span class="line"><span class="cl">  Container Runtime Version:  docker://25.0.2
+</span></span><span class="line"><span class="cl">  Kubelet Version:            v1.29.1
+</span></span><span class="line"><span class="cl">  Kube-Proxy Version:         v1.29.1
+</span></span><span class="line"><span class="cl">PodCIDR:                      172.168.2.0/24
+</span></span><span class="line"><span class="cl">PodCIDRs:                     172.168.2.0/24
+</span></span><span class="line"><span class="cl">Non-terminated Pods:          (5 in total)
+</span></span><span class="line"><span class="cl">  Namespace                   Name                                    CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+</span></span><span class="line"><span class="cl">  ---------                   ----                                    ------------  ----------  ---------------  -------------  ---
+</span></span><span class="line"><span class="cl">  calico-system               calico-node-rvhj8                       0 (0%)        0 (0%)      0 (0%)           0 (0%)         17h
+</span></span><span class="line"><span class="cl">  calico-system               calico-typha-5f87879b7d-tjwld           0 (0%)        0 (0%)      0 (0%)           0 (0%)         17h
+</span></span><span class="line"><span class="cl">  calico-system               csi-node-driver-b58b7                   0 (0%)        0 (0%)      0 (0%)           0 (0%)         17h
+</span></span><span class="line"><span class="cl">  kube-system                 kube-proxy-xcf67                        0 (0%)        0 (0%)      0 (0%)           0 (0%)         17h
+</span></span><span class="line"><span class="cl">  kube-system                 nvidia-device-plugin-daemonset-pjjr9    0 (0%)        0 (0%)      0 (0%)           0 (0%)         14m
+</span></span><span class="line"><span class="cl">Allocated resources:
+</span></span><span class="line"><span class="cl">  (Total limits may be over 100 percent, i.e., overcommitted.)
+</span></span><span class="line"><span class="cl">  Resource           Requests  Limits
+</span></span><span class="line"><span class="cl">  --------           --------  ------
+</span></span><span class="line"><span class="cl">  cpu                0 (0%)    0 (0%)
+</span></span><span class="line"><span class="cl">  memory             0 (0%)    0 (0%)
+</span></span><span class="line"><span class="cl">  ephemeral-storage  0 (0%)    0 (0%)
+</span></span><span class="line"><span class="cl">  hugepages-1Gi      0 (0%)    0 (0%)
+</span></span><span class="line"><span class="cl">  hugepages-2Mi      0 (0%)    0 (0%)
+</span></span><span class="line"><span class="cl">  nvidia.com/gpu     0         0
+</span></span><span class="line"><span class="cl">Events:              &lt;none&gt;</span></span></code></pre></div></div>
+</li>
 </ol>
-<pre tabindex="0"><code>參考資料：
-https://github.com/NVIDIA/k8s-device-plugin
-https://bluesmilery.github.io/blogs/afcb1072/
-</code></pre>
-<h3 class="relative group">Trouble Shooting: 
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">參考資料：
+</span></span><span class="line"><span class="cl">https://github.com/NVIDIA/k8s-device-plugin
+</span></span><span class="line"><span class="cl">https://bluesmilery.github.io/blogs/afcb1072/</span></span></code></pre></div></div>
+
+<h3 class="relative group">Trouble Shooting:
     <div id="trouble-shooting-1" class="anchor"></div>
     
     <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
-        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#trouble-shooting-1" aria-label="定位點">#</a>
-    </span>        
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#trouble-shooting-1" aria-label="定位點">#</a>
+    </span>
     
 </h3>
 <ul>
 <li>reboot 之後 nvidia-smi 會報錯:
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo ubuntu-drivers devices
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo ubuntu-drivers devices
 </span></span><span class="line"><span class="cl"><span class="c1"># 安裝帶有 recommended 版本的 Driver</span>
 </span></span><span class="line"><span class="cl">sudo apt-get install nvidia-driver-&lt;*&gt;
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># ref:</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># https://zhuanlan.zhihu.com/p/337013545</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># https://www.zhihu.com/question/474222642</span>
-</span></span></code></pre></div></li>
+</span></span><span class="line"><span class="cl"><span class="c1"># https://www.zhihu.com/question/474222642</span></span></span></code></pre></div></div>
+</li>
 <li>create -f k8s device plugin 之後發現 control-plane 沒有被派發任務，
 step.19 沒做到此動作，輸入完即可
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 移除在 control-plane 上的 汙點(taint)</span>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 移除在 control-plane 上的 汙點(taint)</span>
 </span></span><span class="line"><span class="cl">kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 移除在 master 上的 汙點(taint)</span>
-</span></span><span class="line"><span class="cl">kubectl taint nodes --all node-role.kubernetes.io/master-
-</span></span></code></pre></div></li>
+</span></span><span class="line"><span class="cl">kubectl taint nodes --all node-role.kubernetes.io/master-</span></span></code></pre></div></div>
+</li>
 </ul>
 
-<h1 class="relative group">GPU Burn 
+<h1 class="relative group">GPU Burn
     <div id="gpu-burn" class="anchor"></div>
     
     <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
-        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#gpu-burn" aria-label="定位點">#</a>
-    </span>        
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#gpu-burn" aria-label="定位點">#</a>
+    </span>
     
 </h1>
-<p>使用 <a
-  href="https://github.com/wilicc/gpu-burn"
-    target="_blank"
-  >wilicc/gpu-burn</a> 作為 GPU Burn 程式並且打包成 images 使用</p>
+<p>使用 <a href="https://github.com/wilicc/gpu-burn"  target="_blank" rel="noreferrer">wilicc/gpu-burn</a> 作為 GPU Burn 程式並且打包成 images 使用</p>
 <ol>
 <li>wilicc/gpu-burn to image</li>
 </ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/wilicc/gpu-burn
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/wilicc/gpu-burn
 </span></span><span class="line"><span class="cl"><span class="nb">cd</span> gpu-burn
-</span></span><span class="line"><span class="cl">nano Dockerfile
-</span></span></code></pre></div><pre tabindex="0"><code># 把它修改版本及執行方式成我們要的樣子方便後面 k8s 使用
-ARG CUDA_VERSION=12.3.1
-ARG IMAGE_DISTRO=ubuntu22.04
+</span></span><span class="line"><span class="cl">nano Dockerfile</span></span></code></pre></div></div>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl"># 把它修改版本及執行方式成我們要的樣子方便後面 k8s 使用
+</span></span><span class="line"><span class="cl">ARG CUDA_VERSION=12.3.1
+</span></span><span class="line"><span class="cl">ARG IMAGE_DISTRO=ubuntu22.04
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">FROM nvidia/cuda:${CUDA_VERSION}-devel-${IMAGE_DISTRO} AS builder
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">WORKDIR /build
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">COPY . /build/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">RUN make
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">FROM nvidia/cuda:${CUDA_VERSION}-runtime-${IMAGE_DISTRO}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">COPY --from=builder /build/gpu_burn /app/
+</span></span><span class="line"><span class="cl">COPY --from=builder /build/compare.ptx /app/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">WORKDIR /app
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Create a /app/result directory and link it to the local ./result directory
+</span></span><span class="line"><span class="cl">RUN mkdir /app/result &amp;&amp; ln -s /app/result /result</span></span></code></pre></div></div>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl"># 打包成 Images
+</span></span><span class="line"><span class="cl">docker build -t gpu_burn .
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 確認是否有打包好的 images
+</span></span><span class="line"><span class="cl">docker images</span></span></code></pre></div></div>
 
-FROM nvidia/cuda:${CUDA_VERSION}-devel-${IMAGE_DISTRO} AS builder
-
-WORKDIR /build
-
-COPY . /build/
-
-RUN make
-
-FROM nvidia/cuda:${CUDA_VERSION}-runtime-${IMAGE_DISTRO}
-
-COPY --from=builder /build/gpu_burn /app/
-COPY --from=builder /build/compare.ptx /app/
-
-WORKDIR /app
-
-# Create a /app/result directory and link it to the local ./result directory
-RUN mkdir /app/result &amp;&amp; ln -s /app/result /result
-</code></pre><pre tabindex="0"><code># 打包成 Images
-docker build -t gpu_burn .
-
-# 確認是否有打包好的 images
-docker images
-</code></pre>
-<h2 class="relative group">Private Docker Registry Server 
+<h2 class="relative group">Private Docker Registry Server
     <div id="private-docker-registry-server" class="anchor"></div>
     
     <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
-        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#private-docker-registry-server" aria-label="定位點">#</a>
-    </span>        
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#private-docker-registry-server" aria-label="定位點">#</a>
+    </span>
     
 </h2>
 <p>因為需要下在自己打包的 image 給其他 node 使用又不想上傳到 dockerhub 所以自己建一個 Private Docker Registry</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 用 docker 架起 Registry</span>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 用 docker 架起 Registry</span>
 </span></span><span class="line"><span class="cl">docker run -d --restart always -p 5000:5000 -v /root/K8s/registry:/var/lib/registry --name registry registry:2
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 把我們剛剛打包好的 image 打上 tag</span>
 </span></span><span class="line"><span class="cl">docker tag &lt;images_name&gt; &lt;registries_ip&gt;:5000/&lt;images_name&gt;
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 在所有要下載的 server 修改 docker 設定檔新增以下 code</span>
-</span></span><span class="line"><span class="cl">nano /etc/docker/daemon.json <span class="o">(</span>all node<span class="o">)</span>
-</span></span></code></pre></div><pre tabindex="0"><code>&#34;live-restore&#34;: true,
-  &#34;group&#34;: &#34;dockerroot&#34;,
-  &#34;insecure-registries&#34;: [&#34;&lt;registries_ip&gt;:5000&#34;]
-</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 重啟 docker 讓他讀取新設定檔 (all node)</span>
+</span></span><span class="line"><span class="cl">nano /etc/docker/daemon.json <span class="o">(</span>all node<span class="o">)</span></span></span></code></pre></div></div>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">&#34;live-restore&#34;: true,
+</span></span><span class="line"><span class="cl">  &#34;group&#34;: &#34;dockerroot&#34;,
+</span></span><span class="line"><span class="cl">  &#34;insecure-registries&#34;: [&#34;&lt;registries_ip&gt;:5000&#34;]</span></span></code></pre></div></div>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 重啟 docker 讓他讀取新設定檔 (all node)</span>
 </span></span><span class="line"><span class="cl">systemctl restart docker
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 上傳剛剛打上 tag 的 images</span>
-</span></span><span class="line"><span class="cl">docker push &lt;registries_IP&gt;:5000/&lt;images_name&gt;
-</span></span></code></pre></div>
-<h2 class="relative group">K8s exec GPU-Burn 
+</span></span><span class="line"><span class="cl">docker push &lt;registries_IP&gt;:5000/&lt;images_name&gt;</span></span></code></pre></div></div>
+
+<h2 class="relative group">K8s exec GPU-Burn
     <div id="k8s-exec-gpu-burn" class="anchor"></div>
     
     <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100 select-none">
-        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700 !no-underline" href="#k8s-exec-gpu-burn" aria-label="定位點">#</a>
-    </span>        
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#k8s-exec-gpu-burn" aria-label="定位點">#</a>
+    </span>
     
 </h2>
 <p>gpu-burn-CN5c.yaml:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">batch/v1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Job</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">batch/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Job</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">gpu-burn-job-controller</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">gpu-burn</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ttlSecondsAfterFinished</span><span class="p">:</span><span class="w"> </span><span class="m">100</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
@@ -1886,14 +2022,14 @@ docker images
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">hostPath</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/root/gpu-result</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Directory</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">batch/v1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Job</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">batch/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Job</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">gpu-burn-job-node1</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">gpu-burn</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ttlSecondsAfterFinished</span><span class="p">:</span><span class="w"> </span><span class="m">100</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
@@ -1919,14 +2055,14 @@ docker images
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">hostPath</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/root/gpu-result</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Directory</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">batch/v1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Job</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">batch/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Job</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">gpu-burn-job-node2</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">gpu-burn</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ttlSecondsAfterFinished</span><span class="p">:</span><span class="w"> </span><span class="m">100</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
@@ -1951,15 +2087,15 @@ docker images
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">result-volume</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">hostPath</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/root/gpu-result</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Directory</span><span class="w">
-</span></span></span></code></pre></div><p>gpu-burn-R4c-3pod.yaml:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">batch/v1</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Job</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Directory</span></span></span></code></pre></div></div>
+<p>gpu-burn-R4c-3pod.yaml:</p>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">batch/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Job</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">metadata</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">gpu-burn-job-random</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">gpu-burn</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">spec</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ttlSecondsAfterFinished</span><span class="p">:</span><span class="w"> </span><span class="m">100</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">completions</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="c"># 完成幾個</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">parallelism</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="c"># 同時執行幾個</span><span class="w">
@@ -1984,24 +2120,23 @@ docker images
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">result-volume</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">hostPath</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/root/gpu-result</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Directory</span><span class="w">
-</span></span></span></code></pre></div><pre tabindex="0"><code>建立任務:
-=&gt; kubectl create -f &lt;yaml&gt;
-
-刪除任務:
-=&gt; kubectl delete -f &lt;yaml&gt;
-
-查看 job :
-=&gt; kubectl get pods
-
-查看 job 詳細資訊 :
-=&gt; kubectl describe pods
-or
-=&gt; kubectl describe pod &lt;pod_name&gt;
-
-查看執行 Logs :
-=&gt; kubectl Logs &lt;pod_name&gt;
-</code></pre>
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Directory</span></span></span></code></pre></div></div>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">建立任務:
+</span></span><span class="line"><span class="cl">=&gt; kubectl create -f &lt;yaml&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">刪除任務:
+</span></span><span class="line"><span class="cl">=&gt; kubectl delete -f &lt;yaml&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">查看 job :
+</span></span><span class="line"><span class="cl">=&gt; kubectl get pods
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">查看 job 詳細資訊 :
+</span></span><span class="line"><span class="cl">=&gt; kubectl describe pods
+</span></span><span class="line"><span class="cl">or
+</span></span><span class="line"><span class="cl">=&gt; kubectl describe pod &lt;pod_name&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">查看執行 Logs :
+</span></span><span class="line"><span class="cl">=&gt; kubectl Logs &lt;pod_name&gt;</span></span></code></pre></div></div>
           
           
           
@@ -2014,23 +2149,6 @@ or
         
 
       </div>
-
-      
-      
-        
-        
-          
-          
-        
-        
-        
-        <script
-          type="text/javascript"
-          src="/js/page.min.54b6f4371722649edbe871e431d8670d670878c22be8f36e229fe53cc9b786fe25a834def5e6de621f7a3e37b72bc8cd73839aa5ed907ed6cbd45cd3e1b0fa20.js"
-          integrity="sha512-VLb0NxciZJ7b6HHkMdhnDWcIeMIr6PNuIp/lPMm3hv4lqDTe9ebeYh96Pje3K8jNc4Oape2QftbL1FzT4bD6IA=="
-          data-oid="views_posts/k8sGPU.md"
-          data-oid-likes="likes_posts/k8sGPU.md"></script>
-      
     </section>
 
     
@@ -2040,7 +2158,7 @@ or
       
         
           <div class="pt-3">
-            <hr class="border-dotted border-neutral-300 dark:border-neutral-600">
+            <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
             <div class="pt-3">
               
 
@@ -2068,10 +2186,22 @@ or
     </footer>
   </article>
 
-        <div id="top-scroller" class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0 z-10">
+        
+
+
+  
+
+
+
+
+
+
+<div
+  id="scroll-to-top"
+  class="fixed bottom-6 end-6 z-50 transform translate-y-4 opacity-0 duration-200">
   <a
     href="#the-top"
-    class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+    class="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
     aria-label="捲動到頁頂"
     title="捲動到頁頂">
     &uarr;
@@ -2093,7 +2223,7 @@ or
       <nav class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400 ">
         <ul class="flex list-none flex-col sm:flex-row">
           
-            <li class=" flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0 ">
+            <li class=" flex mb-1 text-end sm:mb-0 sm:me-7 sm:last:me-0 ">
               <a
                 class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center"
                 href="https://github.com/OKHand-Zy"
@@ -2108,7 +2238,7 @@ or
               </a>
             </li>
           
-            <li class=" flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0 ">
+            <li class=" flex mb-1 text-end sm:mb-0 sm:me-7 sm:last:me-0 ">
               <a
                 class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center"
                 href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=okhand.ziyu@gmail.com"
@@ -2122,7 +2252,7 @@ or
               </a>
             </li>
           
-            <li class=" flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0 ">
+            <li class=" flex mb-1 text-end sm:mb-0 sm:me-7 sm:last:me-0 ">
               <a
                 class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center"
                 href="https://okhand.org/index.xml"
@@ -2146,8 +2276,7 @@ or
       <p class="text-sm text-neutral-500 dark:text-neutral-400">
           &copy;
           2026
-          <a
-  href="mailto:OKH@nd.ZiYu">OKH@nd.ZiYu</a>
+          <a href="mailto:OKH@nd.ZiYu" >OKH@nd.ZiYu</a>
       </p>
     
 
@@ -2173,17 +2302,11 @@ or
   
   
   
-  <script
-    type="text/javascript"
-    src="/js/process.min.ee03488f19c93c2efb199e2e3014ea5f3cb2ce7d45154adb3399a158cac27ca52831db249ede5bb602700ef87eb02434139de0858af1818ab0fb4182472204a4.js"
-    integrity="sha512-7gNIjxnJPC77GZ4uMBTqXzyyzn1FFUrbM5mhWMrCfKUoMdsknt5btgJwDvh&#43;sCQ0E53ghYrxgYqw&#43;0GCRyIEpA=="></script>
-  
-  
 </footer>
 <div
   id="search-wrapper"
   class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh] z-500"
-  data-url="https://okhand.org/zh-tw/">
+  data-url="/zh-tw/">
   <div
     id="search-modal"
     class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800">

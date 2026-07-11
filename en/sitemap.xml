@@ -9,7 +9,7 @@
     <priority>0.5</priority>
     <xhtml:link
       rel="alternate"
-      hreflang="zh-tw"
+      hreflang="zh-TW"
       href="https://okhand.org/zh-tw/about/"
     />
     <xhtml:link
@@ -25,7 +25,7 @@
     <priority>0.5</priority>
     <xhtml:link
       rel="alternate"
-      hreflang="zh-tw"
+      hreflang="zh-TW"
       href="https://okhand.org/zh-tw/"
     />
     <xhtml:link
@@ -36,12 +36,11 @@
   </url>
   <url>
     <loc>https://okhand.org/en/posts/</loc>
-    <lastmod>2025-08-03T12:58:03+08:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
       rel="alternate"
-      hreflang="zh-tw"
+      hreflang="zh-TW"
       href="https://okhand.org/zh-tw/posts/"
     />
     <xhtml:link
