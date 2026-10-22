@@ -3,50 +3,57 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
-    <loc>https://okhand.org/en/about/</loc>
+    <loc>http://localhost:1313/en/about/</loc>
     <lastmod>2025-08-15T19:46:55+08:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
       rel="alternate"
       hreflang="zh-TW"
-      href="https://okhand.org/zh-tw/about/"
+      href="http://localhost:1313/zh-tw/about/"
     />
     <xhtml:link
       rel="alternate"
       hreflang="en"
-      href="https://okhand.org/en/about/"
+      href="http://localhost:1313/en/about/"
     />
   </url>
   <url>
-    <loc>https://okhand.org/en/</loc>
+    <loc>http://localhost:1313/en/</loc>
     <lastmod>2025-08-15T19:46:55+08:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
       rel="alternate"
       hreflang="zh-TW"
-      href="https://okhand.org/zh-tw/"
+      href="http://localhost:1313/zh-tw/"
     />
     <xhtml:link
       rel="alternate"
       hreflang="en"
-      href="https://okhand.org/en/"
+      href="http://localhost:1313/en/"
     />
   </url>
   <url>
-    <loc>https://okhand.org/en/posts/</loc>
+    <loc>http://localhost:1313/en/posts/</loc>
+    <lastmod>2025-08-03T12:58:03+08:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
       rel="alternate"
       hreflang="zh-TW"
-      href="https://okhand.org/zh-tw/posts/"
+      href="http://localhost:1313/zh-tw/posts/"
     />
     <xhtml:link
       rel="alternate"
       hreflang="en"
-      href="https://okhand.org/en/posts/"
+      href="http://localhost:1313/en/posts/"
     />
+  </url>
+  <url>
+    <loc>http://localhost:1313/en/posts/second-post/</loc>
+    <lastmod>2025-08-03T12:58:03+08:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>

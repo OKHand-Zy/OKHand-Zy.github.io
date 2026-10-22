@@ -2,379 +2,409 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on OKH@nd&#39;s Blog</title>
-    <link>https://okhand.org/zh-tw/tags/</link>
+    <link>http://localhost:1313/zh-tw/tags/</link>
     <description>Recent content in Tags on OKH@nd&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-TW</language>
     <copyright>© 2026 OKH@nd.ZiYu</copyright>
-    <lastBuildDate>Sat, 11 Jul 2026 22:20:09 +0800</lastBuildDate><atom:link href="https://okhand.org/zh-tw/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 02 Aug 2026 14:12:07 +0800</lastBuildDate><atom:link href="http://localhost:1313/zh-tw/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Example</title>
+      <link>http://localhost:1313/zh-tw/tags/example/</link>
+      <pubDate>Sun, 02 Aug 2026 14:12:07 +0800</pubDate>
+      
+      <guid>http://localhost:1313/zh-tw/tags/example/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Tag</title>
+      <link>http://localhost:1313/zh-tw/tags/tag/</link>
+      <pubDate>Sun, 02 Aug 2026 14:12:07 +0800</pubDate>
+      
+      <guid>http://localhost:1313/zh-tw/tags/tag/</guid>
+      <description></description>
+      
+    </item>
     
     <item>
       <title>Terminal</title>
-      <link>https://okhand.org/zh-tw/tags/terminal/</link>
+      <link>http://localhost:1313/zh-tw/tags/terminal/</link>
       <pubDate>Sat, 11 Jul 2026 22:20:09 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/terminal/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/terminal/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>DGX_Spark</title>
-      <link>https://okhand.org/zh-tw/tags/dgx_spark/</link>
+      <link>http://localhost:1313/zh-tw/tags/dgx_spark/</link>
       <pubDate>Tue, 10 Mar 2026 15:38:57 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/dgx_spark/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/dgx_spark/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>NVIDIA</title>
-      <link>https://okhand.org/zh-tw/tags/nvidia/</link>
+      <link>http://localhost:1313/zh-tw/tags/nvidia/</link>
       <pubDate>Tue, 10 Mar 2026 15:38:57 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/nvidia/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/nvidia/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Gemini</title>
-      <link>https://okhand.org/zh-tw/tags/gemini/</link>
+      <link>http://localhost:1313/zh-tw/tags/gemini/</link>
       <pubDate>Sun, 31 Aug 2025 00:03:55 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/gemini/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/gemini/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Prompt</title>
-      <link>https://okhand.org/zh-tw/tags/prompt/</link>
+      <link>http://localhost:1313/zh-tw/tags/prompt/</link>
       <pubDate>Sun, 31 Aug 2025 00:03:55 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/prompt/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/prompt/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>API</title>
-      <link>https://okhand.org/zh-tw/tags/api/</link>
+      <link>http://localhost:1313/zh-tw/tags/api/</link>
       <pubDate>Fri, 22 Aug 2025 00:18:28 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/api/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/api/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Model</title>
-      <link>https://okhand.org/zh-tw/tags/model/</link>
+      <link>http://localhost:1313/zh-tw/tags/model/</link>
       <pubDate>Fri, 22 Aug 2025 00:18:28 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/model/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/model/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>OpenAI</title>
-      <link>https://okhand.org/zh-tw/tags/openai/</link>
+      <link>http://localhost:1313/zh-tw/tags/openai/</link>
       <pubDate>Fri, 22 Aug 2025 00:18:28 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/openai/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/openai/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Cloudflare-R2</title>
-      <link>https://okhand.org/zh-tw/tags/cloudflare-r2/</link>
+      <link>http://localhost:1313/zh-tw/tags/cloudflare-r2/</link>
       <pubDate>Fri, 20 Jun 2025 14:04:42 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/cloudflare-r2/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/cloudflare-r2/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Storage</title>
-      <link>https://okhand.org/zh-tw/tags/storage/</link>
+      <link>http://localhost:1313/zh-tw/tags/storage/</link>
       <pubDate>Fri, 20 Jun 2025 14:04:42 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/storage/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/storage/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>SID</title>
-      <link>https://okhand.org/zh-tw/tags/sid/</link>
+      <link>http://localhost:1313/zh-tw/tags/sid/</link>
       <pubDate>Mon, 27 Jan 2025 16:16:10 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/sid/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/sid/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Claude</title>
-      <link>https://okhand.org/zh-tw/tags/claude/</link>
+      <link>http://localhost:1313/zh-tw/tags/claude/</link>
       <pubDate>Sun, 26 Jan 2025 15:23:05 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/claude/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/claude/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>MCP</title>
-      <link>https://okhand.org/zh-tw/tags/mcp/</link>
+      <link>http://localhost:1313/zh-tw/tags/mcp/</link>
       <pubDate>Sun, 26 Jan 2025 15:23:05 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/mcp/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/mcp/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Tool</title>
-      <link>https://okhand.org/zh-tw/tags/tool/</link>
+      <link>http://localhost:1313/zh-tw/tags/tool/</link>
       <pubDate>Sun, 26 Jan 2025 15:23:05 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/tool/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/tool/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Elastic</title>
-      <link>https://okhand.org/zh-tw/tags/elastic/</link>
+      <link>http://localhost:1313/zh-tw/tags/elastic/</link>
       <pubDate>Thu, 05 Dec 2024 23:54:28 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/elastic/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/elastic/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>RAG</title>
-      <link>https://okhand.org/zh-tw/tags/rag/</link>
+      <link>http://localhost:1313/zh-tw/tags/rag/</link>
       <pubDate>Thu, 05 Dec 2024 23:54:28 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/rag/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/rag/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>VectorDB</title>
-      <link>https://okhand.org/zh-tw/tags/vectordb/</link>
+      <link>http://localhost:1313/zh-tw/tags/vectordb/</link>
       <pubDate>Thu, 05 Dec 2024 23:54:28 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/vectordb/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/vectordb/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>GPU</title>
-      <link>https://okhand.org/zh-tw/tags/gpu/</link>
+      <link>http://localhost:1313/zh-tw/tags/gpu/</link>
       <pubDate>Mon, 11 Nov 2024 01:15:55 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/gpu/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/gpu/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Conda</title>
-      <link>https://okhand.org/zh-tw/tags/conda/</link>
+      <link>http://localhost:1313/zh-tw/tags/conda/</link>
       <pubDate>Thu, 12 Sep 2024 19:56:47 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/conda/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/conda/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Pip</title>
-      <link>https://okhand.org/zh-tw/tags/pip/</link>
+      <link>http://localhost:1313/zh-tw/tags/pip/</link>
       <pubDate>Thu, 12 Sep 2024 19:56:47 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/pip/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/pip/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Proxy</title>
-      <link>https://okhand.org/zh-tw/tags/proxy/</link>
+      <link>http://localhost:1313/zh-tw/tags/proxy/</link>
       <pubDate>Thu, 12 Sep 2024 19:56:47 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/proxy/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/proxy/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>TestLink</title>
-      <link>https://okhand.org/zh-tw/tags/testlink/</link>
+      <link>http://localhost:1313/zh-tw/tags/testlink/</link>
       <pubDate>Thu, 12 Sep 2024 19:56:47 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/testlink/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/testlink/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>A100</title>
-      <link>https://okhand.org/zh-tw/tags/a100/</link>
+      <link>http://localhost:1313/zh-tw/tags/a100/</link>
       <pubDate>Wed, 11 Sep 2024 21:23:33 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/a100/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/a100/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Chroma</title>
-      <link>https://okhand.org/zh-tw/tags/chroma/</link>
+      <link>http://localhost:1313/zh-tw/tags/chroma/</link>
       <pubDate>Sun, 09 Jun 2024 15:40:46 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/chroma/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/chroma/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>LangChain</title>
-      <link>https://okhand.org/zh-tw/tags/langchain/</link>
+      <link>http://localhost:1313/zh-tw/tags/langchain/</link>
       <pubDate>Sun, 09 Jun 2024 15:40:46 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/langchain/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/langchain/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Llama.cpp</title>
-      <link>https://okhand.org/zh-tw/tags/llama.cpp/</link>
+      <link>http://localhost:1313/zh-tw/tags/llama.cpp/</link>
       <pubDate>Sun, 09 Jun 2024 15:40:46 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/llama.cpp/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/llama.cpp/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Ollama</title>
-      <link>https://okhand.org/zh-tw/tags/ollama/</link>
+      <link>http://localhost:1313/zh-tw/tags/ollama/</link>
       <pubDate>Sat, 08 Jun 2024 19:56:17 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/ollama/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/ollama/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Docker</title>
-      <link>https://okhand.org/zh-tw/tags/docker/</link>
+      <link>http://localhost:1313/zh-tw/tags/docker/</link>
       <pubDate>Wed, 28 Feb 2024 13:01:40 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/docker/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/docker/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>K8s</title>
-      <link>https://okhand.org/zh-tw/tags/k8s/</link>
+      <link>http://localhost:1313/zh-tw/tags/k8s/</link>
       <pubDate>Wed, 28 Feb 2024 13:01:40 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/k8s/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/k8s/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>S2D</title>
-      <link>https://okhand.org/zh-tw/tags/s2d/</link>
+      <link>http://localhost:1313/zh-tw/tags/s2d/</link>
       <pubDate>Thu, 08 Feb 2024 13:29:55 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/s2d/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/s2d/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Paul Graham</title>
+      <link>http://localhost:1313/zh-tw/tags/paul-graham/</link>
+      <pubDate>Sat, 30 Dec 2023 01:39:20 +0800</pubDate>
+      
+      <guid>http://localhost:1313/zh-tw/tags/paul-graham/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>CI/CD</title>
-      <link>https://okhand.org/zh-tw/tags/ci/cd/</link>
+      <link>http://localhost:1313/zh-tw/tags/ci/cd/</link>
       <pubDate>Sat, 17 Jun 2023 15:33:12 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/ci/cd/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/ci/cd/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Gitlab</title>
-      <link>https://okhand.org/zh-tw/tags/gitlab/</link>
+      <link>http://localhost:1313/zh-tw/tags/gitlab/</link>
       <pubDate>Sat, 17 Jun 2023 15:33:12 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/gitlab/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/gitlab/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Giscus</title>
-      <link>https://okhand.org/zh-tw/tags/giscus/</link>
+      <link>http://localhost:1313/zh-tw/tags/giscus/</link>
       <pubDate>Fri, 12 May 2023 15:05:04 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/giscus/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/giscus/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Jenkins</title>
-      <link>https://okhand.org/zh-tw/tags/jenkins/</link>
+      <link>http://localhost:1313/zh-tw/tags/jenkins/</link>
       <pubDate>Fri, 12 May 2023 11:21:49 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/jenkins/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/jenkins/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Fly.io</title>
-      <link>https://okhand.org/zh-tw/tags/fly.io/</link>
+      <link>http://localhost:1313/zh-tw/tags/fly.io/</link>
       <pubDate>Sat, 04 Feb 2023 15:00:40 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/fly.io/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/fly.io/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Line Notify</title>
-      <link>https://okhand.org/zh-tw/tags/line-notify/</link>
+      <link>http://localhost:1313/zh-tw/tags/line-notify/</link>
       <pubDate>Sat, 04 Feb 2023 15:00:40 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/line-notify/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/line-notify/</guid>
       <description></description>
       
     </item>
     
     <item>
       <title>Heroku</title>
-      <link>https://okhand.org/zh-tw/tags/heroku/</link>
+      <link>http://localhost:1313/zh-tw/tags/heroku/</link>
       <pubDate>Sat, 04 Feb 2023 13:43:16 +0800</pubDate>
       
-      <guid>https://okhand.org/zh-tw/tags/heroku/</guid>
+      <guid>http://localhost:1313/zh-tw/tags/heroku/</guid>
       <description></description>
       
     </item>
