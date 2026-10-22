@@ -1,1918 +1,250 @@
-<!doctype html>
-<html
-  lang="zh-TW"
-  dir="ltr"
-  class="scroll-smooth"
-  data-default-appearance="dark"
-  data-auto-appearance="true"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="utf-8">
-  
-    <meta http-equiv="content-language" content="zh-TW">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="theme-color">
-
-  
-  
-    <title>Dgx Spark Cluster Interconnect &middot; OKH@nd&#39;s Blog</title>
-    <meta name="title" content="Dgx Spark Cluster Interconnect &middot; OKH@nd&#39;s Blog">
-  
-
-  
-  
-  
-  
-  
-    
-  
-    
-  
-    
-  
-  
-    <meta name="description" content="深入探討如何在 NVIDIA DGX 環境下實現雙 Spark 叢集網路互連 (Interconnect)，並針對 GPT-OSS-120B 大型語言模型進行分散式架構配置與通訊優化。">
-  
-  
-    <meta name="keywords" content="NVIDIA,DGX_Spark,">
-  
-  
-  
-  <link rel="canonical" href="http://localhost:1313/zh-tw/posts/dgx-spark-cluster-interconnect/">
-  
-  
-  
-
-  
-  
-    <meta name="author" content="OKH@nd.ZiYu">
-  
-  
-    
-      
-        
-      
-    
-      
-        
-          <link href="https://github.com/OKHand-Zy" rel="me">
-        
-      
-    
-      
-        
-          <link href="https://www.instagram.com/okhand_ziyu/" rel="me">
-        
-      
-    
-      
-        
-          <link href="https://www.linkedin.com/in/okhand-ziyu/" rel="me">
-        
-      
-    
-  
-
-  
-  <meta property="og:url" content="http://localhost:1313/zh-tw/posts/dgx-spark-cluster-interconnect/">
-	<meta property="og:site_name" content="OKH@nd&#39;s Blog">
-	<meta property="og:title" content="Dgx Spark Cluster Interconnect">
-	<meta property="og:description" content="深入探討如何在 NVIDIA DGX 環境下實現雙 Spark 叢集網路互連 (Interconnect)，並針對 GPT-OSS-120B 大型語言模型進行分散式架構配置與通訊優化。">
-	<meta property="og:locale" content="zh_TW">
-	<meta property="og:type" content="article">
-		<meta property="article:section" content="posts">
-		<meta property="article:published_time" content="2026-03-10T15:38:57+08:00">
-		<meta property="article:modified_time" content="2026-03-10T15:38:57+08:00">
-		<meta property="article:tag" content="NVIDIA">
-		<meta property="article:tag" content="DGX_Spark">
-
-  
-	<meta name="twitter:card" content="summary">
-	<meta name="twitter:title" content="Dgx Spark Cluster Interconnect">
-	<meta name="twitter:description" content="深入探討如何在 NVIDIA DGX 環境下實現雙 Spark 叢集網路互連 (Interconnect)，並針對 GPT-OSS-120B 大型語言模型進行分散式架構配置與通訊優化。">
-
-  
-  
-  
-  
-    
-      
-    
-  
-    
-      
-    
-  
-    
-      
-    
-  
-  
-    
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-    
-  
-  
-  <link
-    type="text/css"
-    rel="stylesheet"
-    href="/css/main.bundle.min.bd2f3f5aecb4b187ab756752d1ef627cbb275f3507dc54f853749e9a3e284103e1b5e8bc28fa59678dbcdd710d5af00cbdc261c7b2901c01a55a7407154a33df.css"
-    integrity="sha512-vS8/Wuy0sYerdWdS0e9ifLsnXzUH3FT4U3Semj4oQQPhtei8KPpZZ4283XENWvAMvcJhx7KQHAGlWnQHFUoz3w==">
-
-  
-  
-  <script
-    type="text/javascript"
-    src="/js/appearance.min.07514f0a09be093289e3a94b3ef771391aebb37588ae2035345e460ff9ba92d3f5afea6b684f58e0118936d8a992d227977f5c30f770144b6d8d31610c340e20.js"
-    integrity="sha512-B1FPCgm&#43;CTKJ46lLPvdxORrrs3WIriA1NF5GD/m6ktP1r&#43;praE9Y4BGJNtipktInl39cMPdwFEttjTFhDDQOIA=="></script>
-  
-
-
-  
-  
-  
-  
-  
-  
-    
-    <script defer src="/lib/zoom/zoom.min.umd.a527109b68c082a70f3697716dd72a9d5aa8b545cf800cecbbc7399f2ca6f6e0ce3e431f2062b48bbfa47c9ea42822714060bef309be073f49b9c0e30d318d7b.js" integrity="sha512-pScQm2jAgqcPNpdxbdcqnVqotUXPgAzsu8c5nyym9uDOPkMfIGK0i7&#43;kfJ6kKCJxQGC&#43;8wm&#43;Bz9JucDjDTGNew=="></script>
-    
-    <script defer src="/js/medium-zoom.67b71ecf7eecce38673a92244d1ffd93edb5f1aeedd12e725d0f67fe901828fa3562f6a6d64ad290b36b7d7034b8ea16e63486d75d957bcf6a2732923e5d46e6.js" integrity="sha512-Z7cez37szjhnOpIkTR/9k&#43;218a7t0S5yXQ9n/pAYKPo1Yvam1krSkLNrfXA0uOoW5jSG112Ve89qJzKSPl1G5g=="></script>
-  
-  
-  
-  
-
-  
-  
-  
-    
-  
-  
-    
-    
-    
-  
-  
-    
-  
-  
-  
-  
-  
-  
-  
-    
-    <script
-      defer
-      type="text/javascript"
-      id="script-bundle"
-      src="/js/main.bundle.min.17b3d3bbe00602f12ed247330588c186dd330147642a44a8aca5159f5905a7a6e0a70abb06315b581aef2c4f6d0e4d4bac82dbc1b0916818b057f9ad42c4aae6.js"
-      integrity="sha512-F7PTu&#43;AGAvEu0kczBYjBht0zAUdkKkSorKUVn1kFp6bgpwq7BjFbWBrvLE9tDk1LrILbwbCRaBiwV/mtQsSq5g=="
-      data-copy="複製"
-      data-copied="已複製"></script>
-  
-
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-  
-
-  
-  <script type="application/ld+json">
-  [{
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "articleSection": "Posts",
-    "name": "Dgx Spark Cluster Interconnect",
-    "headline": "Dgx Spark Cluster Interconnect",
-    "description": "深入探討如何在 NVIDIA DGX 環境下實現雙 Spark 叢集網路互連 (Interconnect)，並針對 GPT-OSS-120B 大型語言模型進行分散式架構配置與通訊優化。",
-    "inLanguage": "zh-TW",
-    "url" : "http://localhost:1313/zh-tw/posts/dgx-spark-cluster-interconnect/",
-    "author" : {
-      "@type": "Person",
-      "name": "OKH@nd.ZiYu",
-      "image": "https://image.okhand.org/icon/Hero.webp",
-      "sameAs": ["https://github.com/OKHand-Zy", "https://www.instagram.com/okhand_ziyu/", "https://www.linkedin.com/in/okhand-ziyu/"]
-    },
-    "copyrightYear": "2026",
-    "dateCreated": "2026-03-10T15:38:57\u002b08:00",
-    "datePublished": "2026-03-10T15:38:57\u002b08:00",
-    
-    "dateModified": "2026-03-10T15:38:57\u002b08:00",
-    
-    "keywords": ["NVIDIA","DGX_Spark"],
-    
-    "mainEntityOfPage": "http://localhost:1313/zh-tw/posts/dgx-spark-cluster-interconnect/",
-    "wordCount":  1445 
-  }]
-  </script>
-
-
-
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  
-</head>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <body class="flex flex-col h-screen m-auto leading-7 max-w-7xl px-6 sm:px-14 md:px-24 lg:px-32 text-lg bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral bf-scrollbar">
-    <div id="the-top" class="absolute flex self-center">
-      <a
-        class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
-        href="#main-content">
-        <span class="font-bold text-primary-600 pe-2 dark:text-primary-400">&darr;</span>
-        快轉到主要內容
-      </a>
-    </div>
-    <header>
-      
-      
-        <div class="main-menu flex items-center w-full gap-2 p-1 pl-0">
-  
-    
-    
-      <div>
-        <a href="/zh-tw/" class="flex">
-          <span class="sr-only">OKH@nd&rsquo;s Blog</span>
-          
-            <img
-              src="/OKHand-Logo.png"
-              width="256"
-              height="256"
-              class="logo max-h-20 max-w-20 object-scale-down object-left nozoom"
-              alt="">
-          
-        </a>
-      </div>
-    
-  
-  
-    <a href="/zh-tw/" class="text-base font-medium truncate min-w-0 shrink">
-      OKH@nd&rsquo;s Blog
-    </a>
-  
-  <div class="flex items-center ms-auto">
-    <div class="hidden md:flex">
-      <nav aria-label="" class="flex items-center gap-x-5 h-12">
-  
-    
-      
-  
-    <a
-      href="/zh-tw/"
-      
-      class="flex items-center bf-icon-color-hover"
-      aria-label="首頁"
-      title="OKH@nd&#39;s Blog">
-      
-      
-        <span class="text-sm font-medium break-normal">
-          首頁
-        </span>
-      
-    </a>
-  
-
-    
-      
-  
-    <a
-      href="/zh-tw/posts/"
-      
-      class="flex items-center bf-icon-color-hover"
-      aria-label="文章"
-      title="Posts">
-      
-      
-        <span class="text-sm font-medium break-normal">
-          文章
-        </span>
-      
-    </a>
-  
-
-    
-      
-  
-    <a
-      href="/zh-tw/categories/"
-      
-      class="flex items-center bf-icon-color-hover"
-      aria-label="分類"
-      title="Categories">
-      
-      
-        <span class="text-sm font-medium break-normal">
-          分類
-        </span>
-      
-    </a>
-  
-
-    
-      
-  
-    <a
-      href="/zh-tw/tags/"
-      
-      class="flex items-center bf-icon-color-hover"
-      aria-label="標籤"
-      title="Tags">
-      
-      
-        <span class="text-sm font-medium break-normal">
-          標籤
-        </span>
-      
-    </a>
-  
-
-    
-      
-  
-    <a
-      href="/zh-tw/about/"
-      
-      class="flex items-center bf-icon-color-hover"
-      aria-label="關於我"
-      title="關於 我">
-      
-      
-        <span class="text-sm font-medium break-normal">
-          關於我
-        </span>
-      
-    </a>
-  
-
-    
-  
-
-  
-
-  
-
-  
-    <div class="flex items-center">
-      <button
-        id="appearance-switcher"
-        aria-label="切換為深色模式"
-        type="button"
-        class="text-sm bf-icon-color-hover"
-        title="切換為深色模式">
-        <div class="flex items-center justify-center dark:hidden">
-          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
-</span>
-        </div>
-        <div class="items-center justify-center hidden dark:flex">
-          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
-</span>
-        </div>
-      </button>
-    </div>
-  
-
-  
-    <button
-      id="search-button"
-      aria-label="搜尋 (/)"
-      class="flex items-center gap-2 rounded-lg border bf-border-color bf-border-color-hover bg-neutral-100/50 px-2 py-1 text-sm text-neutral-500 transition-colors hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral-400 dark:hover:text-primary-400"
-      title="搜尋 (/)">
-      <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
-</span>
-      <kbd
-        id="search-shortcut-hint"
-        class="pointer-events-none font-sans text-xs text-neutral-500 dark:text-neutral-400"
-        aria-hidden="true">
-        ⌘K
-      </kbd>
-    </button>
-  
-</nav>
-
-
-
-    </div>
-    <div class="flex md:hidden">
-      
-<div class="mobile-header-row relative flex items-center h-14 gap-4">
-  
-    
-
-  
-
-  
-    <button
-      id="appearance-switcher-mobile"
-      type="button"
-      aria-label="切換為深色模式"
-      title="切換為深色模式"
-      class="flex items-center justify-center text-neutral-900 hover:text-primary-600 dark:text-neutral-200 dark:hover:text-primary-400">
-      <div class="dark:hidden">
-        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
-</span>
-      </div>
-      <div class="hidden dark:block">
-        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
-</span>
-      </div>
-    </button>
-  
-
-  
-    <button
-      id="search-button-mobile"
-      aria-label="搜尋 (/)"
-      class="flex items-center justify-center bf-icon-color-hover"
-      title="搜尋 (/)">
-      <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
-</span>
-    </button>
-  
-
-  
-    <input type="checkbox" id="mobile-menu-toggle" autocomplete="off" class="hidden peer">
-    <label
-      for="mobile-menu-toggle"
-      tabindex="0"
-      role="button"
-      aria-expanded="false"
-      aria-controls="mobile-menu-dialog"
-      aria-label=""
-      class="flex items-center justify-center cursor-pointer bf-icon-color-hover">
-      <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
-</span>
-    </label>
-
-    <div
-      id="mobile-menu-dialog"
-      role="dialog"
-      aria-modal="true"
-      aria-label=""
-      style="scrollbar-gutter: stable;"
-      class="z-50 invisible overflow-y-auto opacity-0 transition-[opacity,visibility] duration-300 peer-checked:visible peer-checked:opacity-100
-      
-        fixed inset-0 px-6 py-20 bg-neutral-50/97 dark:bg-neutral-900/99
-      
-      bf-scrollbar">
-      <label
-        for="mobile-menu-toggle"
-        tabindex="0"
-        role="button"
-        aria-expanded="false"
-        aria-controls="mobile-menu-dialog"
-        class="fixed end-8 top-5 z-50 h-12 w-12 rounded-full flex items-center justify-center cursor-pointer select-none bf-icon-color-hover border bf-border-color bf-border-color-hover bg-neutral-50 dark:bg-neutral-900">
-        <span class="sr-only"></span>
-        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
-</span>
-      </label>
-      <nav
-        aria-label=""
-        class="mx-auto max-w-md space-y-6">
-        
-  
-    
-    <div class="px-2">
-      <div class="flex items-center gap-4">
-        <a
-          href="/zh-tw/"
-          aria-label="首頁"
-          
-          class="flex grow items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
-          
-          <span title="OKH@nd&#39;s Blog" class="text-2xl font-bold tracking-tight">
-            首頁
-          </span>
-        </a>
-        
-      </div>
-
-      
-    </div>
-  
-    
-    <div class="px-2">
-      <div class="flex items-center gap-4">
-        <a
-          href="/zh-tw/posts/"
-          aria-label="文章"
-          
-          class="flex grow items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
-          
-          <span title="Posts" class="text-2xl font-bold tracking-tight">
-            文章
-          </span>
-        </a>
-        
-      </div>
-
-      
-    </div>
-  
-    
-    <div class="px-2">
-      <div class="flex items-center gap-4">
-        <a
-          href="/zh-tw/categories/"
-          aria-label="分類"
-          
-          class="flex grow items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
-          
-          <span title="Categories" class="text-2xl font-bold tracking-tight">
-            分類
-          </span>
-        </a>
-        
-      </div>
-
-      
-    </div>
-  
-    
-    <div class="px-2">
-      <div class="flex items-center gap-4">
-        <a
-          href="/zh-tw/tags/"
-          aria-label="標籤"
-          
-          class="flex grow items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
-          
-          <span title="Tags" class="text-2xl font-bold tracking-tight">
-            標籤
-          </span>
-        </a>
-        
-      </div>
-
-      
-    </div>
-  
-    
-    <div class="px-2">
-      <div class="flex items-center gap-4">
-        <a
-          href="/zh-tw/about/"
-          aria-label="關於我"
-          
-          class="flex grow items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
-          
-          <span title="關於 我" class="text-2xl font-bold tracking-tight">
-            關於我
-          </span>
-        </a>
-        
-      </div>
-
-      
-    </div>
-  
-
-        
-  
-
-        
-  
-
-      </nav>
-    </div>
-  
-</div>
-
-
-
-
-
-
-
-    </div>
-  </div>
-</div>
-
-
-
-
-
-      
-    </header>
-    <div class="relative flex flex-col grow">
-      <main id="main-content" class="grow">
-        
-  
-  
-  
-  
-  <article>
-    
-    
-
-    
-    <header id="single_header" class="mt-5 max-w-prose">
-      
-      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
-        Dgx Spark Cluster Interconnect
-      </h1>
-      <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
-        
-
-
-
-
-
-  
-  
-
-
-
-  
-
-  
-  
-  
-    
-  
-
-  
-
-  
-    
-  
-
-  
-
-  
-    
-  
-
-  
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  <div class="flex flex-row flex-wrap items-center">
-    
-    
-      <time datetime="2026-03-10T15:38:57&#43;08:00">2026年03月10日</time><span class="px-2 text-primary-500">&middot;</span><span>1445 字</span><span class="px-2 text-primary-500">&middot;</span><span title="預計閱讀時間">7 分鐘</span>
-    
-
-    
-    
-  </div>
-
-  
-
-  
-  
-    <div class="flex flex-row flex-wrap items-center">
-      
-        
-      
-        
-          
-            
-              
-                <a class="relative mt-[0.5rem] me-2" href="/zh-tw/categories/environment/">
-                  
-                  <span class="flex cursor-pointer">
-  
-  
-  
-    
-    
-  
-  
-    <span
-      class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-  
-    Environment
-  </span>
-</span>
-
-                </a>
-              
-            
-          
-        
-      
-        
-      
-        
-          
-            
-              
-                <a class="relative mt-[0.5rem] me-2" href="/zh-tw/tags/nvidia/">
-                  <span class="flex cursor-pointer">
-  
-  
-  
-  
-    <span
-      class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-  
-    NVIDIA
-  </span>
-</span>
-
-                </a>
-              
-            
-          
-            
-              
-                <a class="relative mt-[0.5rem] me-2" href="/zh-tw/tags/dgx_spark/">
-                  <span class="flex cursor-pointer">
-  
-  
-  
-  
-    <span
-      class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-  
-    DGX_Spark
-  </span>
-</span>
-
-                </a>
-              
-            
-          
-        
-      
-    </div>
-  
-
-
-      </div>
-      
-        
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-    
-  
-
-  
-
-      
-    </header>
-
-    
-    <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
-      
-      
-      
-      
-      
-
-
-      <div class="min-w-0 min-h-0 max-w-fit">
-        
-
-        <div class="article-content max-w-prose mb-20">
-          <p>進入研究室有幸玩到 DGX Spark 這個 AI 玩具，教授還買了兩台組成 DGX Spark Cluster</p>
-<p>由於 Lab 最近進來兩台 DGX Spark 老師也買了串接線就來玩玩看這樣串起來有多猛瞜。</p>
-<p>先看看這尊絕不凡的身形，裡面可是搭載著 Grace Blackwell 架構的 GB10 晶片阿！
-<figure><img
-    class="my-0 rounded-md"
-    loading="lazy"
-    decoding="async"
-    fetchpriority="low"
-    alt="Two_Sparks"
-    src="https://image.okhand.org/dgx-spark-cluster-interconnect/two_spark.webp"
-    ></figure>
-</p>
-<p>簡單又多工的後背，搭載 10GbE 與 ConnectX-7 高速網卡可達 400Gb/s
-<figure><img
-    class="my-0 rounded-md"
-    loading="lazy"
-    decoding="async"
-    fetchpriority="low"
-    alt="Sparks_Back"
-    src="https://image.okhand.org/dgx-spark-cluster-interconnect/spark_back.webp"
-    ></figure>
-</p>
-<p>詳細架構請參考此文章 <a href="https://www.ithome.com.tw/review/171853"  target="_blank" rel="noreferrer">iThome - 採用GB10晶片，輝達與多家系統廠商推出新型態AI工作站</a></p>
-
-<h1 class="relative group">Step 0：
-    <div id="step-0" class="anchor"></div>
-    
-    <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
-        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#step-0" aria-label="定位點">#</a>
-    </span>
-    
-</h1>
-<ul>
-<li>請安裝完系統，且兩台要有相同 User</li>
-<li>準備一條400G的QSFP線連接兩台</li>
-<li>下載 <a href="https://github.com/NVIDIA/dgx-spark-playbooks/blob/main/nvidia/connect-two-sparks/assets/discover-sparks"  target="_blank" rel="noreferrer">discover-sparks.sh</a> 探索InfiniBand網路腳本</li>
-<li>由於我沒有特別設定 docker 權限在 user 上可以使用，所以以下步驟如果有使用到 docker 等指令權限不夠在前面加上 sudo 即可</li>
-</ul>
-
-<h1 class="relative group">Step 1：
-    <div id="step-1" class="anchor"></div>
-    
-    <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
-        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#step-1" aria-label="定位點">#</a>
-    </span>
-    
-</h1>
-<p>以下是依照 <a href="https://build.nvidia.com/spark/connect-two-sparks/stacked-sparks"  target="_blank" rel="noreferrer">NVIDIA - Connect Two Sparks</a> 的操作步驟</p>
-<ol>
-<li>
-<p>確認 User</p>
-<p>要確認 node1 跟 node2 都有同個 user 喔！</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">＃ 使用 <span class="nb">command</span> 查詢
-</span></span><span class="line"><span class="cl">whoami</span></span></code></pre></div></div>
-</li>
-<li>
-<p>確認 QSFP 是否有連接上</p>
-<p>要確認有 UP 代表才有連接上,照理來說會是一組 UP 起來</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check QSFP interface availability on both nodes</span>
-</span></span><span class="line"><span class="cl">nvidia@dxg-spark-1:~$ ibdev2netdev
-</span></span><span class="line"><span class="cl">roceP2p1s0f0 port <span class="nv">1</span> <span class="o">==</span>&gt; enP2p1s0f0np0 <span class="o">(</span>Down<span class="o">)</span>
-</span></span><span class="line"><span class="cl">roceP2p1s0f1 port <span class="nv">1</span> <span class="o">==</span>&gt; enP2p1s0f1np1 <span class="o">(</span>Up<span class="o">)</span>
-</span></span><span class="line"><span class="cl">rocep1s0f0 port <span class="nv">1</span> <span class="o">==</span>&gt; enp1s0f0np0 <span class="o">(</span>Down<span class="o">)</span>
-</span></span><span class="line"><span class="cl">rocep1s0f1 port <span class="nv">1</span> <span class="o">==</span>&gt; enp1s0f1np1 <span class="o">(</span>Up<span class="o">)</span></span></span></code></pre></div></div>
-</li>
-<li>
-<p>設定CX7網路介面</p>
-<p>我這邊是選擇選項2方法，因為這樣設定靜態IP後，之後重啟後還是一樣的IP
-以下 IP 可以設定成你喜歡的 IP，但切記不能與原本的網路相衝突，且盡量分開網斷。</p>
-<p>Node1設定：</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Create the netplan configuration file</span>
-</span></span><span class="line"><span class="cl">sudo tee /etc/netplan/40-cx7.yaml &gt; /dev/null <span class="s">&lt;&lt;EOF
-</span></span></span><span class="line"><span class="cl"><span class="s">network:
-</span></span></span><span class="line"><span class="cl"><span class="s">version: 2
-</span></span></span><span class="line"><span class="cl"><span class="s">ethernets:
-</span></span></span><span class="line"><span class="cl"><span class="s">    enp1s0f0np0:
-</span></span></span><span class="line"><span class="cl"><span class="s">    addresses:
-</span></span></span><span class="line"><span class="cl"><span class="s">        - 192.168.100.10/24
-</span></span></span><span class="line"><span class="cl"><span class="s">    dhcp4: no
-</span></span></span><span class="line"><span class="cl"><span class="s">    enp1s0f1np1:
-</span></span></span><span class="line"><span class="cl"><span class="s">    addresses:
-</span></span></span><span class="line"><span class="cl"><span class="s">        - 192.168.200.12/24
-</span></span></span><span class="line"><span class="cl"><span class="s">    dhcp4: no
-</span></span></span><span class="line"><span class="cl"><span class="s">    enP2p1s0f0np0:
-</span></span></span><span class="line"><span class="cl"><span class="s">    addresses:
-</span></span></span><span class="line"><span class="cl"><span class="s">        - 192.168.100.14/24
-</span></span></span><span class="line"><span class="cl"><span class="s">    dhcp4: no
-</span></span></span><span class="line"><span class="cl"><span class="s">    enP2p1s0f1np1:
-</span></span></span><span class="line"><span class="cl"><span class="s">    addresses:
-</span></span></span><span class="line"><span class="cl"><span class="s">        - 192.168.200.16/24
-</span></span></span><span class="line"><span class="cl"><span class="s">    dhcp4: no
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Set appropriate permissions</span>
-</span></span><span class="line"><span class="cl">sudo chmod <span class="m">600</span> /etc/netplan/40-cx7.yaml
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Apply the configuration</span>
-</span></span><span class="line"><span class="cl">sudo netplan apply</span></span></code></pre></div></div>
-<p>Node2設定：</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Create the netplan configuration file</span>
-</span></span><span class="line"><span class="cl">sudo tee /etc/netplan/40-cx7.yaml &gt; /dev/null <span class="s">&lt;&lt;EOF
-</span></span></span><span class="line"><span class="cl"><span class="s">network:
-</span></span></span><span class="line"><span class="cl"><span class="s">version: 2
-</span></span></span><span class="line"><span class="cl"><span class="s">ethernets:
-</span></span></span><span class="line"><span class="cl"><span class="s">    enp1s0f0np0:
-</span></span></span><span class="line"><span class="cl"><span class="s">    addresses:
-</span></span></span><span class="line"><span class="cl"><span class="s">        - 192.168.100.11/24
-</span></span></span><span class="line"><span class="cl"><span class="s">    dhcp4: no
-</span></span></span><span class="line"><span class="cl"><span class="s">    enp1s0f1np1:
-</span></span></span><span class="line"><span class="cl"><span class="s">    addresses:
-</span></span></span><span class="line"><span class="cl"><span class="s">        - 192.168.200.13/24
-</span></span></span><span class="line"><span class="cl"><span class="s">    dhcp4: no
-</span></span></span><span class="line"><span class="cl"><span class="s">    enP2p1s0f0np0:
-</span></span></span><span class="line"><span class="cl"><span class="s">    addresses:
-</span></span></span><span class="line"><span class="cl"><span class="s">        - 192.168.100.15/24
-</span></span></span><span class="line"><span class="cl"><span class="s">    dhcp4: no
-</span></span></span><span class="line"><span class="cl"><span class="s">    enP2p1s0f1np1:
-</span></span></span><span class="line"><span class="cl"><span class="s">    addresses:
-</span></span></span><span class="line"><span class="cl"><span class="s">        - 192.168.200.17/24
-</span></span></span><span class="line"><span class="cl"><span class="s">    dhcp4: no
-</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Set appropriate permissions</span>
-</span></span><span class="line"><span class="cl">sudo chmod <span class="m">600</span> /etc/netplan/40-cx7.yaml
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Apply the configuration</span>
-</span></span><span class="line"><span class="cl">sudo netplan apply</span></span></code></pre></div></div>
-</li>
-<li>
-<p>設定免密碼 SSH 驗證</p>
-<p>選擇一個node執行 <a href="https://github.com/NVIDIA/dgx-spark-playbooks/blob/main/nvidia/connect-two-sparks/assets/discover-sparks"  target="_blank" rel="noreferrer">discover-sparks.sh</a> 探索InfiniBand網路腳本，他會自己找到 InfiniBand 介面 IP</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash ./discover-sparks</span></span></code></pre></div></div>
-<p>預期輸出類似如下，但會顯示不同的 IP 位址與節點名稱。首次執行腳本時，系統將提示您輸入每個節點的密碼。</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Found: 169.254.35.62 <span class="o">(</span>dgx-spark-node1.local<span class="o">)</span>
-</span></span><span class="line"><span class="cl">Found: 169.254.35.63 <span class="o">(</span>dgx-spark-node2.local<span class="o">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Setting up bidirectional SSH access <span class="o">(</span><span class="nb">local</span> &lt;-&gt; remote nodes<span class="o">)</span>...
-</span></span><span class="line"><span class="cl">You may be prompted <span class="k">for</span> your password <span class="k">for</span> each node.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">SSH setup complete! Both <span class="nb">local</span> and remote nodes can now SSH to each other without passwords.</span></span></code></pre></div></div>
-</li>
-<li>
-<p>驗證多節點能互通</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Test hostname resolution across nodes</span>
-</span></span><span class="line"><span class="cl">ssh &lt;InfiniBand_IP <span class="k">for</span> Node 1&gt; hostname
-</span></span><span class="line"><span class="cl">ssh &lt;InfiniBand_IP <span class="k">for</span> Node 2&gt; hostname</span></span></code></pre></div></div>
-<p>ex: 以 Step.1 - 4 為例子就是長成以下的樣子</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh 169.254.35.62 hostname
-</span></span><span class="line"><span class="cl">ssh 169.254.35.63 hostname</span></span></code></pre></div></div>
-</li>
-</ol>
-
-<h1 class="relative group">Step 2：
-    <div id="step-2" class="anchor"></div>
-    
-    <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
-        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#step-2" aria-label="定位點">#</a>
-    </span>
-    
-</h1>
-<p>以下是依照 <a href="https://build.nvidia.com/spark/nccl/stacked-sparks"  target="_blank" rel="noreferrer">NVIDIA - NCCL for Two Sparks</a> 的操作步驟</p>
-
-  
-
-
-
-<div
-  
-    class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"
-  
-  >
-  <span
-    
-      class="text-primary-400 pe-3 flex items-center"
-    
-    >
-    <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z"/></svg>
-</span>
-  </span>
-
-  <span
-    
-      class="dark:text-neutral-300"
-    
-    >要確定以上步驟都做完才能到 Step 2 喔！!</span>
-</div>
-
-<ol>
-<li>
-<p>編譯支援 Blackwell 架構的 NCCL
-
-  
-  
-  
-  
-
-
-
-<div
-  
-    class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"
-  
-  >
-  <span
-    
-      class="text-primary-400 pe-3 flex items-center"
-    
-    >
-    <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg>
-</span>
-  </span>
-
-  <span
-    
-      class="dark:text-neutral-300"
-    
-    >請在兩個節點上執行以下指令！!</span>
-</div>
-</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Install dependencies and build NCCL</span>
-</span></span><span class="line"><span class="cl">sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get install -y libopenmpi-dev
-</span></span><span class="line"><span class="cl">git clone -b v2.28.9-1 https://github.com/NVIDIA/nccl.git ~/nccl/
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ~/nccl/
-</span></span><span class="line"><span class="cl">make -j src.build <span class="nv">NVCC_GENCODE</span><span class="o">=</span><span class="s2">&#34;-gencode=arch=compute_121,code=sm_121&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Set environment variables</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">CUDA_HOME</span><span class="o">=</span><span class="s2">&#34;/usr/local/cuda&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">MPI_HOME</span><span class="o">=</span><span class="s2">&#34;/usr/lib/aarch64-linux-gnu/openmpi&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">NCCL_HOME</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$HOME</span><span class="s2">/nccl/build/&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$NCCL_HOME</span><span class="s2">/lib:</span><span class="nv">$CUDA_HOME</span><span class="s2">/lib64/:</span><span class="nv">$MPI_HOME</span><span class="s2">/lib:</span><span class="nv">$LD_LIBRARY_PATH</span><span class="s2">&#34;</span></span></span></code></pre></div></div>
-</li>
-<li>
-<p>建立 NCCL 測試套件</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Clone and build NCCL tests</span>
-</span></span><span class="line"><span class="cl">git clone https://github.com/NVIDIA/nccl-tests.git ~/nccl-tests/
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ~/nccl-tests/
-</span></span><span class="line"><span class="cl">make <span class="nv">MPI</span><span class="o">=</span><span class="m">1</span></span></span></code></pre></div></div>
-</li>
-<li>
-<p>找出正在使用的CX-7網路介面與 IP 位址
-
-  
-
-
-
-<div
-  
-    class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"
-  
-  >
-  <span
-    
-      class="text-primary-400 pe-3 flex items-center"
-    
-    >
-    <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z"/></svg>
-</span>
-  </span>
-
-  <span
-    
-      class="dark:text-neutral-300"
-    
-    ><p>請在兩個節點上執行以下指令！!</p>
-<p>請使用輸出結果中顯示為「(Up)」的介面。 在此範例中，我們將使用 enp1s0f1np1。</p>
-<p>請忽略所有以 enP2p&lt;&hellip;&gt; 前綴開頭的介面，僅需考慮以 enp1&lt;&hellip;&gt; 開頭的介面。</p>
-</span>
-</div>
-</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check network port status</span>
-</span></span><span class="line"><span class="cl">ibdev2netdev</span></span></code></pre></div></div>
-<p>範例輸出：</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">roceP2p1s0f0 port <span class="nv">1</span> <span class="o">==</span>&gt; enP2p1s0f0np0 <span class="o">(</span>Down<span class="o">)</span>
-</span></span><span class="line"><span class="cl">roceP2p1s0f1 port <span class="nv">1</span> <span class="o">==</span>&gt; enP2p1s0f1np1 <span class="o">(</span>Up<span class="o">)</span>
-</span></span><span class="line"><span class="cl">rocep1s0f0 port <span class="nv">1</span> <span class="o">==</span>&gt; enp1s0f0np0 <span class="o">(</span>Down<span class="o">)</span>
-</span></span><span class="line"><span class="cl">rocep1s0f1 port <span class="nv">1</span> <span class="o">==</span>&gt; enp1s0f1np1 <span class="o">(</span>Up<span class="o">)</span></span></span></code></pre></div></div>
-<p>依照介面尋找 IP</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ip addr show enp1s0f0np0
-</span></span><span class="line"><span class="cl">ip addr show enp1s0f1np1</span></span></code></pre></div></div>
-<p>範例輸出：</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># In this example, we are using interface enp1s0f1np1.</span>
-</span></span><span class="line"><span class="cl">nvidia@dgx-spark-1:~$ ip addr show enp1s0f1np1
-</span></span><span class="line"><span class="cl">    4: enp1s0f1np1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu <span class="m">1500</span> qdisc mq state UP group default qlen <span class="m">1000</span>
-</span></span><span class="line"><span class="cl">        link/ether 3c:6d:66:cc:b3:b7 brd ff:ff:ff:ff:ff:ff
-</span></span><span class="line"><span class="cl">        inet **169.254.35.62**/16 brd 169.254.255.255 scope link noprefixroute enp1s0f1np1
-</span></span><span class="line"><span class="cl">        valid_lft forever preferred_lft forever
-</span></span><span class="line"><span class="cl">        inet6 fe80::3e6d:66ff:fecc:b3b7/64 scope link
-</span></span><span class="line"><span class="cl">        valid_lft forever preferred_lft forever</span></span></code></pre></div></div>
-</li>
-<li>
-<p>執行 NCCL 通訊測試
-
-  
-  
-  
-  
-
-
-
-<div
-  
-    class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"
-  
-  >
-  <span
-    
-      class="text-primary-400 pe-3 flex items-center"
-    
-    >
-    <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg>
-</span>
-  </span>
-
-  <span
-    
-      class="dark:text-neutral-300"
-    
-    >僅需一條 QSFP 纜線即可實現完整頻寬。當連接兩條 QSFP 纜線時，必須為所有四個介面指派 IP 位址，方能獲得完整頻寬。</span>
-</div>
-</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Set network interface environment variables (use your Up interface from the previous step)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># UCX_NET_DEVICES, NCCL_SOCKET_IFNAME, OMPI_MCA_btl_tcp_if_include 都要設定成你使用的介面名稱。</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">UCX_NET_DEVICES</span><span class="o">=</span>enp1s0f1np1
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">NCCL_SOCKET_IFNAME</span><span class="o">=</span>enp1s0f1np1
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">OMPI_MCA_btl_tcp_if_include</span><span class="o">=</span>enp1s0f1np1
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Run the all_gather performance test across both nodes (replace the IP addresses with the ones you found in the previous step)</span>
-</span></span><span class="line"><span class="cl">mpirun -np <span class="m">2</span> -H &lt;Node1_CX7_IP&gt;:1,&lt;Node2_CX7_IP&gt;:1 <span class="se">\
-</span></span></span><span class="line"><span class="cl">--mca plm_rsh_agent <span class="s2">&#34;ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl">-x <span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$LD_LIBRARY_PATH</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="nv">$HOME</span>/nccl-tests/build/all_gather_perf</span></span></code></pre></div></div>
-<p>您亦可嘗試將 NCCL 設定的緩衝區大小調大，以充分利用 200Gbps 頻寬。</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Set network interface environment variables (use your active interface)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># UCX_NET_DEVICES, NCCL_SOCKET_IFNAME, OMPI_MCA_btl_tcp_if_include 都要設定成你使用的介面名稱。</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">UCX_NET_DEVICES</span><span class="o">=</span>enp1s0f1np1
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">NCCL_SOCKET_IFNAME</span><span class="o">=</span>enp1s0f1np1
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">OMPI_MCA_btl_tcp_if_include</span><span class="o">=</span>enp1s0f1np1
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Run the all_gather performance test across both nodes</span>
-</span></span><span class="line"><span class="cl">mpirun -np <span class="m">2</span> -H &lt;Node1_CX7_IP&gt;:1,&lt;Node2_CX7_IP&gt;:1 <span class="se">\
-</span></span></span><span class="line"><span class="cl">--mca plm_rsh_agent <span class="s2">&#34;ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl">-x <span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$LD_LIBRARY_PATH</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="nv">$HOME</span>/nccl-tests/build/all_gather_perf -b 16G -e 16G -f <span class="m">2</span></span></span></code></pre></div></div>
-</li>
-</ol>
-
-<h1 class="relative group">補充：
-    <div id="補充" class="anchor"></div>
-    
-    <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
-        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#%e8%a3%9c%e5%85%85" aria-label="定位點">#</a>
-    </span>
-    
-</h1>
-<ol>
-<li>
-<p>Setting CX-7 mtu
-
-  
-  
-  
-  
-
-
-
-<div
-  
-    class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"
-  
-  >
-  <span
-    
-      class="text-primary-400 pe-3 flex items-center"
-    
-    >
-    <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg>
-</span>
-  </span>
-
-  <span
-    
-      class="dark:text-neutral-300"
-    
-    >請在兩個節點上執行以下指令！!</span>
-</div>
-</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Set MTU to 9000~9216 for all CX-7 interfaces</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 設定 MTU 為 9000~9216 區間依照你後面接的設備設定</span>
-</span></span><span class="line"><span class="cl">sudo ip link <span class="nb">set</span> enp1s0f0np0 mtu <span class="m">9000</span>
-</span></span><span class="line"><span class="cl">sudo ip link <span class="nb">set</span> enp1s0f1np1 mtu <span class="m">9000</span>
-</span></span><span class="line"><span class="cl">sudo ip link <span class="nb">set</span> enP2p1s0f0np0 mtu <span class="m">9000</span>
-</span></span><span class="line"><span class="cl">sudo ip link <span class="nb">set</span> enP2p1s0f1np1 mtu <span class="m">9000</span></span></span></code></pre></div></div>
-</li>
-<li>
-<p>Check RDMA link</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rdma link</span></span></code></pre></div></div>
-<p>輸出範例：</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">link rocep1s0f0/1 state DOWN physical_state DISABLED netdev enp1s0f0np0
-</span></span><span class="line"><span class="cl">link rocep1s0f1/1 state ACTIVE physical_state LINK_UP netdev enp1s0f1np1
-</span></span><span class="line"><span class="cl">link roceP2p1s0f0/1 state DOWN physical_state DISABLED netdev enP2p1s0f0np0
-</span></span><span class="line"><span class="cl">link roceP2p1s0f1/1 state ACTIVE physical_state LINK_UP netdev enP2p1s0f1np1</span></span></code></pre></div></div>
-</li>
-<li>
-<p>RoCE test:</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt install perftest
-</span></span><span class="line"><span class="cl"><span class="nv">show_gids</span> <span class="o">=</span>&gt; 找到你的 interface 與 GID 我們只看 rocep*s*f* </span></span></code></pre></div></div>
-<p>輸出範例：</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">DEV     PORT    INDEX   GID                                     IPv4            VER     DEV
-</span></span><span class="line"><span class="cl">---     ----    -----   ---                                     ------------    ---     ---
-</span></span><span class="line"><span class="cl">rocep1s0f0      <span class="m">1</span>       <span class="m">0</span>       ....:....:....:....:....:....:....:....                 v1      enp1s0f0np0
-</span></span><span class="line"><span class="cl">rocep1s0f0      <span class="m">1</span>       <span class="m">1</span>       ....:....:....:....:....:....:....:....                 v2      enp1s0f0np0
-</span></span><span class="line"><span class="cl">rocep1s0f1      <span class="m">1</span>       <span class="m">0</span>       ....:....:....:....:....:....:....:....                 v1      enp1s0f1np1
-</span></span><span class="line"><span class="cl">rocep1s0f1      <span class="m">1</span>       <span class="m">1</span>       ....:....:....:....:....:....:....:....                 v2      enp1s0f1np1
-</span></span><span class="line"><span class="cl">rocep1s0f1      <span class="m">1</span>       <span class="m">2</span>       ....:....:....:....:....:....:....:.... 192.168.555.12          v1      enp1s0f1np1
-</span></span><span class="line"><span class="cl">rocep1s0f1      <span class="m">1</span>       <span class="m">3</span>       ....:....:....:....:....:....:....:.... 192.168.555.12          v2      enp1s0f1np1
-</span></span><span class="line"><span class="cl">roceP2p1s0f0    <span class="m">1</span>       <span class="m">0</span>       ....:....:....:....:....:....:....:....                 v1      enP2p1s0f0np0
-</span></span><span class="line"><span class="cl">roceP2p1s0f0    <span class="m">1</span>       <span class="m">1</span>       ....:....:....:....:....:....:....:....                 v2      enP2p1s0f0np0
-</span></span><span class="line"><span class="cl">roceP2p1s0f1    <span class="m">1</span>       <span class="m">0</span>       ....:....:....:....:....:....:....:....                 v1      enP2p1s0f1np1
-</span></span><span class="line"><span class="cl">roceP2p1s0f1    <span class="m">1</span>       <span class="m">1</span>       ....:....:....:....:....:....:....:....                 v2      enP2p1s0f1np1
-</span></span><span class="line"><span class="cl">roceP2p1s0f1    <span class="m">1</span>       <span class="m">2</span>       ....:....:....:....:....:....:....:.... 192.168.555.16          v1      enP2p1s0f1np1
-</span></span><span class="line"><span class="cl">roceP2p1s0f1    <span class="m">1</span>       <span class="m">3</span>       ....:....:....:....:....:....:....:.... 192.168.555.16          v2      enP2p1s0f1np1
-</span></span><span class="line"><span class="cl"><span class="nv">n_gids_found</span><span class="o">=</span><span class="m">12</span></span></span></code></pre></div></div>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#ib_send_bw：測試網路寬帶</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># Node1 (Server):</span>
-</span></span><span class="line"><span class="cl">ib_send_bw -R -d rocep1s0f1 -x &lt;GID&gt; -R 
-</span></span><span class="line"><span class="cl"><span class="c1">#ex: ib_send_bw -d rocep1s0f1 -x 3 -R </span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Node2 (Client):</span>
-</span></span><span class="line"><span class="cl">ib_send_bw &lt;node1_CX7_ip&gt; -d rocep1s0f1 -x <span class="m">3</span> -R</span></span></code></pre></div></div>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#ib_send_lat：測試網路延遲</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Node1 (Server):</span>
-</span></span><span class="line"><span class="cl">ib_send_lat -d rocep1s0f1 -x &lt;GID&gt; -R
-</span></span><span class="line"><span class="cl"><span class="c1">#ex: ib_send_lat -d rocep1s0f1 -x 3 -R</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Node2 (Client):</span>
-</span></span><span class="line"><span class="cl">ib_send_lat &lt;node1_CX7_ip&gt; -d rocep1s0f1 -x <span class="m">3</span> -R</span></span></code></pre></div></div>
-</li>
-</ol>
-
-<h1 class="relative group">Step 3：
-    <div id="step-3" class="anchor"></div>
-    
-    <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
-        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#step-3" aria-label="定位點">#</a>
-    </span>
-    
-</h1>
-<p>以下是依照 <a href="https://build.nvidia.com/spark/vllm/stacked-sparks"  target="_blank" rel="noreferrer">NVIDIA - vLLM for Inference</a> 的操作步驟</p>
-
-  
-
-
-
-<div
-  
-    class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"
-  
-  >
-  <span
-    
-      class="text-primary-400 pe-3 flex items-center"
-    
-    >
-    <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z"/></svg>
-</span>
-  </span>
-
-  <span
-    
-      class="dark:text-neutral-300"
-    
-    >要確定以上步驟都做完才能到 Step 3 喔！!</span>
-</div>
-
-<ol>
-<li>
-<p>下載 cluster deployment script</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Download on both nodes</span>
-</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/vllm-project/vllm/refs/heads/main/examples/online_serving/run_cluster.sh
-</span></span><span class="line"><span class="cl">chmod +x run_cluster.sh</span></span></code></pre></div></div>
-</li>
-<li>
-<p>從 NVIDIA NGC 拉取 vLLM docker images</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker pull nvcr.io/nvidia/vllm:25.11-py3
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">VLLM_IMAGE</span><span class="o">=</span>nvcr.io/nvidia/vllm:25.11-py3</span></span></code></pre></div></div>
-</li>
-<li>
-<p>啟動 Ray 叢集主節點。</p>
-<p>此節點負責協調分散式推論，並提供 API 端點服務。
-
-  
-  
-  
-  
-
-
-
-<div
-  
-    class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"
-  
-  >
-  <span
-    
-      class="text-primary-400 pe-3 flex items-center"
-    
-    >
-    <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg>
-</span>
-  </span>
-
-  <span
-    
-      class="dark:text-neutral-300"
-    
-    >只在主節點(Node1)下指令即可！</span>
-</div>
-</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># On Node 1, start head node</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Get the IP address of the high-speed interface</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># Use the interface that shows &#34;(Up)&#34; from ibdev2netdev (enp1s0f0np0 or enp1s0f1np1)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">MN_IF_NAME</span><span class="o">=</span>enp1s0f1np1
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">VLLM_HOST_IP</span><span class="o">=</span><span class="k">$(</span>ip -4 addr show <span class="nv">$MN_IF_NAME</span> <span class="p">|</span> grep -oP <span class="s1">&#39;(?&lt;=inet\s)\d+(\.\d+){3}&#39;</span><span class="k">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Using interface </span><span class="nv">$MN_IF_NAME</span><span class="s2"> with IP </span><span class="nv">$VLLM_HOST_IP</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">bash run_cluster.sh <span class="nv">$VLLM_IMAGE</span> <span class="nv">$VLLM_HOST_IP</span> --head ~/.cache/huggingface <span class="se">\
-</span></span></span><span class="line"><span class="cl">-e <span class="nv">VLLM_HOST_IP</span><span class="o">=</span><span class="nv">$VLLM_HOST_IP</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl">-e <span class="nv">UCX_NET_DEVICES</span><span class="o">=</span><span class="nv">$MN_IF_NAME</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl">-e <span class="nv">NCCL_SOCKET_IFNAME</span><span class="o">=</span><span class="nv">$MN_IF_NAME</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl">-e <span class="nv">OMPI_MCA_btl_tcp_if_include</span><span class="o">=</span><span class="nv">$MN_IF_NAME</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl">-e <span class="nv">GLOO_SOCKET_IFNAME</span><span class="o">=</span><span class="nv">$MN_IF_NAME</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl">-e <span class="nv">TP_SOCKET_IFNAME</span><span class="o">=</span><span class="nv">$MN_IF_NAME</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl">-e <span class="nv">RAY_memory_monitor_refresh_ms</span><span class="o">=</span><span class="m">0</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl">-e <span class="nv">MASTER_ADDR</span><span class="o">=</span><span class="nv">$VLLM_HOST_IP</span></span></span></code></pre></div></div>
-</li>
-<li>
-<p>將節點 2 連接至 Ray 叢集作為工作節點。</p>
-<p>此舉可提供額外的 GPU 資源，以實現張量平行運算。
-
-  
-  
-  
-  
-
-
-
-<div
-  
-    class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"
-  
-  >
-  <span
-    
-      class="text-primary-400 pe-3 flex items-center"
-    
-    >
-    <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg>
-</span>
-  </span>
-
-  <span
-    
-      class="dark:text-neutral-300"
-    
-    >只在叢集節點(Node2)下指令即可！</span>
-</div>
-</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># On Node 2, join as worker</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Set the interface name (same as Node 1)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">MN_IF_NAME</span><span class="o">=</span>enp1s0f1np1
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># Get Node 2&#39;s own IP address</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">VLLM_HOST_IP</span><span class="o">=</span><span class="k">$(</span>ip -4 addr show <span class="nv">$MN_IF_NAME</span> <span class="p">|</span> grep -oP <span class="s1">&#39;(?&lt;=inet\s)\d+(\.\d+){3}&#39;</span><span class="k">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># IMPORTANT: Set HEAD_NODE_IP to Node 1&#39;s IP address</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># You must get this value from Node 1 (run: echo $VLLM_HOST_IP on Node 1)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">HEAD_NODE_IP</span><span class="o">=</span>&lt;NODE_1_CX7_IP_ADDRESS&gt;
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Worker IP: </span><span class="nv">$VLLM_HOST_IP</span><span class="s2">, connecting to head node at: </span><span class="nv">$HEAD_NODE_IP</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">bash run_cluster.sh <span class="nv">$VLLM_IMAGE</span> <span class="nv">$HEAD_NODE_IP</span> --worker ~/.cache/huggingface <span class="se">\
-</span></span></span><span class="line"><span class="cl">-e <span class="nv">VLLM_HOST_IP</span><span class="o">=</span><span class="nv">$VLLM_HOST_IP</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl">-e <span class="nv">UCX_NET_DEVICES</span><span class="o">=</span><span class="nv">$MN_IF_NAME</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl">-e <span class="nv">NCCL_SOCKET_IFNAME</span><span class="o">=</span><span class="nv">$MN_IF_NAME</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl">-e <span class="nv">OMPI_MCA_btl_tcp_if_include</span><span class="o">=</span><span class="nv">$MN_IF_NAME</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl">-e <span class="nv">GLOO_SOCKET_IFNAME</span><span class="o">=</span><span class="nv">$MN_IF_NAME</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl">-e <span class="nv">TP_SOCKET_IFNAME</span><span class="o">=</span><span class="nv">$MN_IF_NAME</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl">-e <span class="nv">RAY_memory_monitor_refresh_ms</span><span class="o">=</span><span class="m">0</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl">-e <span class="nv">MASTER_ADDR</span><span class="o">=</span><span class="nv">$HEAD_NODE_IP</span></span></span></code></pre></div></div>
-</li>
-<li>
-<p>驗證叢集狀態</p>
-<p>確認兩個節點皆被 Ray 叢集識別且處於可用狀態。
-
-  
-  
-  
-  
-
-
-
-<div
-  
-    class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"
-  
-  >
-  <span
-    
-      class="text-primary-400 pe-3 flex items-center"
-    
-    >
-    <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg>
-</span>
-  </span>
-
-  <span
-    
-      class="dark:text-neutral-300"
-    
-    >只在主節點(Node1)下指令即可！</span>
-</div>
-</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># On Node 1 (head node)</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># Find the vLLM container name (it will be node-&lt;random_number&gt;)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">VLLM_CONTAINER</span><span class="o">=</span><span class="k">$(</span>docker ps --format <span class="s1">&#39;{{.Names}}&#39;</span> <span class="p">|</span> grep -E <span class="s1">&#39;^node-[0-9]+$&#39;</span><span class="k">)</span>
-</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Found container: </span><span class="nv">$VLLM_CONTAINER</span><span class="s2">&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> <span class="nv">$VLLM_CONTAINER</span> ray status</span></span></code></pre></div></div>
-</li>
-<li>
-<p>vllm 搭建 GPT-OSS-120B模型
-vllm 參數都能自行調整，參數可查看此文章<a href="https://zhuanlan.zhihu.com/p/1916898243423500022"  target="_blank" rel="noreferrer">zhihu - vLLM参数详细说明</a>
-
-  
-  
-  
-  
-
-
-
-<div
-  
-    class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"
-  
-  >
-  <span
-    
-      class="text-primary-400 pe-3 flex items-center"
-    
-    >
-    <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 128c17.67 0 32 14.33 32 32c0 17.67-14.33 32-32 32S224 177.7 224 160C224 142.3 238.3 128 256 128zM296 384h-80C202.8 384 192 373.3 192 360s10.75-24 24-24h16v-64H224c-13.25 0-24-10.75-24-24S210.8 224 224 224h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24S309.3 384 296 384z"/></svg>
-</span>
-  </span>
-
-  <span
-    
-      class="dark:text-neutral-300"
-    
-    >只在主節點(Node1)下指令即可！</span>
-</div>
-</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># On Node 1, enter container and start server</span>
-</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">VLLM_CONTAINER</span><span class="o">=</span><span class="k">$(</span>docker ps --format <span class="s1">&#39;{{.Names}}&#39;</span> <span class="p">|</span> grep -E <span class="s1">&#39;^node-[0-9]+$&#39;</span><span class="k">)</span>
-</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -it <span class="nv">$VLLM_CONTAINER</span> /bin/bash -c <span class="err">&#39;</span>
-</span></span><span class="line"><span class="cl">vllm serve openai/gpt-oss-120b <span class="se">\
-</span></span></span><span class="line"><span class="cl">    --host 0.0.0.0 <span class="se">\ </span>
-</span></span><span class="line"><span class="cl">    --port <span class="m">8000</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl">    --tensor-parallel-size <span class="m">2</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl">    --max_model_len <span class="m">2048</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl">    --gpu-memory-utilization 0.9</span></span></code></pre></div></div>
-</li>
-<li>
-<p>確認服務</p>
-<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Test from Node 1 or external client</span>
-</span></span><span class="line"><span class="cl">curl http://&lt;node1_IP&gt;:8000/v1/completions <span class="se">\
-</span></span></span><span class="line"><span class="cl">-H <span class="s2">&#34;Content-Type: application/json&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl">-d <span class="s1">&#39;{
-</span></span></span><span class="line"><span class="cl"><span class="s1">    &#34;model&#34;: &#34;openai/gpt-oss-120b&#34;,
-</span></span></span><span class="line"><span class="cl"><span class="s1">    &#34;prompt&#34;: &#34;Write a haiku about a GPU&#34;,
-</span></span></span><span class="line"><span class="cl"><span class="s1">    &#34;max_tokens&#34;: 32,
-</span></span></span><span class="line"><span class="cl"><span class="s1">    &#34;temperature&#34;: 0.7
-</span></span></span><span class="line"><span class="cl"><span class="s1">}&#39;</span></span></span></code></pre></div></div>
-</li>
-<li>
-<p>部署完成！！</p>
-</li>
-</ol>
-
-<h1 class="relative group">Note:
-    <div id="note" class="anchor"></div>
-    
-    <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
-        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#note" aria-label="定位點">#</a>
-    </span>
-    
-</h1>
-<ul>
-<li>
-<p>看論壇說雙條200G可以能而外提供 52 Gbit/sec 速度。但我這邊是使用單條400G的線所以這部份沒有嘗試。</p>
-<p>ref：<a href="https://forums.developer.nvidia.com/t/connectx-7-nic-in-dgx-spark/350417/61"  target="_blank" rel="noreferrer">developer.nvidia - connectx-7-nic-in-dgx-spark</a></p>
-</li>
-<li>
-<p>有關網路聚合的官方解釋</p>
-<p>ref：<a href="https://forums.developer.nvidia.com/t/connectx-7-nic-in-dgx-spark/350417/65"  target="_blank" rel="noreferrer">developer.nvidia - connectx-7-nic-in-dgx-spark</a></p>
-</li>
-<li>
-<p>DGX Spark 上不支援 GPU Direct RDMA</p>
-<p>ref：<a href="https://forums.developer.nvidia.com/t/enabling-gpu-direct-rdma-for-dgx-spark-clustering/352051/2"  target="_blank" rel="noreferrer">developer.nvidia - enabling-gpu-direct-rdma-for-dgx-spark-clustering</a></p>
-</li>
-<li>
-<p>目前看起來都是玩家互相討論實作居多，官方很少出來澄清或是證明問題。</p>
-</li>
-<li>
-<p>目前雙同道網路還是個謎，沒有人能成功</p>
-</li>
-<li>
-<p>分別有 NCCL 跟 RoCE 通道測試，是不同的喔請注意!</p>
-</li>
-<li>
-<p>如果遇到問題請多上官方討論區尋找</p>
-<p>ref：<a href="https://forums.developer.nvidia.com/c/accelerated-computing/dgx-spark-gb10/dgx-spark-gb10/721"  target="_blank" rel="noreferrer">developer.nvidia - dgx-spark-gb10</a></p>
-</li>
-<li>
-<p>測試 項目 與 目的</p>
-<table>
-	<thead>
-			<tr>
-					<th style="text-align: left">項目</th>
-					<th style="text-align: center">測什麼</th>
-					<th style="text-align: right">解釋</th>
-					<th style="text-align: right">層級</th>
-					<th style="text-align: right">用途</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td style="text-align: left">iperf3</td>
-					<td style="text-align: center">TCP throughput</td>
-					<td style="text-align: right">TCP / UDP socket throughput</td>
-					<td style="text-align: right">Network stack</td>
-					<td style="text-align: right">普通網路</td>
-			</tr>
-			<tr>
-					<td style="text-align: left">RoCE benchmark</td>
-					<td style="text-align: center">RDMA bandwidth</td>
-					<td style="text-align: right">NIC → NIC memory access, CPU 不參與</td>
-					<td style="text-align: right">NIC transport</td>
-					<td style="text-align: right">HPC network</td>
-			</tr>
-			<tr>
-					<td style="text-align: left">NCCL test</td>
-					<td style="text-align: center">GPU collective bandwidth</td>
-					<td style="text-align: right">GPU ↔ GPU</td>
-					<td style="text-align: right">Application layer</td>
-					<td style="text-align: right">AI training</td>
-			</tr>
-	</tbody>
-</table>
-</li>
-</ul>
-
-<h1 class="relative group">心得：
-    <div id="心得" class="anchor"></div>
-    
-    <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
-        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#%e5%bf%83%e5%be%97" aria-label="定位點">#</a>
-    </span>
-    
-</h1>
-<p>跑 GPT-OSS-120b 在 vllm 上</p>
-<ul>
-<li>
-<p>單架構：</p>
-<ul>
-<li>單人使用時： Latency: ~28.24 ms/token, TPS: ~35.4 token/sec</li>
-<li>併發使用時： Latency: ~39.05 ms/token, TPS: ~25.61 token/sec</li>
-</ul>
-</li>
-<li>
-<p>雙幾架構：</p>
-<ul>
-<li>單人使用時： Latency: ~30.23 ms/token, TPS: ~33.08 tokens/sec</li>
-<li>併發使用時： Latency: ~29.07 ms/token, TPS: ~34.40 token/sec</li>
-</ul>
-</li>
-<li>
-<p>結論：</p>
-<p>我們可以發現當單人使用時沒有太大差異但只要多人使用時 cluster 架構就展現分片計算的優勢大幅降低延遲時間。</p>
-<ul>
-<li>平均生成速率 (TPS)：由 25.61 提升至 34.40 token/sec，效能增長約 34.3%。</li>
-<li>系統延遲 (Latency)：顯著降低了約 25.6%，大幅提升了使用者交互的流暢度。</li>
-<li>整體吞吐能力：在高負載下，系統總體處理效能提升約 34% ~ 36%，有效克服了單機架構的效能瓶頸。</li>
-</ul>
-</li>
-</ul>
-<p>實測出來，說真的如果你只是要大 VRAM 可以接受推論很慢 且 大多數都是使用 <strong>精度4(FP4)</strong> 模型，那你很適合這台。</p>
-<p>最近 macOS 26.2 新功能 RDMA over Thunderbolt 5 可以嘗試看看 Mac Studio 照理來說各項數值因該都是超越這台，但價格同時也是甩的遠遠的。</p>
-<p>但 Mac 有一個坑是目前 cluster 還是用 EXO，身為一個從 EXO 開源那時候用，我個人是覺得超級不穩，如果有人用新版的也歡迎告訴我目前能用嗎？</p>
-<p>個人覺得有錢還是買 GPU Server 就好別想不開，除非你想玩個新玩具。</p>
-
-<h1 class="relative group">Reference
-    <div id="reference" class="anchor"></div>
-    
-    <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
-        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#reference" aria-label="定位點">#</a>
-    </span>
-    
-</h1>
-<hr>
-<p><a href="https://build.nvidia.com/spark/connect-two-sparks/stacked-sparks"  target="_blank" rel="noreferrer">NVIDIA - Connect Two Sparks</a></p>
-<p><a href="https://build.nvidia.com/spark/nccl/stacked-sparks"  target="_blank" rel="noreferrer">NVIDIA - NCCL for Two Sparks</a></p>
-<p><a href="https://forums.developer.nvidia.com/t/connectx-7-nic-in-dgx-spark/350417/63?page=3"  target="_blank" rel="noreferrer">NVIDIA - connectx-7-nic-in-dgx-spark</a></p>
-<p><a href="https://www.linkedin.com/pulse/connecting-two-sparks-andrew-myers-p9gme/"  target="_blank" rel="noreferrer">Linkedin - Andrew M._Connecting Two Sparks</a></p>
-<p><a href="https://www.jeffgeerling.com/blog/2025/15-tb-vram-on-mac-studio-rdma-over-thunderbolt-5/"  target="_blank" rel="noreferrer">jeffgeerling - 1.5 TB of VRAM on Mac Studio - RDMA over Thunderbolt 5</a></p>
-<p><a href="https://github.com/NVIDIA/dgx-spark-playbooks"  target="_blank" rel="noreferrer">GitHub - dgx-spark-playbooks</a></p>
-          
-          
-          
-        </div>
-        
-        
-
-        
-
-        
-
-      </div>
-    </section>
-
-    
-    <footer class="pt-8 max-w-prose print:hidden">
-      
-
-      
-  
-    <div class="pt-3">
-      <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
-      <div class="pt-3">
-        
-
-<script src="https://giscus.app/client.js"
-        data-repo="OKHand-Zy/OKHand-Zy.github.io"
-        data-repo-id="R_kgDOI4u6xw"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOI4u6x84CuITR"
-        data-mapping="url"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        data-lang="zh-TW"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
-</script>
-
-      </div>
-    </div>
-  
-
-
-    </footer>
-  </article>
-
-        
-
-
-  
-
-
-
-
-
-
-
-
-
-
-<div
-  id="scroll-to-top"
-  class="fixed bottom-6 end-6 z-50 transform translate-y-4 opacity-0 duration-200">
-  <a
-    href="#the-top"
-    class="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
-    aria-label="捲動到頁頂"
-    title="捲動到頁頂">
-    &uarr;
-  </a>
-</div>
-
-      </main><footer id="site-footer" class="py-10 print:hidden">
-  
-  
-    
-      
-      
-        
-          
-          
-      
-      
-      
-      <nav aria-label="" class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400 ">
-        <ul class="flex list-none flex-col sm:flex-row">
-          
-            <li class=" flex mb-1 text-end sm:mb-0 sm:me-7 sm:last:me-0 ">
-              <a
-                class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center"
-                href="https://github.com/OKHand-Zy"
-                title="">
-                
-                  <span class="mr-1">
-                    <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
-</span>
-                  </span>
-                
-                GitHub
-              </a>
-            </li>
-          
-            <li class=" flex mb-1 text-end sm:mb-0 sm:me-7 sm:last:me-0 ">
-              <a
-                class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center"
-                href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=okhand.ziyu@gmail.com"
-                title="">
-                
-                  <span class="mr-1">
-                    <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg></span>
-                  </span>
-                
-                Gmail
-              </a>
-            </li>
-          
-            <li class=" flex mb-1 text-end sm:mb-0 sm:me-7 sm:last:me-0 ">
-              <a
-                class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center"
-                href="https://okhand.org/index.xml"
-                title="">
-                
-                  <span class="mr-1">
-                    <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 64C0 46.3 14.3 32 32 32c229.8 0 416 186.2 416 416c0 17.7-14.3 32-32 32s-32-14.3-32-32C384 253.6 226.4 96 32 96C14.3 96 0 81.7 0 64zM128 416c0 35.3-28.7 64-64 64s-64-28.7-64-64s28.7-64 64-64s64 28.7 64 64zM32 160c159.1 0 288 128.9 288 288c0 17.7-14.3 32-32 32s-32-14.3-32-32c0-123.7-100.3-224-224-224c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></svg></span>
-                  </span>
-                
-                RSS
-              </a>
-            </li>
-          
-        </ul>
-      </nav>
-    
-  
-  <div class="flex items-center justify-between">
-    
-    
-      <p class="text-sm text-neutral-500 dark:text-neutral-400">
-          &copy;
-          2026
-          <a href="mailto:OKH@nd.ZiYu" >OKH@nd.ZiYu</a>
-      </p>
-    
-
-    
-    
-      <p class="text-xs text-neutral-500 dark:text-neutral-400">
-        
-        
-        以 <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
-          href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
-          href="https://blowfish.page/" target="_blank" rel="noopener noreferrer">Blowfish</a> 製作
-      </p>
-    
-  </div>
-  
-  
-</footer>
-<div
-  id="search-wrapper"
-  role="dialog"
-  aria-modal="true"
-  aria-label="搜尋"
-  class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh] z-500"
-  data-url="/zh-tw/">
-  <div
-    id="search-modal"
-    class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800">
-    <header class="relative z-10 flex items-center justify-between flex-none px-2">
-      <form class="flex items-center flex-auto min-w-0">
-        <div class="flex items-center justify-center w-8 h-8 text-neutral-400">
-          <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
-</span>
-        </div>
-        <input
-          type="search"
-          id="search-query"
-          aria-label="搜尋"
-          class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent"
-          placeholder="搜尋"
-          tabindex="0">
-      </form>
-      <button
-        id="close-search-button"
-        class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
-        title="關閉 (Esc)">
-        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
-</span>
-      </button>
-    </header>
-    <section class="flex-auto px-2 overflow-auto">
-      <ul id="search-results">
-        
-      </ul>
-    </section>
-  </div>
-</div>
-
-    </div>
-    
-    
-  </body>
-  
-  
-</html>
+<!doctype html><html lang=zh-TW dir=ltr class=scroll-smooth data-default-appearance=dark data-auto-appearance=true><head><meta charset=utf-8><meta http-equiv=content-language content="zh-TW"><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><meta name=theme-color><title>Dgx Spark Cluster Interconnect &#183; OKH@nd's Blog</title><meta name=title content="Dgx Spark Cluster Interconnect &#183; OKH@nd's Blog"><meta name=description content="深入探討如何在 NVIDIA DGX 環境下實現雙 Spark 叢集網路互連 (Interconnect)，並針對 GPT-OSS-120B 大型語言模型進行分散式架構配置與通訊優化。"><meta name=keywords content="NVIDIA,DGX_Spark,"><link rel=canonical href=https://okhand.org/zh-tw/posts/dgx-spark-cluster-interconnect/><meta name=author content="OKH@nd.ZiYu"><link href=https://github.com/OKHand-Zy rel=me><link href=https://www.instagram.com/okhand_ziyu/ rel=me><link href=https://www.linkedin.com/in/okhand-ziyu/ rel=me><meta property="og:url" content="https://okhand.org/zh-tw/posts/dgx-spark-cluster-interconnect/"><meta property="og:site_name" content="OKH@nd's Blog"><meta property="og:title" content="Dgx Spark Cluster Interconnect"><meta property="og:description" content="深入探討如何在 NVIDIA DGX 環境下實現雙 Spark 叢集網路互連 (Interconnect)，並針對 GPT-OSS-120B 大型語言模型進行分散式架構配置與通訊優化。"><meta property="og:locale" content="zh_TW"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2026-03-10T15:38:57+08:00"><meta property="article:modified_time" content="2026-03-10T15:38:57+08:00"><meta property="article:tag" content="NVIDIA"><meta property="article:tag" content="DGX_Spark"><meta name=twitter:card content="summary"><meta name=twitter:title content="Dgx Spark Cluster Interconnect"><meta name=twitter:description content="深入探討如何在 NVIDIA DGX 環境下實現雙 Spark 叢集網路互連 (Interconnect)，並針對 GPT-OSS-120B 大型語言模型進行分散式架構配置與通訊優化。"><link type=text/css rel=stylesheet href=/css/main.bundle.min.bd2f3f5aecb4b187ab756752d1ef627cbb275f3507dc54f853749e9a3e284103e1b5e8bc28fa59678dbcdd710d5af00cbdc261c7b2901c01a55a7407154a33df.css integrity="sha512-vS8/Wuy0sYerdWdS0e9ifLsnXzUH3FT4U3Semj4oQQPhtei8KPpZZ4283XENWvAMvcJhx7KQHAGlWnQHFUoz3w=="><script type=text/javascript src=/js/appearance.min.07514f0a09be093289e3a94b3ef771391aebb37588ae2035345e460ff9ba92d3f5afea6b684f58e0118936d8a992d227977f5c30f770144b6d8d31610c340e20.js integrity="sha512-B1FPCgm+CTKJ46lLPvdxORrrs3WIriA1NF5GD/m6ktP1r+praE9Y4BGJNtipktInl39cMPdwFEttjTFhDDQOIA=="></script><script defer src=/lib/zoom/zoom.min.umd.a527109b68c082a70f3697716dd72a9d5aa8b545cf800cecbbc7399f2ca6f6e0ce3e431f2062b48bbfa47c9ea42822714060bef309be073f49b9c0e30d318d7b.js integrity="sha512-pScQm2jAgqcPNpdxbdcqnVqotUXPgAzsu8c5nyym9uDOPkMfIGK0i7+kfJ6kKCJxQGC+8wm+Bz9JucDjDTGNew=="></script><script defer src=/js/medium-zoom.67b71ecf7eecce38673a92244d1ffd93edb5f1aeedd12e725d0f67fe901828fa3562f6a6d64ad290b36b7d7034b8ea16e63486d75d957bcf6a2732923e5d46e6.js integrity="sha512-Z7cez37szjhnOpIkTR/9k+218a7t0S5yXQ9n/pAYKPo1Yvam1krSkLNrfXA0uOoW5jSG112Ve89qJzKSPl1G5g=="></script><script defer type=text/javascript id=script-bundle src=/js/main.bundle.min.17b3d3bbe00602f12ed247330588c186dd330147642a44a8aca5159f5905a7a6e0a70abb06315b581aef2c4f6d0e4d4bac82dbc1b0916818b057f9ad42c4aae6.js integrity="sha512-F7PTu+AGAvEu0kczBYjBht0zAUdkKkSorKUVn1kFp6bgpwq7BjFbWBrvLE9tDk1LrILbwbCRaBiwV/mtQsSq5g==" data-copy=複製 data-copied=已複製></script><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><script type=application/ld+json>[{"@context":"https://schema.org","@type":"Article","articleSection":"Posts","name":"Dgx Spark Cluster Interconnect","headline":"Dgx Spark Cluster Interconnect","description":"深入探討如何在 NVIDIA DGX 環境下實現雙 Spark 叢集網路互連 (Interconnect)，並針對 GPT-OSS-120B 大型語言模型進行分散式架構配置與通訊優化。","inLanguage":"zh-TW","url":"https://okhand.org/zh-tw/posts/dgx-spark-cluster-interconnect/","author":{"@type":"Person","name":"OKH@nd.ZiYu","image":"https://image.okhand.org/icon/Hero.webp","sameAs":["https://github.com/OKHand-Zy","https://www.instagram.com/okhand_ziyu/","https://www.linkedin.com/in/okhand-ziyu/"]},"copyrightYear":"2026","dateCreated":"2026-03-10T15:38:57\u002b08:00","datePublished":"2026-03-10T15:38:57\u002b08:00","dateModified":"2026-03-10T15:38:57\u002b08:00","keywords":["NVIDIA","DGX_Spark"],"mainEntityOfPage":"https://okhand.org/zh-tw/posts/dgx-spark-cluster-interconnect/","wordCount":1445}]</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-F39WJMWNM4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-F39WJMWNM4")</script></head><body class="flex flex-col h-screen m-auto leading-7 max-w-7xl px-6 sm:px-14 md:px-24 lg:px-32 text-lg bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral bf-scrollbar"><div id=the-top class="absolute flex self-center"><a class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600" href=#main-content><span class="font-bold text-primary-600 pe-2 dark:text-primary-400">&darr;</span>
+快轉到主要內容</a></div><header><div class="main-menu flex items-center w-full gap-2 p-1 pl-0"><div><a href=/zh-tw/ class=flex><span class=sr-only>OKH@nd&rsquo;s Blog</span>
+<img src=/OKHand-Logo.png width=256 height=256 class="logo max-h-20 max-w-20 object-scale-down object-left nozoom" alt></a></div><a href=/zh-tw/ class="text-base font-medium truncate min-w-0 shrink">OKH@nd&rsquo;s Blog</a><div class="flex items-center ms-auto"><div class="hidden md:flex"><nav aria-label class="flex items-center gap-x-5 h-12"><a href=/zh-tw/ class="flex items-center bf-icon-color-hover" aria-label=首頁 title="OKH@nd's Blog"><span class="text-sm font-medium break-normal">首頁
+</span></a><a href=/zh-tw/posts/ class="flex items-center bf-icon-color-hover" aria-label=文章 title=Posts><span class="text-sm font-medium break-normal">文章
+</span></a><a href=/zh-tw/categories/ class="flex items-center bf-icon-color-hover" aria-label=分類 title=Categories><span class="text-sm font-medium break-normal">分類
+</span></a><a href=/zh-tw/tags/ class="flex items-center bf-icon-color-hover" aria-label=標籤 title=Tags><span class="text-sm font-medium break-normal">標籤
+</span></a><a href=/zh-tw/about/ class="flex items-center bf-icon-color-hover" aria-label=關於我 title="關於 我"><span class="text-sm font-medium break-normal">關於我</span></a><div class="flex items-center"><button id=appearance-switcher aria-label=切換為深色模式 type=button class="text-sm bf-icon-color-hover" title=切換為深色模式><div class="flex items-center justify-center dark:hidden"><span class="relative block icon"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M32 256C32 132.2 132.3 32 255.8 32c11.36.0 29.7 1.668 40.9 3.746 9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3 9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480 132.1 480 32 379.6 32 256z"/></svg></span></div><div class="items-center justify-center hidden dark:flex"><span class="relative block icon"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02.0-95.1 42.98-95.1 95.1s41.2 96.9 95.1 96.9 95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347l-63.2-91.9 63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89 164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6 12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256 2.74 347.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7 19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109 109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69.0-127.1-57.31-127.1-127.1.0-70.69 57.31-127.1 127.1-127.1S383.1 186.2 383.1 256c0 70.7-56.4 127.1-127.1 127.1z"/></svg></span></div></button></div><button id=search-button aria-label="搜尋 (/)" class="flex items-center gap-2 rounded-lg border bf-border-color bf-border-color-hover bg-neutral-100/50 px-2 py-1 text-sm text-neutral-500 transition-colors hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral-400 dark:hover:text-primary-400" title="搜尋 (/)">
+<span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7 405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9.0 208 0S0 93.1.0 208s93.1 208 208 208c48.3.0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9.0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7.0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7.0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span><kbd id=search-shortcut-hint class="pointer-events-none font-sans text-xs text-neutral-500 dark:text-neutral-400" aria-hidden=true>⌘K</kbd></button></nav></div><div class="flex md:hidden"><div class="mobile-header-row relative flex items-center h-14 gap-4"><button id=appearance-switcher-mobile type=button aria-label=切換為深色模式 title=切換為深色模式 class="flex items-center justify-center text-neutral-900 hover:text-primary-600 dark:text-neutral-200 dark:hover:text-primary-400"><div class=dark:hidden><span class="relative block icon"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M32 256C32 132.2 132.3 32 255.8 32c11.36.0 29.7 1.668 40.9 3.746 9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3 9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480 132.1 480 32 379.6 32 256z"/></svg></span></div><div class="hidden dark:block"><span class="relative block icon"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02.0-95.1 42.98-95.1 95.1s41.2 96.9 95.1 96.9 95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347l-63.2-91.9 63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89 164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6 12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256 2.74 347.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7 19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109 109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69.0-127.1-57.31-127.1-127.1.0-70.69 57.31-127.1 127.1-127.1S383.1 186.2 383.1 256c0 70.7-56.4 127.1-127.1 127.1z"/></svg></span></div></button>
+<button id=search-button-mobile aria-label="搜尋 (/)" class="flex items-center justify-center bf-icon-color-hover" title="搜尋 (/)">
+<span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7 405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9.0 208 0S0 93.1.0 208s93.1 208 208 208c48.3.0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9.0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7.0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7.0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span></button>
+<input type=checkbox id=mobile-menu-toggle autocomplete=off class="hidden peer">
+<label for=mobile-menu-toggle tabindex=0 role=button aria-expanded=false aria-controls=mobile-menu-dialog aria-label class="flex items-center justify-center cursor-pointer bf-icon-color-hover"><span class="relative block icon"><svg viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416c17.7.0 32 14.33 32 32 0 17.7-14.3 32-32 32H32C14.33 128 0 113.7.0 96zM0 256c0-17.7 14.33-32 32-32H416c17.7.0 32 14.3 32 32s-14.3 32-32 32H32c-17.67.0-32-14.3-32-32zM416 448H32c-17.67.0-32-14.3-32-32s14.33-32 32-32H416c17.7.0 32 14.3 32 32s-14.3 32-32 32z"/></svg></span></label><div id=mobile-menu-dialog role=dialog aria-modal=true aria-label style=scrollbar-gutter:stable class="z-50 invisible overflow-y-auto opacity-0 transition-[opacity,visibility] duration-300 peer-checked:visible peer-checked:opacity-100
+fixed inset-0 px-6 py-20 bg-neutral-50/97 dark:bg-neutral-900/99
+bf-scrollbar"><label for=mobile-menu-toggle tabindex=0 role=button aria-expanded=false aria-controls=mobile-menu-dialog class="fixed end-8 top-5 z-50 h-12 w-12 rounded-full flex items-center justify-center cursor-pointer select-none bf-icon-color-hover border bf-border-color bf-border-color-hover bg-neutral-50 dark:bg-neutral-900"><span class=sr-only></span>
+<span class="relative block icon"><svg viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75.0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3 54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75.0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75.0-45.25s32.75-12.5 45.25.0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25.0s12.5 32.75.0 45.25l-105.4 105.4L310.6 361.4z"/></svg></span></label><nav aria-label class="mx-auto max-w-md space-y-6"><div class=px-2><div class="flex items-center gap-4"><a href=/zh-tw/ aria-label=首頁 class="flex grow items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200"><span title="OKH@nd's Blog" class="text-2xl font-bold tracking-tight">首頁</span></a></div></div><div class=px-2><div class="flex items-center gap-4"><a href=/zh-tw/posts/ aria-label=文章 class="flex grow items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200"><span title=Posts class="text-2xl font-bold tracking-tight">文章</span></a></div></div><div class=px-2><div class="flex items-center gap-4"><a href=/zh-tw/categories/ aria-label=分類 class="flex grow items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200"><span title=Categories class="text-2xl font-bold tracking-tight">分類</span></a></div></div><div class=px-2><div class="flex items-center gap-4"><a href=/zh-tw/tags/ aria-label=標籤 class="flex grow items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200"><span title=Tags class="text-2xl font-bold tracking-tight">標籤</span></a></div></div><div class=px-2><div class="flex items-center gap-4"><a href=/zh-tw/about/ aria-label=關於我 class="flex grow items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200"><span title="關於 我" class="text-2xl font-bold tracking-tight">關於我</span></a></div></div></nav></div></div></div></div></div></header><div class="relative flex flex-col grow"><main id=main-content class=grow><article><header id=single_header class="mt-5 max-w-prose"><h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">Dgx Spark Cluster Interconnect</h1><div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden"><div class="flex flex-row flex-wrap items-center"><time datetime=2026-03-10T15:38:57+08:00>2026年03月10日</time><span class="px-2 text-primary-500">&#183;</span><span>1445 字</span><span class="px-2 text-primary-500">&#183;</span><span title=預計閱讀時間>7 分鐘</span></div><div class="flex flex-row flex-wrap items-center"><a class="relative mt-[0.5rem] me-2" href=/zh-tw/categories/environment/><span class="flex cursor-pointer"><span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">Environment
+</span></span></a><a class="relative mt-[0.5rem] me-2" href=/zh-tw/tags/nvidia/><span class="flex cursor-pointer"><span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">NVIDIA
+</span></span></a><a class="relative mt-[0.5rem] me-2" href=/zh-tw/tags/dgx_spark/><span class="flex cursor-pointer"><span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">DGX_Spark</span></span></a></div></div></header><section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row"><div class="min-w-0 min-h-0 max-w-fit"><div class="article-content max-w-prose mb-20"><p>進入研究室有幸玩到 DGX Spark 這個 AI 玩具，教授還買了兩台組成 DGX Spark Cluster</p><p>由於 Lab 最近進來兩台 DGX Spark 老師也買了串接線就來玩玩看這樣串起來有多猛瞜。</p><p>先看看這尊絕不凡的身形，裡面可是搭載著 Grace Blackwell 架構的 GB10 晶片阿！<figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt=Two_Sparks src=https://image.okhand.org/dgx-spark-cluster-interconnect/two_spark.webp></figure></p><p>簡單又多工的後背，搭載 10GbE 與 ConnectX-7 高速網卡可達 400Gb/s<figure><img class="my-0 rounded-md" loading=lazy decoding=async fetchpriority=low alt=Sparks_Back src=https://image.okhand.org/dgx-spark-cluster-interconnect/spark_back.webp></figure></p><p>詳細架構請參考此文章 <a href=https://www.ithome.com.tw/review/171853 target=_blank rel=noreferrer>iThome - 採用GB10晶片，輝達與多家系統廠商推出新型態AI工作站</a></p><h1 class="relative group">Step 0：<div id=step-0 class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#step-0 aria-label=定位點>#</a></span></h1><ul><li>請安裝完系統，且兩台要有相同 User</li><li>準備一條400G的QSFP線連接兩台</li><li>下載 <a href=https://github.com/NVIDIA/dgx-spark-playbooks/blob/main/nvidia/connect-two-sparks/assets/discover-sparks target=_blank rel=noreferrer>discover-sparks.sh</a> 探索InfiniBand網路腳本</li><li>由於我沒有特別設定 docker 權限在 user 上可以使用，所以以下步驟如果有使用到 docker 等指令權限不夠在前面加上 sudo 即可</li></ul><h1 class="relative group">Step 1：<div id=step-1 class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#step-1 aria-label=定位點>#</a></span></h1><p>以下是依照 <a href=https://build.nvidia.com/spark/connect-two-sparks/stacked-sparks target=_blank rel=noreferrer>NVIDIA - Connect Two Sparks</a> 的操作步驟</p><ol><li><p>確認 User</p><p>要確認 node1 跟 node2 都有同個 user 喔！</p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>＃ 使用 <span class=nb>command</span> 查詢
+</span></span><span class=line><span class=cl>whoami</span></span></code></pre></div></div></li><li><p>確認 QSFP 是否有連接上</p><p>要確認有 UP 代表才有連接上,照理來說會是一組 UP 起來</p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Check QSFP interface availability on both nodes</span>
+</span></span><span class=line><span class=cl>nvidia@dxg-spark-1:~$ ibdev2netdev
+</span></span><span class=line><span class=cl>roceP2p1s0f0 port <span class=nv>1</span> <span class=o>==</span>&gt; enP2p1s0f0np0 <span class=o>(</span>Down<span class=o>)</span>
+</span></span><span class=line><span class=cl>roceP2p1s0f1 port <span class=nv>1</span> <span class=o>==</span>&gt; enP2p1s0f1np1 <span class=o>(</span>Up<span class=o>)</span>
+</span></span><span class=line><span class=cl>rocep1s0f0 port <span class=nv>1</span> <span class=o>==</span>&gt; enp1s0f0np0 <span class=o>(</span>Down<span class=o>)</span>
+</span></span><span class=line><span class=cl>rocep1s0f1 port <span class=nv>1</span> <span class=o>==</span>&gt; enp1s0f1np1 <span class=o>(</span>Up<span class=o>)</span></span></span></code></pre></div></div></li><li><p>設定CX7網路介面</p><p>我這邊是選擇選項2方法，因為這樣設定靜態IP後，之後重啟後還是一樣的IP
+以下 IP 可以設定成你喜歡的 IP，但切記不能與原本的網路相衝突，且盡量分開網斷。</p><p>Node1設定：</p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Create the netplan configuration file</span>
+</span></span><span class=line><span class=cl>sudo tee /etc/netplan/40-cx7.yaml &gt; /dev/null <span class=s>&lt;&lt;EOF
+</span></span></span><span class=line><span class=cl><span class=s>network:
+</span></span></span><span class=line><span class=cl><span class=s>version: 2
+</span></span></span><span class=line><span class=cl><span class=s>ethernets:
+</span></span></span><span class=line><span class=cl><span class=s>    enp1s0f0np0:
+</span></span></span><span class=line><span class=cl><span class=s>    addresses:
+</span></span></span><span class=line><span class=cl><span class=s>        - 192.168.100.10/24
+</span></span></span><span class=line><span class=cl><span class=s>    dhcp4: no
+</span></span></span><span class=line><span class=cl><span class=s>    enp1s0f1np1:
+</span></span></span><span class=line><span class=cl><span class=s>    addresses:
+</span></span></span><span class=line><span class=cl><span class=s>        - 192.168.200.12/24
+</span></span></span><span class=line><span class=cl><span class=s>    dhcp4: no
+</span></span></span><span class=line><span class=cl><span class=s>    enP2p1s0f0np0:
+</span></span></span><span class=line><span class=cl><span class=s>    addresses:
+</span></span></span><span class=line><span class=cl><span class=s>        - 192.168.100.14/24
+</span></span></span><span class=line><span class=cl><span class=s>    dhcp4: no
+</span></span></span><span class=line><span class=cl><span class=s>    enP2p1s0f1np1:
+</span></span></span><span class=line><span class=cl><span class=s>    addresses:
+</span></span></span><span class=line><span class=cl><span class=s>        - 192.168.200.16/24
+</span></span></span><span class=line><span class=cl><span class=s>    dhcp4: no
+</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Set appropriate permissions</span>
+</span></span><span class=line><span class=cl>sudo chmod <span class=m>600</span> /etc/netplan/40-cx7.yaml
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Apply the configuration</span>
+</span></span><span class=line><span class=cl>sudo netplan apply</span></span></code></pre></div></div><p>Node2設定：</p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Create the netplan configuration file</span>
+</span></span><span class=line><span class=cl>sudo tee /etc/netplan/40-cx7.yaml &gt; /dev/null <span class=s>&lt;&lt;EOF
+</span></span></span><span class=line><span class=cl><span class=s>network:
+</span></span></span><span class=line><span class=cl><span class=s>version: 2
+</span></span></span><span class=line><span class=cl><span class=s>ethernets:
+</span></span></span><span class=line><span class=cl><span class=s>    enp1s0f0np0:
+</span></span></span><span class=line><span class=cl><span class=s>    addresses:
+</span></span></span><span class=line><span class=cl><span class=s>        - 192.168.100.11/24
+</span></span></span><span class=line><span class=cl><span class=s>    dhcp4: no
+</span></span></span><span class=line><span class=cl><span class=s>    enp1s0f1np1:
+</span></span></span><span class=line><span class=cl><span class=s>    addresses:
+</span></span></span><span class=line><span class=cl><span class=s>        - 192.168.200.13/24
+</span></span></span><span class=line><span class=cl><span class=s>    dhcp4: no
+</span></span></span><span class=line><span class=cl><span class=s>    enP2p1s0f0np0:
+</span></span></span><span class=line><span class=cl><span class=s>    addresses:
+</span></span></span><span class=line><span class=cl><span class=s>        - 192.168.100.15/24
+</span></span></span><span class=line><span class=cl><span class=s>    dhcp4: no
+</span></span></span><span class=line><span class=cl><span class=s>    enP2p1s0f1np1:
+</span></span></span><span class=line><span class=cl><span class=s>    addresses:
+</span></span></span><span class=line><span class=cl><span class=s>        - 192.168.200.17/24
+</span></span></span><span class=line><span class=cl><span class=s>    dhcp4: no
+</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Set appropriate permissions</span>
+</span></span><span class=line><span class=cl>sudo chmod <span class=m>600</span> /etc/netplan/40-cx7.yaml
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Apply the configuration</span>
+</span></span><span class=line><span class=cl>sudo netplan apply</span></span></code></pre></div></div></li><li><p>設定免密碼 SSH 驗證</p><p>選擇一個node執行 <a href=https://github.com/NVIDIA/dgx-spark-playbooks/blob/main/nvidia/connect-two-sparks/assets/discover-sparks target=_blank rel=noreferrer>discover-sparks.sh</a> 探索InfiniBand網路腳本，他會自己找到 InfiniBand 介面 IP</p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>bash ./discover-sparks</span></span></code></pre></div></div><p>預期輸出類似如下，但會顯示不同的 IP 位址與節點名稱。首次執行腳本時，系統將提示您輸入每個節點的密碼。</p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>Found: 169.254.35.62 <span class=o>(</span>dgx-spark-node1.local<span class=o>)</span>
+</span></span><span class=line><span class=cl>Found: 169.254.35.63 <span class=o>(</span>dgx-spark-node2.local<span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Setting up bidirectional SSH access <span class=o>(</span><span class=nb>local</span> &lt;-&gt; remote nodes<span class=o>)</span>...
+</span></span><span class=line><span class=cl>You may be prompted <span class=k>for</span> your password <span class=k>for</span> each node.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>SSH setup complete! Both <span class=nb>local</span> and remote nodes can now SSH to each other without passwords.</span></span></code></pre></div></div></li><li><p>驗證多節點能互通</p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Test hostname resolution across nodes</span>
+</span></span><span class=line><span class=cl>ssh &lt;InfiniBand_IP <span class=k>for</span> Node 1&gt; hostname
+</span></span><span class=line><span class=cl>ssh &lt;InfiniBand_IP <span class=k>for</span> Node 2&gt; hostname</span></span></code></pre></div></div><p>ex: 以 Step.1 - 4 為例子就是長成以下的樣子</p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ssh 169.254.35.62 hostname
+</span></span><span class=line><span class=cl>ssh 169.254.35.63 hostname</span></span></code></pre></div></div></li></ol><h1 class="relative group">Step 2：<div id=step-2 class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#step-2 aria-label=定位點>#</a></span></h1><p>以下是依照 <a href=https://build.nvidia.com/spark/nccl/stacked-sparks target=_blank rel=noreferrer>NVIDIA - NCCL for Two Sparks</a> 的操作步驟</p><div class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"><span class="text-primary-400 pe-3 flex items-center"><span class="relative block icon"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M506.3 417 293 53c-16.33-28-57.54-28-73.98.0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6c32.76.0 53.26-35 36.96-63zM232 168c0-13.25 10.75-24 24-24s24 10.8 24 24v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zm24 248c-17.36.0-31.44-14.08-31.44-31.44s14.07-31.44 31.44-31.44 31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z"/></svg>
+</span></span><span class=dark:text-neutral-300>要確定以上步驟都做完才能到 Step 2 喔！!</span></div><ol><li><p>編譯支援 Blackwell 架構的 NCCL<div class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"><span class="text-primary-400 pe-3 flex items-center"><span class="relative block icon"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M256 0C114.6.0.0 114.6.0 256s114.6 256 256 256 256-114.6 256-256S397.4.0 256 0zm0 128c17.67.0 32 14.33 32 32 0 17.67-14.33 32-32 32s-32-14.3-32-32 14.3-32 32-32zm40 256h-80c-13.2.0-24-10.7-24-24s10.75-24 24-24h16v-64h-8c-13.25.0-24-10.75-24-24s10.8-24 24-24h32c13.25.0 24 10.75 24 24v88h16c13.25.0 24 10.75 24 24s-10.7 24-24 24z"/></svg>
+</span></span><span class=dark:text-neutral-300>請在兩個節點上執行以下指令！!</span></div></p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Install dependencies and build NCCL</span>
+</span></span><span class=line><span class=cl>sudo apt-get update <span class=o>&amp;&amp;</span> sudo apt-get install -y libopenmpi-dev
+</span></span><span class=line><span class=cl>git clone -b v2.28.9-1 https://github.com/NVIDIA/nccl.git ~/nccl/
+</span></span><span class=line><span class=cl><span class=nb>cd</span> ~/nccl/
+</span></span><span class=line><span class=cl>make -j src.build <span class=nv>NVCC_GENCODE</span><span class=o>=</span><span class=s2>&#34;-gencode=arch=compute_121,code=sm_121&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Set environment variables</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>CUDA_HOME</span><span class=o>=</span><span class=s2>&#34;/usr/local/cuda&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>MPI_HOME</span><span class=o>=</span><span class=s2>&#34;/usr/lib/aarch64-linux-gnu/openmpi&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>NCCL_HOME</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$HOME</span><span class=s2>/nccl/build/&#34;</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>LD_LIBRARY_PATH</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$NCCL_HOME</span><span class=s2>/lib:</span><span class=nv>$CUDA_HOME</span><span class=s2>/lib64/:</span><span class=nv>$MPI_HOME</span><span class=s2>/lib:</span><span class=nv>$LD_LIBRARY_PATH</span><span class=s2>&#34;</span></span></span></code></pre></div></div></li><li><p>建立 NCCL 測試套件</p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Clone and build NCCL tests</span>
+</span></span><span class=line><span class=cl>git clone https://github.com/NVIDIA/nccl-tests.git ~/nccl-tests/
+</span></span><span class=line><span class=cl><span class=nb>cd</span> ~/nccl-tests/
+</span></span><span class=line><span class=cl>make <span class=nv>MPI</span><span class=o>=</span><span class=m>1</span></span></span></code></pre></div></div></li><li><p>找出正在使用的CX-7網路介面與 IP 位址<div class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"><span class="text-primary-400 pe-3 flex items-center"><span class="relative block icon"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M506.3 417 293 53c-16.33-28-57.54-28-73.98.0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6c32.76.0 53.26-35 36.96-63zM232 168c0-13.25 10.75-24 24-24s24 10.8 24 24v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zm24 248c-17.36.0-31.44-14.08-31.44-31.44s14.07-31.44 31.44-31.44 31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z"/></svg>
+</span></span><span class=dark:text-neutral-300><p>請在兩個節點上執行以下指令！!</p><p>請使用輸出結果中顯示為「(Up)」的介面。 在此範例中，我們將使用 enp1s0f1np1。</p><p>請忽略所有以 enP2p&lt;&mldr;> 前綴開頭的介面，僅需考慮以 enp1&lt;&mldr;> 開頭的介面。</p></span></div></p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Check network port status</span>
+</span></span><span class=line><span class=cl>ibdev2netdev</span></span></code></pre></div></div><p>範例輸出：</p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>roceP2p1s0f0 port <span class=nv>1</span> <span class=o>==</span>&gt; enP2p1s0f0np0 <span class=o>(</span>Down<span class=o>)</span>
+</span></span><span class=line><span class=cl>roceP2p1s0f1 port <span class=nv>1</span> <span class=o>==</span>&gt; enP2p1s0f1np1 <span class=o>(</span>Up<span class=o>)</span>
+</span></span><span class=line><span class=cl>rocep1s0f0 port <span class=nv>1</span> <span class=o>==</span>&gt; enp1s0f0np0 <span class=o>(</span>Down<span class=o>)</span>
+</span></span><span class=line><span class=cl>rocep1s0f1 port <span class=nv>1</span> <span class=o>==</span>&gt; enp1s0f1np1 <span class=o>(</span>Up<span class=o>)</span></span></span></code></pre></div></div><p>依照介面尋找 IP</p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ip addr show enp1s0f0np0
+</span></span><span class=line><span class=cl>ip addr show enp1s0f1np1</span></span></code></pre></div></div><p>範例輸出：</p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># In this example, we are using interface enp1s0f1np1.</span>
+</span></span><span class=line><span class=cl>nvidia@dgx-spark-1:~$ ip addr show enp1s0f1np1
+</span></span><span class=line><span class=cl>    4: enp1s0f1np1: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu <span class=m>1500</span> qdisc mq state UP group default qlen <span class=m>1000</span>
+</span></span><span class=line><span class=cl>        link/ether 3c:6d:66:cc:b3:b7 brd ff:ff:ff:ff:ff:ff
+</span></span><span class=line><span class=cl>        inet **169.254.35.62**/16 brd 169.254.255.255 scope link noprefixroute enp1s0f1np1
+</span></span><span class=line><span class=cl>        valid_lft forever preferred_lft forever
+</span></span><span class=line><span class=cl>        inet6 fe80::3e6d:66ff:fecc:b3b7/64 scope link
+</span></span><span class=line><span class=cl>        valid_lft forever preferred_lft forever</span></span></code></pre></div></div></li><li><p>執行 NCCL 通訊測試<div class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"><span class="text-primary-400 pe-3 flex items-center"><span class="relative block icon"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M256 0C114.6.0.0 114.6.0 256s114.6 256 256 256 256-114.6 256-256S397.4.0 256 0zm0 128c17.67.0 32 14.33 32 32 0 17.67-14.33 32-32 32s-32-14.3-32-32 14.3-32 32-32zm40 256h-80c-13.2.0-24-10.7-24-24s10.75-24 24-24h16v-64h-8c-13.25.0-24-10.75-24-24s10.8-24 24-24h32c13.25.0 24 10.75 24 24v88h16c13.25.0 24 10.75 24 24s-10.7 24-24 24z"/></svg>
+</span></span><span class=dark:text-neutral-300>僅需一條 QSFP 纜線即可實現完整頻寬。當連接兩條 QSFP 纜線時，必須為所有四個介面指派 IP 位址，方能獲得完整頻寬。</span></div></p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Set network interface environment variables (use your Up interface from the previous step)</span>
+</span></span><span class=line><span class=cl><span class=c1># UCX_NET_DEVICES, NCCL_SOCKET_IFNAME, OMPI_MCA_btl_tcp_if_include 都要設定成你使用的介面名稱。</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>UCX_NET_DEVICES</span><span class=o>=</span>enp1s0f1np1
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>NCCL_SOCKET_IFNAME</span><span class=o>=</span>enp1s0f1np1
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>OMPI_MCA_btl_tcp_if_include</span><span class=o>=</span>enp1s0f1np1
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Run the all_gather performance test across both nodes (replace the IP addresses with the ones you found in the previous step)</span>
+</span></span><span class=line><span class=cl>mpirun -np <span class=m>2</span> -H &lt;Node1_CX7_IP&gt;:1,&lt;Node2_CX7_IP&gt;:1 <span class=se>\
+</span></span></span><span class=line><span class=cl>--mca plm_rsh_agent <span class=s2>&#34;ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no&#34;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>-x <span class=nv>LD_LIBRARY_PATH</span><span class=o>=</span><span class=nv>$LD_LIBRARY_PATH</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=nv>$HOME</span>/nccl-tests/build/all_gather_perf</span></span></code></pre></div></div><p>您亦可嘗試將 NCCL 設定的緩衝區大小調大，以充分利用 200Gbps 頻寬。</p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Set network interface environment variables (use your active interface)</span>
+</span></span><span class=line><span class=cl><span class=c1># UCX_NET_DEVICES, NCCL_SOCKET_IFNAME, OMPI_MCA_btl_tcp_if_include 都要設定成你使用的介面名稱。</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>UCX_NET_DEVICES</span><span class=o>=</span>enp1s0f1np1
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>NCCL_SOCKET_IFNAME</span><span class=o>=</span>enp1s0f1np1
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>OMPI_MCA_btl_tcp_if_include</span><span class=o>=</span>enp1s0f1np1
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Run the all_gather performance test across both nodes</span>
+</span></span><span class=line><span class=cl>mpirun -np <span class=m>2</span> -H &lt;Node1_CX7_IP&gt;:1,&lt;Node2_CX7_IP&gt;:1 <span class=se>\
+</span></span></span><span class=line><span class=cl>--mca plm_rsh_agent <span class=s2>&#34;ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no&#34;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>-x <span class=nv>LD_LIBRARY_PATH</span><span class=o>=</span><span class=nv>$LD_LIBRARY_PATH</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=nv>$HOME</span>/nccl-tests/build/all_gather_perf -b 16G -e 16G -f <span class=m>2</span></span></span></code></pre></div></div></li></ol><h1 class="relative group">補充：<div id=補充 class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#%e8%a3%9c%e5%85%85 aria-label=定位點>#</a></span></h1><ol><li><p>Setting CX-7 mtu<div class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"><span class="text-primary-400 pe-3 flex items-center"><span class="relative block icon"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M256 0C114.6.0.0 114.6.0 256s114.6 256 256 256 256-114.6 256-256S397.4.0 256 0zm0 128c17.67.0 32 14.33 32 32 0 17.67-14.33 32-32 32s-32-14.3-32-32 14.3-32 32-32zm40 256h-80c-13.2.0-24-10.7-24-24s10.75-24 24-24h16v-64h-8c-13.25.0-24-10.75-24-24s10.8-24 24-24h32c13.25.0 24 10.75 24 24v88h16c13.25.0 24 10.75 24 24s-10.7 24-24 24z"/></svg>
+</span></span><span class=dark:text-neutral-300>請在兩個節點上執行以下指令！!</span></div></p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Set MTU to 9000~9216 for all CX-7 interfaces</span>
+</span></span><span class=line><span class=cl><span class=c1># 設定 MTU 為 9000~9216 區間依照你後面接的設備設定</span>
+</span></span><span class=line><span class=cl>sudo ip link <span class=nb>set</span> enp1s0f0np0 mtu <span class=m>9000</span>
+</span></span><span class=line><span class=cl>sudo ip link <span class=nb>set</span> enp1s0f1np1 mtu <span class=m>9000</span>
+</span></span><span class=line><span class=cl>sudo ip link <span class=nb>set</span> enP2p1s0f0np0 mtu <span class=m>9000</span>
+</span></span><span class=line><span class=cl>sudo ip link <span class=nb>set</span> enP2p1s0f1np1 mtu <span class=m>9000</span></span></span></code></pre></div></div></li><li><p>Check RDMA link</p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>rdma link</span></span></code></pre></div></div><p>輸出範例：</p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>link rocep1s0f0/1 state DOWN physical_state DISABLED netdev enp1s0f0np0
+</span></span><span class=line><span class=cl>link rocep1s0f1/1 state ACTIVE physical_state LINK_UP netdev enp1s0f1np1
+</span></span><span class=line><span class=cl>link roceP2p1s0f0/1 state DOWN physical_state DISABLED netdev enP2p1s0f0np0
+</span></span><span class=line><span class=cl>link roceP2p1s0f1/1 state ACTIVE physical_state LINK_UP netdev enP2p1s0f1np1</span></span></code></pre></div></div></li><li><p>RoCE test:</p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>apt install perftest
+</span></span><span class=line><span class=cl><span class=nv>show_gids</span> <span class=o>=</span>&gt; 找到你的 interface 與 GID 我們只看 rocep*s*f* </span></span></code></pre></div></div><p>輸出範例：</p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>DEV     PORT    INDEX   GID                                     IPv4            VER     DEV
+</span></span><span class=line><span class=cl>---     ----    -----   ---                                     ------------    ---     ---
+</span></span><span class=line><span class=cl>rocep1s0f0      <span class=m>1</span>       <span class=m>0</span>       ....:....:....:....:....:....:....:....                 v1      enp1s0f0np0
+</span></span><span class=line><span class=cl>rocep1s0f0      <span class=m>1</span>       <span class=m>1</span>       ....:....:....:....:....:....:....:....                 v2      enp1s0f0np0
+</span></span><span class=line><span class=cl>rocep1s0f1      <span class=m>1</span>       <span class=m>0</span>       ....:....:....:....:....:....:....:....                 v1      enp1s0f1np1
+</span></span><span class=line><span class=cl>rocep1s0f1      <span class=m>1</span>       <span class=m>1</span>       ....:....:....:....:....:....:....:....                 v2      enp1s0f1np1
+</span></span><span class=line><span class=cl>rocep1s0f1      <span class=m>1</span>       <span class=m>2</span>       ....:....:....:....:....:....:....:.... 192.168.555.12          v1      enp1s0f1np1
+</span></span><span class=line><span class=cl>rocep1s0f1      <span class=m>1</span>       <span class=m>3</span>       ....:....:....:....:....:....:....:.... 192.168.555.12          v2      enp1s0f1np1
+</span></span><span class=line><span class=cl>roceP2p1s0f0    <span class=m>1</span>       <span class=m>0</span>       ....:....:....:....:....:....:....:....                 v1      enP2p1s0f0np0
+</span></span><span class=line><span class=cl>roceP2p1s0f0    <span class=m>1</span>       <span class=m>1</span>       ....:....:....:....:....:....:....:....                 v2      enP2p1s0f0np0
+</span></span><span class=line><span class=cl>roceP2p1s0f1    <span class=m>1</span>       <span class=m>0</span>       ....:....:....:....:....:....:....:....                 v1      enP2p1s0f1np1
+</span></span><span class=line><span class=cl>roceP2p1s0f1    <span class=m>1</span>       <span class=m>1</span>       ....:....:....:....:....:....:....:....                 v2      enP2p1s0f1np1
+</span></span><span class=line><span class=cl>roceP2p1s0f1    <span class=m>1</span>       <span class=m>2</span>       ....:....:....:....:....:....:....:.... 192.168.555.16          v1      enP2p1s0f1np1
+</span></span><span class=line><span class=cl>roceP2p1s0f1    <span class=m>1</span>       <span class=m>3</span>       ....:....:....:....:....:....:....:.... 192.168.555.16          v2      enP2p1s0f1np1
+</span></span><span class=line><span class=cl><span class=nv>n_gids_found</span><span class=o>=</span><span class=m>12</span></span></span></code></pre></div></div><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1>#ib_send_bw：測試網路寬帶</span>
+</span></span><span class=line><span class=cl><span class=c1># Node1 (Server):</span>
+</span></span><span class=line><span class=cl>ib_send_bw -R -d rocep1s0f1 -x &lt;GID&gt; -R 
+</span></span><span class=line><span class=cl><span class=c1>#ex: ib_send_bw -d rocep1s0f1 -x 3 -R </span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Node2 (Client):</span>
+</span></span><span class=line><span class=cl>ib_send_bw &lt;node1_CX7_ip&gt; -d rocep1s0f1 -x <span class=m>3</span> -R</span></span></code></pre></div></div><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1>#ib_send_lat：測試網路延遲</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Node1 (Server):</span>
+</span></span><span class=line><span class=cl>ib_send_lat -d rocep1s0f1 -x &lt;GID&gt; -R
+</span></span><span class=line><span class=cl><span class=c1>#ex: ib_send_lat -d rocep1s0f1 -x 3 -R</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Node2 (Client):</span>
+</span></span><span class=line><span class=cl>ib_send_lat &lt;node1_CX7_ip&gt; -d rocep1s0f1 -x <span class=m>3</span> -R</span></span></code></pre></div></div></li></ol><h1 class="relative group">Step 3：<div id=step-3 class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#step-3 aria-label=定位點>#</a></span></h1><p>以下是依照 <a href=https://build.nvidia.com/spark/vllm/stacked-sparks target=_blank rel=noreferrer>NVIDIA - vLLM for Inference</a> 的操作步驟</p><div class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"><span class="text-primary-400 pe-3 flex items-center"><span class="relative block icon"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M506.3 417 293 53c-16.33-28-57.54-28-73.98.0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6c32.76.0 53.26-35 36.96-63zM232 168c0-13.25 10.75-24 24-24s24 10.8 24 24v128c0 13.25-10.75 24-23.1 24S232 309.3 232 296V168zm24 248c-17.36.0-31.44-14.08-31.44-31.44s14.07-31.44 31.44-31.44 31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z"/></svg>
+</span></span><span class=dark:text-neutral-300>要確定以上步驟都做完才能到 Step 3 喔！!</span></div><ol><li><p>下載 cluster deployment script</p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Download on both nodes</span>
+</span></span><span class=line><span class=cl>wget https://raw.githubusercontent.com/vllm-project/vllm/refs/heads/main/examples/online_serving/run_cluster.sh
+</span></span><span class=line><span class=cl>chmod +x run_cluster.sh</span></span></code></pre></div></div></li><li><p>從 NVIDIA NGC 拉取 vLLM docker images</p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker pull nvcr.io/nvidia/vllm:25.11-py3
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>VLLM_IMAGE</span><span class=o>=</span>nvcr.io/nvidia/vllm:25.11-py3</span></span></code></pre></div></div></li><li><p>啟動 Ray 叢集主節點。</p><p>此節點負責協調分散式推論，並提供 API 端點服務。<div class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"><span class="text-primary-400 pe-3 flex items-center"><span class="relative block icon"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M256 0C114.6.0.0 114.6.0 256s114.6 256 256 256 256-114.6 256-256S397.4.0 256 0zm0 128c17.67.0 32 14.33 32 32 0 17.67-14.33 32-32 32s-32-14.3-32-32 14.3-32 32-32zm40 256h-80c-13.2.0-24-10.7-24-24s10.75-24 24-24h16v-64h-8c-13.25.0-24-10.75-24-24s10.8-24 24-24h32c13.25.0 24 10.75 24 24v88h16c13.25.0 24 10.75 24 24s-10.7 24-24 24z"/></svg>
+</span></span><span class=dark:text-neutral-300>只在主節點(Node1)下指令即可！</span></div></p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># On Node 1, start head node</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Get the IP address of the high-speed interface</span>
+</span></span><span class=line><span class=cl><span class=c1># Use the interface that shows &#34;(Up)&#34; from ibdev2netdev (enp1s0f0np0 or enp1s0f1np1)</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>MN_IF_NAME</span><span class=o>=</span>enp1s0f1np1
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>VLLM_HOST_IP</span><span class=o>=</span><span class=k>$(</span>ip -4 addr show <span class=nv>$MN_IF_NAME</span> <span class=p>|</span> grep -oP <span class=s1>&#39;(?&lt;=inet\s)\d+(\.\d+){3}&#39;</span><span class=k>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;Using interface </span><span class=nv>$MN_IF_NAME</span><span class=s2> with IP </span><span class=nv>$VLLM_HOST_IP</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>bash run_cluster.sh <span class=nv>$VLLM_IMAGE</span> <span class=nv>$VLLM_HOST_IP</span> --head ~/.cache/huggingface <span class=se>\
+</span></span></span><span class=line><span class=cl>-e <span class=nv>VLLM_HOST_IP</span><span class=o>=</span><span class=nv>$VLLM_HOST_IP</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>-e <span class=nv>UCX_NET_DEVICES</span><span class=o>=</span><span class=nv>$MN_IF_NAME</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>-e <span class=nv>NCCL_SOCKET_IFNAME</span><span class=o>=</span><span class=nv>$MN_IF_NAME</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>-e <span class=nv>OMPI_MCA_btl_tcp_if_include</span><span class=o>=</span><span class=nv>$MN_IF_NAME</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>-e <span class=nv>GLOO_SOCKET_IFNAME</span><span class=o>=</span><span class=nv>$MN_IF_NAME</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>-e <span class=nv>TP_SOCKET_IFNAME</span><span class=o>=</span><span class=nv>$MN_IF_NAME</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>-e <span class=nv>RAY_memory_monitor_refresh_ms</span><span class=o>=</span><span class=m>0</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>-e <span class=nv>MASTER_ADDR</span><span class=o>=</span><span class=nv>$VLLM_HOST_IP</span></span></span></code></pre></div></div></li><li><p>將節點 2 連接至 Ray 叢集作為工作節點。</p><p>此舉可提供額外的 GPU 資源，以實現張量平行運算。<div class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"><span class="text-primary-400 pe-3 flex items-center"><span class="relative block icon"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M256 0C114.6.0.0 114.6.0 256s114.6 256 256 256 256-114.6 256-256S397.4.0 256 0zm0 128c17.67.0 32 14.33 32 32 0 17.67-14.33 32-32 32s-32-14.3-32-32 14.3-32 32-32zm40 256h-80c-13.2.0-24-10.7-24-24s10.75-24 24-24h16v-64h-8c-13.25.0-24-10.75-24-24s10.8-24 24-24h32c13.25.0 24 10.75 24 24v88h16c13.25.0 24 10.75 24 24s-10.7 24-24 24z"/></svg>
+</span></span><span class=dark:text-neutral-300>只在叢集節點(Node2)下指令即可！</span></div></p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># On Node 2, join as worker</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Set the interface name (same as Node 1)</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>MN_IF_NAME</span><span class=o>=</span>enp1s0f1np1
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Get Node 2&#39;s own IP address</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>VLLM_HOST_IP</span><span class=o>=</span><span class=k>$(</span>ip -4 addr show <span class=nv>$MN_IF_NAME</span> <span class=p>|</span> grep -oP <span class=s1>&#39;(?&lt;=inet\s)\d+(\.\d+){3}&#39;</span><span class=k>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># IMPORTANT: Set HEAD_NODE_IP to Node 1&#39;s IP address</span>
+</span></span><span class=line><span class=cl><span class=c1># You must get this value from Node 1 (run: echo $VLLM_HOST_IP on Node 1)</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>HEAD_NODE_IP</span><span class=o>=</span>&lt;NODE_1_CX7_IP_ADDRESS&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;Worker IP: </span><span class=nv>$VLLM_HOST_IP</span><span class=s2>, connecting to head node at: </span><span class=nv>$HEAD_NODE_IP</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>bash run_cluster.sh <span class=nv>$VLLM_IMAGE</span> <span class=nv>$HEAD_NODE_IP</span> --worker ~/.cache/huggingface <span class=se>\
+</span></span></span><span class=line><span class=cl>-e <span class=nv>VLLM_HOST_IP</span><span class=o>=</span><span class=nv>$VLLM_HOST_IP</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>-e <span class=nv>UCX_NET_DEVICES</span><span class=o>=</span><span class=nv>$MN_IF_NAME</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>-e <span class=nv>NCCL_SOCKET_IFNAME</span><span class=o>=</span><span class=nv>$MN_IF_NAME</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>-e <span class=nv>OMPI_MCA_btl_tcp_if_include</span><span class=o>=</span><span class=nv>$MN_IF_NAME</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>-e <span class=nv>GLOO_SOCKET_IFNAME</span><span class=o>=</span><span class=nv>$MN_IF_NAME</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>-e <span class=nv>TP_SOCKET_IFNAME</span><span class=o>=</span><span class=nv>$MN_IF_NAME</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>-e <span class=nv>RAY_memory_monitor_refresh_ms</span><span class=o>=</span><span class=m>0</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>-e <span class=nv>MASTER_ADDR</span><span class=o>=</span><span class=nv>$HEAD_NODE_IP</span></span></span></code></pre></div></div></li><li><p>驗證叢集狀態</p><p>確認兩個節點皆被 Ray 叢集識別且處於可用狀態。<div class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"><span class="text-primary-400 pe-3 flex items-center"><span class="relative block icon"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M256 0C114.6.0.0 114.6.0 256s114.6 256 256 256 256-114.6 256-256S397.4.0 256 0zm0 128c17.67.0 32 14.33 32 32 0 17.67-14.33 32-32 32s-32-14.3-32-32 14.3-32 32-32zm40 256h-80c-13.2.0-24-10.7-24-24s10.75-24 24-24h16v-64h-8c-13.25.0-24-10.75-24-24s10.8-24 24-24h32c13.25.0 24 10.75 24 24v88h16c13.25.0 24 10.75 24 24s-10.7 24-24 24z"/></svg>
+</span></span><span class=dark:text-neutral-300>只在主節點(Node1)下指令即可！</span></div></p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># On Node 1 (head node)</span>
+</span></span><span class=line><span class=cl><span class=c1># Find the vLLM container name (it will be node-&lt;random_number&gt;)</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>VLLM_CONTAINER</span><span class=o>=</span><span class=k>$(</span>docker ps --format <span class=s1>&#39;{{.Names}}&#39;</span> <span class=p>|</span> grep -E <span class=s1>&#39;^node-[0-9]+$&#39;</span><span class=k>)</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;Found container: </span><span class=nv>$VLLM_CONTAINER</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker <span class=nb>exec</span> <span class=nv>$VLLM_CONTAINER</span> ray status</span></span></code></pre></div></div></li><li><p>vllm 搭建 GPT-OSS-120B模型
+vllm 參數都能自行調整，參數可查看此文章<a href=https://zhuanlan.zhihu.com/p/1916898243423500022 target=_blank rel=noreferrer>zhihu - vLLM参数详细说明</a><div class="flex px-4 py-3 rounded-md shadow bg-primary-100 dark:bg-primary-900"><span class="text-primary-400 pe-3 flex items-center"><span class="relative block icon"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M256 0C114.6.0.0 114.6.0 256s114.6 256 256 256 256-114.6 256-256S397.4.0 256 0zm0 128c17.67.0 32 14.33 32 32 0 17.67-14.33 32-32 32s-32-14.3-32-32 14.3-32 32-32zm40 256h-80c-13.2.0-24-10.7-24-24s10.75-24 24-24h16v-64h-8c-13.25.0-24-10.75-24-24s10.8-24 24-24h32c13.25.0 24 10.75 24 24v88h16c13.25.0 24 10.75 24 24s-10.7 24-24 24z"/></svg>
+</span></span><span class=dark:text-neutral-300>只在主節點(Node1)下指令即可！</span></div></p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># On Node 1, enter container and start server</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>VLLM_CONTAINER</span><span class=o>=</span><span class=k>$(</span>docker ps --format <span class=s1>&#39;{{.Names}}&#39;</span> <span class=p>|</span> grep -E <span class=s1>&#39;^node-[0-9]+$&#39;</span><span class=k>)</span>
+</span></span><span class=line><span class=cl>docker <span class=nb>exec</span> -it <span class=nv>$VLLM_CONTAINER</span> /bin/bash -c <span class=err>&#39;</span>
+</span></span><span class=line><span class=cl>vllm serve openai/gpt-oss-120b <span class=se>\
+</span></span></span><span class=line><span class=cl>    --host 0.0.0.0 <span class=se>\ </span>
+</span></span><span class=line><span class=cl>    --port <span class=m>8000</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>    --tensor-parallel-size <span class=m>2</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>    --max_model_len <span class=m>2048</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>    --gpu-memory-utilization 0.9</span></span></code></pre></div></div></li><li><p>確認服務</p><div class=highlight-wrapper><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Test from Node 1 or external client</span>
+</span></span><span class=line><span class=cl>curl http://&lt;node1_IP&gt;:8000/v1/completions <span class=se>\
+</span></span></span><span class=line><span class=cl>-H <span class=s2>&#34;Content-Type: application/json&#34;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl>-d <span class=s1>&#39;{
+</span></span></span><span class=line><span class=cl><span class=s1>    &#34;model&#34;: &#34;openai/gpt-oss-120b&#34;,
+</span></span></span><span class=line><span class=cl><span class=s1>    &#34;prompt&#34;: &#34;Write a haiku about a GPU&#34;,
+</span></span></span><span class=line><span class=cl><span class=s1>    &#34;max_tokens&#34;: 32,
+</span></span></span><span class=line><span class=cl><span class=s1>    &#34;temperature&#34;: 0.7
+</span></span></span><span class=line><span class=cl><span class=s1>}&#39;</span></span></span></code></pre></div></div></li><li><p>部署完成！！</p></li></ol><h1 class="relative group">Note:<div id=note class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#note aria-label=定位點>#</a></span></h1><ul><li><p>看論壇說雙條200G可以能而外提供 52 Gbit/sec 速度。但我這邊是使用單條400G的線所以這部份沒有嘗試。</p><p>ref：<a href=https://forums.developer.nvidia.com/t/connectx-7-nic-in-dgx-spark/350417/61 target=_blank rel=noreferrer>developer.nvidia - connectx-7-nic-in-dgx-spark</a></p></li><li><p>有關網路聚合的官方解釋</p><p>ref：<a href=https://forums.developer.nvidia.com/t/connectx-7-nic-in-dgx-spark/350417/65 target=_blank rel=noreferrer>developer.nvidia - connectx-7-nic-in-dgx-spark</a></p></li><li><p>DGX Spark 上不支援 GPU Direct RDMA</p><p>ref：<a href=https://forums.developer.nvidia.com/t/enabling-gpu-direct-rdma-for-dgx-spark-clustering/352051/2 target=_blank rel=noreferrer>developer.nvidia - enabling-gpu-direct-rdma-for-dgx-spark-clustering</a></p></li><li><p>目前看起來都是玩家互相討論實作居多，官方很少出來澄清或是證明問題。</p></li><li><p>目前雙同道網路還是個謎，沒有人能成功</p></li><li><p>分別有 NCCL 跟 RoCE 通道測試，是不同的喔請注意!</p></li><li><p>如果遇到問題請多上官方討論區尋找</p><p>ref：<a href=https://forums.developer.nvidia.com/c/accelerated-computing/dgx-spark-gb10/dgx-spark-gb10/721 target=_blank rel=noreferrer>developer.nvidia - dgx-spark-gb10</a></p></li><li><p>測試 項目 與 目的</p><table><thead><tr><th style=text-align:left>項目</th><th style=text-align:center>測什麼</th><th style=text-align:right>解釋</th><th style=text-align:right>層級</th><th style=text-align:right>用途</th></tr></thead><tbody><tr><td style=text-align:left>iperf3</td><td style=text-align:center>TCP throughput</td><td style=text-align:right>TCP / UDP socket throughput</td><td style=text-align:right>Network stack</td><td style=text-align:right>普通網路</td></tr><tr><td style=text-align:left>RoCE benchmark</td><td style=text-align:center>RDMA bandwidth</td><td style=text-align:right>NIC → NIC memory access, CPU 不參與</td><td style=text-align:right>NIC transport</td><td style=text-align:right>HPC network</td></tr><tr><td style=text-align:left>NCCL test</td><td style=text-align:center>GPU collective bandwidth</td><td style=text-align:right>GPU ↔ GPU</td><td style=text-align:right>Application layer</td><td style=text-align:right>AI training</td></tr></tbody></table></li></ul><h1 class="relative group">心得：<div id=心得 class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#%e5%bf%83%e5%be%97 aria-label=定位點>#</a></span></h1><p>跑 GPT-OSS-120b 在 vllm 上</p><ul><li><p>單架構：</p><ul><li>單人使用時： Latency: ~28.24 ms/token, TPS: ~35.4 token/sec</li><li>併發使用時： Latency: ~39.05 ms/token, TPS: ~25.61 token/sec</li></ul></li><li><p>雙幾架構：</p><ul><li>單人使用時： Latency: ~30.23 ms/token, TPS: ~33.08 tokens/sec</li><li>併發使用時： Latency: ~29.07 ms/token, TPS: ~34.40 token/sec</li></ul></li><li><p>結論：</p><p>我們可以發現當單人使用時沒有太大差異但只要多人使用時 cluster 架構就展現分片計算的優勢大幅降低延遲時間。</p><ul><li>平均生成速率 (TPS)：由 25.61 提升至 34.40 token/sec，效能增長約 34.3%。</li><li>系統延遲 (Latency)：顯著降低了約 25.6%，大幅提升了使用者交互的流暢度。</li><li>整體吞吐能力：在高負載下，系統總體處理效能提升約 34% ~ 36%，有效克服了單機架構的效能瓶頸。</li></ul></li></ul><p>實測出來，說真的如果你只是要大 VRAM 可以接受推論很慢 且 大多數都是使用 <strong>精度4(FP4)</strong> 模型，那你很適合這台。</p><p>最近 macOS 26.2 新功能 RDMA over Thunderbolt 5 可以嘗試看看 Mac Studio 照理來說各項數值因該都是超越這台，但價格同時也是甩的遠遠的。</p><p>但 Mac 有一個坑是目前 cluster 還是用 EXO，身為一個從 EXO 開源那時候用，我個人是覺得超級不穩，如果有人用新版的也歡迎告訴我目前能用嗎？</p><p>個人覺得有錢還是買 GPU Server 就好別想不開，除非你想玩個新玩具。</p><h1 class="relative group">Reference<div id=reference class=anchor></div><span class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none"><a class="text-primary-300 dark:text-neutral-700 !no-underline" href=#reference aria-label=定位點>#</a></span></h1><hr><p><a href=https://build.nvidia.com/spark/connect-two-sparks/stacked-sparks target=_blank rel=noreferrer>NVIDIA - Connect Two Sparks</a></p><p><a href=https://build.nvidia.com/spark/nccl/stacked-sparks target=_blank rel=noreferrer>NVIDIA - NCCL for Two Sparks</a></p><p><a href="https://forums.developer.nvidia.com/t/connectx-7-nic-in-dgx-spark/350417/63?page=3" target=_blank rel=noreferrer>NVIDIA - connectx-7-nic-in-dgx-spark</a></p><p><a href=https://www.linkedin.com/pulse/connecting-two-sparks-andrew-myers-p9gme/ target=_blank rel=noreferrer>Linkedin - Andrew M._Connecting Two Sparks</a></p><p><a href=https://www.jeffgeerling.com/blog/2025/15-tb-vram-on-mac-studio-rdma-over-thunderbolt-5/ target=_blank rel=noreferrer>jeffgeerling - 1.5 TB of VRAM on Mac Studio - RDMA over Thunderbolt 5</a></p><p><a href=https://github.com/NVIDIA/dgx-spark-playbooks target=_blank rel=noreferrer>GitHub - dgx-spark-playbooks</a></p></div></div></section><footer class="pt-8 max-w-prose print:hidden"><div class=pt-3><hr class="border-dotted border-neutral-300 dark:border-neutral-600"><div class=pt-3><script src=https://giscus.app/client.js data-repo=OKHand-Zy/OKHand-Zy.github.io data-repo-id=R_kgDOI4u6xw data-category=Announcements data-category-id=DIC_kwDOI4u6x84CuITR data-mapping=url data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=zh-TW data-loading=lazy crossorigin=anonymous async></script></div></div></footer></article><div id=scroll-to-top class="fixed bottom-6 end-6 z-50 transform translate-y-4 opacity-0 duration-200"><a href=#the-top class="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400" aria-label=捲動到頁頂 title=捲動到頁頂>&uarr;</a></div></main><footer id=site-footer class="py-10 print:hidden"><nav aria-label class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400"><ul class="flex list-none flex-col sm:flex-row"><li class="flex mb-1 text-end sm:mb-0 sm:me-7 sm:last:me-0"><a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center" href=https://github.com/OKHand-Zy title><span class=mr-1><span class="relative block icon"><svg viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6.0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6.0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3.0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1.0-6.2-.3-40.4-.3-61.4.0.0-70 15-84.7-29.8.0.0-11.4-29.1-27.8-36.6.0.0-22.9-15.7 1.6-15.4.0.0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5.0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9.0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4.0 33.7-.3 75.4-.3 83.6.0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6.0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9.0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+</span></span>GitHub</a></li><li class="flex mb-1 text-end sm:mb-0 sm:me-7 sm:last:me-0"><a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=okhand.ziyu@gmail.com" title><span class=mr-1><span class="relative block icon"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M48 64C21.5 64 0 85.5.0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4.0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4.0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3.0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8.0L0 176z"/></svg></span>
+</span>Gmail</a></li><li class="flex mb-1 text-end sm:mb-0 sm:me-7 sm:last:me-0"><a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center" href=https://okhand.org/index.xml title><span class=mr-1><span class="relative block icon"><svg viewBox="0 0 448 512"><path fill="currentColor" d="M0 64C0 46.3 14.3 32 32 32c229.8.0 416 186.2 416 416 0 17.7-14.3 32-32 32s-32-14.3-32-32C384 253.6 226.4 96 32 96 14.3 96 0 81.7.0 64zM128 416c0 35.3-28.7 64-64 64S0 451.3.0 416s28.7-64 64-64 64 28.7 64 64zM32 160c159.1.0 288 128.9 288 288 0 17.7-14.3 32-32 32s-32-14.3-32-32c0-123.7-100.3-224-224-224-17.7.0-32-14.3-32-32s14.3-32 32-32z"/></svg></span>
+</span>RSS</a></li></ul></nav><div class="flex items-center justify-between"><p class="text-sm text-neutral-500 dark:text-neutral-400">&copy;
+2026
+<a href=mailto:OKH@nd.ZiYu>OKH@nd.ZiYu</a></p><p class="text-xs text-neutral-500 dark:text-neutral-400">以 <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href=https://gohugo.io/ target=_blank rel="noopener noreferrer">Hugo</a> & <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500" href=https://blowfish.page/ target=_blank rel="noopener noreferrer">Blowfish</a> 製作</p></div></footer><div id=search-wrapper role=dialog aria-modal=true aria-label=搜尋 class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh] z-500" data-url=/zh-tw/><div id=search-modal class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800"><header class="relative z-10 flex items-center justify-between flex-none px-2"><form class="flex items-center flex-auto min-w-0"><div class="flex items-center justify-center w-8 h-8 text-neutral-400"><span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7 405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9.0 208 0S0 93.1.0 208s93.1 208 208 208c48.3.0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9.0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7.0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7.0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg></span></div><input type=search id=search-query aria-label=搜尋 class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent" placeholder=搜尋 tabindex=0></form><button id=close-search-button class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400" title="關閉 (Esc)">
+<span class="relative block icon"><svg viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75.0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3 54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75.0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75.0-45.25s32.75-12.5 45.25.0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25.0s12.5 32.75.0 45.25l-105.4 105.4L310.6 361.4z"/></svg></span></button></header><section class="flex-auto px-2 overflow-auto"><ul id=search-results></ul></section></div></div></div></body></html>
